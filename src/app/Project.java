@@ -27,6 +27,18 @@ public class Project extends DatabaseObject {
 		this.manager = manager;
 		this.activities = activities;
 	}
+
+	@Override
+	protected void save() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void delete() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

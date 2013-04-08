@@ -16,4 +16,16 @@ public class Developer extends DatabaseObject {
 		this.name = name;
 	}
 
+	@Override
+	protected void save() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

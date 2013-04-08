@@ -1,6 +1,8 @@
 package app;
 
-public class Assist {
+import persistency.DatabaseObject;
+
+public class Assist extends DatabaseObject {
 	
 	private int id;
 	private Developer developer;
@@ -14,6 +16,18 @@ public class Assist {
 		this.id = id;
 		this.developer = developer;
 		this.spentTime = spentTime;
+	}
+
+	@Override
+	protected void save() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void delete() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

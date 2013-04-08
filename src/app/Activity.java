@@ -5,7 +5,7 @@ import java.util.List;
 
 import persistency.DatabaseObject;
 
-public class Activity extends DatabaseObject{
+public class Activity extends DatabaseObject {
 	
 	private String description;
 	private Developer developer;
@@ -30,6 +30,18 @@ public class Activity extends DatabaseObject{
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.assists = new ArrayList<Assist>();
+	}
+
+	@Override
+	protected void save() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void delete() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
