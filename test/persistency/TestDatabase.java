@@ -25,6 +25,7 @@ public class TestDatabase extends SetUpDatabase {
 		Developer dev = this.db.developer.read(1);
 
 		assertEquals("Developer name", "Moby Dick", dev.getName());
+		assertEquals("Developer initials", "MD", dev.getInitials());
 	}
 	
 	@Test
