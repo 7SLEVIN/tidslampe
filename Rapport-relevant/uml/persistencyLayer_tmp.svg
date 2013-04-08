@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="575" version="1.1" width="956" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffffff" height="139" stroke="#ffffff" stroke-width="1" width="194" x="294" y="422"/>
+<rect fill="none" height="139" stroke="#000000" stroke-width="1" width="194" x="294" y="422"/>
+<text font-family="Dialog" font-size="12" x="364" y="436">
+Database</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="194" x="294" y="446"/>
+<text font-family="Dialog" font-size="12" x="298" y="461">
+developer : DeveloperRepository</text>
+<text font-family="Dialog" font-size="12" x="298" y="478">
+activity : ActivityReposity</text>
+<text font-family="Dialog" font-size="12" x="298" y="495">
+assist : AssistReposity</text>
+<text font-family="Dialog" font-size="12" x="298" y="512">
+project : ProjectReposity</text>
+<text font-family="Dialog" font-size="12" x="298" y="529">
+connection : DatabaseConnection</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="194" x="294" y="539"/>
+<rect fill="#ffffff" height="160" stroke="#ffffff" stroke-width="1" width="229" x="302" y="14"/>
+<rect fill="none" height="160" stroke="#000000" stroke-width="1" width="229" x="302" y="14"/>
+<text font-family="Dialog" font-size="12" font-style="italic" x="307" y="28">
+Repository&lt;T extends DatabaseObject&gt;</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="229" x="302" y="38"/>
+<text font-family="Dialog" font-size="12" x="306" y="53">
+tableName : String</text>
+<text font-family="Dialog" font-size="12" x="306" y="70">
+columnNames : List&lt;String&gt;</text>
+<text font-family="Dialog" font-size="12" x="306" y="87">
+connection : DatabaseConnection</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="229" x="302" y="97"/>
+<text font-family="Dialog" font-size="12" font-style="italic" x="306" y="112">
+create() : T</text>
+<text font-family="Dialog" font-size="12" font-style="italic" x="306" y="129">
+read() : T</text>
+<text font-family="Dialog" font-size="12" font-style="italic" x="306" y="146">
+update()</text>
+<text font-family="Dialog" font-size="12" font-style="italic" x="306" y="163">
+delete()</text>
+<rect fill="#ffffff" height="71" stroke="#ffffff" stroke-width="1" width="125" x="654" y="246"/>
+<rect fill="none" height="71" stroke="#000000" stroke-width="1" width="125" x="654" y="246"/>
+<text font-family="Dialog" font-size="12" x="659" y="260">
+DeveloperRepository</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="125" x="654" y="270"/>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="125" x="654" y="293"/>
+<polyline fill="none" points="718,246 718,214 422,214 422,173" stroke="#000000" stroke-width="1"/>
+<polygon fill="#ffffff" points="422,173 429,185 415,185" stroke="#ffffff" stroke-width="1"/>
+<polygon fill="none" points="422,173 429,185 415,185" stroke="#000000" stroke-width="1"/>
+<rect fill="#ffffff" height="71" stroke="#ffffff" stroke-width="1" width="112" x="526" y="246"/>
+<rect fill="none" height="71" stroke="#000000" stroke-width="1" width="112" x="526" y="246"/>
+<text font-family="Dialog" font-size="12" x="535" y="260">
+ActivityRepository</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="112" x="526" y="270"/>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="112" x="526" y="293"/>
+<polyline fill="none" points="582,246 582,214 422,214 422,173" stroke="#000000" stroke-width="1"/>
+<polygon fill="#ffffff" points="422,173 429,185 415,185" stroke="#ffffff" stroke-width="1"/>
+<polygon fill="none" points="422,173 429,185 415,185" stroke="#000000" stroke-width="1"/>
+<rect fill="#ffffff" height="71" stroke="#ffffff" stroke-width="1" width="163" x="334" y="246"/>
+<rect fill="none" height="71" stroke="#000000" stroke-width="1" width="163" x="334" y="246"/>
+<text font-family="Dialog" font-size="12" x="369" y="260">
+AssistRepository</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="163" x="334" y="270"/>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="163" x="334" y="293"/>
+<polyline fill="none" points="422,246 422,173" stroke="#000000" stroke-width="1"/>
+<polygon fill="#ffffff" points="422,173 429,185 415,185" stroke="#ffffff" stroke-width="1"/>
+<polygon fill="none" points="422,173 429,185 415,185" stroke="#000000" stroke-width="1"/>
+<rect fill="#ffffff" height="68" stroke="#ffffff" stroke-width="1" width="107" x="206" y="246"/>
+<rect fill="none" height="68" stroke="#000000" stroke-width="1" width="107" x="206" y="246"/>
+<text font-family="Dialog" font-size="12" x="211" y="260">
+ProjectRepository</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="107" x="206" y="270"/>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="107" x="206" y="291"/>
+<polyline fill="none" points="270,246 270,214 422,214 422,173" stroke="#000000" stroke-width="1"/>
+<polygon fill="#ffffff" points="422,173 429,185 415,185" stroke="#ffffff" stroke-width="1"/>
+<polygon fill="none" points="422,173 429,185 415,185" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="414,316 414,422" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="718,316 718,374 414,374 414,422" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="270,313 270,374 414,374 414,422" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="590,316 590,374 414,374 414,422" stroke="#000000" stroke-width="1"/>
+<rect fill="#ffffff" height="75" stroke="#ffffff" stroke-width="1" width="127" x="14" y="294"/>
+<rect fill="none" height="75" stroke="#000000" stroke-width="1" width="127" x="14" y="294"/>
+<text font-family="Dialog" font-size="12" x="19" y="308">
+DatabaseConnection</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="127" x="14" y="318"/>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="127" x="14" y="341"/>
+<text font-family="Dialog" font-size="12" x="18" y="356">
+insert() : Int</text>
+<polyline fill="none" points="302,70 70,70 70,294" stroke="#000000" stroke-width="1"/>
+<line fill="#000000" stroke="#000000" stroke-width="1" x1="63" x2="70" y1="282" y2="294"/>
+<line fill="#000000" stroke="#000000" stroke-width="1" x1="77" x2="70" y1="282" y2="294"/>
+<text font-family="Dialog" font-size="12" x="83" y="278">
+1</text>
+<rect fill="#ffffff" height="68" stroke="#ffffff" stroke-width="1" width="136" x="806" y="246"/>
+<rect fill="none" height="68" stroke="#000000" stroke-width="1" width="136" x="806" y="246"/>
+<text font-family="Dialog" font-size="12" x="814" y="260">
+DevActRelationsRepo</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="136" x="806" y="270"/>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="136" x="806" y="291"/>
+<polyline fill="none" points="878,246 878,214 422,214 422,173" stroke="#000000" stroke-width="1"/>
+<polygon fill="#ffffff" points="422,173 429,185 415,185" stroke="#ffffff" stroke-width="1"/>
+<polygon fill="none" points="422,173 429,185 415,185" stroke="#000000" stroke-width="1"/>
+<polyline fill="none" points="886,313 886,374 414,374 414,422" stroke="#000000" stroke-width="1"/>
+</svg>
