@@ -33,7 +33,7 @@ public class DatabaseConnection {
 				StringUtils.join(vals, ','));
 		int id = -1;
 		try {
-			this.stmt.executeUpdate(query);
+			this.update(query);
 
 			// Get the id of the inserted row
 			ResultSet rs = this.stmt.executeQuery("select last_insert_rowid()");
@@ -48,15 +48,18 @@ public class DatabaseConnection {
 	}
 
 	public ResultSet query(String query) throws SQLException {
+		System.out.println(query);
 		return this.stmt.executeQuery(query);
 	}
 
 	public int update(String query) throws SQLException {
+		System.out.println(query);
 		return this.stmt.executeUpdate(query);
 	}
 	
 	public ResultSet read(String table, int id) throws SQLException {
 		String query = "select * from " + table + " where id=" + id;
-		return this.stmt.executeQuery(query);
+		
+		return this.query(query);
 	}
 }
