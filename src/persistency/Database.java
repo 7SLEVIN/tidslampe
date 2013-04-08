@@ -1,24 +1,31 @@
 package persistency;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import app.Developer;
-import app.Project;
 
 public class Database {
+	
+	private DatabaseConnection conn;
 
-	private List<Project> projects;
-	private List<Developer> developers;
+	public ProjectRepository project;
+	public DeveloperRepository developer;
+	public ActivityRepository activity;
+	public AssistRepository assist;
 	
 	/**
-	 * @param projects
-	 * @param developers
+	 * @param conn
+	 * @param project
+	 * @param developer
+	 * @param activity
+	 * @param assist
 	 */
 	public Database() {
-		this.projects = new ArrayList<Project>();
-		this.developers = new ArrayList<Developer>();
-	}
+		this.conn = new DatabaseConnection();
+		
+		this.project = new ProjectRepository(conn);
+		this.developer = new DeveloperRepository(conn);
+		this.activity = new ActivityRepository(conn);
+		this.assist = new AssistRepository(conn);
+	} 
+	
 	
 	
 }

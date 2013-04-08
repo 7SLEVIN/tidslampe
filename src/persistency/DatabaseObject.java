@@ -5,6 +5,14 @@ abstract public class DatabaseObject {
 	private int id;
 	protected static Database database;
 	
+	public DatabaseObject(int id) {
+		this.id = id;
+	}
+	
+	abstract protected void save();
+	
+	abstract protected void delete();
+	
 	protected int getId() {
 		return this.id;
 	}
@@ -12,9 +20,5 @@ abstract public class DatabaseObject {
 	protected void setId(int id) {
 		this.id = id;
 	}
-	
-	abstract void save();
-	
-	abstract void delete();
 	
 }
