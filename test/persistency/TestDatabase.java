@@ -2,6 +2,7 @@ package persistency;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,18 +17,7 @@ import app.Assist;
 import app.Developer;
 import app.Project;
 
-public class TestDatabase {
-	
-	private Database db;
-
-	@Before
-	public void setUp() throws Exception {
-		 this.db = new Database();
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
+public class TestDatabase extends SetUpDatabase {
 
 	@Test
 	public void testCreateProject() {

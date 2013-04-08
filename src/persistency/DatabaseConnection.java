@@ -47,7 +47,7 @@ public class DatabaseConnection {
 		return id;
 	}
 
-	public ResultSet execQuery(String query) throws SQLException {
+	public ResultSet query(String query) throws SQLException {
 		return this.stmt.executeQuery(query);
 	}
 
