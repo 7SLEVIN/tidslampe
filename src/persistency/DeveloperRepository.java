@@ -1,7 +1,9 @@
 package persistency;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import app.Developer;
 
@@ -22,8 +24,16 @@ public class DeveloperRepository extends Repository<Developer> {
 
 	@Override
 	protected ArrayList<Developer> parse(ResultSet rs) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Developer> developers = new ArrayList<Developer>();
+		try {
+			while (rs.next()) {
+				developers.add(new Developer(rs.getInt("id"), 
+						rs.getString(this.columns[0]), rs.getString(this.columns[1])));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return developers;
 	}
 	
 }

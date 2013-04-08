@@ -24,7 +24,6 @@ public class SetUpDatabase {
 		this.db.getConn().update("drop table activity");
 		this.db.getConn().update("drop table activity_developer_relation");
 		this.db.getConn().update("drop table assist");
-			
 	}
 
 }

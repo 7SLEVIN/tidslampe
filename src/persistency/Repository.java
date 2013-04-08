@@ -1,6 +1,7 @@
 package persistency;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public abstract class Repository<T extends DatabaseObject> {
@@ -23,9 +24,9 @@ public abstract class Repository<T extends DatabaseObject> {
 		return this.conn.insert(this.table, this.columns, values);
 	}
 	
-	public T read(int id) {
-		// TODO
-		return null;
+	public T read(int id) throws SQLException {
+		ResultSet rs = this.conn.read(this.table, id);
+		return this.parse(rs).get(0);
 	}
 	
 	protected void update(T entity) {

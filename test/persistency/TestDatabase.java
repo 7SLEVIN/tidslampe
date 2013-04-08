@@ -20,6 +20,14 @@ import app.Project;
 public class TestDatabase extends SetUpDatabase {
 
 	@Test
+	public void testRead() throws SQLException {
+		Developer man = this.db.developer.create("MD", "Moby Dick");
+		Developer dev = this.db.developer.read(1);
+
+		assertEquals("Developer name", "Moby Dick", dev.getName());
+	}
+	
+	@Test
 	public void testCreateProject() {
 		Developer man = this.db.developer.create("MD", "Moby Dick");
 		Project proj = this.db.project.create("Tidslampe", 666, 1337, man);

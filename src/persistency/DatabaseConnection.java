@@ -54,4 +54,9 @@ public class DatabaseConnection {
 	public int update(String query) throws SQLException {
 		return this.stmt.executeUpdate(query);
 	}
+	
+	public ResultSet read(String table, int id) throws SQLException {
+		String query = "select * from " + table + " where id=" + id;
+		return this.stmt.executeQuery(query);
+	}
 }
