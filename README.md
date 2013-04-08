@@ -1,4 +1,4 @@
-tidslampe
+Tidslampe
 =========
 
 Software Engineering examination project
