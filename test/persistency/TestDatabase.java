@@ -22,7 +22,7 @@ public class TestDatabase extends SetUpDatabase {
 	@Test
 	public void testRead() throws SQLException {
 		Developer man = this.db.developer.create("MD", "Moby Dick");
-		Developer dev = this.db.developer.read(1);
+		Developer dev = this.db.developer.read(man.getId());
 
 		assertEquals("Developer name", "Moby Dick", dev.getName());
 	}

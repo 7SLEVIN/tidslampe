@@ -28,9 +28,10 @@ public class DatabaseConnection {
 	public int insert(String table, String[] columns, String[] values) {
 		String[] cols = ArrayUtils.wrapElementsWith(columns, "\"");
 		String[] vals = ArrayUtils.wrapElementsWith(values, "\"");
-		final String query = String.format("insert into %s (%s) values (%s)",
-				table, StringUtils.join(cols, ','),
-				StringUtils.join(vals, ','));
+		final String query = String
+				.format("insert into %s (%s) values (%s)", table,
+						StringUtils.join(cols, ','),
+						StringUtils.join(vals, ','));
 		int id = -1;
 		try {
 			this.update(query);
@@ -56,10 +57,9 @@ public class DatabaseConnection {
 		System.out.println(query);
 		return this.stmt.executeUpdate(query);
 	}
-	
+
 	public ResultSet read(String table, int id) throws SQLException {
-		String query = "select * from " + table + " where id=" + id;
-		
+		String query = String.format("select * from %s where id=%d", table, id);
 		return this.query(query);
 	}
 }
