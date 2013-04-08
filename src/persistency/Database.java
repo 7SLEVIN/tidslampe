@@ -18,7 +18,8 @@ public class Database {
 	 * @param assist
 	 */
 	public Database() {
-		this.conn = new DatabaseConnection();
+		// TODO refactor db filename out of source code
+		this.conn = new DatabaseConnection("data.db");
 		
 		this.project = new ProjectRepository(conn);
 		this.developer = new DeveloperRepository(conn);
