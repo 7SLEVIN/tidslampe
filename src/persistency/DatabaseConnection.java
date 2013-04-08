@@ -37,7 +37,7 @@ public class DatabaseConnection {
 			this.update(query);
 
 			// Get the id of the inserted row
-			ResultSet rs = this.stmt.executeQuery("select last_insert_rowid()");
+			ResultSet rs = this.query("select last_insert_rowid()");
 			if (rs.next()) {
 				id = rs.getInt("last_insert_rowid()");
 			}
