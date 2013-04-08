@@ -8,6 +8,7 @@ public class Database {
 	public ProjectRepository project;
 	public DeveloperRepository developer;
 	public ActivityRepository activity;
+	public ActivityDeveloperRelationRepository activityDeveloperRelation;
 	public AssistRepository assist;
 	
 	/**
@@ -24,6 +25,7 @@ public class Database {
 		this.project = new ProjectRepository(conn);
 		this.developer = new DeveloperRepository(conn);
 		this.activity = new ActivityRepository(conn);
+		this.activityDeveloperRelation = new ActivityDeveloperRelationRepository(conn);
 		this.assist = new AssistRepository(conn);
 	} 
 	
