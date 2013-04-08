@@ -12,7 +12,7 @@ public class AssistRepository extends Repository<Assist> {
 		 super(conn);
 		 
 		 this.table = "assist";
-		 this.columns = new String[]{"developer", "spentTime"};
+		 this.columns = new String[]{"developer_id", "spent_time"};
 	 }
 	 
 	 public Assist create(Developer developer, Number spentTime) {

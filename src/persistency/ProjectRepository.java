@@ -15,8 +15,8 @@ public class ProjectRepository extends Repository<Project> {
 		super(conn);
 		 
 		this.table = "project";
-		this.columns = new String[]{"name", "hourBudget", "deadline", 
-				"manager"};
+		this.columns = new String[]{"name", "hour_budget", "deadline", 
+				"manager_id"};
 	}
 	
 	public Project create(String name, int hourBudget, int deadline, 

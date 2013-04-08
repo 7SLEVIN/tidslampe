@@ -13,8 +13,8 @@ public class ActivityRepository extends Repository<Activity> {
 		super(conn);
 		
 		this.table = "activity";
-		this.columns = new String[]{"description", "expectedTime", 
-				"startTime", "endTime"};	
+		this.columns = new String[]{"description", "expected_time", 
+				"start_time", "end_time"};	
 	}
 
 	public Activity create(String description, Number expectedTime, 

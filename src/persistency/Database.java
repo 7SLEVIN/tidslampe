@@ -27,6 +27,10 @@ public class Database {
 		this.activity = new ActivityRepository(conn);
 		this.activityDeveloperRelation = new ActivityDeveloperRelationRepository(conn);
 		this.assist = new AssistRepository(conn);
+	}
+
+	public DatabaseConnection getConn() {
+		return this.conn;
 	} 
 	
 	

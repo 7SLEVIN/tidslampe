@@ -20,8 +20,7 @@ public abstract class Repository<T extends DatabaseObject> {
 	abstract protected ArrayList<T> parse(ResultSet rs);
 
 	protected int create(String[] values) {
-		// TODO
-		return 0;
+		return this.conn.insert(this.table, this.columns, values);
 	}
 	
 	public T read(int id) {
