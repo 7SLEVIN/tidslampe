@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import app.Activity;
+import app.ActivityDeveloperRelation;
 import app.Assist;
 import app.Developer;
 import app.Project;
@@ -56,6 +57,20 @@ public class TestDatabase {
 		assertEquals("Activity expected time", 1.5, activity.getExpectedTime());
 		assertEquals("Activity start time", date, activity.getStartTime());
 		assertEquals("Activity end time", date, activity.getEndTime());
+	}
+
+	@Test
+	public void testCreateActivityDeveloperRelation() throws ParseException {
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2011-01-18");
+		Activity activity = this.db.activity.create("Catch Moby Dick", 1.5, date, date);
+		Developer dev = this.db.developer.create("MD", "Moby Dick");
+		ActivityDeveloperRelation rel = this.db.activityDeveloperRelation.create(activity, 
+				dev);
+		
+		assertEquals("ActivityDeveloperRelation activity", "Catch Moby Dick", 
+				rel.getActivity().getDescription());
+		assertEquals("ActivityDeveloperRelation developer", "Moby Dick", 
+				rel.getDeveloper().getName());
 	}
 
 	@Test
