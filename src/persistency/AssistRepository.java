@@ -1,7 +1,7 @@
 package persistency;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.List;
 
 import app.Assist;
 import app.Developer;
@@ -23,7 +23,7 @@ public class AssistRepository extends Repository<Assist> {
 	 }
 
 	@Override
-	protected ArrayList<Assist> parse(ResultSet rs) {
+	protected List<Assist> parse(ResultSet rs) {
 		// TODO Auto-generated method stub
 		return null;
 	}

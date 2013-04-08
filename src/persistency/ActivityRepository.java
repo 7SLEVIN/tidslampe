@@ -1,11 +1,10 @@
 package persistency;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import app.Activity;
-import app.Developer;
 
 public class ActivityRepository extends Repository<Activity> {
 
@@ -27,7 +26,7 @@ public class ActivityRepository extends Repository<Activity> {
 	}
 
 	@Override
-	protected ArrayList<Activity> parse(ResultSet rs) {
+	protected List<Activity> parse(ResultSet rs) {
 		// TODO Auto-generated method stub
 		return null;
 	}

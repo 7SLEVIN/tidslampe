@@ -1,10 +1,8 @@
 package persistency;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
-import app.Activity;
 import app.Developer;
 import app.Project;
 
@@ -28,7 +26,7 @@ public class ProjectRepository extends Repository<Project> {
 	}
 
 	@Override
-	protected ArrayList<Project> parse(ResultSet rs) {
+	protected List<Project> parse(ResultSet rs) {
 		// TODO Auto-generated method stub
 		return null;
 	}

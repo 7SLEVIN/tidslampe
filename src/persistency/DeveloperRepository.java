@@ -23,8 +23,8 @@ public class DeveloperRepository extends Repository<Developer> {
 	}
 
 	@Override
-	protected ArrayList<Developer> parse(ResultSet rs) {
-		ArrayList<Developer> developers = new ArrayList<Developer>();
+	protected List<Developer> parse(ResultSet rs) {
+		List<Developer> developers = new ArrayList<Developer>();
 		try {
 			while (rs.next()) {
 				developers.add(new Developer(rs.getInt("id"), 

@@ -2,7 +2,7 @@ package persistency;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Repository<T extends DatabaseObject> {
 
@@ -18,7 +18,7 @@ public abstract class Repository<T extends DatabaseObject> {
 		this.conn = conn;
 	}
 	
-	abstract protected ArrayList<T> parse(ResultSet rs);
+	abstract protected List<T> parse(ResultSet rs);
 
 	protected int create(String[] values) {
 		return this.conn.insert(this.table, this.columns, values);
@@ -26,7 +26,8 @@ public abstract class Repository<T extends DatabaseObject> {
 	
 	public T read(int id) throws SQLException {
 		ResultSet rs = this.conn.read(this.table, id);
-		return this.parse(rs).get(0);
+		List<T> results = this.parse(rs);
+		return results.isEmpty() ? null : results.get(0);
 	}
 	
 	protected void update(T entity) {
