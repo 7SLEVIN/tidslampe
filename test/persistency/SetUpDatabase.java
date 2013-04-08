@@ -10,9 +10,9 @@ public class SetUpDatabase {
 	@Before
 	public void setUp() throws Exception {
 		 this.db = new Database();
-		 this.db.getConn().update("create table project (name string, hour_budget float, deadline integer, manager_id integer)");
+		 this.db.getConn().update("create table project (id integer, name string, hour_budget float, deadline integer, manager_id integer)");
 		 this.db.getConn().update("create table developer (id integer, initials string, name string)");
-		 this.db.getConn().update("create table activity (description string, expected_time float, start_time string, end_time string)");
+		 this.db.getConn().update("create table activity (id integer, description string, expected_time float, start_time string, end_time string)");
 		 this.db.getConn().update("create table activity_developer_relation (id integer, activity_id integer, developer_id integer)");
 		 this.db.getConn().update("create table assist (id integer, developer_id int, spent_time float)");
 	}

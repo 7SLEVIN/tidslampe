@@ -56,7 +56,7 @@ public class DatabaseConnection {
 	}
 	
 	public ResultSet read(String table, int id) throws SQLException {
-		String query = "select * from " + table + " where id=" + id;
+		String query = String.format("select * from %s where id=%d", table, id);
 		return this.stmt.executeQuery(query);
 	}
 }
