@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="613" version="1.1" width="1042" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffffff" height="176" stroke="#ffffff" stroke-width="1" width="158" x="262" y="302"/>
+<rect fill="none" height="176" stroke="#000000" stroke-width="1" width="158" x="262" y="302"/>
+<text font-family="Dialog" font-size="13" x="320" y="317">
+Activity</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="158" x="262" y="328"/>
+<text font-family="Dialog" font-size="13" x="266" y="344">
+description : String</text>
+<text font-family="Dialog" font-size="13" x="266" y="363">
+developer</text>
+<text font-family="Dialog" font-size="13" x="266" y="382">
+expectedTime : Number</text>
+<text font-family="Dialog" font-size="13" x="266" y="401">
+startTime : Long</text>
+<text font-family="Dialog" font-size="13" x="266" y="420">
+endTime : Long</text>
+<text font-family="Dialog" font-size="13" x="266" y="439">
+assists : List&lt;Assist&gt;</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="158" x="262" y="453"/>
+<rect fill="#ffffff" height="113" stroke="#ffffff" stroke-width="1" width="144" x="534" y="486"/>
+<rect fill="none" height="113" stroke="#000000" stroke-width="1" width="144" x="534" y="486"/>
+<text font-family="Dialog" font-size="13" x="587" y="501">
+Assist</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="144" x="534" y="512"/>
+<text font-family="Dialog" font-size="13" x="538" y="528">
+developer</text>
+<text font-family="Dialog" font-size="13" x="538" y="547">
+spentTime : Number</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="144" x="534" y="567"/>
+<polyline fill="none" points="419,477 534,486" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="13" x="432" y="471">
+0</text>
+<text font-family="Dialog" font-size="13" x="508" y="478">
+0..*</text>
+<rect fill="#ffffff" height="100" stroke="#ffffff" stroke-width="1" width="100" x="550" y="294"/>
+<rect fill="none" height="100" stroke="#000000" stroke-width="1" width="100" x="550" y="294"/>
+<text font-family="Dialog" font-size="13" x="572" y="309">
+Developer</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="100" x="550" y="320"/>
+<text font-family="Dialog" font-size="13" x="554" y="336">
+initials : String</text>
+<text font-family="Dialog" font-size="13" x="554" y="355">
+name : String</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="100" x="550" y="369"/>
+<polyline fill="none" points="419,318 550,318" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="13" x="432" y="311">
+0</text>
+<text font-family="Dialog" font-size="13" x="522" y="311">
+0..1</text>
+<polyline fill="none" points="598,486 598,393" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="13" x="611" y="467">
+0</text>
+<text font-family="Dialog" font-size="13" x="611" y="421">
+1</text>
+<rect fill="#ffffff" height="214" stroke="#ffffff" stroke-width="1" width="205" x="246" y="14"/>
+<rect fill="none" height="214" stroke="#000000" stroke-width="1" width="205" x="246" y="14"/>
+<text font-family="Dialog" font-size="13" x="328" y="29">
+Project</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="205" x="246" y="40"/>
+<text font-family="Dialog" font-size="13" x="250" y="56">
+manager : Developer</text>
+<text font-family="Dialog" font-size="13" x="250" y="75">
+projectName : String</text>
+<text font-family="Dialog" font-size="13" x="250" y="94">
+projectID : Integer</text>
+<text font-family="Dialog" font-size="13" x="250" y="113">
+hourBudget : Integer</text>
+<text font-family="Dialog" font-size="13" x="250" y="132">
+deadline : LongInt/UnixTimestamp</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="205" x="246" y="162"/>
+<text font-family="Dialog" font-size="13" x="250" y="178">
+set/getActivities() : List&lt;Activity&gt;</text>
+<text font-family="Dialog" font-size="13" x="250" y="197">
+set/getManager() : Developer</text>
+<polyline fill="none" points="347,227 347,302" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="13" x="360" y="254">
+0</text>
+<text font-family="Dialog" font-size="13" x="354" y="285">
+1..*</text>
+<polyline fill="none" points="347,227 347,302" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="13" x="360" y="254">
+0</text>
+<text font-family="Dialog" font-size="13" x="354" y="285">
+1..*</text>
+<rect fill="#ffffff" height="94" stroke="#ffffff" stroke-width="1" width="177" x="518" y="86"/>
+<rect fill="none" height="94" stroke="#000000" stroke-width="1" width="177" x="518" y="86"/>
+<text font-family="Dialog" font-size="13" x="564" y="101">
+ProjectPlanner</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="177" x="518" y="112"/>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="177" x="518" y="145"/>
+<polyline fill="none" points="518,129 450,129" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="13" x="497" y="122">
+0</text>
+<text font-family="Dialog" font-size="13" x="457" y="122">
+0..*</text>
+<polyline fill="none" points="601,179 601,294" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="13" x="614" y="206">
+0</text>
+<text font-family="Dialog" font-size="13" x="608" y="277">
+0..*</text>
+<rect fill="#ffffff" height="109" stroke="#ffffff" stroke-width="1" width="135" x="14" y="342"/>
+<rect fill="none" height="109" stroke="#000000" stroke-width="1" width="135" x="14" y="342"/>
+<text font-family="Dialog" font-size="13" x="44" y="357">
+FixedActivity</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="135" x="14" y="368"/>
+<text font-family="Dialog" font-size="13" x="18" y="384">
+type : Type</text>
+<text font-family="Dialog" font-size="13" x="18" y="403">
+description : String</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="135" x="14" y="421"/>
+<rect fill="#ffffff" height="116" stroke="#ffffff" stroke-width="1" width="128" x="102" y="142"/>
+<rect fill="none" height="116" stroke="#000000" stroke-width="1" width="128" x="102" y="142"/>
+<text font-family="Dialog" font-size="13" x="152" y="179">
+Type</text>
+<text font-family="Dialog" font-size="13" x="134" y="158">
+&lt;&lt;enum&gt;&gt;</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="128" x="102" y="190"/>
+<text font-family="Dialog" font-size="13" x="106" y="206">
+Vacation</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="128" x="102" y="226"/>
+<polyline fill="none" points="148,257 148,342" stroke="#000000" stroke-width="1"/>
+<polygon fill="#ffffff" points="148,342 141,330 155,330" stroke="#ffffff" stroke-width="1"/>
+<polygon fill="none" points="148,342 141,330 155,330" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="13" x="55" y="304">
+contains</text>
+<polyline fill="none" points="450,227 550,294" stroke="#333399" stroke-width="1"/>
+<text font-family="Dialog" font-size="13" x="474" y="230">
+0</text>
+<text font-family="Dialog" font-size="13" x="529" y="270">
+0..1</text>
+<rect fill="#ffffff" height="94" stroke="#ffffff" stroke-width="1" width="230" x="798" y="86"/>
+<rect fill="none" height="94" stroke="#000000" stroke-width="1" width="230" x="798" y="86"/>
+<text font-family="Dialog" font-size="13" x="887" y="101">
+Calendar</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="230" x="798" y="112"/>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="230" x="798" y="133"/>
+<text font-family="Dialog" font-size="13" x="802" y="149">
+viewDeveloper(Developer/devInitials?)</text>
+<text font-family="Dialog" font-size="13" x="802" y="168">
+viewProject(Project/projectID)</text>
+<rect fill="#ffffff" height="100" stroke="#ffffff" stroke-width="1" width="144" x="806" y="238"/>
+<rect fill="none" height="100" stroke="#000000" stroke-width="1" width="144" x="806" y="238"/>
+<text font-family="Dialog" font-size="13" x="850" y="253">
+Database</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="144" x="806" y="264"/>
+<text font-family="Dialog" font-size="13" x="810" y="280">
+projects : List&lt;Project&gt;</text>
+<text font-family="Dialog" font-size="13" x="810" y="299">
+newAttr : Integer</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="144" x="806" y="310"/>
+<text font-family="Dialog" font-size="13" x="810" y="326">
+InitializeProjects()</text>
+<rect fill="#ffffff" height="94" stroke="#ffffff" stroke-width="1" width="154" x="758" y="390"/>
+<rect fill="none" height="94" stroke="#000000" stroke-width="1" width="154" x="758" y="390"/>
+<text font-family="Dialog" font-size="13" x="763" y="405">
+abstract DatabaseObject</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="154" x="758" y="416"/>
+<text font-family="Dialog" font-size="13" x="762" y="432">
+id : Int</text>
+<text font-family="Dialog" font-size="13" x="762" y="451">
+database : Database</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="154" x="758" y="462"/>
+</svg>
