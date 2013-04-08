@@ -11,6 +11,7 @@ public class Database {
 	public AssistRepository assist;
 	
 	/**
+	 * @param conn
 	 * @param project
 	 * @param developer
 	 * @param activity
@@ -19,10 +20,10 @@ public class Database {
 	public Database() {
 		this.conn = new DatabaseConnection();
 		
-		this.project = new ProjectRepository(this);
-		this.developer = new DeveloperRepository(this);
-		this.activity = new ActivityRepository(this);
-		this.assist = new AssistRepository(this);
+		this.project = new ProjectRepository(conn);
+		this.developer = new DeveloperRepository(conn);
+		this.activity = new ActivityRepository(conn);
+		this.assist = new AssistRepository(conn);
 	} 
 	
 	

@@ -1,6 +1,7 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import persistency.DatabaseObject;
@@ -8,10 +9,10 @@ import persistency.DatabaseObject;
 public class Activity extends DatabaseObject {
 	
 	private String description;
-	private Developer developer;
+	private List<Developer> developers;
 	private Number expectedTime;
-	private Long startTime;
-	private Long endTime;
+	private Date startTime;
+	private Date endTime;
 	private List<Assist> assists;
 	
 	/**
@@ -22,10 +23,12 @@ public class Activity extends DatabaseObject {
 	 * @param startTime
 	 * @param endTime
 	 */
-	public Activity(String description, Developer developer,
-			Number expectedTime, Long startTime, Long endTime) {
+	public Activity(int id, String description, Number expectedTime, 
+			Date startTime, Date endTime) {
+		super(id);
+		
 		this.description = description;
-		this.developer = developer;
+		this.developers = new ArrayList<Developer>();
 		this.expectedTime = expectedTime;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -42,6 +45,22 @@ public class Activity extends DatabaseObject {
 	protected void delete() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Number getExpectedTime() {
+		return expectedTime;
+	}
+
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
 	}
 	
 

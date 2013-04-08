@@ -8,20 +8,20 @@ public abstract class Repository<T extends DatabaseObject> {
 	protected String table;
 	protected String[] columns;
 	
-	private Database database;
+	private DatabaseConnection conn;
 	
 	/**
-	 * 
+	 * @param conn
 	 */
-	public Repository(Database database) {
-		this.database = database;
+	public Repository(DatabaseConnection conn) {
+		this.conn = conn;
 	}
 	
 	abstract protected ArrayList<T> parse(ResultSet rs);
 
-	public T create(String[] columns) {
+	protected int create(String[] values) {
 		// TODO
-		return null;
+		return 0;
 	}
 	
 	public T read(int id) {
@@ -29,15 +29,11 @@ public abstract class Repository<T extends DatabaseObject> {
 		return null;
 	}
 	
-	public void update(T entity) {
+	protected void update(T entity) {
 		// TODO
 	}
 	
 	public void delete(int id) {
-		// TODO
-	}
-	
-	public void delete(T entity) {
 		// TODO
 	}
 	

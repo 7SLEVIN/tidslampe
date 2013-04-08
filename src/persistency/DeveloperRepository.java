@@ -7,11 +7,17 @@ import app.Developer;
 
 public class DeveloperRepository extends Repository<Developer> {
 	
-	public DeveloperRepository(Database database) {
-		super(database);
+	public DeveloperRepository(DatabaseConnection conn) {
+		super(conn);
 		 
 		this.table = "developer";
-		this.columns = new String[]{"id", "initials", "name"};
+		this.columns = new String[]{"initials", "name"};
+	}
+	
+	public Developer create(String initials, String name) {
+		int id = this.create(new String[]{initials, name});
+		Developer dev = new Developer(id, initials, name); 
+		return dev;
 	}
 
 	@Override
