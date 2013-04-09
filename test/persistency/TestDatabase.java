@@ -16,33 +16,26 @@ import app.Developer;
 import app.Project;
 
 public class TestDatabase extends SetUpDatabase {
-
-	@Test
-	public void testRead() throws SQLException {
-		Developer man = this.db.developer.create("MD", "Moby Dick");
-		Developer dev = this.db.developer.read(man.getId());
-
-		assertEquals("Developer name", "Moby Dick", dev.getName());
-		assertEquals("Developer initials", "MD", dev.getInitials());
-	}
 	
 	@Test
-	public void testCreateProject() {
+	public void testCreateReadProject() throws SQLException {
 		Developer man = this.db.developer.create("MD", "Moby Dick");
 		Project proj = this.db.project.create("Tidslampe", 666, 1337, man);
+		Project actual = this.db.project.read(proj.getId());
 		
-		assertEquals("Project name", "Tidslampe", proj.getName());
-		assertEquals("Project hour budget", 666, proj.getHourBudget());
-		assertEquals("Project deadline", 1337, proj.getDeadline());
-		assertEquals("Project manager", "Moby Dick", proj.getManager().getName());
+		assertEquals("Project name", "Tidslampe", actual.getName());
+		assertEquals("Project hour budget", 666, actual.getHourBudget());
+		assertEquals("Project deadline", 1337, actual.getDeadline());
+		assertEquals("Project manager", "Moby Dick", actual.getManager().getName());
 	}
 
 	@Test
-	public void testCreateDeveloper() {
+	public void testCreateReadDeveloper() throws SQLException {
 		Developer dev = this.db.developer.create("MD", "Moby Dick");
-		
-		assertEquals("Developer initials", "MD", dev.getInitials());
-		assertEquals("Developer name", "Moby Dick", dev.getName());
+		Developer actual = this.db.developer.read(dev.getId());
+
+		assertEquals("Developer name", "Moby Dick", actual.getName());
+		assertEquals("Developer initials", "MD", actual.getInitials());
 	}
 
 	@Test

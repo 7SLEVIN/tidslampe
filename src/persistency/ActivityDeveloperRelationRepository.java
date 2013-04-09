@@ -9,8 +9,8 @@ import app.Developer;
 
 public class ActivityDeveloperRelationRepository extends Repository<ActivityDeveloperRelation> {
 
-	public ActivityDeveloperRelationRepository(DatabaseConnection conn) {
-		super(conn);
+	public ActivityDeveloperRelationRepository(Database db) {
+		super(db);
 		
 		this.table = "activity_developer_relation";
 		this.columns = new String[]{"activity_id", "developer_id"};

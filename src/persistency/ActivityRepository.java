@@ -8,8 +8,8 @@ import app.Activity;
 
 public class ActivityRepository extends Repository<Activity> {
 
-	public ActivityRepository(DatabaseConnection conn) {
-		super(conn);
+	public ActivityRepository(Database db) {
+		super(db);
 		
 		this.table = "activity";
 		this.columns = new String[]{"description", "expected_time", 

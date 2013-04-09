@@ -3,7 +3,7 @@ package persistency;
 
 public class Database {
 	
-	private DatabaseConnection conn;
+	protected DatabaseConnection conn;
 
 	public ProjectRepository project;
 	public DeveloperRepository developer;
@@ -22,11 +22,11 @@ public class Database {
 		// TODO refactor db filename out of source code
 		this.conn = new DatabaseConnection("data.db");
 		
-		this.project = new ProjectRepository(conn);
-		this.developer = new DeveloperRepository(conn);
-		this.activity = new ActivityRepository(conn);
-		this.activityDeveloperRelation = new ActivityDeveloperRelationRepository(conn);
-		this.assist = new AssistRepository(conn);
+		this.project = new ProjectRepository(this);
+		this.developer = new DeveloperRepository(this);
+		this.activity = new ActivityRepository(this);
+		this.activityDeveloperRelation = new ActivityDeveloperRelationRepository(this);
+		this.assist = new AssistRepository(this);
 	}
 
 	public DatabaseConnection getConn() {

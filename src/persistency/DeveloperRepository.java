@@ -9,8 +9,8 @@ import app.Developer;
 
 public class DeveloperRepository extends Repository<Developer> {
 	
-	public DeveloperRepository(DatabaseConnection conn) {
-		super(conn);
+	public DeveloperRepository(Database db) {
+		super(db);
 		 
 		this.table = "developer";
 		this.columns = new String[]{"initials", "name"};

@@ -8,8 +8,8 @@ import app.Developer;
 
 public class AssistRepository extends Repository<Assist> {
 
-	 public AssistRepository(DatabaseConnection conn) {
-		 super(conn);
+	 public AssistRepository(Database db) {
+		 super(db);
 		 
 		 this.table = "assist";
 		 this.columns = new String[]{"developer_id", "spent_time"};
