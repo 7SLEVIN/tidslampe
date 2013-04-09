@@ -49,12 +49,12 @@ public class DatabaseConnection {
 	}
 
 	public ResultSet execQuery(String query) throws SQLException {
-		System.out.println(query);
+//		System.out.println(query);
 		return this.stmt.executeQuery(query);
 	}
 
 	public int execUpdate(String query) throws SQLException {
-		System.out.println(query);
+//		System.out.println(query);
 		return this.stmt.executeUpdate(query);
 	}
 
