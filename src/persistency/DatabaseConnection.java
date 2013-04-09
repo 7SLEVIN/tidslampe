@@ -25,7 +25,7 @@ public class DatabaseConnection {
 		}
 	}
 
-	public int insert(String table, String[] columns, String[] values) {
+	public int create(String table, String[] columns, String[] values) {
 		String[] cols = ArrayUtils.wrapElementsWith(columns, "\"");
 		String[] vals = ArrayUtils.wrapElementsWith(values, "\"");
 		final String query = String
@@ -34,10 +34,10 @@ public class DatabaseConnection {
 						StringUtils.join(vals, ','));
 		int id = -1;
 		try {
-			this.update(query);
+			this.execUpdate(query);
 
 			// Get the id of the inserted row
-			ResultSet rs = this.query("select last_insert_rowid()");
+			ResultSet rs = this.execQuery("select last_insert_rowid()");
 			if (rs.next()) {
 				id = rs.getInt("last_insert_rowid()");
 			}
@@ -48,18 +48,23 @@ public class DatabaseConnection {
 		return id;
 	}
 
-	public ResultSet query(String query) throws SQLException {
+	public ResultSet execQuery(String query) throws SQLException {
 		System.out.println(query);
 		return this.stmt.executeQuery(query);
 	}
 
-	public int update(String query) throws SQLException {
+	public int execUpdate(String query) throws SQLException {
 		System.out.println(query);
 		return this.stmt.executeUpdate(query);
 	}
 
 	public ResultSet read(String table, int id) throws SQLException {
 		String query = String.format("select * from %s where id=%d", table, id);
-		return this.query(query);
+		return this.execQuery(query);
+	}
+
+	public ResultSet readAll(String table) throws SQLException {
+		String query = String.format("select * from %s", table);
+		return this.execQuery(query);
 	}
 }

@@ -14,21 +14,21 @@ public class TestDatabaseConnection {
 	@Before
 	public void setUp() throws Exception {
 		this.dbCon = new DatabaseConnection("test_db.db");
-		this.dbCon.update("drop table if exists foo");
-		this.dbCon.update("create table foo (id integer, name string)");
+		this.dbCon.execUpdate("drop table if exists foo");
+		this.dbCon.execUpdate("create table foo (id integer, name string)");
 	}
 
 	@Test
 	public void testInsertId() {
-		int id1 = this.dbCon.insert("foo", new String[]{"name"}, new String[]{"Karlsson Delight"});
+		int id1 = this.dbCon.create("foo", new String[]{"name"}, new String[]{"Karlsson Delight"});
 		assertEquals("Last insert id", 1, id1);
 
-		int id2 = this.dbCon.insert("foo", new String[]{"name"}, new String[]{"Moby Dick"});
+		int id2 = this.dbCon.create("foo", new String[]{"name"}, new String[]{"Moby Dick"});
 		assertEquals("Last insert id increased", 2, id2);
 	}
 	
 	@After 
 	public void tearDown() throws SQLException {
-		this.dbCon.update("drop table if exists foo");
+		this.dbCon.execUpdate("drop table if exists foo");
 	}
 }
