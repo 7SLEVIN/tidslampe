@@ -1,6 +1,7 @@
 package persistency;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Activity;
@@ -26,8 +27,19 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 
 	@Override
 	protected List<ActivityDeveloperRelation> parse(ResultSet rs) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ActivityDeveloperRelation> rel = new ArrayList<ActivityDeveloperRelation>();
+		try {
+			while (rs.next()) {
+				int activity_id = rs.getInt(this.columns[0]);
+				int developer_id = rs.getInt(this.columns[1]);
+				rel.add(new ActivityDeveloperRelation(rs.getInt("id"), 
+						this.db.activity.read(activity_id), 
+						this.db.developer.read(developer_id)));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rel;
 	}
 
 }
