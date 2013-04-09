@@ -3,10 +3,12 @@ package persistency;
 import static org.junit.Assert.assertEquals;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Test;
 
@@ -34,7 +36,7 @@ public class TestDatabase extends SetUpDatabase {
 	}
 	
 	@Test
-	public void testCreateReadProject() throws SQLException {
+	public void testCreateProject() throws SQLException {
 		Developer man = this.db.developer.create("MD", "Moby Dick");
 		Project proj = this.db.project.create("Tidslampe", 666, 1337, man);
 		Project actual = this.db.project.read(proj.getId());
@@ -46,7 +48,7 @@ public class TestDatabase extends SetUpDatabase {
 	}
 
 	@Test
-	public void testCreateReadDeveloper() throws SQLException {
+	public void testCreateDeveloper() throws SQLException {
 		Developer dev = this.db.developer.create("MD", "Moby Dick");
 		Developer actual = this.db.developer.read(dev.getId());
 
@@ -55,14 +57,15 @@ public class TestDatabase extends SetUpDatabase {
 	}
 
 	@Test
-	public void testCreateActivity() throws ParseException {
-		Date date = new SimpleDateFormat("yyyy-MM-dd").parse("2011-01-18");
+	public void testCreateActivity() throws ParseException, SQLException {
+		Date date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss z").parse("22.04.1991 12:23:45 CET");
 		Activity activity = this.db.activity.create("Catch Moby Dick", 1.5, date, date);
+		Activity actual = this.db.activity.read(activity.getId());
 		
-		assertEquals("Activity description", "Catch Moby Dick", activity.getDescription());
-		assertEquals("Activity expected time", 1.5, activity.getExpectedTime());
-		assertEquals("Activity start time", date, activity.getStartTime());
-		assertEquals("Activity end time", date, activity.getEndTime());
+		assertEquals("Activity description", "Catch Moby Dick", actual.getDescription());
+		assertEquals("Activity expected time", 1.5, actual.getExpectedTime());
+		assertEquals("Activity start time", date, actual.getStartTime());
+		assertEquals("Activity end time", date, actual.getEndTime());
 	}
 
 	@Test
