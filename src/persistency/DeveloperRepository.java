@@ -21,7 +21,13 @@ public class DeveloperRepository extends Repository<Developer> {
 		Developer dev = new Developer(id, initials, name); 
 		return dev;
 	}
-
+	
+	public List<Developer> readByInitials(String initials) {
+		return this.parse(this.db.conn.readSpecific(this.table, this.columns[0], initials));
+	}
+	
+	
+	
 	@Override
 	protected List<Developer> parse(ResultSet rs) {
 		List<Developer> developers = new ArrayList<Developer>();

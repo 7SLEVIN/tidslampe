@@ -30,7 +30,7 @@ public abstract class Repository<T extends DatabaseObject> {
 	}
 	
 	public T read(int id) throws SQLException {
-		ResultSet rs = this.db.conn.read(this.table, id);
+		ResultSet rs = this.db.conn.readByID(this.table, id);
 		List<T> results = this.parse(rs);
 		return results.isEmpty() ? null : results.get(0);
 	}
