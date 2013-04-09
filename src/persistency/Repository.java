@@ -21,7 +21,12 @@ public abstract class Repository<T extends DatabaseObject> {
 	abstract protected List<T> parse(ResultSet rs);
 
 	protected int create(String[] values) {
-		return this.db.conn.insert(this.table, this.columns, values);
+		return this.db.conn.create(this.table, this.columns, values);
+	}
+
+	public List<T> readAll() throws SQLException {
+		ResultSet rs = this.db.conn.readAll(this.table);
+		return this.parse(rs);
 	}
 	
 	public T read(int id) throws SQLException {

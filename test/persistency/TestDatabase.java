@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -16,6 +17,21 @@ import app.Developer;
 import app.Project;
 
 public class TestDatabase extends SetUpDatabase {
+	
+	@Test
+	public void testReadAll() throws SQLException {
+		List<Developer> devs = this.db.developer.readAll();
+		assertEquals("Empty readAll", 0, devs.size());
+		this.db.developer.create("MD", "Moby Dick");
+		
+		devs = this.db.developer.readAll();
+		assertEquals("Single readAll", 1, devs.size());
+		this.db.developer.create("AW", "Alan Watts");
+		this.db.developer.create("DK", "Donald Knuth");
+		
+		devs = this.db.developer.readAll();
+		assertEquals("Multiple readAll", 3, devs.size());
+	}
 	
 	@Test
 	public void testCreateReadProject() throws SQLException {
