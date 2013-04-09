@@ -5,8 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.Developer;
-import app.Project;
+import model.Developer;
+import model.Project;
+
 
 
 public class ProjectRepository extends Repository<Project> {

@@ -1,6 +1,5 @@
-package app;
+package model;
 
-import persistency.DatabaseObject;
 
 public class ActivityDeveloperRelation extends DatabaseObject {
 

@@ -3,8 +3,9 @@ package persistency;
 import java.sql.ResultSet;
 import java.util.List;
 
-import app.Assist;
-import app.Developer;
+import model.Assist;
+import model.Developer;
+
 
 public class AssistRepository extends Repository<Assist> {
 

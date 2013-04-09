@@ -1,6 +1,5 @@
-package app;
+package model;
 
-import persistency.DatabaseObject;
 
 public class Assist extends DatabaseObject {
 	

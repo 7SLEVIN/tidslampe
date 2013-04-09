@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import app.Activity;
+import model.Activity;
+
 
 public class ActivityRepository extends Repository<Activity> {
 

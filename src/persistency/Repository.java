@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import model.DatabaseObject;
+
 public abstract class Repository<T extends DatabaseObject> {
 
 	protected String table;

@@ -10,13 +10,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import model.Activity;
+import model.ActivityDeveloperRelation;
+import model.Assist;
+import model.Developer;
+import model.Project;
+
 import org.junit.Test;
 
-import app.Activity;
-import app.ActivityDeveloperRelation;
-import app.Assist;
-import app.Developer;
-import app.Project;
 
 public class TestDatabase extends SetUpDatabase {
 	

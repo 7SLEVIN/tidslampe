@@ -1,4 +1,6 @@
-package persistency;
+package model;
+
+import persistency.Database;
 
 abstract public class DatabaseObject {
 
@@ -13,7 +15,7 @@ abstract public class DatabaseObject {
 	
 	abstract protected void delete();
 	
-	protected int getId() {
+	public int getId() {
 		return this.id;
 	}
 	

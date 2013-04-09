@@ -1,9 +1,9 @@
-package app;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import persistency.DatabaseObject;
+
 
 public class Project extends DatabaseObject {
 

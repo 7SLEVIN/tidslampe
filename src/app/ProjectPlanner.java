@@ -8,22 +8,31 @@ import view.state.ViewState;
 
 public class ProjectPlanner {
 	
-	public static void main(String[] args) {
-		new ProjectPlanner();
-	}
-	
 	private Database database;
+	private TimeService timeService;
 	private LoginController loginControl;
+	
 	
 	/**
 	 * 
 	 */
 	public ProjectPlanner() {
-		ViewContainer v = new ViewContainer();
-		ViewController sc = new ViewController(v);
-		sc.setViewState(ViewState.Menu);
+		this.timeService = new TimeService();
+		this.database = new Database();
+		this.loginControl = new LoginController(this.database,this.timeService);
+		
 	}
 	
+	public Database getDatabase(){
+		return this.database;
+	}
 	
+	public TimeService getTimeService(){
+		return this.timeService;
+	}
+	
+	public void setTimeService(TimeService ts){
+		this.timeService = ts;
+	}
 
 }

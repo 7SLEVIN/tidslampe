@@ -1,10 +1,10 @@
-package app;
+package model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import persistency.DatabaseObject;
+
 
 public class Activity extends DatabaseObject {
 	

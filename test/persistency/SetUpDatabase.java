@@ -3,13 +3,16 @@ package persistency;
 import org.junit.After;
 import org.junit.Before;
 
+import app.ProjectPlanner;
+
 public class SetUpDatabase {
 	
 	protected Database db;
+	protected ProjectPlanner projectPlanner = new ProjectPlanner();
 
 	@Before
 	public void setUp() throws Exception {
-		 this.db = new Database();
+		 this.db = this.projectPlanner.getDatabase();
 		 
 		 this.db.getConn().execUpdate("create table if not exists project (id integer primary key autoincrement, name string, hour_budget float, deadline integer, manager_id integer)");
 		 this.db.getConn().execUpdate("create table if not exists developer (id integer primary key autoincrement, initials string, name string)");

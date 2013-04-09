@@ -3,9 +3,10 @@ package persistency;
 import java.sql.ResultSet;
 import java.util.List;
 
-import app.Activity;
-import app.ActivityDeveloperRelation;
-import app.Developer;
+import model.Activity;
+import model.ActivityDeveloperRelation;
+import model.Developer;
+
 
 public class ActivityDeveloperRelationRepository extends Repository<ActivityDeveloperRelation> {
 
