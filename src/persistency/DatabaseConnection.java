@@ -57,10 +57,21 @@ public class DatabaseConnection {
 //		System.out.println(query);
 		return this.stmt.executeUpdate(query);
 	}
+	
+	public ResultSet readSpecific(String table, String key, String value){
+		String query = String.format("select * from %s where %s=%s", table, key, value);
+		try {
+			return this.execQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
-	public ResultSet read(String table, int id) throws SQLException {
-		String query = String.format("select * from %s where id=%d", table, id);
-		return this.execQuery(query);
+	public ResultSet readByID(String table, int id) throws SQLException {
+//		String query = String.format("select * from %s where id=%d", table, id);
+//		return this.execQuery(query);
+		return this.readSpecific(table, "id", String.valueOf(id));
 	}
 
 	public ResultSet readAll(String table) throws SQLException {

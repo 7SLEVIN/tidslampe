@@ -1,5 +1,6 @@
 package app;
 
+import controller.LoginController;
 import controller.ViewController;
 import persistency.Database;
 import view.ViewContainer;
@@ -12,7 +13,8 @@ public class ProjectPlanner {
 	}
 	
 	private Database database;
-
+	private LoginController loginControl;
+	
 	/**
 	 * 
 	 */
