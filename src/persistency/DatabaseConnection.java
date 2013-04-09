@@ -48,33 +48,40 @@ public class DatabaseConnection {
 		return id;
 	}
 
-	public ResultSet execQuery(String query) throws SQLException {
+	public ResultSet execQuery(String query) {
 //		System.out.println(query);
-		return this.stmt.executeQuery(query);
-	}
-
-	public int execUpdate(String query) throws SQLException {
-//		System.out.println(query);
-		return this.stmt.executeUpdate(query);
-	}
-	
-	public ResultSet readSpecific(String table, String key, String value){
-		String query = String.format("select * from %s where %s=%s", table, key, value);
 		try {
-			return this.execQuery(query);
+			return this.stmt.executeQuery(query);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public ResultSet readByID(String table, int id) throws SQLException {
+	public int execUpdate(String query)  {
+//		System.out.println(query);
+		try {
+			return this.stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public ResultSet readSpecific(String table, String key, String value){
+		String query = "SELECT * FROM " + table + " WHERE " + key + "='" + value +"'";
+		return this.execQuery(query);
+	}
+
+	public ResultSet readByID(String table, int id)  {
 //		String query = String.format("select * from %s where id=%d", table, id);
 //		return this.execQuery(query);
 		return this.readSpecific(table, "id", String.valueOf(id));
 	}
 
-	public ResultSet readAll(String table) throws SQLException {
+	public ResultSet readAll(String table)  {
 		String query = String.format("select * from %s", table);
 		return this.execQuery(query);
 	}

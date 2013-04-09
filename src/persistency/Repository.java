@@ -24,12 +24,12 @@ public abstract class Repository<T extends DatabaseObject> {
 		return this.db.conn.create(this.table, this.columns, values);
 	}
 
-	public List<T> readAll() throws SQLException {
+	public List<T> readAll()  {
 		ResultSet rs = this.db.conn.readAll(this.table);
 		return this.parse(rs);
 	}
 	
-	public T read(int id) throws SQLException {
+	public T read(int id)  {
 		ResultSet rs = this.db.conn.readByID(this.table, id);
 		List<T> results = this.parse(rs);
 		return results.isEmpty() ? null : results.get(0);
