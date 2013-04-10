@@ -2,9 +2,6 @@ package persistency;
 
 import org.junit.After;
 import org.junit.Before;
-import static org.mockito.Mockito.*;
-
-import exceptions.Troll;
 
 import app.ProjectPlanner;
 
