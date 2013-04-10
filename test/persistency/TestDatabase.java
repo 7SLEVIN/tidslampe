@@ -1,15 +1,11 @@
 package persistency;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
-import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import model.Activity;
 import model.ActivityDeveloperRelation;
