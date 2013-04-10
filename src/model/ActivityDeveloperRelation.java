@@ -31,12 +31,26 @@ public class ActivityDeveloperRelation extends DatabaseObject {
 		
 	}
 
+	@Override
+	public String[] toArray() {
+		return new String[]{String.valueOf(this.activity.getId()), 
+				String.valueOf(this.developer.getId())};
+	}
+
 	public Activity getActivity() {
 		return activity;
 	}
 
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+
 	public Developer getDeveloper() {
 		return developer;
+	}
+
+	public void setDeveloper(Developer developer) {
+		this.developer = developer;
 	}
 
 }
