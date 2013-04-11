@@ -25,6 +25,11 @@ public abstract class Repository<T extends DatabaseObject> {
 		return this.db.conn.create(this.table, this.columns, values);
 	}
 
+	public List<T> readAllWhere(String key, String value)  {
+		ResultSet rs = this.db.conn.readAllWhere(this.table, key, value);
+		return this.parse(rs);
+	}
+
 	public List<T> readAll()  {
 		ResultSet rs = this.db.conn.readAll(this.table);
 		return this.parse(rs);

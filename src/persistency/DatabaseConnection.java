@@ -69,7 +69,7 @@ public class DatabaseConnection {
 		}
 		return -1;
 	}
-	
+	 
 	public ResultSet readSpecific(String table, String key, String value){
 		String query = "SELECT * FROM " + table + " WHERE " + key + "='" + value +"'";
 		return this.execQuery(query);
@@ -83,6 +83,11 @@ public class DatabaseConnection {
 
 	public ResultSet readAll(String table)  {
 		String query = String.format("select * from %s", table);
+		return this.execQuery(query);
+	}
+
+	public ResultSet readAllWhere(String table, String key, String value) {
+		String query = String.format("select * from %s where %s=%s", table, key, value);
 		return this.execQuery(query);
 	}
 }
