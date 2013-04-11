@@ -42,11 +42,16 @@ public abstract class Repository<T extends DatabaseObject> {
 	}
 	
 	protected void update(T entity) {
-		// TODO
+		String[] values = entity.toArray();
+		this.db.conn.update(this.table, entity.getId(), this.columns, values);
 	}
 	
 	public void delete(int id) {
-		// TODO
+		this.db.conn.delete(this.table, id);
+	}
+	
+	public int count() {
+		return this.db.conn.count(this.table);
 	}
 	
 }

@@ -3,8 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Project extends DatabaseObject {
 
 	private String name;
@@ -44,20 +42,51 @@ public class Project extends DatabaseObject {
 		
 	}
 
+	@Override
+	public String[] toArray() {
+		return new String[]{this.name, String.valueOf(hourBudget), 
+				String.valueOf(deadline), 
+				String.valueOf(this.manager.getId())};
+	}
+
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getHourBudget() {
 		return hourBudget;
 	}
 
+	public void setHourBudget(int hourBudget) {
+		this.hourBudget = hourBudget;
+	}
+
 	public int getDeadline() {
 		return deadline;
 	}
 
+	public void setDeadline(int deadline) {
+		this.deadline = deadline;
+	}
+
 	public Developer getManager() {
 		return manager;
+	}
+
+	public void setManager(Developer manager) {
+		this.manager = manager;
+	}
+
+	public List<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
 	}
 
 }
