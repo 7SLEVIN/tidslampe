@@ -30,14 +30,26 @@ public class Assist extends DatabaseObject {
 		
 	}
 
+	@Override
+	public String[] toArray() {
+		return new String[]{String.valueOf(this.developer.getId()), 
+				String.valueOf(this.spentTime)};
+	}
+
 	public Developer getDeveloper() {
 		return developer;
+	}
+
+	public void setDeveloper(Developer developer) {
+		this.developer = developer;
 	}
 
 	public Number getSpentTime() {
 		return spentTime;
 	}
-	
-	
+
+	public void setSpentTime(Number spentTime) {
+		this.spentTime = spentTime;
+	}
 
 }

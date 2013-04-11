@@ -12,8 +12,10 @@ abstract public class DatabaseObject {
 	}
 	
 	abstract protected void save();
-	
+
 	abstract protected void delete();
+	
+	public abstract String[] toArray();
 	
 	public int getId() {
 		return this.id;

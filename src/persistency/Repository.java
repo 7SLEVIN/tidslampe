@@ -25,6 +25,11 @@ public abstract class Repository<T extends DatabaseObject> {
 		return this.db.conn.create(this.table, this.columns, values);
 	}
 
+	public List<T> readAllWhere(String key, String value)  {
+		ResultSet rs = this.db.conn.readAllWhere(this.table, key, value);
+		return this.parse(rs);
+	}
+
 	public List<T> readAll()  {
 		ResultSet rs = this.db.conn.readAll(this.table);
 		return this.parse(rs);
@@ -37,11 +42,16 @@ public abstract class Repository<T extends DatabaseObject> {
 	}
 	
 	protected void update(T entity) {
-		// TODO
+		String[] values = entity.toArray();
+		this.db.conn.update(this.table, entity.getId(), this.columns, values);
 	}
 	
 	public void delete(int id) {
-		// TODO
+		this.db.conn.delete(this.table, id);
+	}
+	
+	public int count() {
+		return this.db.conn.count(this.table);
 	}
 	
 }

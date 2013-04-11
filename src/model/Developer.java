@@ -29,13 +29,27 @@ public class Developer extends DatabaseObject {
 		// TODO Auto-generated method stub	
 		
 	}
+	
+	@Override
+	public String[] toArray() {
+		return new String[]{this.initials, this.name};
+	}
+	
+	public String getInitials() {
+		return this.initials;
+	}
 
+	public void setInitials(String initials) {
+		this.initials = initials;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
 
-	public String getInitials() {
-		return this.initials;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 
 }
