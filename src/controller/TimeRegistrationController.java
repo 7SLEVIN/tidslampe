@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import model.TimeEntry;
+
 public class TimeRegistrationController {
 
 	public TimeRegistrationController(){
@@ -23,5 +25,11 @@ public class TimeRegistrationController {
 	        } catch (ParseException e) {
 	            return false;
 	        }
+	}
+
+	public boolean timeAlreadyUsed(TimeEntry timeEntry){
+		
+		
+		return false;
 	}
 }

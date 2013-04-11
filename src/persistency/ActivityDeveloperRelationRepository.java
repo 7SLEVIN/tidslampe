@@ -21,7 +21,7 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 	public ActivityDeveloperRelation create(Activity activity, Developer developer) {
 		int id = this.create(new String[]{String.valueOf(activity.getId()), 
 				String.valueOf(developer.getId())});
-		ActivityDeveloperRelation rel = new ActivityDeveloperRelation(id, activity, developer);
+		ActivityDeveloperRelation rel = new ActivityDeveloperRelation(this.db, id, activity, developer);
 		return rel;
 	}
 
@@ -32,7 +32,7 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 			while (rs.next()) {
 				int activity_id = rs.getInt(this.columns[0]);
 				int developer_id = rs.getInt(this.columns[1]);
-				rel.add(new ActivityDeveloperRelation(rs.getInt("id"), 
+				rel.add(new ActivityDeveloperRelation(this.db, rs.getInt("id"), 
 						this.db.activity.read(activity_id), 
 						this.db.developer.read(developer_id)));
 			}

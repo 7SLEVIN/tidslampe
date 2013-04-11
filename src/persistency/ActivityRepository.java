@@ -26,7 +26,7 @@ public class ActivityRepository extends Repository<Activity> {
 		
 		int id = this.create(new String[]{description, String.valueOf(expectedTime), 
 				df.format(startTime), df.format(endTime)});
-		Activity activity = new Activity(id, description, expectedTime, 
+		Activity activity = new Activity(this.db, id, description, expectedTime, 
 				startTime, endTime);
 		return activity;
 	}
@@ -37,7 +37,7 @@ public class ActivityRepository extends Repository<Activity> {
 		DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss z");
 		try {
 			while (rs.next()) {
-				activities.add(new Activity(rs.getInt("id"), 
+				activities.add(new Activity(this.db, rs.getInt("id"), 
 						rs.getString(this.columns[0]), 
 						rs.getDouble(this.columns[1]), 
 						df.parse(rs.getString(this.columns[2])), 

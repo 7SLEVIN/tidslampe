@@ -1,5 +1,7 @@
 package model;
 
+import persistency.Database;
+
 
 public class Developer extends DatabaseObject {
 	
@@ -11,8 +13,8 @@ public class Developer extends DatabaseObject {
 	 * @param initials
 	 * @param name
 	 */
-	public Developer(int id, String initials, String name) {
-		super(id);
+	public Developer(Database db, int id, String initials, String name) {
+		super(id,db);
 		
 		this.initials = initials;
 		this.name = name;

@@ -1,5 +1,7 @@
 package model;
 
+import persistency.Database;
+
 
 public class Assist extends DatabaseObject {
 	
@@ -11,8 +13,8 @@ public class Assist extends DatabaseObject {
 	 * @param developer
 	 * @param spentTime
 	 */
-	public Assist(int id, Developer developer, Number spentTime) {
-		super(id);
+	public Assist(Database db, int id, Developer developer, Number spentTime) {
+		super(id,db);
 		
 		this.developer = developer;
 		this.spentTime = spentTime;

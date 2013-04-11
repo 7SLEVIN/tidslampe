@@ -5,10 +5,11 @@ import persistency.Database;
 abstract public class DatabaseObject {
 
 	private int id;
-	protected static Database database;
+	protected Database db;
 	
-	public DatabaseObject(int id) {
+	public DatabaseObject(int id, Database db){
 		this.id = id;
+		this.db = db;
 	}
 	
 	abstract protected void save();

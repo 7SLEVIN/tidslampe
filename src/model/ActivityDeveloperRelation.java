@@ -1,5 +1,7 @@
 package model;
 
+import persistency.Database;
+
 
 public class ActivityDeveloperRelation extends DatabaseObject {
 
@@ -11,9 +13,9 @@ public class ActivityDeveloperRelation extends DatabaseObject {
 	 * @param activity
 	 * @param developer
 	 */
-	public ActivityDeveloperRelation(int id, Activity activity,
+	public ActivityDeveloperRelation(Database db, int id, Activity activity,
 			Developer developer) {
-		super(id);
+		super(id,db);
 		
 		this.activity = activity;
 		this.developer = developer;

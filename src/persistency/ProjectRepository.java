@@ -24,7 +24,7 @@ public class ProjectRepository extends Repository<Project> {
 			Developer manager) {
 		int id = this.create(new String[]{name, String.valueOf(hourBudget), 
 				String.valueOf(deadline), String.valueOf(manager.getId())});
-		Project dev = new Project(id, name, hourBudget, deadline, manager); 
+		Project dev = new Project(this.db, id, name, hourBudget, deadline, manager); 
 		return dev;
 	}
 
@@ -33,7 +33,7 @@ public class ProjectRepository extends Repository<Project> {
 		List<Project> projects = new ArrayList<Project>();
 		try {
 			while (rs.next()) {
-				projects.add(new Project(rs.getInt("id"), 
+				projects.add(new Project(this.db, rs.getInt("id"), 
 						rs.getString(this.columns[0]), 
 						rs.getInt(this.columns[1]), 
 						rs.getInt(this.columns[2]),

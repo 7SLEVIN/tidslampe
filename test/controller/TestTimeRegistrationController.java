@@ -15,7 +15,7 @@ public class TestTimeRegistrationController extends SetUpDatabase {
 	 * 3 - Tjek om den tid allerede er registreret
 	 * 4 - Indsæt
 	 */
-	
+
 	@Test
 	public void testSanityCheck(){
 		

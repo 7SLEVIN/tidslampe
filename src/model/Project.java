@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import persistency.Database;
+
 public class Project extends DatabaseObject {
 
 	private String name;
@@ -19,9 +21,9 @@ public class Project extends DatabaseObject {
 	 * @param manager
 	 * @param activities
 	 */
-	public Project(int id, String name, int hourBudget, 
+	public Project(Database db, int id, String name, int hourBudget, 
 			int deadline, Developer manager) {
-		super(id);
+		super(id,db);
 		
 		this.name = name;
 		this.hourBudget = hourBudget;

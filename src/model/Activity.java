@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import persistency.Database;
+
 public class Activity extends DatabaseObject {
 	
 	private String description;
@@ -23,9 +25,9 @@ public class Activity extends DatabaseObject {
 	 * @param startTime
 	 * @param endTime
 	 */
-	public Activity(int id, String description, Number expectedTime, 
+	public Activity(Database db, int id, String description, Number expectedTime, 
 			Date startTime, Date endTime) {
-		super(id);
+		super(id,db);
 		
 		this.description = description;
 		this.developers = new ArrayList<Developer>();
