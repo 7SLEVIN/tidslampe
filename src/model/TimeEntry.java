@@ -8,12 +8,13 @@ public class TimeEntry extends DatabaseObject{
 	int developerActivityRelationID;
 	int developerID; //TODO for effektiv database-søgning for kollision med tidligere time-registrering?
 	
-	public TimeEntry(Database db, int id, long startTime, long endTime, int devActRelID) {
+	public TimeEntry(Database db, int id, long startTime, long endTime, int devActRelID, int devID) {
 		super(id,db);
 		
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.developerActivityRelationID = devActRelID;
+		this.developerID = devID;
 	}
 	
 	@Override

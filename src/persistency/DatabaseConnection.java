@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import utils.ArrayUtils;
+import utils.Query;
 import utils.StringUtils;
 
 public class DatabaseConnection {
@@ -46,6 +47,17 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		}
 		return id;
+	}
+	
+	public ResultSet execQuery(Query query) {
+//		System.out.println(query);
+		try {
+			return this.stmt.executeQuery(query.End());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public ResultSet execQuery(String query) {
