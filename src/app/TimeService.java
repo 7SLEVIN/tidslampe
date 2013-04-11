@@ -21,17 +21,4 @@ public class TimeService {
 		return this.date;
 	}
 	
-	public static boolean isDateValid(String date) 
-	{ //TODO sanity-check on date provided by user when reserving time.
-		String DATE_FORMAT = "yyyy-MM-dd-kk-mm";
-	        try {
-	            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-	            df.setLenient(false);
-	            df.parse(date);
-	            return true;
-	        } catch (ParseException e) {
-	            return false;
-	        }
-	}
-	
 }

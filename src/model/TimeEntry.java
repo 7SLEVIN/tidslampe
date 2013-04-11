@@ -4,6 +4,7 @@ public class TimeEntry extends DatabaseObject{
 	long startTime; //TODO brugeren skal vælge tid fra liste. 
 	long endTime; //TODO endTime = startTime + 0.5h * n?
 	int developerActivityRelationID;
+	int developerID; //TODO for effektiv database-søgning for kollision med tidligere time-registrering?
 	
 	public TimeEntry(int id, long startTime, long endTime, int devActRelID) {
 		super(id);
