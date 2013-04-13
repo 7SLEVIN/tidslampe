@@ -2,11 +2,11 @@ package controller;
 
 import java.util.List;
 
-import app.TimeService;
 
 import model.Developer;
 
 import persistency.Database;
+import utils.TimeService;
 
 public class LoginController {
 	public boolean loggedin = false;
@@ -21,7 +21,7 @@ public class LoginController {
 	}
 
 	public boolean login(String s) {
-		List<Developer> potentialDevs = this.db.getDeveloper().readByInitials(s);
+		List<Developer> potentialDevs = this.db.Developer().readByInitials(s);
 
 		this.loggedin = potentialDevs.size() == 1;
 		if (this.loggedin) {

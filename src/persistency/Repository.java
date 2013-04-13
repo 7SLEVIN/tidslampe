@@ -41,7 +41,7 @@ public abstract class Repository<T extends DatabaseObject> {
 		return results.isEmpty() ? null : results.get(0);
 	}
 	
-	protected void update(T entity) {
+	public void update(T entity) {
 		String[] values = entity.toArray();
 		this.db.conn.update(this.table, entity.getId(), this.columns, values);
 	}

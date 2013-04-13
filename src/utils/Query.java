@@ -38,33 +38,33 @@ public class Query {
 		else
 			this.query += "WHERE ";
 
-		this.query += String.format("%s %s %s ", key, operator ,value);
+		this.query += String.format("%s %s '%s' ", key, operator ,value);
 		this.lastStatement = QueryStatement.Where;
 		return this;
 	}
 
 	public Query WhereEquals(String key, String value) {
-		return this.WhereRaw(key, "\"" + value + "\"", "=");
+		return this.WhereRaw(key, value , "=");
 	}
 	
 	public Query WhereEquals(String key, int value) {
 		return this.WhereRaw(key, String.valueOf(value), "=");
 	}
 	
-	public Query WhereWeaklyLessThan(String key, int value) {
+	public Query WhereLessThan(String key, Number value) {
 		return this.WhereRaw(key, String.valueOf(value), "<=");
 	}
 	
-	public Query WhereWeaklyLessThan(String key, String value) {
-		return this.WhereRaw(key, value, "<=");
+	public Query WhereLessThan(String key, String value) {
+		return this.WhereRaw(key,  value, "<=");
 	}
 	
-	public Query WhereWeaklyMoreThan(String key, int value) {
+	public Query WhereMoreThan(String key, Number value) {
 		return this.WhereRaw(key, String.valueOf(value), ">=");
 	}
 	
-	public Query WhereWeaklyMoreThan(String key, String value) {
-		return this.WhereRaw(key, value, ">=");
+	public Query WhereMoreThan(String key, String value) {
+		return this.WhereRaw(key,  value , ">=");
 	}	
 
 	private Query _InsertInto(String table, String[] columns, String[] values) {

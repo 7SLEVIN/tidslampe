@@ -12,9 +12,9 @@ import model.Developer;
 
 import org.junit.Test;
 
-import app.TimeService;
 
 import persistency.SetUpDatabase;
+import utils.TimeService;
 
 public class TestLoginController extends SetUpDatabase {
 
@@ -22,13 +22,13 @@ public class TestLoginController extends SetUpDatabase {
 	@Test
 	public void testLogin(){
 		
-		this.db.getDeveloper().create("PG", "Patrick Gadd");
-		this.db.getDeveloper().create("SA", "Simon Altschuler");
-		this.db.getDeveloper().create("MF", "Markus F�revaag");
+		this.db.Developer().create("PG", "Patrick Gadd");
+		this.db.Developer().create("SA", "Simon Altschuler");
+		this.db.Developer().create("MF", "Markus F�revaag");
 		
 		LoginController loginControl = new LoginController(this.db,this.projectPlanner.getTimeService());
 		
-		List<Developer> devs = this.db.getDeveloper().readAll();
+		List<Developer> devs = this.db.Developer().readAll();
 		
 		assertEquals(3, devs.size());
 		
@@ -43,7 +43,7 @@ public class TestLoginController extends SetUpDatabase {
 	
 	@Test
 	public void testLogout(){
-		this.db.getDeveloper().create("LOL", "Lord Ole Larsen");
+		this.db.Developer().create("LOL", "Lord Ole Larsen");
 		
 		LoginController loginControl = new LoginController(this.db,this.projectPlanner.getTimeService());
 		
@@ -68,7 +68,7 @@ public class TestLoginController extends SetUpDatabase {
 		Calendar cal = new GregorianCalendar(2011,Calendar.NOVEMBER,11); //Very important date: Google "11 11 11 video game releases" and go to the Wikipedia-page
 		when(timeService.getCurrentDateTime()).thenReturn(cal);
 		
-		this.db.getDeveloper().create("LOL", "Lord Ole Larsen");
+		this.db.Developer().create("LOL", "Lord Ole Larsen");
 		
 		LoginController loginControl = new LoginController(this.db,this.projectPlanner.getTimeService());
 		

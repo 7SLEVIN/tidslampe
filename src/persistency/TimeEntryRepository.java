@@ -5,9 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import sun.font.LayoutPathImpl.EndType;
 import utils.Query;
-import model.Developer;
 import model.TimeEntry;
 
 public class TimeEntryRepository extends Repository<TimeEntry> {
@@ -23,13 +21,32 @@ public class TimeEntryRepository extends Repository<TimeEntry> {
 				Query.SelectAllFrom(this.table).WhereEquals("developer_id", id));
 		return this.parse(rs);
 	}
-	
+	/**
+	 * 
+	 * @param startTime
+	 * @param endTime
+	 * @param devActRelID
+	 * @param devID
+	 * @return returns null if time is already in use!
+	 */
 	public TimeEntry create(long startTime, long endTime, int devActRelID, int devID) {
+		if(this.isTimeUsed(startTime, endTime, devID))
+			return null;
+		
 		int id = this.create(new String[]{String.valueOf(startTime), String.valueOf(endTime),String.valueOf(devActRelID),String.valueOf(devID)});
+		
 		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, devActRelID, devID); 
 		return entry;
 	}
 	
+	private boolean isTimeUsed(long startTime, long endTime, int devID){
+		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.SelectAllFrom(this.table)
+				.WhereLessThan("start_time", endTime)
+				.WhereMoreThan("end_time", startTime)
+				.WhereEquals("developer_id", devID)));
+		
+		return collidingEntries.size() > 0;
+	}
 	
 	@Override
 	protected List<TimeEntry> parse(ResultSet rs) {

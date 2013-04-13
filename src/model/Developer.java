@@ -41,17 +41,17 @@ public class Developer extends DatabaseObject {
 		return this.initials;
 	}
 
-	public void setInitials(String initials) {
-		this.initials = initials;
+	public void setInitials(String ints){
+		this.initials = ints;
+		this.db.Developer().update(this);
 	}
 	
 	public String getName() {
 		return this.name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name){
 		this.name = name;
+		this.db.Developer().update(this);
 	}
-
-
 }

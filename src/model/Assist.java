@@ -42,16 +42,18 @@ public class Assist extends DatabaseObject {
 		return developer;
 	}
 
-	public void setDeveloper(Developer developer) {
+	public void setDeveloper(Developer developer){
 		this.developer = developer;
+		this.db.Assist().update(this);
 	}
-
+	
 	public Number getSpentTime() {
 		return spentTime;
 	}
-
-	public void setSpentTime(Number spentTime) {
+	
+	public void setSpentTime(Number spentTime){
 		this.spentTime = spentTime;
+		this.db.Assist().update(this);
 	}
 
 }

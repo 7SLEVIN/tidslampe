@@ -35,27 +35,27 @@ public class Database {
 		return this.conn;
 	}
 
-	public DeveloperRepository getDeveloper() {
+	public DeveloperRepository Developer() {
 		return developer;
 	}
 
-	public ProjectRepository getProject() {
+	public ProjectRepository Project() {
 		return project;
 	}
 
-	public ActivityRepository getActivity() {
+	public ActivityRepository Activity() {
 		return activity;
 	}
 	
-	public ActivityDeveloperRelationRepository getActivityDeveloperRelation() {
+	public ActivityDeveloperRelationRepository ActivityDeveloperRelation() {
 		return activityDeveloperRelation;
 	}
 
-	public AssistRepository getAssist() {
+	public AssistRepository Assist() {
 		return assist;
 	}
 
-	public TimeEntryRepository getTimeEntry() {
+	public TimeEntryRepository TimeEntry() {
 		return timeEntry;
 	}
 }

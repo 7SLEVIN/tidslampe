@@ -1,9 +1,6 @@
 package model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import persistency.Database;
@@ -13,8 +10,8 @@ public class Activity extends DatabaseObject {
 	private String description;
 	private List<Developer> developers;
 	private Number expectedTime;
-	private Date startTime;
-	private Date endTime;
+	private long startTime;
+	private long endTime;
 	private List<Assist> assists;
 	
 	/**
@@ -26,7 +23,7 @@ public class Activity extends DatabaseObject {
 	 * @param endTime
 	 */
 	public Activity(Database db, int id, String description, Number expectedTime, 
-			Date startTime, Date endTime) {
+			Long startTime, Long endTime) {
 		super(id,db);
 		
 		this.description = description;
@@ -37,6 +34,12 @@ public class Activity extends DatabaseObject {
 		this.assists = new ArrayList<Assist>();
 	}
 
+	@Override
+	public String[] toArray() {
+		return new String[]{this.description , String.valueOf(this.expectedTime) , String.valueOf(this.startTime) , String.valueOf(this.endTime)};
+	}
+
+	
 	@Override
 	protected void save() {
 		// TODO Auto-generated method stub
@@ -49,59 +52,49 @@ public class Activity extends DatabaseObject {
 		
 	}
 
-	@Override
-	public String[] toArray() {
-		DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss z");
-		return new String[]{this.description, String.valueOf(this.expectedTime), 
-				df.format(this.startTime), df.format(this.endTime)};
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description){
 		this.description = description;
+		this.db.Activity().update(this);
 	}
 
 	public List<Developer> getDevelopers() {
 		return developers;
 	}
 
-	public void setDevelopers(List<Developer> developers) {
-		this.developers = developers;
-	}
-
 	public Number getExpectedTime() {
 		return expectedTime;
 	}
-
-	public void setExpectedTime(Number expectedTime) {
-		this.expectedTime = expectedTime;
+	
+	public void setExpectedTime(Number expTime){
+		this.expectedTime = expTime;
+		this.db.Activity().update(this);
 	}
 
-	public Date getStartTime() {
+	public long getStartTime() {
 		return startTime;
 	}
-
-	public void setStartTime(Date startTime) {
+	
+	public void setStartTime(long startTime){
 		this.startTime = startTime;
+		this.db.Activity().update(this);
 	}
 
-	public Date getEndTime() {
+	public long getEndTime() {
 		return endTime;
 	}
-
-	public void setEndTime(Date endTime) {
+	
+	public void setEndTime(long endTime){
 		this.endTime = endTime;
+		this.db.Activity().update(this);
 	}
 
 	public List<Assist> getAssists() {
 		return assists;
 	}
 
-	public void setAssists(List<Assist> assists) {
-		this.assists = assists;
-	}
 
 }

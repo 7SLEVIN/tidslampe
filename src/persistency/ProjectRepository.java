@@ -34,7 +34,7 @@ public class ProjectRepository extends Repository<Project> {
 				projects.add(new Project(this.db, rs.getInt("id"), rs
 						.getString(this.columns[0]),
 						rs.getInt(this.columns[1]), rs.getInt(this.columns[2]),
-						this.db.getDeveloper().read(rs.getInt(this.columns[3]))));
+						this.db.Developer().read(rs.getInt(this.columns[3]))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

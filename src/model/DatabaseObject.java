@@ -22,8 +22,4 @@ abstract public class DatabaseObject {
 		return this.id;
 	}
 	
-	protected void setId(int id) {
-		this.id = id;
-	}
-	
 }

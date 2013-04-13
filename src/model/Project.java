@@ -54,41 +54,41 @@ public class Project extends DatabaseObject {
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
+	
+	public void setName(String name){
 		this.name = name;
+		this.db.Project().update(this);
 	}
 
 	public int getHourBudget() {
 		return hourBudget;
 	}
-
-	public void setHourBudget(int hourBudget) {
-		this.hourBudget = hourBudget;
+	
+	public void setHourBudget(int i) {
+		this.hourBudget = i;
+		this.db.Project().update(this);
 	}
 
 	public int getDeadline() {
 		return deadline;
 	}
-
-	public void setDeadline(int deadline) {
+	
+	public void setDeadline(int deadline){
 		this.deadline = deadline;
+		this.db.Project().update(this);
 	}
 
 	public Developer getManager() {
 		return manager;
 	}
-
-	public void setManager(Developer manager) {
+	
+	public void setManager(Developer manager){
 		this.manager = manager;
+		this.db.Project().update(this);
 	}
 
 	public List<Activity> getActivities() {
 		return activities;
-	}
-
-	public void setActivities(List<Activity> activities) {
-		this.activities = activities;
 	}
 
 }

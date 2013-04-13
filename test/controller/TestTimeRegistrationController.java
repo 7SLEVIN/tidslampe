@@ -2,64 +2,86 @@ package controller;
 
 import static org.junit.Assert.assertEquals;
 
-import java.sql.Date;
 
 import model.Activity;
 import model.ActivityDeveloperRelation;
 import model.Developer;
+import model.TimeEntry;
 
 import org.junit.Test;
 import persistency.SetUpDatabase;
+import utils.TimeService;
 
 public class TestTimeRegistrationController extends SetUpDatabase {
-
+	TimeService timeService = new TimeService();
 	/*
 	 * 1 - Brugeren skal angive tid
 	 * 2 - Lav sanity-check på den angivne tid
 	 * 3 - Tjek om den tid allerede er registreret
 	 * 4 - Indsæt
 	 */
-
-	@Test
-	public void testSanityCheck(){
-		TimeRegistrationController trControl = new TimeRegistrationController();
-//User has given chosen a time in the UI 		
-		int year = 2013;
-		int month = 2;
-		int day = 31;
-		int hour = 11;
-		int minute = 30 * 1;
-		
-		assertEquals(false, trControl.isDateValid(year, month, day, hour, minute));
-		
-		day = 28;
-		assertEquals(true, trControl.isDateValid(year, month, day, hour, minute));
-		
-		day = 29;
-		assertEquals(false, trControl.isDateValid(year, month, day, hour, minute));
-		
-		year = 2012;
-		assertEquals(true, trControl.isDateValid(year, month, day, hour, minute));
-	}
 	
+	@Test
 	public void testTimeTaken(){
-		TimeRegistrationController trControl = new TimeRegistrationController();
+		TimeRegistrationController trControl = new TimeRegistrationController(this.timeService);
 		
-		this.db.developer.create("PG", "Patrick Gadd");
-		this.db.developer.create("SA", "Simon Altschuler");
-		this.db.developer.create("MF", "Markus Færevaag");
+		this.db.Developer().create("PG", "Patrick Gadd");
+		this.db.Developer().create("SA", "Simon Altschuler");
+		this.db.Developer().create("MF", "Markus Færevaag");
 		
-		Developer developer =this.db.developer.readAll().get(0);
+		Developer developer =this.db.Developer().readAll().get(0);
 		
 		String description = "test-activity";
 		int expectedTime = 10;
-		Date startTime = new Date(2013, 4, 13);
-		Date endTime = new Date(2013, 5, 13);
-		Activity activity = this.db.activity.create(description, expectedTime, startTime, endTime);
+		int year = 2013;
+		int month = 4;
+		int day = 13;
+		int hour = 10;
+		int minute = 30;
+		long startTime = this.timeService.convertToMillis(year, month, day, hour, minute);
+		long endTime = this.timeService.convertToMillis(year, month+1, day, hour, minute);
+
+		Activity activity = this.db.Activity().create(description, expectedTime, startTime, endTime);
+		ActivityDeveloperRelation relation = this.db.ActivityDeveloperRelation().create(activity, developer);
+
+//Initialization done, moving on to registration		
 		
-		ActivityDeveloperRelation relation = this.db.activityDeveloperRelation.create(activity, developer);
+		hour = 15;
+		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 		
+		TimeEntry firstEntry = this.db.TimeEntry().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
 		
-//		this.db.timeEntry.create(startTime.g, endTime, relation.getId(), relation.getDeveloper().getId());
+		assertEquals(false, firstEntry == null);
+		
+		hour = 8;
+		minute = 0;
+		startTime = this.timeService.convertToMillis(year, month, day, hour, minute);
+		hour = 11;
+		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
+		
+		TimeEntry beginningOverlap = this.db.TimeEntry().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+
+		assertEquals(true, beginningOverlap == null);
+		
+		hour = 14;
+		minute = 0;
+		startTime = this.timeService.convertToMillis(year, month, day, hour, minute);
+		hour = 17;
+		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
+		
+		TimeEntry endOverlap = this.db.TimeEntry().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+
+		assertEquals(true, endOverlap == null);
+		
+		hour = 8;
+		minute = 0;
+		startTime = this.timeService.convertToMillis(year, month, day, hour, minute);
+		hour = 10;
+		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
+		
+		TimeEntry secondEntry = this.db.TimeEntry().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+
+		assertEquals(false, secondEntry == null);
+		
 	}
 }

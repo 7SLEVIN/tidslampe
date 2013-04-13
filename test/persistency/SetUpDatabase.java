@@ -7,12 +7,11 @@ import app.ProjectPlanner;
 
 public class SetUpDatabase {
 	
-	protected Database db;
-	protected ProjectPlanner projectPlanner = new ProjectPlanner();
+	protected Database db = new Database();
+	protected ProjectPlanner projectPlanner = new ProjectPlanner(this.db);
 
 	@Before
 	public void setUp() throws Exception {
-		this.db = this.projectPlanner.getDatabase();
 
 		this.db.getConn()
 				.execUpdate(
@@ -22,14 +21,18 @@ public class SetUpDatabase {
 						"create table if not exists developer (id integer primary key autoincrement, initials string, name string)");
 		this.db.getConn()
 				.execUpdate(
-						"create table if not exists activity (id integer primary key autoincrement, description string, expected_time float, start_time datetime, end_time datetime)");
+						"create table if not exists activity (id integer primary key autoincrement, description string, expected_time float, start_time BIGINT, end_time BIGINT)");
 		this.db.getConn()
 				.execUpdate(
 						"create table if not exists activity_developer_relation (id integer primary key autoincrement, activity_id integer, developer_id integer)");
 		this.db.getConn()
 				.execUpdate(
 						"create table if not exists assist (id integer primary key autoincrement, developer_id integer, spent_time float)");
-
+		
+		this.db.getConn()
+		.execUpdate(
+				"create table if not exists time_entry (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
+		
 		this.db.getConn().execUpdate("delete from project");
 		this.db.getConn().execUpdate("delete from developer");
 		this.db.getConn().execUpdate("delete from activity");
