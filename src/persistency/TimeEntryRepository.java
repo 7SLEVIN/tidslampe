@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import sun.font.LayoutPathImpl.EndType;
 import utils.Query;
+import model.Developer;
 import model.TimeEntry;
 
 public class TimeEntryRepository extends Repository<TimeEntry> {
@@ -20,6 +22,12 @@ public class TimeEntryRepository extends Repository<TimeEntry> {
 		ResultSet rs = this.db.getConn().execQuery(
 				Query.SelectAllFrom(this.table).WhereEquals("developer_id", id));
 		return this.parse(rs);
+	}
+	
+	public TimeEntry create(long startTime, long endTime, int devActRelID, int devID) {
+		int id = this.create(new String[]{String.valueOf(startTime), String.valueOf(endTime),String.valueOf(devActRelID),String.valueOf(devID)});
+		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, devActRelID, devID); 
+		return entry;
 	}
 	
 	

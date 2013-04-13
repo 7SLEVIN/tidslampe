@@ -53,5 +53,4 @@ public abstract class Repository<T extends DatabaseObject> {
 	public int count() {
 		return this.db.conn.count(this.table);
 	}
-	
 }

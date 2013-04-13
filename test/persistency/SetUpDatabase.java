@@ -22,7 +22,7 @@ public class SetUpDatabase {
 						"create table if not exists developer (id integer primary key autoincrement, initials string, name string)");
 		this.db.getConn()
 				.execUpdate(
-						"create table if not exists activity (id integer primary key autoincrement, description string, expected_time float, start_time string, end_time string)");
+						"create table if not exists activity (id integer primary key autoincrement, description string, expected_time float, start_time datetime, end_time datetime)");
 		this.db.getConn()
 				.execUpdate(
 						"create table if not exists activity_developer_relation (id integer primary key autoincrement, activity_id integer, developer_id integer)");
