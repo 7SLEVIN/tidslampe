@@ -1,8 +1,6 @@
 package view.state;
 
 import java.awt.Dimension;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JPanel;
 

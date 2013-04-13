@@ -1,22 +1,18 @@
 package view.state;
 
+import java.awt.Component;
+
 import javax.swing.JLabel;
 
-/**
- * The main menu view state
- */
 @SuppressWarnings("serial")
-public class MenuViewState extends AbstractMenuViewState {
-
-	private JLabel label;
-
+public class MenuViewState extends AbstractViewState {
 	public MenuViewState() {
-		// Label
-		this.label = new JLabel();
-		this.label.setAlignmentX(CENTER_ALIGNMENT);
-		this.label.setText("Hi Karlsson Delight!");
-
-		// Add to panel
-		this.add(this.label);
+		JLabel label = new JLabel();
+		label.setAlignmentX(Component.CENTER_ALIGNMENT);
+		label.setAlignmentY(Component.TOP_ALIGNMENT);
+		label.setText("I am le menu!");
+		
+		this.add(label);
 	}
+
 }
