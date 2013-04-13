@@ -32,24 +32,40 @@ public class Query {
 		return this;
 	}
 
-	private Query WhereRaw(String key, String value) {
+	private Query WhereRaw(String key, String value, String operator) {
 		if (this.lastStatement == QueryStatement.Where)
 			this.query += "AND ";
 		else
 			this.query += "WHERE ";
 
-		this.query += String.format("%s = %s ", key, value);
+		this.query += String.format("%s %s %s ", key, operator ,value);
 		this.lastStatement = QueryStatement.Where;
 		return this;
 	}
 
-	public Query Where(String key, String value) {
-		return this.WhereRaw(key, "\"" + value + "\"");
+	public Query WhereEquals(String key, String value) {
+		return this.WhereRaw(key, "\"" + value + "\"", "=");
 	}
-
-	public Query Where(String key, int value) {
-		return this.WhereRaw(key, String.valueOf(value));
+	
+	public Query WhereEquals(String key, int value) {
+		return this.WhereRaw(key, String.valueOf(value), "=");
 	}
+	
+	public Query WhereWeaklyLessThan(String key, int value) {
+		return this.WhereRaw(key, String.valueOf(value), "<=");
+	}
+	
+	public Query WhereWeaklyLessThan(String key, String value) {
+		return this.WhereRaw(key, value, "<=");
+	}
+	
+	public Query WhereWeaklyMoreThan(String key, int value) {
+		return this.WhereRaw(key, String.valueOf(value), ">=");
+	}
+	
+	public Query WhereWeaklyMoreThan(String key, String value) {
+		return this.WhereRaw(key, value, ">=");
+	}	
 
 	private Query _InsertInto(String table, String[] columns, String[] values) {
 		if (this.lastStatement != QueryStatement.Empty || columns.length != values.length)

@@ -16,9 +16,8 @@ public class TestTimeRegistrationController extends SetUpDatabase {
 
 	@Test
 	public void testSanityCheck(){
-		
 		TimeRegistrationController trControl = new TimeRegistrationController();
-		
+//User has given chosen a time in the UI 		
 		int year = 2013;
 		int month = 2;
 		int day = 31;
@@ -35,6 +34,10 @@ public class TestTimeRegistrationController extends SetUpDatabase {
 		
 		year = 2012;
 		assertEquals(true, trControl.isDateValid(year, month, day, hour, minute));
+	}
+	
+	public void testTimeTaken(){
+		TimeRegistrationController trControl = new TimeRegistrationController();
 		
 	}
 }

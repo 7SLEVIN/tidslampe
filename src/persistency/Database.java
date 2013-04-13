@@ -10,6 +10,7 @@ public class Database {
 	public ActivityRepository activity;
 	public ActivityDeveloperRelationRepository activityDeveloperRelation;
 	public AssistRepository assist;
+	public TimeEntryRepository timeEntry;
 	
 	/**
 	 * @param conn
@@ -27,6 +28,7 @@ public class Database {
 		this.activity = new ActivityRepository(this);
 		this.activityDeveloperRelation = new ActivityDeveloperRelationRepository(this);
 		this.assist = new AssistRepository(this);
+		this.timeEntry = new TimeEntryRepository(this);
 	}
 
 	public DatabaseConnection getConn() {

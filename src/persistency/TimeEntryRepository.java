@@ -18,7 +18,7 @@ public class TimeEntryRepository extends Repository<TimeEntry> {
 	
 	public List<TimeEntry> entriesByDeveloperID(int id){
 		ResultSet rs = this.db.getConn().execQuery(
-				Query.SelectAllFrom(this.table).Where("developer_id", id));
+				Query.SelectAllFrom(this.table).WhereEquals("developer_id", id));
 		return this.parse(rs);
 	}
 	
