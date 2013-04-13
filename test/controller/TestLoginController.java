@@ -22,13 +22,13 @@ public class TestLoginController extends SetUpDatabase {
 	@Test
 	public void testLogin(){
 		
-		this.db.developer.create("PG", "Patrick Gadd");
-		this.db.developer.create("SA", "Simon Altschuler");
-		this.db.developer.create("MF", "Markus Færevaag");
+		this.db.getDeveloper().create("PG", "Patrick Gadd");
+		this.db.getDeveloper().create("SA", "Simon Altschuler");
+		this.db.getDeveloper().create("MF", "Markus Fï¿½revaag");
 		
 		LoginController loginControl = new LoginController(this.db,this.projectPlanner.getTimeService());
 		
-		List<Developer> devs = this.db.developer.readAll();
+		List<Developer> devs = this.db.getDeveloper().readAll();
 		
 		assertEquals(3, devs.size());
 		
@@ -43,7 +43,7 @@ public class TestLoginController extends SetUpDatabase {
 	
 	@Test
 	public void testLogout(){
-		this.db.developer.create("LOL", "Lord Ole Larsen");
+		this.db.getDeveloper().create("LOL", "Lord Ole Larsen");
 		
 		LoginController loginControl = new LoginController(this.db,this.projectPlanner.getTimeService());
 		
@@ -68,7 +68,7 @@ public class TestLoginController extends SetUpDatabase {
 		Calendar cal = new GregorianCalendar(2011,Calendar.NOVEMBER,11); //Very important date: Google "11 11 11 video game releases" and go to the Wikipedia-page
 		when(timeService.getCurrentDateTime()).thenReturn(cal);
 		
-		this.db.developer.create("LOL", "Lord Ole Larsen");
+		this.db.getDeveloper().create("LOL", "Lord Ole Larsen");
 		
 		LoginController loginControl = new LoginController(this.db,this.projectPlanner.getTimeService());
 		

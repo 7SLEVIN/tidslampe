@@ -5,12 +5,12 @@ public class Database {
 	
 	protected DatabaseConnection conn;
 
-	public ProjectRepository project;
-	public DeveloperRepository developer;
-	public ActivityRepository activity;
-	public ActivityDeveloperRelationRepository activityDeveloperRelation;
-	public AssistRepository assist;
-	public TimeEntryRepository timeEntry;
+	private ProjectRepository project;
+	private DeveloperRepository developer;
+	private ActivityRepository activity;
+	private ActivityDeveloperRelationRepository activityDeveloperRelation;
+	private AssistRepository assist;
+	private TimeEntryRepository timeEntry;
 	
 	/**
 	 * @param conn
@@ -33,8 +33,29 @@ public class Database {
 
 	public DatabaseConnection getConn() {
 		return this.conn;
-	} 
+	}
+
+	public DeveloperRepository getDeveloper() {
+		return developer;
+	}
+
+	public ProjectRepository getProject() {
+		return project;
+	}
+
+	public ActivityRepository getActivity() {
+		return activity;
+	}
 	
-	
-	
+	public ActivityDeveloperRelationRepository getActivityDeveloperRelation() {
+		return activityDeveloperRelation;
+	}
+
+	public AssistRepository getAssist() {
+		return assist;
+	}
+
+	public TimeEntryRepository getTimeEntry() {
+		return timeEntry;
+	}
 }
