@@ -15,7 +15,6 @@ public class ProjectPlanner {
 		this.timeService = new TimeService();
 		this.loginControl = new LoginController(this.database, this.timeService);
 
-		
 	}
 
 	public Database getDatabase() {

@@ -18,6 +18,12 @@ public class DeveloperRepository extends Repository<Developer> {
 	}
 	
 	public Developer create(String initials, String name) {
+		List<Developer> collisionDeveloper = this.readByInitials(initials);
+		if(collisionDeveloper.size() > 0){
+			System.out.println("A developer with initials \"" + initials + "\" already exists!");
+			return null;
+		}
+		
 		int id = this.create(new String[]{initials, name});
 		Developer dev = new Developer(this.db, id, initials, name); 
 		return dev;
