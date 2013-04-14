@@ -5,6 +5,8 @@ public enum QueryStatement {
 	Select,
 	Where,
 	Insert,
+	Update,
 	OrderBy,
-	Limit
+	Limit, 
+	Delete
 }
