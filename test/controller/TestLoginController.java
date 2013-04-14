@@ -16,10 +16,10 @@ import model.TimeEntry;
 import org.junit.Test;
 
 
-import persistency.SetUpDatabase;
+import persistency.BaseTestDatabase;
 import utils.TimeService;
 
-public class TestLoginController extends SetUpDatabase {
+public class TestLoginController extends BaseTestDatabase {
 
 	
 	@Test

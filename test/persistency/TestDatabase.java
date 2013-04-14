@@ -16,7 +16,7 @@ import org.junit.Test;
 import utils.TimeService;
 
 
-public class TestDatabase extends SetUpDatabase {
+public class TestDatabase extends BaseTestDatabase {
 	
 	@Test
 	public void testReadAll() {

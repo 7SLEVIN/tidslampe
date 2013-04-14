@@ -3,15 +3,15 @@ package controller.view;
 import java.awt.event.ActionListener;
 import java.beans.EventHandler;
 
+import controller.LoginController;
+
 import persistency.Database;
+import utils.TimeService;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.LoginViewState;
+import view.state.ViewState;
 
-/**
- * Is called by {@link command.SetViewStateCommand} to switch between view
- * states
- */
 public class LoginViewController extends AbstractViewController {
 
 	private LoginViewState viewState;
@@ -28,7 +28,12 @@ public class LoginViewController extends AbstractViewController {
 	}
 	
 	public void tryLogin() {
-		
+		//XXX hax going on
+		LoginController lc = new LoginController(this.database, new TimeService());
+		if (lc.login(this.viewState.getInputText())) 
+			this.viewContainer.setViewState(ViewState.Menu);
+		else 
+			this.viewState.setMessage("Invalid login");
 	}
 
 	@Override

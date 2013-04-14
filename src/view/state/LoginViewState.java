@@ -36,6 +36,10 @@ public class LoginViewState extends AbstractViewState {
 		return this.button;
 	}
 
+	public String getInputText() {
+		return this.input.getText();
+	}
+
 	public void setMessage(String msg) {
 		this.label.setText(msg);
 	}

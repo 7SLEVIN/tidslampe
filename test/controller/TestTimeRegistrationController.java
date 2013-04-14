@@ -9,16 +9,16 @@ import model.Developer;
 import model.TimeEntry;
 
 import org.junit.Test;
-import persistency.SetUpDatabase;
+import persistency.BaseTestDatabase;
 import utils.TimeService;
 
-public class TestTimeRegistrationController extends SetUpDatabase {
+public class TestTimeRegistrationController extends BaseTestDatabase {
 	TimeService timeService = new TimeService();
 	/*
 	 * 1 - Brugeren skal angive tid
-	 * 2 - Lav sanity-check på den angivne tid
+	 * 2 - Lav sanity-check pï¿½ den angivne tid
 	 * 3 - Tjek om den tid allerede er registreret
-	 * 4 - Indsæt
+	 * 4 - Indsï¿½t
 	 */
 	
 	@Test
@@ -27,7 +27,7 @@ public class TestTimeRegistrationController extends SetUpDatabase {
 		
 		this.db.Developer().create("PG", "Patrick Gadd");
 		this.db.Developer().create("SA", "Simon Altschuler");
-		this.db.Developer().create("MF", "Markus Færevaag");
+		this.db.Developer().create("MF", "Markus Fï¿½revaag");
 		
 		Developer developer =this.db.Developer().readAll().get(0);
 		
