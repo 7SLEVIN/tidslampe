@@ -28,7 +28,7 @@ public class TimeService {
 		}
 		
 		Calendar cal = Calendar.getInstance();
-		cal.set(year, month, day, hour, minute);
+		cal.set(year, month, day, hour, minute,0);
 		
 		return cal.getTimeInMillis();
 	}

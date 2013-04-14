@@ -34,4 +34,24 @@ public class TimeEntry extends DatabaseObject{
 		return null;
 	}
 	
+	public int getDurationInMinutes(){
+		return (int) (this.endTime - this.startTime)/1000/60;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public long getEndTime() {
+		return endTime;
+	}
+
+	public int getDeveloperActivityRelationID() {
+		return developerActivityRelationID;
+	}
+
+	public int getDeveloperID() {
+		return developerID;
+	}
+	
 }

@@ -15,13 +15,13 @@ public class TestQueryBuilder {
 	@Test
 	public void testSelectWhere() {
 		String q1 = Query.SelectAllFrom("foo").WhereEquals("id", 1).End();
-		assertEquals("Select where", "SELECT * FROM foo WHERE id = 1", q1);
+		assertEquals("Select where", "SELECT * FROM foo WHERE id = '1'", q1);
 
 		String q2 = Query.SelectAllFrom("foo").WhereEquals("name", "bar").End();
-		assertEquals("Select where", "SELECT * FROM foo WHERE name = \"bar\"", q2);
+		assertEquals("Select where", "SELECT * FROM foo WHERE name = 'bar'", q2);
 
 		String q3 = Query.SelectAllFrom("foo").WhereEquals("name", "bar").WhereEquals("id", 1).End();
-		assertEquals("Select where", "SELECT * FROM foo WHERE name = \"bar\" AND id = 1", q3);
+		assertEquals("Select where", "SELECT * FROM foo WHERE name = 'bar' AND id = '1'", q3);
 	}
 	
 	@Test
@@ -39,7 +39,7 @@ public class TestQueryBuilder {
 	@Test
 	public void testOrderBy() {
 		String q2 = Query.SelectAllFrom("foo").WhereEquals("id", 1).OrderBy("name").End();
-		assertEquals("Order by after where", "SELECT * FROM foo WHERE id = 1 ORDER BY name ASC", q2);
+		assertEquals("Order by after where", "SELECT * FROM foo WHERE id = '1' ORDER BY name ASC", q2);
 		
 		String q3 = Query.SelectAllFrom("foo").OrderBy("name", SortDirection.Desc).End();
 		assertEquals("Order by desc", "SELECT * FROM foo ORDER BY name DESC", q3);
@@ -49,7 +49,7 @@ public class TestQueryBuilder {
 	@Test
 	public void testLimit() {
 		String q2 = Query.SelectAllFrom("foo").WhereEquals("id", 1).OrderBy("name").Limit(5).End();
-		assertEquals("Order by after where", "SELECT * FROM foo WHERE id = 1 ORDER BY name ASC LIMIT 5", q2);
+		assertEquals("Order by after where", "SELECT * FROM foo WHERE id = '1' ORDER BY name ASC LIMIT 5", q2);
 		
 		String q3 = Query.SelectAllFrom("foo").Limit(1).End();
 		assertEquals("Order by desc", "SELECT * FROM foo LIMIT 1", q3);

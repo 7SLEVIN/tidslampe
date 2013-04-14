@@ -39,13 +39,22 @@ public class TimeEntryRepository extends Repository<TimeEntry> {
 		return entry;
 	}
 	
-	private boolean isTimeUsed(long startTime, long endTime, int devID){
+	public List<TimeEntry> getCollidingEntries(long startTime, long endTime, int devID){
 		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.SelectAllFrom(this.table)
 				.WhereLessThan("start_time", endTime)
 				.WhereMoreThan("end_time", startTime)
 				.WhereEquals("developer_id", devID)));
-		
-		return collidingEntries.size() > 0;
+		return collidingEntries;
+	}
+	/**
+	 * Tells whether or not some time is already in use. Accepts 5 minutes overlap
+	 * @param startTime
+	 * @param endTime
+	 * @param devID
+	 * @return
+	 */
+	private boolean isTimeUsed(long startTime, long endTime, int devID){
+		return this.getCollidingEntries(startTime+5*60*1000, endTime-5*60*1000, devID).size() > 0;
 	}
 	
 	@Override
