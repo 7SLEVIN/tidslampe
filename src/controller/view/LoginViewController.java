@@ -6,6 +6,7 @@ import java.beans.EventHandler;
 import controller.LoginController;
 
 import persistency.Database;
+import utils.ActionUtils;
 import utils.TimeService;
 import view.ViewContainer;
 import view.state.AbstractViewState;
@@ -23,7 +24,8 @@ public class LoginViewController extends AbstractViewController {
 	@Override
 	public void initialize() {
 		this.viewState = new LoginViewState();
-		this.viewState.getLoginButton().addActionListener((ActionListener)EventHandler.create(ActionListener.class, this, "tryLogin"));
+		
+		ActionUtils.addListener(this.viewState.getLoginButton(), this, "tryLogin");
 		this.viewState.setMessage("Hello, login here");
 	}
 	

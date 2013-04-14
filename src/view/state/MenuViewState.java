@@ -1,18 +1,18 @@
 package view.state;
 
-import java.awt.Component;
-
-import javax.swing.JLabel;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class MenuViewState extends AbstractViewState {
+	private JButton developersButton;
+	
 	public MenuViewState() {
-		JLabel label = new JLabel();
-		label.setAlignmentX(Component.CENTER_ALIGNMENT);
-		label.setAlignmentY(Component.TOP_ALIGNMENT);
-		label.setText("I am le menu!");
+		this.developersButton = new JButton("Developers");
 		
-		this.add(label);
+		this.add(this.developersButton);
 	}
 
+	public JButton getDevelopersButton() {
+		return developersButton;
+	}
 }

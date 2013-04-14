@@ -1,28 +1,29 @@
 package controller.view;
 
+import controller.action.ChangeViewAction;
 import persistency.Database;
+import utils.ActionUtils;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.MenuViewState;
-import controller.view.AbstractViewController;
+import view.state.ViewState;
 
 public class MenuViewController extends AbstractViewController {
-
 	private MenuViewState viewState;
 	
 	public MenuViewController(Database database, ViewContainer viewContainer) {
 		super(database, viewContainer);
-		this.viewState = new MenuViewState();
 	}
 
 	@Override
 	public AbstractViewState getViewState() {
-		return viewState;
+		return this.viewState;
 	}
 
 	@Override
 	public void initialize() {
-		
+		this.viewState = new MenuViewState();
+		this.viewState.getDevelopersButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewState.Developers));
 	}
 
 }

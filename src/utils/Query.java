@@ -87,7 +87,7 @@ public class Query {
 		for (int i = 0; i < columns.length; i++) {
 			fields.add(String.format("%s=%s", columns[i], vals[i]));
 		}
-		this.query += StringUtils.join(fields.toArray(new String[]{}), ',') + " ";
+		this.query += ArrayUtils.join(fields.toArray(new String[]{}), ',') + " ";
 		this.lastStatement = QueryStatement.Update;
 		return this;
 	}
@@ -146,8 +146,8 @@ public class Query {
 
 		this.query += String.format("INSERT INTO %s (%s) VALUES (%s)", 
 				table,
-				StringUtils.join(columns, ','), 
-				StringUtils.join(ArrayUtils.wrapElementsWith(values, "\""), ','));
+				ArrayUtils.join(columns, ','), 
+				ArrayUtils.join(ArrayUtils.wrapElementsWith(values, "\""), ','));
 		
 		this.lastStatement = QueryStatement.Insert;
 		return this;

@@ -11,6 +11,7 @@ import view.state.ViewState;
 
 import controller.view.AbstractViewController;
 import controller.view.LoginViewController;
+import controller.view.DevelopersViewController;
 import controller.view.MenuViewController;
 
 /**
@@ -53,6 +54,10 @@ public class ViewContainer extends JFrame {
 		switch(viewState){
 		case Login: 
 			viewController = new LoginViewController(this.database, this); 
+			break;
+			
+		case Developers: 
+			viewController = new DevelopersViewController(this.database, this); 
 			break;
 			
 		case Menu: 

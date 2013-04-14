@@ -30,10 +30,6 @@ public class Database {
 		this.timeEntry = new TimeEntryRepository(this);
 	}
 
-	public Database() {
-		this("dev_db.db");
-	}
-
 	public DatabaseConnection getConn() {
 		return this.conn;
 	}
