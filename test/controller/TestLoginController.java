@@ -154,8 +154,8 @@ public class TestLoginController extends SetUpDatabase {
 		loginControl.logout();
 
 //Register remaining work 
-		TimeEntry secondEntry = this.db.TimeEntry().create(testMillis+1000*60*120, testMillis+1000*60*300, relation.getId(), developer.getId());
-		assertEquals(180, secondEntry.getDurationInMinutes());
+		TimeEntry secondEntry = this.db.TimeEntry().create(testMillis+1000*60*120, testMillis+1000*60*290, relation.getId(), developer.getId());
+		assertEquals(170, secondEntry.getDurationInMinutes());
 		loginControl.logout();
 		
 //Should log out now, since the work has been registered		
