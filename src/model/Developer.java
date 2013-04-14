@@ -33,7 +33,7 @@ public class Developer extends DatabaseObject {
 	}
 	
 	@Override
-	public String[] toArray() {
+	public String[] getValueArray() {
 		return new String[]{this.initials, this.name};
 	}
 	

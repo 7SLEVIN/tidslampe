@@ -45,7 +45,7 @@ public class Project extends DatabaseObject {
 	}
 
 	@Override
-	public String[] toArray() {
+	public String[] getValueArray() {
 		return new String[]{this.name, String.valueOf(hourBudget), 
 				String.valueOf(deadline), 
 				String.valueOf(this.manager.getId())};

@@ -1,6 +1,5 @@
 package controller.view;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.EventHandler;
 
@@ -8,9 +7,6 @@ import persistency.Database;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.LoginViewState;
-import view.state.ViewState;
-import controller.LoginController;
-import controller.action.ChangeViewAction;
 
 /**
  * Is called by {@link command.SetViewStateCommand} to switch between view

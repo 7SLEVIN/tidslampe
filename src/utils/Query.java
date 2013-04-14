@@ -7,6 +7,7 @@ public class Query {
 	private String query;
 	private QueryStatement lastStatement;
 
+	// Factory methods
 	public static Query SelectAllFrom(String table) {
 		return new Query()._SelectAllFrom(table);
 	}
@@ -32,6 +33,7 @@ public class Query {
 		return new Query()._InsertInto(table, columns, values);
 	}
 
+	// Instance
 	public Query() {
 		this.query = "";
 		this.lastStatement = QueryStatement.Empty;

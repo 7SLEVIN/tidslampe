@@ -24,7 +24,7 @@ public class DeveloperRepository extends Repository<Developer> {
 	}
 	
 	public List<Developer> readByInitials(String initials) {
-		return this.parse(this.db.conn.readSpecific(this.table, this.columns[0], initials));
+		return this.parse(this.db.conn.readWhereEquals(this.table, this.columns[0], initials));
 	}
 	
 	

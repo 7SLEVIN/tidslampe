@@ -3,6 +3,8 @@ package persistency;
 import java.sql.ResultSet;
 import java.util.List;
 
+import utils.Query;
+
 import model.DatabaseObject;
 
 public abstract class Repository<T extends DatabaseObject> {
@@ -25,24 +27,24 @@ public abstract class Repository<T extends DatabaseObject> {
 		return this.db.conn.create(this.table, this.columns, values);
 	}
 
-	public List<T> readAllWhere(String key, String value)  {
-		ResultSet rs = this.db.conn.readAllWhere(this.table, key, value);
+	public List<T> readAllWhereEquals(String key, String value)  {
+		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table).WhereEquals(key, value));
 		return this.parse(rs);
 	}
 
 	public List<T> readAll()  {
-		ResultSet rs = this.db.conn.readAll(this.table);
+		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table));
 		return this.parse(rs);
 	}
 	
 	public T read(int id)  {
-		ResultSet rs = this.db.conn.readByID(this.table, id);
+		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table).WhereEquals("id", id));
 		List<T> results = this.parse(rs);
 		return results.isEmpty() ? null : results.get(0);
 	}
 	
 	public void update(T entity) {
-		String[] values = entity.toArray();
+		String[] values = entity.getValueArray();
 		this.db.conn.update(this.table, entity.getId(), this.columns, values);
 	}
 	

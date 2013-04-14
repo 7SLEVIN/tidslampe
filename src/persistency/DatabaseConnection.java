@@ -69,16 +69,16 @@ public class DatabaseConnection {
 		return this.execUpdate(query.End());
 	}
 	 
-	public ResultSet readSpecific(String table, String key, String value){
+	public ResultSet readWhereEquals(String table, String key, String value){
 		return this.execQuery(Query.SelectAllFrom(table).WhereEquals(key, value));
 	}
 	 
-	public ResultSet readSpecific(String table, String key, int value){
+	public ResultSet readWhereEquals(String table, String key, int value){
 		return this.execQuery(Query.SelectAllFrom(table).WhereEquals(key, value));
 	}
 
 	public ResultSet readByID(String table, int id)  {
-		return this.readSpecific(table, "id", id);
+		return this.readWhereEquals(table, "id", id);
 	}
 
 	public ResultSet readAll(String table)  {

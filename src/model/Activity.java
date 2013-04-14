@@ -35,7 +35,7 @@ public class Activity extends DatabaseObject {
 	}
 
 	@Override
-	public String[] toArray() {
+	public String[] getValueArray() {
 		return new String[]{this.description , String.valueOf(this.expectedTime) , String.valueOf(this.startTime) , String.valueOf(this.endTime)};
 	}
 

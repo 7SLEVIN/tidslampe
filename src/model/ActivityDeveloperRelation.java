@@ -34,7 +34,7 @@ public class ActivityDeveloperRelation extends DatabaseObject {
 	}
 
 	@Override
-	public String[] toArray() {
+	public String[] getValueArray() {
 		return new String[]{String.valueOf(this.activity.getId()), 
 				String.valueOf(this.developer.getId())};
 	}

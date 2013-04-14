@@ -27,7 +27,7 @@ public class ReservedTimeEntry extends DatabaseObject {
 	}
 
 	@Override
-	public String[] toArray() {
+	public String[] getValueArray() {
 		// TODO Auto-generated method stub
 		return null;
 	}
