@@ -6,13 +6,12 @@ import view.state.ViewState;
 
 
 public class Main {
-	private static Database database;
 	
 	public static void main(String[] args) {
-		database = new Database();
+		Database database = new Database();
+		ViewContainer viewContainer = new ViewContainer(database);
+		viewContainer.setViewState(ViewState.Login);
 		
-		ViewContainer v = new ViewContainer(database);
-		v.setViewState(ViewState.Login);
 		new ProjectPlanner(database);
 	}
 	

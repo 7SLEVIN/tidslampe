@@ -7,6 +7,10 @@ public class Query {
 	public static Query SelectAllFrom(String table) {
 		return new Query()._SelectAllFrom(table);
 	}
+	
+	public static Query Select(String field) {
+		return new Query()._Select(field);
+	}
 
 	public static Query InsertInto(String table, String[] columns,
 			String[] values) {
@@ -23,11 +27,25 @@ public class Query {
 	}
 
 	private Query _SelectAllFrom(String table) {
+		return this._Select("*").From(table);
+	}
+
+	private Query _Select(String field) {
 		if (this.lastStatement != QueryStatement.Empty)
 			System.err.println("Invalid query");
 		// throw new InvalidFormatException("First statement must be SELECT");
 
-		this.query += String.format("SELECT * FROM %s ", table);
+		this.query += String.format("SELECT %s ", field);
+		this.lastStatement = QueryStatement.Select;
+		return this;
+	}
+
+	public Query From(String field) {
+		if (this.lastStatement != QueryStatement.Select)
+			System.err.println("Invalid query");
+		// throw new InvalidFormatException("First statement must be SELECT");
+
+		this.query += String.format("FROM %s ", field);
 		this.lastStatement = QueryStatement.Select;
 		return this;
 	}

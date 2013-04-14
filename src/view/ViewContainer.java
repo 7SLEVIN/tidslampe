@@ -44,8 +44,8 @@ public class ViewContainer extends JFrame {
 	 *            The new state to change to
 	 */
 	public void setViewState(ViewState viewState) {
-		if (this.getCurrentViewController() != null) {
-			this.getCurrentViewController().getViewState().dispose();
+		if (this.currentViewController != null) {
+			this.currentViewController.getViewState().dispose();
 		}
 		
 		AbstractViewController viewController = null;
@@ -61,9 +61,10 @@ public class ViewContainer extends JFrame {
 			
 		default: throw new InvalidParameterException("");
 		}
+
+		viewController.initialize();
 		
 		this.setContentPane(viewController.getViewState());
-		viewController.getViewState().initialize();
 
 		this.pack();
 		

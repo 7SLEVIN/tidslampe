@@ -20,4 +20,9 @@ public class MenuViewController extends AbstractViewController {
 		return viewState;
 	}
 
+	@Override
+	public void initialize() {
+		
+	}
+
 }

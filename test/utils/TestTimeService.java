@@ -1,13 +1,8 @@
 package utils;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
-
-import java.util.Calendar;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import controller.TimeRegistrationController;
 
 public class TestTimeService {
 	TimeService timeService = new TimeService();

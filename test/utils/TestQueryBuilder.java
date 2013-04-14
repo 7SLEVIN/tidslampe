@@ -13,6 +13,18 @@ public class TestQueryBuilder {
 	}
 	
 	@Test
+	public void testSelectFrom() {
+		String q1 = Query.Select("test_func()").End();
+		assertEquals("Simple select", "SELECT test_func()", q1);
+
+		String q2 = Query.Select("id").From("foo").End();
+		assertEquals("Simple select", "SELECT id FROM foo", q2);
+
+		String q3 = Query.Select("id, name, age").From("foo").End();
+		assertEquals("Simple select", "SELECT id, name, age FROM foo", q3);
+	}
+	
+	@Test
 	public void testSelectWhere() {
 		String q1 = Query.SelectAllFrom("foo").WhereEquals("id", 1).End();
 		assertEquals("Select where", "SELECT * FROM foo WHERE id = '1'", q1);

@@ -1,10 +1,15 @@
 package controller.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.EventHandler;
+
 import persistency.Database;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.LoginViewState;
 import view.state.ViewState;
+import controller.LoginController;
 import controller.action.ChangeViewAction;
 
 /**
@@ -17,9 +22,16 @@ public class LoginViewController extends AbstractViewController {
 	
 	public LoginViewController(Database database, ViewContainer viewContainer) {
 		super(database, viewContainer);
-		
+	}
+
+	@Override
+	public void initialize() {
 		this.viewState = new LoginViewState();
-		this.viewState.getLoginButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewState.Menu));
+		this.viewState.getLoginButton().addActionListener((ActionListener)EventHandler.create(ActionListener.class, this, "tryLogin"));
+		this.viewState.setMessage("Hello, login here");
+	}
+	
+	public void tryLogin() {
 		
 	}
 
