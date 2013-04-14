@@ -2,8 +2,6 @@ package app;
 
 import persistency.Database;
 import utils.TimeService;
-import view.ViewContainer;
-import view.state.ViewState;
 import controller.LoginController;
 
 public class ProjectPlanner {

@@ -16,7 +16,7 @@ abstract public class DatabaseObject {
 
 	abstract protected void delete();
 	
-	public abstract String[] toArray();
+	public abstract String[] getValueArray();
 	
 	public int getId() {
 		return this.id;

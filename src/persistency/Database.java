@@ -1,6 +1,5 @@
 package persistency;
 
-
 public class Database {
 	
 	protected DatabaseConnection conn;
@@ -19,9 +18,9 @@ public class Database {
 	 * @param activity
 	 * @param assist
 	 */
-	public Database() {
+	public Database(String dbFile) {
 		// TODO refactor db filename out of source code
-		this.conn = new DatabaseConnection("data.db");
+		this.conn = new DatabaseConnection(dbFile);
 		
 		this.project = new ProjectRepository(this);
 		this.developer = new DeveloperRepository(this);
@@ -29,6 +28,10 @@ public class Database {
 		this.activityDeveloperRelation = new ActivityDeveloperRelationRepository(this);
 		this.assist = new AssistRepository(this);
 		this.timeEntry = new TimeEntryRepository(this);
+	}
+
+	public Database() {
+		this("dev_db.db");
 	}
 
 	public DatabaseConnection getConn() {

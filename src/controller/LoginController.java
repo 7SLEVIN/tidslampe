@@ -66,8 +66,12 @@ public class LoginController {
 	protected long getTodaysEarliestTime(){
 		Calendar cal = this.ts.getCurrentDateTime();
 		
-		int year = cal.get(cal.YEAR),month = cal.get(cal.MONTH),day = cal.get(cal.DAY_OF_MONTH),
-				hour = cal.get(cal.HOUR_OF_DAY), minute = cal.get(cal.MINUTE), second = cal.get(cal.SECOND);
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		int minute = cal.get(Calendar.MINUTE);
+		int second = cal.get(Calendar.SECOND);
 		
 		long nowInMillis = cal.getTimeInMillis();
 		nowInMillis -= 1000 * (3600*hour + 60 * minute + second);

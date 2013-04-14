@@ -37,7 +37,7 @@ public class TimeService {
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(timestamp);
 		
-		int[] values = new int[]{cal.YEAR , cal.MONTH , cal.DAY_OF_MONTH , cal.HOUR_OF_DAY , cal.MINUTE};
+		int[] values = new int[]{Calendar.YEAR , Calendar.MONTH , Calendar.DAY_OF_MONTH , Calendar.HOUR_OF_DAY , Calendar.MINUTE};
 		
 		return values;
 	}

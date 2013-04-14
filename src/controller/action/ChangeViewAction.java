@@ -21,5 +21,4 @@ public class ChangeViewAction implements ActionListener {
 		this.viewContainer.setViewState(this.viewState);
 
 	}
-
 }

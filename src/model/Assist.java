@@ -33,7 +33,7 @@ public class Assist extends DatabaseObject {
 	}
 
 	@Override
-	public String[] toArray() {
+	public String[] getValueArray() {
 		return new String[]{String.valueOf(this.developer.getId()), 
 				String.valueOf(this.spentTime)};
 	}

@@ -3,8 +3,6 @@ package persistency;
 import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import model.Activity;
@@ -18,7 +16,7 @@ import org.junit.Test;
 import utils.TimeService;
 
 
-public class TestDatabase extends SetUpDatabase {
+public class TestDatabase extends BaseTestDatabase {
 	
 	@Test
 	public void testReadAll() {

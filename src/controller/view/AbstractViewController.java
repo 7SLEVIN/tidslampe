@@ -14,4 +14,6 @@ public abstract class AbstractViewController {
 	}
 	
 	abstract public AbstractViewState getViewState();
+
+	abstract public void initialize();
 }
