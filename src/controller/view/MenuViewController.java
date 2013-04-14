@@ -1,5 +1,6 @@
 package controller.view;
 
+import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
 import persistency.Database;
 import utils.ActionUtils;
@@ -11,8 +12,8 @@ import view.state.ViewState;
 public class MenuViewController extends AbstractViewController {
 	private MenuViewState viewState;
 	
-	public MenuViewController(Database database, ViewContainer viewContainer) {
-		super(database, viewContainer);
+	public MenuViewController(Database database, ViewContainer viewContainer, ControllerCollection controllers) {
+		super(database, viewContainer, controllers);
 	}
 
 	@Override

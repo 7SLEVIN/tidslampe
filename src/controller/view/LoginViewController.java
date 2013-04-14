@@ -1,10 +1,5 @@
 package controller.view;
 
-import java.awt.event.ActionListener;
-import java.beans.EventHandler;
-
-import controller.LoginController;
-
 import persistency.Database;
 import utils.ActionUtils;
 import utils.TimeService;
@@ -12,13 +7,15 @@ import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.LoginViewState;
 import view.state.ViewState;
+import controller.ControllerCollection;
+import controller.LoginController;
 
 public class LoginViewController extends AbstractViewController {
 
 	private LoginViewState viewState;
 	
-	public LoginViewController(Database database, ViewContainer viewContainer) {
-		super(database, viewContainer);
+	public LoginViewController(Database database, ViewContainer viewContainer, ControllerCollection controllers) {
+		super(database, viewContainer, controllers);
 	}
 
 	@Override
@@ -30,9 +27,7 @@ public class LoginViewController extends AbstractViewController {
 	}
 	
 	public void tryLogin() {
-		//XXX hax going on
-		LoginController lc = new LoginController(this.database, new TimeService());
-		if (lc.login(this.viewState.getInputText())) 
+		if (this.controllers.getLoginController().login(this.viewState.getInputText())) 
 			this.viewContainer.setViewState(ViewState.Menu);
 		else 
 			this.viewState.setMessage("Invalid login");

@@ -9,6 +9,7 @@ import persistency.Database;
 
 import view.state.ViewState;
 
+import controller.ControllerCollection;
 import controller.view.AbstractViewController;
 import controller.view.LoginViewController;
 import controller.view.DevelopersViewController;
@@ -21,12 +22,14 @@ import controller.view.MenuViewController;
 @SuppressWarnings("serial")
 public class ViewContainer extends JFrame {
 	private Database database;
+	private ControllerCollection controllers;
 	private AbstractViewController currentViewController;
 	
-	public ViewContainer(Database database) {
+	public ViewContainer(Database database, ControllerCollection controllers) {
 		super("Tidslampe");
 		
 		this.database = database;
+		this.controllers = controllers;
 		
 		this.setResizable(false);
 		this.setSize(new Dimension(500, 500));
@@ -53,15 +56,15 @@ public class ViewContainer extends JFrame {
 		
 		switch(viewState){
 		case Login: 
-			viewController = new LoginViewController(this.database, this); 
+			viewController = new LoginViewController(this.database, this, this.controllers); 
 			break;
 			
 		case Developers: 
-			viewController = new DevelopersViewController(this.database, this); 
+			viewController = new DevelopersViewController(this.database, this, this.controllers); 
 			break;
 			
 		case Menu: 
-			viewController = new MenuViewController(this.database, this); 
+			viewController = new MenuViewController(this.database, this, this.controllers); 
 			break;
 			
 		default: throw new InvalidParameterException("");
@@ -78,5 +81,9 @@ public class ViewContainer extends JFrame {
 
 	public AbstractViewController getCurrentViewController() {
 		return currentViewController;
+	}
+
+	public ControllerCollection getControllers() {
+		return controllers;
 	}
 }
