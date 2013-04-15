@@ -47,7 +47,7 @@ public class TimeService {
 		if(hour == 0)
 			hour = 24;
 		else if(hour == 24)
-			hour = 0;
+			return false;
 		
 		String date = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day)+"-"+String.valueOf(hour)+"-"+String.valueOf(minute);
 		System.out.println("input: "+date);
