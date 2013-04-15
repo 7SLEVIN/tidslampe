@@ -90,5 +90,17 @@ public class TestQueryBuilder {
 		String q3 = Query.SelectAllFrom("foo").Limit(1).End();
 		assertEquals("Order by desc", "SELECT * FROM foo LIMIT 1", q3);
 	}
+	
+	@Test
+	public void testExists() {
+		String q1 = Query.Exists("foo", 1).End();
+		assertEquals("Exists", "SELECT EXISTS(SELECT * FROM foo WHERE id=1)", q1);
+	}
 
+	
+	@Test
+	public void testCount() {
+		String q1 = Query.Count("foo").End();
+		assertEquals("Count", "SELECT COUNT(*) FROM foo", q1);
+	}
 }
