@@ -52,6 +52,14 @@ public class TestTimeService {
 		hour = 23; minute = 59; day = 10;
 		long thirdMillis = timeService.convertToMillis(year, month, day, hour, minute);
 		assertEquals(true, secondMillis > thirdMillis); //"second" is after "third" and should be greater
+		
+		int[] values = timeService.convertToValues(thirdMillis);
+		
+		assertEquals(year, values[0]);
+		assertEquals(month, values[1]);
+		assertEquals(day, values[2]);
+		assertEquals(hour, values[3]);
+		assertEquals(minute, values[4]);
 	}
 	
 

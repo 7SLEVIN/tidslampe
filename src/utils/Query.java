@@ -85,6 +85,8 @@ public class Query {
 		List<String> fields = new ArrayList<String>();
 		
 		for (int i = 0; i < columns.length; i++) {
+			System.out.print("columns[" + i + "]: ");
+			System.out.println(columns[i] + ", vals: " + vals[i]);
 			fields.add(String.format("%s=%s", columns[i], vals[i]));
 		}
 		this.query += ArrayUtils.join(fields.toArray(new String[]{}), ',') + " ";

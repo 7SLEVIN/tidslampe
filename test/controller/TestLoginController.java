@@ -11,6 +11,7 @@ import java.util.List;
 import model.Activity;
 import model.ActivityDeveloperRelation;
 import model.Developer;
+import model.Project;
 import model.TimeEntry;
 
 import org.junit.Test;
@@ -116,10 +117,10 @@ public class TestLoginController extends BaseTestDatabase {
 		
 //Det samme indenfor 10 sekunder		
 		assertEquals(testMillis/10000, cal.getTimeInMillis()/10000); 
-				
 
 		Developer developer = this.db.Developer().create("LOL", "Lord Ole Larsen");
-		Activity activity = this.db.Activity().create("Save the Queen", 10, testMillis, testMillis);
+		Project project = this.db.Project().create("Main mission", 24, testMillis+1000*3600*24*7, developer);
+		Activity activity = this.db.Activity().createProjectActivity(project.getId(),"Save the Queen", 10, testMillis, testMillis);
 		ActivityDeveloperRelation relation = this.db.ActivityDeveloperRelation().create(activity, developer);
 		
 		assertEquals("login failed",true, loginControl.login(("LOL")));
@@ -144,17 +145,17 @@ public class TestLoginController extends BaseTestDatabase {
 		
 		
 //Register work 
-		TimeEntry timeEntry = this.db.TimeEntry().create(testMillis, testMillis+1000*60*120, relation.getId(), developer.getId());
+		TimeEntry timeEntry = this.db.RegisterTime().create(testMillis, testMillis+1000*60*120, relation.getId(), developer.getId());
 		assertEquals(120, timeEntry.getDurationInMinutes());
 		loginControl.logout();
 		
 //"Register" work 
-		TimeEntry nullEntry = this.db.TimeEntry().create(testMillis+1000*60*30, testMillis+1000*60*180, relation.getId(), developer.getId());
+		TimeEntry nullEntry = this.db.RegisterTime().create(testMillis+1000*60*30, testMillis+1000*60*180, relation.getId(), developer.getId());
 		assertEquals(null, nullEntry);
 		loginControl.logout();
 
 //Register remaining work 
-		TimeEntry secondEntry = this.db.TimeEntry().create(testMillis+1000*60*120, testMillis+1000*60*290, relation.getId(), developer.getId());
+		TimeEntry secondEntry = this.db.RegisterTime().create(testMillis+1000*60*120, testMillis+1000*60*290, relation.getId(), developer.getId());
 		assertEquals(170, secondEntry.getDurationInMinutes());
 		loginControl.logout();
 		

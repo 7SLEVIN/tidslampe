@@ -9,7 +9,7 @@ public class Project extends DatabaseObject {
 
 	private String name;
 	private int hourBudget;
-	private int deadline;
+	private long deadline;
 	private Developer manager;
 	private List<Activity> activities;
 	
@@ -22,7 +22,7 @@ public class Project extends DatabaseObject {
 	 * @param activities
 	 */
 	public Project(Database db, int id, String name, int hourBudget, 
-			int deadline, Developer manager) {
+			long deadline, Developer manager) {
 		super(id,db);
 		
 		this.name = name;
@@ -69,7 +69,7 @@ public class Project extends DatabaseObject {
 		this.db.Project().update(this);
 	}
 
-	public int getDeadline() {
+	public long getDeadline() {
 		return deadline;
 	}
 	

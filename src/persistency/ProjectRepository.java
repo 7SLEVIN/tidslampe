@@ -18,7 +18,7 @@ public class ProjectRepository extends Repository<Project> {
 				"manager_id" };
 	}
 
-	public Project create(String name, int hourBudget, int deadline, Developer manager) {
+	public Project create(String name, int hourBudget, long deadline, Developer manager) {
 		int id = this.create(new String[] { name, String.valueOf(hourBudget),
 				String.valueOf(deadline), String.valueOf(manager.getId()) });
 		Project dev = new Project(this.db, id, name, hourBudget, deadline,

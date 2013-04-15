@@ -37,7 +37,8 @@ public class TimeService {
 		Calendar cal = Calendar.getInstance();
 		cal.setTimeInMillis(timestamp);
 		
-		int[] values = new int[]{Calendar.YEAR , Calendar.MONTH , Calendar.DAY_OF_MONTH , Calendar.HOUR_OF_DAY , Calendar.MINUTE};
+		int[] values = new int[]{cal.get(Calendar.YEAR) , cal.get(Calendar.MONTH) ,
+				cal.get(Calendar.DAY_OF_MONTH) , cal.get(Calendar.HOUR_OF_DAY) , cal.get(Calendar.MINUTE)};
 		
 		return values;
 	}
@@ -46,17 +47,18 @@ public class TimeService {
 	{
 		if(hour == 0)
 			hour = 24;
-		else if(hour == 24)
+		else if(hour >= 24){
+			System.out.println("INVALID DATE! hilsen TimeService");
 			return false;
+		}
+			
 		
 		String date = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day)+"-"+String.valueOf(hour)+"-"+String.valueOf(minute);
-		System.out.println("input: "+date);
 		String DATE_FORMAT = "yyyy-MM-dd-kk-mm";
 	        try {
 	            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
 	            df.setLenient(false);
 	            Date d = df.parse(date);
-	            System.out.println("interpreted as: " + df.format(d));
 	            return true;
 	        } catch (ParseException e) {
 	        	System.out.println("INVALID DATE! hilsen TimeService");

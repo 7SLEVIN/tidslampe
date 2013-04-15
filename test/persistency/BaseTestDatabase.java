@@ -16,10 +16,15 @@ public class BaseTestDatabase {
 
 		this.db.getConn().execUpdate("create table if not exists project (id integer primary key autoincrement, name string, hour_budget float, deadline integer, manager_id integer)");
 		this.db.getConn().execUpdate("create table if not exists developer (id integer primary key autoincrement, initials string, name string)");
-		this.db.getConn().execUpdate("create table if not exists activity (id integer primary key autoincrement, description string, expected_time float, start_time BIGINT, end_time BIGINT)");
+		
+		
+		this.db.getConn().execUpdate("create table if not exists activity (id integer primary key autoincrement,activity_type string, description string, expected_time integer, start_time BIGINT, end_time BIGINT, project_id integer)");
+//		this.columns = new String[]{                                                                           "activity_type" ,     "description",      "expected_time", 		"start_time",      "end_time",      "project_id"};	
+		
 		this.db.getConn().execUpdate("create table if not exists activity_developer_relation (id integer primary key autoincrement, activity_id integer, developer_id integer)");
 		this.db.getConn().execUpdate("create table if not exists assist (id integer primary key autoincrement, developer_id integer, spent_time float)");
-		this.db.getConn().execUpdate("create table if not exists time_entry (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
+		this.db.getConn().execUpdate("create table if not exists register_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
+		this.db.getConn().execUpdate("create table if not exists reserve_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
 	}
 	
 	@Before
@@ -30,6 +35,8 @@ public class BaseTestDatabase {
 		this.db.getConn().execUpdate("delete from activity");
 		this.db.getConn().execUpdate("delete from activity_developer_relation");
 		this.db.getConn().execUpdate("delete from assist");
+		this.db.getConn().execUpdate("delete from register_time");
+		this.db.getConn().execUpdate("delete from reserve_time");
  
 	}
 
@@ -40,6 +47,8 @@ public class BaseTestDatabase {
 //		this.db.getConn().execUpdate("drop table activity");
 //		this.db.getConn().execUpdate("drop table activity_developer_relation");
 //		this.db.getConn().execUpdate("drop table assist");
+//		this.db.getConn().execUpdate("drop table register_time");
+//		this.db.getConn().execUpdate("drop table reserve_time");
 	}
 
 }

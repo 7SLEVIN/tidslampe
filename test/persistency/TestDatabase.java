@@ -74,12 +74,12 @@ public class TestDatabase extends BaseTestDatabase {
 		hour = 14;
 		long endTime = timeService.convertToMillis(year, month, day, hour, minute);
 		
-		Activity activity = this.db.Activity().create("Catch Moby Dick", 1.5, startTime, endTime);
+		Activity activity = this.db.Activity().createProjectActivity(1,"Catch Moby Dick", 2, startTime, endTime);
 		Activity actual = this.db.Activity().read(activity.getId());
 		
 		assertEquals("Activity description", "Catch Moby Dick", actual.getDescription());
 		assertEquals("Activity description", "Catch Moby Dick", activity.getDescription());
-		assertEquals("Activity expected time", 1.5, actual.getExpectedTime());
+		assertEquals("Activity expected time", 2, actual.getExpectedTime());
 		long actualStart = actual.getStartTime();
 		assertEquals("Activity start time", startTime, actualStart);
 		long actualEnd = actual.getEndTime();
@@ -94,7 +94,7 @@ public class TestDatabase extends BaseTestDatabase {
 		hour = 14;
 		long endTime = timeService.convertToMillis(year, month, day, hour, minute);
 		
-		Activity activity = this.db.Activity().create("Catch Moby Dick", 1.5, startTime, endTime);
+		Activity activity = this.db.Activity().createProjectActivity(1,"Catch Moby Dick", 2, startTime, endTime);
 		Developer dev = this.db.Developer().create("MD", "Moby Dick");
 		ActivityDeveloperRelation rel = this.db.ActivityDeveloperRelation().create(activity, dev);
 		ActivityDeveloperRelation actual = this.db.ActivityDeveloperRelation().read(rel.getId());
@@ -159,7 +159,7 @@ public class TestDatabase extends BaseTestDatabase {
 		long newDate = timeService.convertToMillis(year, month, day, 10, 0);
 		long newDate2 = timeService.convertToMillis(year, month, day, 12, 0);
 		
-		Activity activity = this.db.Activity().create("Catch Moby Dick", 1.5, date, date2);
+		Activity activity = this.db.Activity().createProjectActivity(1,"Catch Moby Dick", 2, date, date2);
 
 		activity.setDescription("Leave Moby Dick alone");
 		activity.setExpectedTime(666);
@@ -167,10 +167,10 @@ public class TestDatabase extends BaseTestDatabase {
 		activity.setEndTime(newDate2);
 		
 		this.db.Activity().update(activity);
-		Activity actual = this.db.Activity().read(activity.getId());
+		Activity actual = (Activity) this.db.Activity().read(activity.getId());
 		
 		assertEquals("Activity description", "Leave Moby Dick alone", actual.getDescription());
-		assertEquals("Activity expected time", 666.0, actual.getExpectedTime());
+		assertEquals("Activity expected time", 666, actual.getExpectedTime());
 		assertEquals("Activity start time", newDate, actual.getStartTime());
 		assertEquals("Activity end time", newDate2, actual.getEndTime());
 	}
@@ -184,9 +184,9 @@ public class TestDatabase extends BaseTestDatabase {
 		year = 1981; month = 07; day = 2;
 		long newDate = timeService.convertToMillis(year, month, day, 0, 0);
 
-		Activity activity = this.db.Activity().create("Catch Moby Dick", 1.5, date, date);
+		Activity activity = this.db.Activity().createProjectActivity(1,"Catch Moby Dick", 1, date, date);
 		Developer dev = this.db.Developer().create("MD", "Moby Dick");
-		Activity newActivity = this.db.Activity().create("Leave Moby Dick alone", 666.0, newDate, newDate);
+		Activity newActivity = this.db.Activity().createProjectActivity(1,"Leave Moby Dick alone", 666, newDate, newDate);
 		Developer newDev = this.db.Developer().create("RS", "Richard Stallman");
 		ActivityDeveloperRelation rel = this.db.ActivityDeveloperRelation().create(activity, dev);
 		
@@ -257,11 +257,11 @@ public class TestDatabase extends BaseTestDatabase {
 		TimeService timeService = new TimeService();
 		int year = 1991;		int month = 4;		int day = 22;
 		long date = timeService.convertToMillis(year, month, day, 0, 0);
-		Activity activity = this.db.Activity().create("Catch Moby Dick", 1.5, date, date);
+		Activity activity = this.db.Activity().createProjectActivity(1,"Catch Moby Dick", 1, date, date);
 		Activity actual = this.db.Activity().read(activity.getId());
 		
 		assertEquals("Activity description", "Catch Moby Dick", actual.getDescription());
-		assertEquals("Activity expected time", 1.5, actual.getExpectedTime());
+		assertEquals("Activity expected time", 1, actual.getExpectedTime());
 		assertEquals("Activity start time", date, actual.getStartTime());
 		assertEquals("Activity end time", date, actual.getEndTime());
 		
@@ -275,7 +275,7 @@ public class TestDatabase extends BaseTestDatabase {
 		TimeService timeService = new TimeService();
 		int year = 1991;		int month = 4;		int day = 22;
 		long date = timeService.convertToMillis(year, month, day, 0, 0);
-		Activity activity = this.db.Activity().create("Catch Moby Dick", 1.5, date, date);
+		Activity activity = this.db.Activity().createProjectActivity(1,"Catch Moby Dick", 1, date, date);
 		Developer dev = this.db.Developer().create("MD", "Moby Dick");
 		ActivityDeveloperRelation rel = this.db.ActivityDeveloperRelation().create(activity, dev);
 		ActivityDeveloperRelation actual = this.db.ActivityDeveloperRelation().read(rel.getId());

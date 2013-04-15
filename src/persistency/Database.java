@@ -9,7 +9,8 @@ public class Database {
 	private ActivityRepository activity;
 	private ActivityDeveloperRelationRepository activityDeveloperRelation;
 	private AssistRepository assist;
-	private TimeEntryRepository timeEntry;
+	private RegisterTimeRepository registerTime;
+	private ReserveTimeRepository reserveTime;
 	
 	/**
 	 * @param conn
@@ -27,7 +28,8 @@ public class Database {
 		this.activity = new ActivityRepository(this);
 		this.activityDeveloperRelation = new ActivityDeveloperRelationRepository(this);
 		this.assist = new AssistRepository(this);
-		this.timeEntry = new TimeEntryRepository(this);
+		this.registerTime = new RegisterTimeRepository(this);
+		this.reserveTime = new ReserveTimeRepository(this);
 	}
 
 	public DatabaseConnection getConn() {
@@ -54,7 +56,11 @@ public class Database {
 		return assist;
 	}
 
-	public TimeEntryRepository TimeEntry() {
-		return timeEntry;
+	public RegisterTimeRepository RegisterTime() {
+		return registerTime;
+	}
+	
+	public ReserveTimeRepository ReserveTime(){
+		return this.reserveTime;
 	}
 }

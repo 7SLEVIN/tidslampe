@@ -1,7 +1,10 @@
 package model;
 
 import persistency.Database;
-
+/**
+ * TimeEntries bruges både til RegisteredEntries og ReservedEntries 
+ *
+ */
 public class TimeEntry extends DatabaseObject{
 	long startTime; //TODO brugeren skal vï¿½lge tid fra liste. 
 	long endTime; //TODO endTime = startTime + 0.5h * n?
