@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class TimeService {
 	private Calendar date;
@@ -23,7 +24,6 @@ public class TimeService {
 	
 	public long convertToMillis(int year, int month, int day, int hour, int minute){		
 		if(!this.isDateValid(year, month, day, hour, minute)){
-			System.out.println("INVALID DATE! hilsen TimeService");
 			return -1L;
 		}
 		
@@ -50,14 +50,16 @@ public class TimeService {
 			hour = 0;
 		
 		String date = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day)+"-"+String.valueOf(hour)+"-"+String.valueOf(minute);
-		
+		System.out.println("input: "+date);
 		String DATE_FORMAT = "yyyy-MM-dd-kk-mm";
 	        try {
 	            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
 	            df.setLenient(false);
-	            df.parse(date);
+	            Date d = df.parse(date);
+	            System.out.println("interpreted as: " + df.format(d));
 	            return true;
 	        } catch (ParseException e) {
+	        	System.out.println("INVALID DATE! hilsen TimeService");
 	            return false;
 	        }
 	}
