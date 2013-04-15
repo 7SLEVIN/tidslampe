@@ -32,6 +32,14 @@ public class Query {
 			String[] values) {
 		return new Query()._InsertInto(table, columns, values);
 	}
+	
+	public static Query Exists(String table, int id) {
+		return new Query()._Exists(table, id);
+	}
+	
+	public static Query Count(String table) {
+		return new Query()._Count(table);
+	}
 
 	// Instance
 	public Query() {
@@ -179,5 +187,18 @@ public class Query {
 		this.query += String.format("LIMIT %d", lim);
 		this.lastStatement = QueryStatement.Limit;
 		return this;
+	}
+	
+	private Query _Exists(String table, int id) {
+		if (this.lastStatement != QueryStatement.Empty)
+			System.err.println("Inavlid query");
+		this.query += String.format("SELECT EXISTS(SELECT * FROM %s WHERE id=%d)", table, id);
+		return this;
+	}
+	
+	private Query _Count(String table) {
+		if (this.lastStatement != QueryStatement.Empty)
+			System.err.println("Inavlid query");
+		return this._Select("COUNT(*)").From(table);
 	}
 }
