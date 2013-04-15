@@ -89,26 +89,27 @@ public class DatabaseConnection {
 		return this.execQuery(Query.SelectAllFrom(table).WhereEquals(key, value));
 	}
 	
-	public void update(String table, int id, String column, String value) {
-//		if (count(table,id) < 1) Troll.getInstance().showYourself();
-		
+	public boolean update(String table, int id, String column, String value) {
+		if (!this.exists(table, id)) return false;
 		this.execUpdate(Query.Update(table, column, value));
+		return true;
 	}
 	
-	public void update(String table, int id, String[] columns, String[] values) {
-//		if (count(table,id) < 1) Troll.getInstance().showYourself();
+	public boolean update(String table, int id, String[] columns, String[] values) {
+		if (!this.exists(table, id)) return false;
 		this.execUpdate(Query.Update(table, columns, values));
+		return true;
 	}
 
-	public void delete(String table, int id) {
-//		if (count(table,id) < 1) Troll.getInstance().showYourself();
-		
+	public boolean delete(String table, int id) {
+		if (!this.exists(table, id)) return false;
 		this.execUpdate(Query.DeleteFrom(table).WhereEquals("id", id));
+		return true;
 	}
 	
 	public int count(String table) {
-		ResultSet rs = this.execQuery(Query.Select("COUNT(*)").From(table));
-		int count = -1;
+		ResultSet rs = this.execQuery(Query.Count(table));
+		int count = 0;
 		try {
 			while (rs.next()) {
 				count = rs.getInt(1);
@@ -117,5 +118,17 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		}
 		return count;
+	}
+	
+	public boolean exists(String table, int id) {
+		ResultSet rs = this.execQuery(Query.Exists(table, id));
+		try {
+			while (rs.next()) {
+				return rs.getBoolean(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

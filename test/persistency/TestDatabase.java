@@ -236,7 +236,7 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.Project().delete(actual.getId());
 		
-		assertEquals("Project count", 0, this.db.Project().readAll().size());
+		assertEquals("Project count", 0, this.db.Project().count());
 	}
 
 	@Test
@@ -249,7 +249,7 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.Developer().delete(actual.getId());
 		
-		assertEquals("Developer count", 0, this.db.Developer().readAll().size());
+		assertEquals("Developer count", 0, this.db.Developer().count());
 	}
 
 	@Test
@@ -267,7 +267,7 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.Activity().delete(actual.getId());
 		
-		assertEquals("Activity count", 0, this.db.Activity().readAll().size());
+		assertEquals("Activity count", 0, this.db.Activity().count());
 	}
 
 	@Test
@@ -287,7 +287,7 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.ActivityDeveloperRelation().delete(actual.getId());
 		
-		assertEquals("ActivityDeveloperRelation count", 0, this.db.ActivityDeveloperRelation().readAll().size());
+		assertEquals("ActivityDeveloperRelation count", 0, this.db.ActivityDeveloperRelation().count());
 	}
 
 	@Test
@@ -301,7 +301,7 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.Assist().delete(actual.getId());
 		
-		assertEquals("Assist count", 0, this.db.Assist().readAll().size());
+		assertEquals("Assist count", 0, this.db.Assist().count());
 	}
 	
 }
