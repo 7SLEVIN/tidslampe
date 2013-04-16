@@ -32,7 +32,7 @@ public class AssistRepository extends Repository<Assist> {
 				int developer_id = rs.getInt(this.columns[0]);
 				Number spent_time = rs.getDouble(this.columns[1]);
 				assists.add(new Assist(this.db, rs.getInt("id"), 
-						this.db.Developer().read(developer_id), 
+						this.db.developer().read(developer_id), 
 						spent_time));
 			}
 		} catch (Exception e) {

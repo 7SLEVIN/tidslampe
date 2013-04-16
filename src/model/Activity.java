@@ -91,7 +91,7 @@ public class Activity extends DatabaseObject {
 
 	public void setDescription(String description){
 		this.description = description;
-		this.db.Activity().update(this);
+		this.db.activity().update(this);
 	}
 
 	public Number getExpectedTime() {
@@ -100,7 +100,7 @@ public class Activity extends DatabaseObject {
 	
 	public void setExpectedTime(int expTime){
 		this.expectedTime = expTime;
-		this.db.Activity().update(this);
+		this.db.activity().update(this);
 	}
 	
 	public long getStartTime() {
@@ -109,7 +109,7 @@ public class Activity extends DatabaseObject {
 	
 	public void setStartTime(long newDate) {
 		this.startTime = newDate;
-		this.db.Activity().update(this);
+		this.db.activity().update(this);
 	}
 	
 	public long getEndTime() {
@@ -118,7 +118,7 @@ public class Activity extends DatabaseObject {
 	
 	public void setEndTime(long newDate) {
 		this.endTime = newDate;
-		this.db.Activity().update(this);
+		this.db.activity().update(this);
 	}
 
 }

@@ -27,7 +27,7 @@ public class LoginController {
 	}
 	
 	public boolean login(String s) {
-		List<Developer> potentialDevs = this.db.Developer().readByInitials(s);
+		List<Developer> potentialDevs = this.db.developer().readByInitials(s);
 
 		this.loggedin = potentialDevs.size() == 1;
 		if (this.loggedin) {
@@ -82,7 +82,7 @@ public class LoginController {
 
 		int totalTimeRegisteredToday = 0;
 		
-		List<TimeEntry> collidingEntries = this.db.RegisterTime().getCollidingEntries(earliestToday, earliestToday+3600*24*1000, devID);
+		List<TimeEntry> collidingEntries = this.db.registerTime().getCollidingEntries(earliestToday, earliestToday+3600*24*1000, devID);
 		
 		for(TimeEntry timeEntry : collidingEntries){
 			totalTimeRegisteredToday += timeEntry.getDurationInMinutes();

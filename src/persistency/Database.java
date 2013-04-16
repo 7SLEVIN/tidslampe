@@ -36,31 +36,31 @@ public class Database {
 		return this.conn;
 	}
 
-	public DeveloperRepository Developer() {
+	public DeveloperRepository developer() {
 		return developer;
 	}
 
-	public ProjectRepository Project() {
+	public ProjectRepository project() {
 		return project;
 	}
 
-	public ActivityRepository Activity() {
+	public ActivityRepository activity() {
 		return activity;
 	}
 	
-	public ActivityDeveloperRelationRepository ActivityDeveloperRelation() {
+	public ActivityDeveloperRelationRepository activityDeveloperRelation() {
 		return activityDeveloperRelation;
 	}
 
-	public AssistRepository Assist() {
+	public AssistRepository assist() {
 		return assist;
 	}
 
-	public RegisterTimeRepository RegisterTime() {
+	public RegisterTimeRepository registerTime() {
 		return registerTime;
 	}
 	
-	public ReserveTimeRepository ReserveTime(){
+	public ReserveTimeRepository reserveTime(){
 		return this.reserveTime;
 	}
 }

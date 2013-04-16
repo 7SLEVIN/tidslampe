@@ -33,8 +33,8 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 				int activity_id = rs.getInt(this.columns[0]);
 				int developer_id = rs.getInt(this.columns[1]);
 				rel.add(new ActivityDeveloperRelation(this.db, rs.getInt("id"), 
-						this.db.Activity().read(activity_id), 
-						this.db.Developer().read(developer_id)));
+						this.db.activity().read(activity_id), 
+						this.db.developer().read(developer_id)));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

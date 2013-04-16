@@ -57,7 +57,7 @@ public class Project extends DatabaseObject {
 	
 	public void setName(String name){
 		this.name = name;
-		this.db.Project().update(this);
+		this.db.project().update(this);
 	}
 
 	public int getHourBudget() {
@@ -66,7 +66,7 @@ public class Project extends DatabaseObject {
 	
 	public void setHourBudget(int i) {
 		this.hourBudget = i;
-		this.db.Project().update(this);
+		this.db.project().update(this);
 	}
 
 	public long getDeadline() {
@@ -75,7 +75,7 @@ public class Project extends DatabaseObject {
 	
 	public void setDeadline(int deadline){
 		this.deadline = deadline;
-		this.db.Project().update(this);
+		this.db.project().update(this);
 	}
 
 	public Developer getManager() {
@@ -84,7 +84,7 @@ public class Project extends DatabaseObject {
 	
 	public void setManager(Developer manager){
 		this.manager = manager;
-		this.db.Project().update(this);
+		this.db.project().update(this);
 	}
 
 	public List<Activity> getActivities() {

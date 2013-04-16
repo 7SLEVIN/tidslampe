@@ -43,7 +43,7 @@ public class Developer extends DatabaseObject {
 
 	public void setInitials(String ints){
 		this.initials = ints;
-		this.db.Developer().update(this);
+		this.db.developer().update(this);
 	}
 	
 	public String getName() {
@@ -52,6 +52,6 @@ public class Developer extends DatabaseObject {
 
 	public void setName(String name){
 		this.name = name;
-		this.db.Developer().update(this);
+		this.db.developer().update(this);
 	}
 }

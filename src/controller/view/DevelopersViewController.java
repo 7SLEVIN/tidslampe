@@ -39,7 +39,7 @@ public class DevelopersViewController extends AbstractViewController {
 	}
 
 	private void fillDeveloperList() {
-		this.viewState.setDevelopers(this.database.Developer().readAll());
+		this.viewState.setDevelopers(this.database.developer().readAll());
 	}
 	
 	public void createNewDeveloper() {
@@ -51,7 +51,7 @@ public class DevelopersViewController extends AbstractViewController {
 			return;
 		}
 		
-		if (this.database.Developer().create(initialsInput, nameInput) == null) {
+		if (this.database.developer().create(initialsInput, nameInput) == null) {
 			JOptionPane.showMessageDialog(null, "Could not create developer");
 		}
 		this.fillDeveloperList();
@@ -69,7 +69,7 @@ public class DevelopersViewController extends AbstractViewController {
 		
 		int confirm = JOptionPane.showConfirmDialog(null, String.format("Really delete %s?", sel.getName()));
 		if (confirm == 0) {
-			this.database.Developer().delete(sel.getId());
+			this.database.developer().delete(sel.getId());
 			this.fillDeveloperList();
 		}
 	}

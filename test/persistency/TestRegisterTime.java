@@ -23,7 +23,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 	
 	@Test
 	public void testTimeTaken(){
-		Developer developer = this.db.Developer().create("AL", "Abraham Lincoln");
+		Developer developer = this.db.developer().create("AL", "Abraham Lincoln");
 
 		
 		
@@ -37,9 +37,9 @@ public class TestRegisterTime extends BaseTestDatabase {
 		long startTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 		long endTime = this.timeService.convertToMillis(year, month+1, day, hour, minute);
 
-		Project project = this.db.Project().create("Run for presidency", 5, endTime, developer);
-		Activity activity = this.db.Activity().createProjectActivity(project.getId(),description, expectedTime, startTime, endTime);
-		ActivityDeveloperRelation relation = this.db.ActivityDeveloperRelation().create(activity, developer);
+		Project project = this.db.project().create("Run for presidency", 5, endTime, developer);
+		Activity activity = this.db.activity().createProjectActivity(project.getId(),description, expectedTime, startTime, endTime);
+		ActivityDeveloperRelation relation = this.db.activityDeveloperRelation().create(activity, developer);
 
 		hour = 15;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
@@ -47,7 +47,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		//Initialization done, moving on to registration
 		
 //Register legal entry		
-		TimeEntry firstEntry = this.db.RegisterTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry firstEntry = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
 		
 		assertEquals(false, firstEntry == null);
 
@@ -58,7 +58,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		hour = 11;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 		
-		TimeEntry beginningOverlap = this.db.RegisterTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry beginningOverlap = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
 
 		assertEquals(true, beginningOverlap == null);
 		
@@ -69,7 +69,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		hour = 17;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 		
-		TimeEntry endOverlap = this.db.RegisterTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry endOverlap = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
 
 		assertEquals(true, endOverlap == null);
 		
@@ -79,7 +79,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		hour = 17;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 		
-		TimeEntry totalOverlap = this.db.RegisterTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry totalOverlap = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
 
 		assertEquals(true, totalOverlap == null);
 		
@@ -90,7 +90,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		hour = 10;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 	
-		TimeEntry secondEntry = this.db.RegisterTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry secondEntry = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
 
 		assertEquals(false, secondEntry == null);
 		
@@ -101,7 +101,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		hour = 24;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 	
-		TimeEntry illegalEntry = this.db.RegisterTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry illegalEntry = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
 
 		assertEquals(true, illegalEntry == null);
 		

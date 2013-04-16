@@ -19,10 +19,10 @@ public class ReserveTimeRepository extends TimeRepository {
 		if(this.isTimeUsed(startTime, endTime, devID))
 			return null;
 		
-		int activityID = this.db.ActivityDeveloperRelation().read(devActRelID).getId();
-		if(this.db.Activity().isFixed(activityID)){
-//Hvis aktiviteten er fixed, så skal den bare registreres med det samme
-			return this.db.RegisterTime().create(startTime, endTime, devActRelID, devID);
+		int activityID = this.db.activityDeveloperRelation().read(devActRelID).getId();
+		if(this.db.activity().isFixed(activityID)){
+//Hvis aktiviteten er fixed, sï¿½ skal den bare registreres med det samme
+			return this.db.registerTime().create(startTime, endTime, devActRelID, devID);
 		}else{
 			int id = this.create(new String[]{String.valueOf(startTime), String.valueOf(endTime),String.valueOf(devActRelID),String.valueOf(devID)});
 			
@@ -39,7 +39,7 @@ public class ReserveTimeRepository extends TimeRepository {
 				.WhereMoreThan("end_time", startTime)
 				.WhereEquals("developer_id", devID)));
 		
-		collidingEntries.addAll(this.db.RegisterTime().getCollidingEntries(startTime, endTime, devID));
+		collidingEntries.addAll(this.db.registerTime().getCollidingEntries(startTime, endTime, devID));
 		
 		return collidingEntries;
 	}

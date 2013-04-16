@@ -26,13 +26,13 @@ public class TestLoginController extends BaseTestDatabase {
 	@Test
 	public void testLogin(){
 		
-		this.db.Developer().create("PG", "Patrick Gadd");
-		this.db.Developer().create("SA", "Simon Altschuler");
-		this.db.Developer().create("MF", "Markus F�revaag");
+		this.db.developer().create("PG", "Patrick Gadd");
+		this.db.developer().create("SA", "Simon Altschuler");
+		this.db.developer().create("MF", "Markus F�revaag");
 		
 		LoginController loginControl = new LoginController(this.db,this.projectPlanner.getTimeService());
 		
-		List<Developer> devs = this.db.Developer().readAll();
+		List<Developer> devs = this.db.developer().readAll();
 		
 		assertEquals(3, devs.size());
 		
@@ -47,7 +47,7 @@ public class TestLoginController extends BaseTestDatabase {
 	
 	@Test
 	public void testLogout(){
-		this.db.Developer().create("LOL", "Lord Ole Larsen");
+		this.db.developer().create("LOL", "Lord Ole Larsen");
 		
 		LoginController loginControl = new LoginController(this.db,this.projectPlanner.getTimeService());
 		
@@ -72,7 +72,7 @@ public class TestLoginController extends BaseTestDatabase {
 		Calendar cal = new GregorianCalendar(2011,Calendar.NOVEMBER,11); //Very important date: Google "11 11 11 video game releases" and go to the Wikipedia-page
 		when(timeService.getCurrentDateTime()).thenReturn(cal);
 		
-		this.db.Developer().create("LOL", "Lord Ole Larsen");
+		this.db.developer().create("LOL", "Lord Ole Larsen");
 		
 		LoginController loginControl = new LoginController(this.db,this.projectPlanner.getTimeService());
 		
@@ -118,10 +118,10 @@ public class TestLoginController extends BaseTestDatabase {
 //Det samme indenfor 10 sekunder		
 		assertEquals(testMillis/10000, cal.getTimeInMillis()/10000); 
 
-		Developer developer = this.db.Developer().create("LOL", "Lord Ole Larsen");
-		Project project = this.db.Project().create("Main mission", 24, testMillis+1000*3600*24*7, developer);
-		Activity activity = this.db.Activity().createProjectActivity(project.getId(),"Save the Queen", 10, testMillis, testMillis);
-		ActivityDeveloperRelation relation = this.db.ActivityDeveloperRelation().create(activity, developer);
+		Developer developer = this.db.developer().create("LOL", "Lord Ole Larsen");
+		Project project = this.db.project().create("Main mission", 24, testMillis+1000*3600*24*7, developer);
+		Activity activity = this.db.activity().createProjectActivity(project.getId(),"Save the Queen", 10, testMillis, testMillis);
+		ActivityDeveloperRelation relation = this.db.activityDeveloperRelation().create(activity, developer);
 		
 		assertEquals("login failed",true, loginControl.login(("LOL")));
 
@@ -145,17 +145,17 @@ public class TestLoginController extends BaseTestDatabase {
 		
 		
 //Register work 
-		TimeEntry timeEntry = this.db.RegisterTime().create(testMillis, testMillis+1000*60*120, relation.getId(), developer.getId());
+		TimeEntry timeEntry = this.db.registerTime().create(testMillis, testMillis+1000*60*120, relation.getId(), developer.getId());
 		assertEquals(120, timeEntry.getDurationInMinutes());
 		loginControl.logout();
 		
 //"Register" work 
-		TimeEntry nullEntry = this.db.RegisterTime().create(testMillis+1000*60*30, testMillis+1000*60*180, relation.getId(), developer.getId());
+		TimeEntry nullEntry = this.db.registerTime().create(testMillis+1000*60*30, testMillis+1000*60*180, relation.getId(), developer.getId());
 		assertEquals(null, nullEntry);
 		loginControl.logout();
 
 //Register remaining work 
-		TimeEntry secondEntry = this.db.RegisterTime().create(testMillis+1000*60*120, testMillis+1000*60*290, relation.getId(), developer.getId());
+		TimeEntry secondEntry = this.db.registerTime().create(testMillis+1000*60*120, testMillis+1000*60*290, relation.getId(), developer.getId());
 		assertEquals(170, secondEntry.getDurationInMinutes());
 		loginControl.logout();
 		

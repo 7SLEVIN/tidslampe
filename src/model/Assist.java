@@ -44,7 +44,7 @@ public class Assist extends DatabaseObject {
 
 	public void setDeveloper(Developer developer){
 		this.developer = developer;
-		this.db.Assist().update(this);
+		this.db.assist().update(this);
 	}
 	
 	public Number getSpentTime() {
@@ -53,7 +53,7 @@ public class Assist extends DatabaseObject {
 	
 	public void setSpentTime(Number spentTime){
 		this.spentTime = spentTime;
-		this.db.Assist().update(this);
+		this.db.assist().update(this);
 	}
 
 }

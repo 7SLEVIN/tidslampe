@@ -45,7 +45,7 @@ public class ActivityDeveloperRelation extends DatabaseObject {
 	
 	public void setActivity(Activity activity){
 		this.activity = activity;
-		this.db.ActivityDeveloperRelation().update(this);
+		this.db.activityDeveloperRelation().update(this);
 	}
 
 	public Developer getDeveloper() {
@@ -54,7 +54,7 @@ public class ActivityDeveloperRelation extends DatabaseObject {
 	
 	public void setDeveloper(Developer developer){
 		this.developer = developer;
-		this.db.ActivityDeveloperRelation().update(this);
+		this.db.activityDeveloperRelation().update(this);
 	}
 
 
