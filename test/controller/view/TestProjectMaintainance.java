@@ -20,7 +20,7 @@ public class TestProjectMaintainance extends BaseTestDatabase{
 	
 	private void init(){
 		this.controllers = new ControllerCollection(this.db, this.projectPlanner.getTimeService());
-		this.viewContainer = new ViewContainer(this.db, controllers);
+		this.viewContainer = new ViewContainer();
 		
 		this.addProjects();
 		this.addDevelopers();
@@ -33,8 +33,7 @@ public class TestProjectMaintainance extends BaseTestDatabase{
 		
 		Project testProject = this.db.project().readAll().get(0);
 		
-		System.out.println("count1 : "+this.db.project().readAll().size());
-		System.out.println("count2 : "+this.db.project().count());
+		assertEquals(this.db.project().readAll().size(), this.db.project().count());
 		
 		int projectID = testProject.getId();
 		Project project = this.db.project().read(projectID);

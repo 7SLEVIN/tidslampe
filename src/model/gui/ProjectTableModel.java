@@ -26,7 +26,7 @@ public class ProjectTableModel extends DefaultTableModel implements TableModel {
 			case 0: return o.getName();
 			case 1: return o.getHourBudget();
 			case 2: return o.getDeadline();
-			case 3: return o.getManager().getName();
+			case 3: return o.getManager() != null ? o.getManager().getName() : "N/A" ;
 			default: return null;
 		}
 	}
