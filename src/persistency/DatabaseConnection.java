@@ -11,12 +11,14 @@ import utils.Query;
 public class DatabaseConnection {
 
 	private Connection conn;
+	private Statement stmt;
 
 	public DatabaseConnection(String dbFile) {
 		try {
 			Class.forName("org.sqlite.JDBC");
 
 			this.conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+			this.stmt = this.conn.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,7 +49,7 @@ public class DatabaseConnection {
 	public ResultSet execQuery(String query) {
 		//System.out.println(query);
 		try {
-			return this.conn.createStatement().executeQuery(query);
+			return this.stmt.executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -57,7 +59,7 @@ public class DatabaseConnection {
 	public int execUpdate(String query)  {
 		//System.out.println(query);
 		try {
-			return this.conn.createStatement().executeUpdate(query);
+			this.stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
