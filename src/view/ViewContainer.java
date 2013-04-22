@@ -1,19 +1,10 @@
 package view;
 
 import java.awt.Dimension;
-import java.security.InvalidParameterException;
 
 import javax.swing.JFrame;
 
-import persistency.Database;
-
-import view.state.ViewState;
-
-import controller.ControllerCollection;
 import controller.view.AbstractViewController;
-import controller.view.LoginViewController;
-import controller.view.DevelopersViewController;
-import controller.view.MenuViewController;
 
 /**
  * The main window inside which states are rendered
@@ -21,15 +12,10 @@ import controller.view.MenuViewController;
 
 @SuppressWarnings("serial")
 public class ViewContainer extends JFrame {
-	private Database database;
-	private ControllerCollection controllers;
 	private AbstractViewController currentViewController;
 	
-	public ViewContainer(Database database, ControllerCollection controllers) {
+	public ViewContainer() {
 		super("Tidslampe");
-		
-		this.database = database;
-		this.controllers = controllers;
 		
 		this.setResizable(false);
 		this.setSize(new Dimension(500, 500));
@@ -47,27 +33,9 @@ public class ViewContainer extends JFrame {
 	 * @param state
 	 *            The new state to change to
 	 */
-	public void setViewState(ViewState viewState) {
+	public void setViewState(AbstractViewController viewController) {
 		if (this.currentViewController != null) {
 			this.currentViewController.getViewState().dispose();
-		}
-		
-		AbstractViewController viewController = null;
-		
-		switch(viewState){
-		case Login: 
-			viewController = new LoginViewController(this.database, this, this.controllers); 
-			break;
-			
-		case Developers: 
-			viewController = new DevelopersViewController(this.database, this, this.controllers); 
-			break;
-			
-		case Menu: 
-			viewController = new MenuViewController(this.database, this, this.controllers); 
-			break;
-			
-		default: throw new InvalidParameterException("");
 		}
 
 		viewController.initialize();
@@ -81,9 +49,5 @@ public class ViewContainer extends JFrame {
 
 	public AbstractViewController getCurrentViewController() {
 		return currentViewController;
-	}
-
-	public ControllerCollection getControllers() {
-		return controllers;
 	}
 }

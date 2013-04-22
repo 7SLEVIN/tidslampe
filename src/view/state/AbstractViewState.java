@@ -26,7 +26,5 @@ abstract public class AbstractViewState extends JPanel {
 	 * Lets a view state initialize itself after it has been added to a frame
 	 */
 	public void initialize() {}
-
-        
         
 }

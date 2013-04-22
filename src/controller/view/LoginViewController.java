@@ -2,13 +2,11 @@ package controller.view;
 
 import persistency.Database;
 import utils.ActionUtils;
-import utils.TimeService;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.LoginViewState;
-import view.state.ViewState;
 import controller.ControllerCollection;
-import controller.LoginController;
+import factory.ViewControllerFactory;
 
 public class LoginViewController extends AbstractViewController {
 
@@ -28,7 +26,7 @@ public class LoginViewController extends AbstractViewController {
 	
 	public void tryLogin() {
 		if (this.controllers.getLoginController().login(this.viewState.getInputText())) 
-			this.viewContainer.setViewState(ViewState.Menu);
+			this.viewContainer.setViewState(ViewControllerFactory.CreateMenuViewController());
 		else 
 			this.viewState.setMessage("Invalid login");
 	}

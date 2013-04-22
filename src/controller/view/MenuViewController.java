@@ -1,13 +1,12 @@
 package controller.view;
 
-import controller.ControllerCollection;
-import controller.action.ChangeViewAction;
 import persistency.Database;
-import utils.ActionUtils;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.MenuViewState;
-import view.state.ViewState;
+import controller.ControllerCollection;
+import controller.action.ChangeViewAction;
+import factory.ViewControllerFactory;
 
 public class MenuViewController extends AbstractViewController {
 	private MenuViewState viewState;
@@ -24,7 +23,10 @@ public class MenuViewController extends AbstractViewController {
 	@Override
 	public void initialize() {
 		this.viewState = new MenuViewState();
-		this.viewState.getDevelopersButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewState.Developers));
+		this.viewState.getDevelopersButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateDevelopersViewController()));
+		int currentDeveloperId = this.controllers.getLoginController().getUser().getId();
+		this.viewState.getCalendarButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateCalendarViewController(currentDeveloperId)));
+		this.viewState.getProjectsButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectsViewController()));
 	}
 
 }

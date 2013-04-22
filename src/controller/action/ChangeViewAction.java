@@ -4,21 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import view.ViewContainer;
-import view.state.ViewState;
+import controller.view.AbstractViewController;
 
 public class ChangeViewAction implements ActionListener {
+	private ViewContainer viewContainer;
+	private AbstractViewController viewController;
 
-	private final ViewContainer viewContainer;
-	private final ViewState viewState;
-
-	public ChangeViewAction(ViewContainer viewContainer, ViewState viewState) {
+	public ChangeViewAction(ViewContainer viewContainer, AbstractViewController viewController) {
 		this.viewContainer = viewContainer;
-		this.viewState = viewState;
+		this.viewController = viewController;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.viewContainer.setViewState(this.viewState);
+		this.viewContainer.setViewState(this.viewController);
 
 	}
 }
