@@ -1,5 +1,6 @@
 package controller.view;
 
+import model.Developer;
 import model.Project;
 import persistency.Database;
 import utils.ActionUtils;
@@ -30,7 +31,7 @@ public class ProjectsViewController extends AbstractViewController {
 		this.viewState = new ProjectsViewState(); 
 		
 		ActionUtils.addListener(this.viewState.getDeleteButton(), this, "deleteSelectedProject");
-//		ActionUtils.addListener(this.viewState.getCreateButton(), this, "createNewDeveloper");
+		ActionUtils.addListener(this.viewState.getCreateButton(), this, "createNewProject");
 		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
 
 		this.fillProjectList();
@@ -45,20 +46,25 @@ public class ProjectsViewController extends AbstractViewController {
 		this.viewState.setManagers(this.database.developer().readAll());
 	}
 	
-//	public void createNewProject() {
-//		String initialsInput = this.viewState.getInitialsInput().trim();
-//		String nameInput = this.viewState.getNameInput().trim();
-//		
-//		if (initialsInput.length() == 0 || nameInput.length() == 0) {
-//			Dialog.message("You must fill out both initials and name");
-//			return;
-//		}
-//		
-//		if (this.database.developer().create(initialsInput, nameInput) == null) {
-//			Dialog.message("Could not create developer");
-//		}
-//		this.fillDeveloperList();
-//	}
+	public void createNewProject() {
+		String nameInput = this.viewState.getNameInput().trim();
+		int hourBudgetInput = this.viewState.getHourBudgetInput();
+		int deadlineInput = this.viewState.getDeadlineInput();
+		Developer managerInput = this.viewState.getManagerInput();
+		
+		if (nameInput.length() == 0 ||
+				hourBudgetInput < 0 ||
+				deadlineInput < 0 ||
+				managerInput == null) {
+			Dialog.message("You must fill out all fields");
+			return;
+		}
+		
+		if (this.database.project().create(nameInput, hourBudgetInput, deadlineInput, managerInput) == null) {
+			Dialog.message("Could not create project");
+		}
+		this.fillProjectList();
+	}
 	
 	public void deleteSelectedProject() {
 		Project sel = this.viewState.getSelectedProject();

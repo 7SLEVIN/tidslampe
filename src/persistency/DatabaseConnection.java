@@ -92,13 +92,13 @@ public class DatabaseConnection {
 	
 	public boolean update(String table, int id, String column, String value) {
 		if (!this.exists(table, id)) return false;
-		this.execUpdate(Query.Update(table, column, value));
+		this.execUpdate(Query.Update(table, column, value).WhereEquals("id", id));
 		return true;
 	}
 	
 	public boolean update(String table, int id, String[] columns, String[] values) {
 		if (!this.exists(table, id)) return false;
-		this.execUpdate(Query.Update(table, columns, values));
+		this.execUpdate(Query.Update(table, columns, values).WhereEquals("id", id));
 		return true;
 	}
 

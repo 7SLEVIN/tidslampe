@@ -40,18 +40,19 @@ public class ProjectsViewState extends AbstractViewState {
 		this.nameInput = new JTextField(10);
 		this.hourBudgetInput = new JTextField(3);
 		this.deadlineInput = new JTextField(3);
-		this.managerInput = new JComboBox();
-		
+		this.managerInput = new JComboBox<Developer>();
+
 		JPanel createPanel = new JPanel();
+		JPanel createPanel2 = new JPanel();
 		createPanel.add(new JLabel("Name"));
 		createPanel.add(this.nameInput);
 		createPanel.add(new JLabel("Hour Budget"));
 		createPanel.add(this.hourBudgetInput);
 		createPanel.add(new JLabel("Deadline"));
 		createPanel.add(this.deadlineInput);
-		createPanel.add(new JLabel("Manager"));
-		createPanel.add(this.managerInput);
-		createPanel.add(this.createButton);
+		createPanel2.add(new JLabel("Manager"));
+		createPanel2.add(this.managerInput);
+		createPanel2.add(this.createButton);
 		
 		JScrollPane scrollPane = new JScrollPane(this.table);
 		scrollPane.setPreferredSize(new Dimension(400, 300));
@@ -59,6 +60,7 @@ public class ProjectsViewState extends AbstractViewState {
 		this.add(scrollPane);
 		this.add(this.deleteButton);
 		this.add(createPanel);
+		this.add(createPanel2);
 	}
 
 	public JButton getBackButton() {
@@ -69,9 +71,18 @@ public class ProjectsViewState extends AbstractViewState {
 		return deleteButton;
 	}
 
+	public JButton getCreateButton() {
+		return this.createButton;
+	}
+
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 		this.table.setModel(new ProjectTableModel(projects));
+	}
+
+	public void setManagers(List<Developer> developers) {
+		this.managerInput.setModel(new DeveloperComboBoxModel(developers));
+		this.managerInput.setRenderer(new DeveloperListRenderer());
 	}
 	
 	public Project getSelectedProject() {
@@ -80,12 +91,19 @@ public class ProjectsViewState extends AbstractViewState {
 		return this.projects.get(this.table.getSelectedRow());
 	}
 
-	public JTextField getNameInput() {
-		return this.nameInput;
+	public String getNameInput() {
+		return this.nameInput.getText();
 	}
 
-	public void setManagers(List<Developer> developers) {
-		this.managerInput.setModel(new DeveloperComboBoxModel(developers));
-		this.managerInput.setRenderer(new DeveloperListRenderer());
+	public int getHourBudgetInput() {
+		return Integer.parseInt(this.hourBudgetInput.getText());
+	}
+
+	public int getDeadlineInput() {
+		return Integer.parseInt(this.deadlineInput.getText());
+	}
+
+	public Developer getManagerInput() {
+		return (Developer) this.managerInput.getSelectedItem();
 	}
 }
