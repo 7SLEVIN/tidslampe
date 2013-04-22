@@ -29,7 +29,7 @@ public class LoginViewState extends AbstractViewState {
 		// Add to panel
 		this.add(this.label);
 		this.add(this.input);
-		this.add(this.button);
+		this.add(this.button);;
 	}
 
 	public JButton getLoginButton() {
@@ -42,5 +42,9 @@ public class LoginViewState extends AbstractViewState {
 
 	public void setMessage(String msg) {
 		this.label.setText(msg);
+	}
+	
+	public JTextField getInputField() {
+		return this.input;
 	}
 }

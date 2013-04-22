@@ -25,6 +25,7 @@ public class MenuViewController extends AbstractViewController {
 	public void initialize() {
 		this.viewState = new MenuViewState();
 		this.viewState.getDevelopersButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewState.Developers));
+		this.viewState.getProjectsButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewState.Projects));
 	}
 
 }

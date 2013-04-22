@@ -3,6 +3,7 @@ package view;
 import java.awt.Dimension;
 import java.security.InvalidParameterException;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import persistency.Database;
@@ -14,6 +15,7 @@ import controller.view.AbstractViewController;
 import controller.view.LoginViewController;
 import controller.view.DevelopersViewController;
 import controller.view.MenuViewController;
+import controller.view.ProjectsViewController;
 
 /**
  * The main window inside which states are rendered
@@ -56,7 +58,7 @@ public class ViewContainer extends JFrame {
 		
 		switch(viewState){
 		case Login: 
-			viewController = new LoginViewController(this.database, this, this.controllers); 
+			viewController = new LoginViewController(this.database, this, this.controllers);
 			break;
 			
 		case Developers: 
@@ -65,6 +67,10 @@ public class ViewContainer extends JFrame {
 			
 		case Menu: 
 			viewController = new MenuViewController(this.database, this, this.controllers); 
+			break;
+			
+		case Projects: 
+			viewController = new ProjectsViewController(this.database, this, this.controllers);
 			break;
 			
 		default: throw new InvalidParameterException("");

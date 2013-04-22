@@ -6,5 +6,6 @@ package view.state;
 public enum ViewState {
 	Menu,
 	Login, 
-	Developers
+	Developers,
+	Projects
 }
