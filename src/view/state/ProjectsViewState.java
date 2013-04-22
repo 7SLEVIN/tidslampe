@@ -13,32 +13,34 @@ import javax.swing.JTextField;
 
 import model.Developer;
 import model.Project;
+import model.gui.DeveloperComboBoxModel;
+import model.gui.DeveloperListRenderer;
 import model.gui.ProjectTableModel;
 
 @SuppressWarnings("serial")
 public class ProjectsViewState extends AbstractViewState {
 	
 	private JButton backButton;
-//	private JButton deleteButton;
+	private JButton deleteButton;
 	private JButton createButton;
 	private JTable table;
 	private List<Project> projects;
 	private JTextField nameInput;
 	private JTextField hourBudgetInput;
 	private JTextField deadlineInput;
-	//private JComboBox<Developer> managerInput;
+	private JComboBox<Developer> managerInput;
 	
 	public ProjectsViewState() {
 		this.table = new JTable();
-//		this.deleteButton = new JButton("Delete selected");
+		this.deleteButton = new JButton("Delete selected");
 		this.backButton = new JButton("Back to menu");
 
 		// Creation GUI
 		this.createButton = new JButton("Create new");
-		this.nameInput = new JTextField(15);
-		this.hourBudgetInput = new JTextField(5);
-		this.deadlineInput = new JTextField(5);
-		//this.managerInput = new JComboBox<Developer>();
+		this.nameInput = new JTextField(10);
+		this.hourBudgetInput = new JTextField(3);
+		this.deadlineInput = new JTextField(3);
+		this.managerInput = new JComboBox();
 		
 		JPanel createPanel = new JPanel();
 		createPanel.add(new JLabel("Name"));
@@ -48,14 +50,14 @@ public class ProjectsViewState extends AbstractViewState {
 		createPanel.add(new JLabel("Deadline"));
 		createPanel.add(this.deadlineInput);
 		createPanel.add(new JLabel("Manager"));
-		//createPanel.add(this.managerInput);
+		createPanel.add(this.managerInput);
 		createPanel.add(this.createButton);
 		
 		JScrollPane scrollPane = new JScrollPane(this.table);
 		scrollPane.setPreferredSize(new Dimension(400, 300));
 		this.add(this.backButton);
 		this.add(scrollPane);
-//		this.add(this.getDeleteButton());
+		this.add(this.deleteButton);
 		this.add(createPanel);
 	}
 
@@ -63,6 +65,10 @@ public class ProjectsViewState extends AbstractViewState {
 		return backButton;
 	}
 	
+	public JButton getDeleteButton() {
+		return deleteButton;
+	}
+
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 		this.table.setModel(new ProjectTableModel(projects));
@@ -76,5 +82,10 @@ public class ProjectsViewState extends AbstractViewState {
 
 	public JTextField getNameInput() {
 		return this.nameInput;
+	}
+
+	public void setManagers(List<Developer> developers) {
+		this.managerInput.setModel(new DeveloperComboBoxModel(developers));
+		this.managerInput.setRenderer(new DeveloperListRenderer());
 	}
 }
