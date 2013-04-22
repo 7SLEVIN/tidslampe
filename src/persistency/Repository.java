@@ -32,6 +32,11 @@ public abstract class Repository<T extends DatabaseObject> {
 		return this.parse(rs);
 	}
 
+	public List<T> readAllWhereEquals(String key, int value)  {
+		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table).WhereEquals(key, value));
+		return this.parse(rs);
+	}
+
 	public List<T> readAll()  {
 		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table));
 		return this.parse(rs);

@@ -21,6 +21,11 @@ public class ActivityRepository extends Repository<Activity> {
 		
 	}
 	
+	public List<Activity> readByDeveloperId(int developerId) {
+		this.db.conn.execQuery("select * from activity where project_id in (select id from project");
+		return null;
+	}
+	
 	public Activity createProjectActivity(int projectID, String description, int expectedTime, long startTime, long endTime){
 		int id = this.create(new String[]{ActivityType.PROJECT.name(), description, 
 				String.valueOf(expectedTime), String.valueOf(startTime),

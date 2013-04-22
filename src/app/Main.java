@@ -1,10 +1,10 @@
 package app;
 
-import controller.ControllerCollection;
 import persistency.Database;
 import utils.TimeService;
 import view.ViewContainer;
-import view.state.ViewState;
+import controller.ControllerCollection;
+import factory.ViewControllerFactory;
 
 
 public class Main {
@@ -14,12 +14,13 @@ public class Main {
 		
 		// Wire up
 		TimeService timeService = new TimeService();
-		ControllerCollection controllers = new ControllerCollection(database, timeService);
-		ViewContainer viewContainer = new ViewContainer(database, controllers);
-		viewContainer.setViewState(ViewState.Login);
+		ControllerCollection controllerCollection = new ControllerCollection(database, timeService);
+		ViewContainer viewContainer = new ViewContainer();
+		ViewControllerFactory.initialize(database, viewContainer, controllerCollection);
+		
 		
 		// Bootstrap
+		viewContainer.setViewState(ViewControllerFactory.CreateLoginViewController());
 		new ProjectPlanner(database);
 	}
-	
 }
