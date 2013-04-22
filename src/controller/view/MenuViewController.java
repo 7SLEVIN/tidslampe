@@ -26,6 +26,7 @@ public class MenuViewController extends AbstractViewController {
 		this.viewState.getDevelopersButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateDevelopersViewController()));
 		int currentDeveloperId = this.controllers.getLoginController().getUser().getId();
 		this.viewState.getCalendarButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateCalendarViewController(currentDeveloperId)));
+		this.viewState.getProjectsButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectsViewController()));
 	}
 
 }

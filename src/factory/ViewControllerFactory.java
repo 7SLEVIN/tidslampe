@@ -7,6 +7,7 @@ import controller.view.CalendarViewController;
 import controller.view.DevelopersViewController;
 import controller.view.LoginViewController;
 import controller.view.MenuViewController;
+import controller.view.ProjectsViewController;
 
 public class ViewControllerFactory {
 
@@ -34,6 +35,10 @@ public class ViewControllerFactory {
 	
 	public static MenuViewController CreateMenuViewController() {
 		return new MenuViewController(database, viewContainer, controllerCollection);
+	}
+	
+	public static ProjectsViewController CreateProjectsViewController() {
+		return new ProjectsViewController(database, viewContainer, controllerCollection);
 	}
 
 }
