@@ -2,6 +2,7 @@ package controller.view;
 
 import static org.junit.Assert.*;
 
+import model.Developer;
 import model.Project;
 
 import org.junit.Test;
@@ -34,20 +35,47 @@ public class TestProjectMaintainance extends BaseTestDatabase{
 		assertEquals(this.db.project().readAll().size(), this.db.project().count());
 
 		Project testProject = this.db.project().readAll().get(0);
+		Developer developer = this.db.developer().readAll().get(0);
 		
 		int projectID = testProject.getId();
 		Project project = this.db.project().read(projectID);
 		
 		assertEquals(testProject.getName(), project.getName());
 		
-		
 		ProjectMaintainanceVC projectMaintainance = new ProjectMaintainanceVC(this.db, viewContainer, controllers, projectID);
-		fail("Not yet implemented");
+		
+		assertEquals(null, projectMaintainance.getProject().getManager());
+		
+		projectMaintainance.assignManager(developer.getId());
+		
+		assertEquals(developer.getId(), projectMaintainance.getProject().getManager().getId());
 	}
 	
 	@Test
 	public void testSplitActivities(){
-		fail("Not yet implemented");
+		this.projectPlanner = new ProjectPlanner(this.db);
+		this.init();
+		
+		assertEquals(2, this.db.project().count());
+		assertEquals(4, this.db.developer().count());
+		
+		Project testProject = this.db.project().readAll().get(0);
+		int projectID = testProject.getId();
+		ProjectMaintainanceVC projectMaintainance = new ProjectMaintainanceVC(this.db, viewContainer, controllers, projectID);
+		
+		assertEquals(0, projectMaintainance.getProject().getActivities().size());
+		
+		Long deadline = this.projectPlanner.getTimeService().convertToMillis(2013, 05, 13, 12, 0);
+		projectMaintainance.addNewActivity("test-activity #1", 100, deadline-1000*3600*24*7*4, deadline);
+		
+		assertEquals(1, projectMaintainance.getProject().getActivities().size());
+		
+		int activityID = projectMaintainance.getProject().getActivities().get(0).getId();
+		
+		fail("projectMaintainance.splitActivity() mangler");
+		
+		
+		fail("Activities skal have developer relations");
 	}
 	
 	@Test

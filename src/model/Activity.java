@@ -94,7 +94,7 @@ public class Activity extends DatabaseObject {
 		this.db.activity().update(this);
 	}
 
-	public Number getExpectedTime() {
+	public int getExpectedTime() {
 		return this.expectedTime;
 	}
 	
