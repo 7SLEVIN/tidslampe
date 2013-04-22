@@ -27,6 +27,19 @@ public class BaseTestDatabase {
 		this.db.getConn().execUpdate("create table if not exists reserve_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
 	}
 	
+	protected void addProjects(){
+		Long deadline = this.projectPlanner.getTimeService().convertToMillis(2013, 05, 13, 12, 0);
+		this.db.project().create("TestProject_01", 100, deadline);
+		this.db.project().create("TestProject_02", 100, deadline);
+	}
+	
+	protected void addDevelopers(){
+		this.db.developer().create("PM", "Paul McCartney");
+		this.db.developer().create("JL", "John Lennon");
+		this.db.developer().create("GH", "George Harrison");
+		this.db.developer().create("RS", "Ringo Starr");
+	}
+	
 	@Before
 	public void setUp() throws Exception {
 		

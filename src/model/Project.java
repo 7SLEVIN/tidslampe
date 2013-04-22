@@ -31,6 +31,16 @@ public class Project extends DatabaseObject {
 		this.manager = manager;
 		this.activities = new ArrayList<Activity>();
 	}
+	
+	public Project(Database db, int id, String name, int hourBudget, 
+			long deadline) {
+		super(id,db);
+		
+		this.name = name;
+		this.hourBudget = hourBudget;
+		this.deadline = deadline;
+		this.activities = new ArrayList<Activity>();
+	}
 
 	@Override
 	protected void save() {

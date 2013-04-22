@@ -21,9 +21,16 @@ public class ProjectRepository extends Repository<Project> {
 	public Project create(String name, int hourBudget, long deadline, Developer manager) {
 		int id = this.create(new String[] { name, String.valueOf(hourBudget),
 				String.valueOf(deadline), String.valueOf(manager.getId()) });
-		Project dev = new Project(this.db, id, name, hourBudget, deadline,
+		Project project = new Project(this.db, id, name, hourBudget, deadline,
 				manager);
-		return dev;
+		return project;
+	}
+	
+	public Project create(String name, int hourBudget, long deadline) {
+		int id = this.create(new String[] { name, String.valueOf(hourBudget),
+				String.valueOf(deadline), "-1" });
+		Project project = new Project(this.db, id, name, hourBudget, deadline);
+		return project;
 	}
 
 	@Override
