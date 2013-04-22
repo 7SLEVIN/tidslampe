@@ -26,7 +26,7 @@ public class ProjectsViewState extends AbstractViewState {
 	private JTextField nameInput;
 	private JTextField hourBudgetInput;
 	private JTextField deadlineInput;
-	private JComboBox<Developer> managerInput;
+	//private JComboBox<Developer> managerInput;
 	
 	public ProjectsViewState() {
 		this.table = new JTable();
@@ -38,7 +38,7 @@ public class ProjectsViewState extends AbstractViewState {
 		this.nameInput = new JTextField(15);
 		this.hourBudgetInput = new JTextField(5);
 		this.deadlineInput = new JTextField(5);
-		this.managerInput = new JComboBox<Developer>();
+		//this.managerInput = new JComboBox<Developer>();
 		
 		JPanel createPanel = new JPanel();
 		createPanel.add(new JLabel("Name"));
@@ -48,7 +48,7 @@ public class ProjectsViewState extends AbstractViewState {
 		createPanel.add(new JLabel("Deadline"));
 		createPanel.add(this.deadlineInput);
 		createPanel.add(new JLabel("Manager"));
-		createPanel.add(this.managerInput);
+		//createPanel.add(this.managerInput);
 		createPanel.add(this.createButton);
 		
 		JScrollPane scrollPane = new JScrollPane(this.table);
