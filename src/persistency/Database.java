@@ -22,6 +22,7 @@ public class Database {
 	public Database(String dbFile) {
 		// TODO refactor db filename out of source code
 		this.conn = new DatabaseConnection(dbFile);
+		this.setUp();
 		
 		this.project = new ProjectRepository(this);
 		this.developer = new DeveloperRepository(this);
@@ -30,6 +31,16 @@ public class Database {
 		this.assist = new AssistRepository(this);
 		this.registerTime = new RegisterTimeRepository(this);
 		this.reserveTime = new ReserveTimeRepository(this);
+	}
+	
+	private void setUp() {
+		this.conn.execUpdate("create table if not exists project (id integer primary key autoincrement, name string, hour_budget float, deadline integer, manager_id integer)");
+		this.conn.execUpdate("create table if not exists developer (id integer primary key autoincrement, initials string, name string)");
+		this.conn.execUpdate("create table if not exists activity (id integer primary key autoincrement,activity_type string, description string, expected_time integer, start_time BIGINT, end_time BIGINT, project_id integer)");
+		this.conn.execUpdate("create table if not exists activity_developer_relation (id integer primary key autoincrement, activity_id integer, developer_id integer)");
+		this.conn.execUpdate("create table if not exists assist (id integer primary key autoincrement, developer_id integer, spent_time float)");
+		this.conn.execUpdate("create table if not exists register_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
+		this.conn.execUpdate("create table if not exists reserve_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
 	}
 
 	public DatabaseConnection getConn() {
