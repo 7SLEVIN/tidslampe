@@ -31,9 +31,9 @@ public class TestProjectMaintainance extends BaseTestDatabase{
 		this.projectPlanner = new ProjectPlanner(this.db);
 		this.init();
 		
-		Project testProject = this.db.project().readAll().get(0);
-		
 		assertEquals(this.db.project().readAll().size(), this.db.project().count());
+
+		Project testProject = this.db.project().readAll().get(0);
 		
 		int projectID = testProject.getId();
 		Project project = this.db.project().read(projectID);

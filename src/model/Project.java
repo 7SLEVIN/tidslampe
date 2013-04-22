@@ -58,7 +58,7 @@ public class Project extends DatabaseObject {
 	public String[] getValueArray() {
 		return new String[]{this.name, String.valueOf(hourBudget), 
 				String.valueOf(deadline), 
-				String.valueOf(this.manager.getId())};
+				this.manager != null ? String.valueOf(this.manager.getId()) : "-1"};
 	}
 
 	public String getName() {
