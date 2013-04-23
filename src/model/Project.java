@@ -29,7 +29,6 @@ public class Project extends DatabaseObject {
 		this.hourBudget = hourBudget;
 		this.deadline = deadline;
 		this.manager = manager;
-		this.activities = new ArrayList<Activity>();
 	}
 	
 	public Project(Database db, int id, String name, int hourBudget, 
@@ -39,7 +38,6 @@ public class Project extends DatabaseObject {
 		this.name = name;
 		this.hourBudget = hourBudget;
 		this.deadline = deadline;
-		this.activities = new ArrayList<Activity>();
 	}
 
 	@Override
@@ -98,7 +96,8 @@ public class Project extends DatabaseObject {
 	}
 
 	public List<Activity> getActivities() {
-		return activities;
+		this.activities = this.db.activity().readAllWhereEquals("project_id", this.getId());
+		return this.activities;
 	}
 
 }

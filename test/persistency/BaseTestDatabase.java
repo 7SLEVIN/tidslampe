@@ -38,7 +38,6 @@ public class BaseTestDatabase {
 	
 	@Before
 	public void setUp() throws Exception {
-		
 		this.db.getConn().execUpdate("delete from project");
 		this.db.getConn().execUpdate("delete from developer");
 		this.db.getConn().execUpdate("delete from activity");
@@ -46,7 +45,6 @@ public class BaseTestDatabase {
 		this.db.getConn().execUpdate("delete from assist");
 		this.db.getConn().execUpdate("delete from register_time");
 		this.db.getConn().execUpdate("delete from reserve_time");
- 
 	}
 
 	@After
