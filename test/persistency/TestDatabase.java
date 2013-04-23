@@ -207,6 +207,7 @@ public class TestDatabase extends BaseTestDatabase {
 		Developer dev = this.db.developer().create("MD", "Moby Dick");
 		Activity newActivity = this.db.activity().createProjectActivity(1,"Leave Moby Dick alone", 666, newDate, newDate);
 		Developer newDev = this.db.developer().create("RS", "Richard Stallman");
+		ActivityDeveloperRelation existing = this.db.activityDeveloperRelation().create(activity, dev);
 		ActivityDeveloperRelation rel = this.db.activityDeveloperRelation().create(activity, dev);
 		
 		rel.setActivity(newActivity);
@@ -214,6 +215,11 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.activityDeveloperRelation().update(rel);
 		ActivityDeveloperRelation actual = this.db.activityDeveloperRelation().read(rel.getId());
+		
+		assertEquals("ActivityDeveloperRelation existing activity", "Catch Moby Dick", 
+				existing.getActivity().getDescription());
+		assertEquals("ActivityDeveloperRelation existing developer", "Moby Dick", 
+				existing.getDeveloper().getName());
 		
 		assertEquals("ActivityDeveloperRelation activity", "Leave Moby Dick alone", 
 				actual.getActivity().getDescription());
@@ -225,6 +231,7 @@ public class TestDatabase extends BaseTestDatabase {
 	public void testUpdateAssist() {
 		Developer dev = this.db.developer().create("MD", "Moby Dick");
 		Developer newDev = this.db.developer().create("RS", "Richard Stallman");
+		Assist existing = this.db.assist().create(dev, 2.0);
 		Assist assist = this.db.assist().create(dev, 1.5);
 		
 		assist.setDeveloper(newDev);
@@ -232,6 +239,9 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.assist().update(assist);
 		Assist actual = this.db.assist().read(assist.getId());
+		
+		assertEquals("Assist existing developer", "Moby Dick", existing.getDeveloper().getName());
+		assertEquals("Assist existing spent time", 2.0, existing.getSpentTime());
 		
 		assertEquals("Assist developer", "Richard Stallman", actual.getDeveloper().getName());
 		assertEquals("Assist spent time", 666.0, actual.getSpentTime());
