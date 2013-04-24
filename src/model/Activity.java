@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import persistency.Database;
@@ -107,6 +109,10 @@ public class Activity extends DatabaseObject {
 		return this.startTime;
 	}
 	
+	public Date getStartDate() {
+		return new Date(this.startTime);
+	}
+	
 	public void setStartTime(long newDate) {
 		this.startTime = newDate;
 		this.db.activity().update(this);
@@ -116,9 +122,17 @@ public class Activity extends DatabaseObject {
 		return this.endTime;
 	}
 	
+	public Date getEndDate() {
+		return new Date(this.endTime);
+	}
+	
 	public void setEndTime(long newDate) {
 		this.endTime = newDate;
 		this.db.activity().update(this);
+	}
+	
+	public Project getProject() {
+		return this.db.project().read(this.projectID);
 	}
 
 }

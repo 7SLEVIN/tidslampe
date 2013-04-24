@@ -14,7 +14,7 @@ abstract public class AbstractViewState extends JPanel {
 	
 	
 	public AbstractViewState() {
-	    this.setPreferredSize(new Dimension(500, 500));
+	    this.setPreferredSize(new Dimension(500, 580));
 	}
 
 	/**

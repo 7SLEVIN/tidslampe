@@ -2,7 +2,9 @@ package view.state;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -28,12 +30,23 @@ import javax.swing.SwingConstants;
 
 import utils.Dialog;
 
+import model.Activity;
+import model.Developer;
+import model.Project;
 import model.TimeEntry;
+import model.gui.ActivityListRenderer;
+import model.gui.GenericComboBoxModel;
+import model.gui.DeveloperListRenderer;
+import model.gui.ProjectListRenderer;
 
 import java.awt.Rectangle;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
 public class CalendarViewState extends AbstractViewState {
@@ -63,10 +76,21 @@ public class CalendarViewState extends AbstractViewState {
 	private JLabel lblFri;
 	private JLabel lblSat;
 	private JLabel lblSun;
+	private JPanel panel;
+	private JButton btnAdd;
+	private JTextField endTimeInput;
+	private JLabel lblNewLabel;
+	private JLabel label;
+	private JTextField startTimeInput;
+	private JPanel panel_3;
+	private JComboBox<Project> cmbProject;
+	private JComboBox<Activity> cmbActivity;
+	private JLabel lblProject;
+	private JLabel lblActivity;
 
 	public CalendarViewState() {
-		setMinimumSize(new Dimension(500, 500));
-		setMaximumSize(new Dimension(500, 500));
+		setMinimumSize(new Dimension(500, 580));
+		setMaximumSize(new Dimension(500, 580));
 
 		JPanel weekPanel = new JPanel();
 		weekPanel.setPreferredSize(new Dimension(500, 300));
@@ -188,9 +212,9 @@ public class CalendarViewState extends AbstractViewState {
 		add(weekPanel);
 		
 		legend = new JPanel();
-		legend.setPreferredSize(new Dimension(500, 70));
-		legend.setMinimumSize(new Dimension(500, 70));
-		legend.setMaximumSize(new Dimension(500, 70));
+		legend.setPreferredSize(new Dimension(500, 20));
+		legend.setMinimumSize(new Dimension(500, 20));
+		legend.setMaximumSize(new Dimension(500, 20));
 		add(legend);
 		GridBagLayout gbl_legend = new GridBagLayout();
 		gbl_legend.columnWidths = new int[] {71, 71, 71, 71, 71, 71, 71};
@@ -327,35 +351,87 @@ public class CalendarViewState extends AbstractViewState {
 		JButton btnNextWeek = new JButton("Next week");
 		controls.add(btnNextWeek);
 		
-
-		this.addTimeEntry(0, 2, Color.BLUE);
-		this.addTimeEntry(4, 6, Color.GREEN);
-		this.addTimeEntry(7, 16, Color.RED);
-		this.addTimeEntry(24, 30, Color.CYAN);
-	}
-	
-	private void addTimeEntry(int fromSlot, int toSlot, Color clr) {
+		panel = new JPanel();
+		add(panel);
 		
-		final TimeEntry te = new TimeEntry(null, fromSlot, fromSlot, toSlot, 2, 1);
+		label = new JLabel("Start time");
+		label.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+		panel.add(label);
 		
-		int slotHeight = 300 / 48;
-
-		JPanel timeEntry = new JPanel();
-		timeEntry.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Dialog.message("" + te.getId());
+		startTimeInput = new JTextField();
+		startTimeInput.setColumns(10);
+		panel.add(startTimeInput);
+		
+		lblNewLabel = new JLabel("End time");
+		lblNewLabel.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+		panel.add(lblNewLabel);
+		
+		endTimeInput = new JTextField();
+		panel.add(endTimeInput);
+		endTimeInput.setColumns(10);
+		
+		btnAdd = new JButton("Add");
+		panel.add(btnAdd);
+		
+		panel_3 = new JPanel();
+		add(panel_3);
+		
+		cmbProject = new JComboBox<Project>();
+		cmbProject.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				
 			}
 		});
+		
+		lblProject = new JLabel("Project");
+		lblProject.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+		panel_3.add(lblProject);
+		panel_3.add(cmbProject);
+		
+		lblActivity = new JLabel("Activity");
+		lblActivity.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+		panel_3.add(lblActivity);
+		
+		cmbActivity = new JComboBox<Activity>();
+		panel_3.add(cmbActivity);
+	}
 
-		timeEntry.setBackground(Color.ORANGE);
-		timeEntry.setBounds(0, slotHeight * fromSlot, 70, slotHeight * (toSlot - fromSlot));
-		timeEntry.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+	public void setProjects(List<Project> projects) {
+		this.cmbProject.setModel(new GenericComboBoxModel<Project>(projects));
+		this.cmbProject.setRenderer(new ProjectListRenderer());
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.cmbActivity.setModel(new GenericComboBoxModel<Activity>(activities));
+		this.cmbActivity.setRenderer(new ActivityListRenderer());
+	}
+	
+	private void addTimeEntry(final TimeEntry timeEntry) {
+
+		int fromMinute = timeEntry.getStartDate().get(Calendar.HOUR_OF_DAY) * 60 + timeEntry.getStartDate().get(Calendar.MINUTE);
+
+		float minuteHeight =  300f / (24f * 60f);
+
+		JPanel timeEntryPanel = new JPanel();
+		timeEntryPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Dialog.message("" + timeEntry.getId());
+			}
+		});
 		
-		JLabel projectLabel = new JLabel("#265");
-		timeEntry.add(projectLabel);
+		Color c = Color.getHSBColor(new Random().nextFloat(), new Random().nextFloat(), new Random().nextFloat());
+		timeEntryPanel.setBackground(c);
+		int durationInMinutes = timeEntry.getDurationInMinutes();
 		
-		wednesday.add(timeEntry);
+		System.out.println("from: " + (int)(minuteHeight * fromMinute) + " - to: " + (int)(minuteHeight * (fromMinute + durationInMinutes)));
+		timeEntryPanel.setBounds(0, (int)(minuteHeight * fromMinute), 70, (int)(minuteHeight * (fromMinute + durationInMinutes)));
+		timeEntryPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		
+		JLabel projectLabel = new JLabel("" + timeEntry.getActivity().getProject().getId());
+		timeEntryPanel.add(projectLabel);
+		
+		wednesday.add(timeEntryPanel);
 	}
 
 	public JButton getBackButton() {
@@ -364,5 +440,11 @@ public class CalendarViewState extends AbstractViewState {
 
 	public void setDeveloperName(String name) {
 		this.developerNameLabel.setText(name);
+	}
+
+	public void setTimeEntries(List<TimeEntry> entries) {
+		for (TimeEntry timeEntry : entries) {
+			this.addTimeEntry(timeEntry);	
+		}
 	}
 }

@@ -18,7 +18,7 @@ public class ViewContainer extends JFrame {
 		super("Tidslampe");
 		
 		this.setResizable(false);
-		this.setSize(new Dimension(500, 500));
+		this.setSize(new Dimension(500, 580));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setIconImage(SpriteHandler.getInstance().get("alien.png").getImage());
 		this.setVisible(true);

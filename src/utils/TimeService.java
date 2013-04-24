@@ -19,7 +19,7 @@ public class TimeService {
 
 	public Calendar getCurrentDateTime() {
 		this.update();
-		return this.date;
+		return (Calendar) this.date.clone();
 	}
 	
 	public long convertToMillis(int year, int month, int day, int hour, int minute){		
@@ -41,6 +41,12 @@ public class TimeService {
 				cal.get(Calendar.DAY_OF_MONTH) , cal.get(Calendar.HOUR_OF_DAY) , cal.get(Calendar.MINUTE)};
 		
 		return values;
+	}
+	
+	public Calendar convertToCalendar(long timestamp){
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(timestamp);
+		return cal;
 	}
 	
 	public boolean isDateValid(int year, int month, int day, int hour, int minute)

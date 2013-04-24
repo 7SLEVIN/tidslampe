@@ -5,14 +5,15 @@ import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataListener;
 
+import model.DatabaseObject;
 import model.Developer;
 
-public class DeveloperComboBoxModel implements ComboBoxModel<Developer> {
+public class GenericComboBoxModel<T extends DatabaseObject> implements ComboBoxModel<T> {
 	
-	private List<Developer> developers;
-	private Developer selected;
+	private List<T> developers;
+	private T selected;
 
-	public DeveloperComboBoxModel(List<Developer> developers) {
+	public GenericComboBoxModel(List<T> developers) {
 		this.developers = developers;
 	}
 	
@@ -22,13 +23,13 @@ public class DeveloperComboBoxModel implements ComboBoxModel<Developer> {
 	}
 
 	@Override
-	public Developer getElementAt(int index) {
+	public T getElementAt(int index) {
 		return this.developers.get(index);
 	}
 
 	@Override
 	public void setSelectedItem(Object selected) {
-		this.selected = (Developer) selected;
+		this.selected = (T) selected;
 	}
 
 	@Override

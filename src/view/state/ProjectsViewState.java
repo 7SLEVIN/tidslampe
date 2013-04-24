@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 import model.Developer;
 import model.Project;
-import model.gui.DeveloperComboBoxModel;
+import model.gui.GenericComboBoxModel;
 import model.gui.DeveloperListRenderer;
 import model.gui.ProjectTableModel;
 
@@ -81,7 +81,7 @@ public class ProjectsViewState extends AbstractViewState {
 	}
 
 	public void setManagers(List<Developer> developers) {
-		this.managerInput.setModel(new DeveloperComboBoxModel(developers));
+		this.managerInput.setModel(new GenericComboBoxModel<Developer>(developers));
 		this.managerInput.setRenderer(new DeveloperListRenderer());
 	}
 	

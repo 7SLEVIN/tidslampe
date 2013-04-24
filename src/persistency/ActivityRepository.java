@@ -22,8 +22,9 @@ public class ActivityRepository extends Repository<Activity> {
 	}
 	
 	public List<Activity> readByDeveloperId(int developerId) {
-		this.db.conn.execQuery("select * from activity where project_id in (select id from project");
-		return null;
+		String query = String.format("SELECT * FROM activity WHERE id IN (%s) ORDER BY start_time", 
+				Query.Select("id").From("activity_developer_relation").WhereEquals("developer_id", developerId).End());
+		return this.parse(this.db.conn.execQuery(query));
 	}
 	
 	public Activity createProjectActivity(int projectID, String description, int expectedTime, long startTime, long endTime){

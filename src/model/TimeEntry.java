@@ -1,8 +1,10 @@
 package model;
 
+import java.util.Calendar;
+
 import persistency.Database;
 /**
- * TimeEntries bruges både til RegisteredEntries og ReservedEntries 
+ * TimeEntries bruges bï¿½de til RegisteredEntries og ReservedEntries 
  *
  */
 public class TimeEntry extends DatabaseObject{
@@ -44,9 +46,21 @@ public class TimeEntry extends DatabaseObject{
 	public long getStartTime() {
 		return startTime;
 	}
+	
+	public Calendar getStartDate() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(this.startTime);
+		return cal;
+	}
 
 	public long getEndTime() {
 		return endTime;
+	}
+	
+	public Calendar getEndDate() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(this.endTime);
+		return cal;
 	}
 
 	public int getDeveloperActivityRelationID() {
@@ -54,7 +68,10 @@ public class TimeEntry extends DatabaseObject{
 	}
 
 	public int getDeveloperID() {
-		return developerID;
+		return this.db.activityDeveloperRelation().read(this.developerActivityRelationID).getDeveloper().getId();
 	}
-	
+
+	public Activity getActivity() {
+		return this.db.activityDeveloperRelation().read(this.developerActivityRelationID).getActivity();
+	}
 }
