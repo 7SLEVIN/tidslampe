@@ -117,6 +117,9 @@ public class TestDatabase extends BaseTestDatabase {
 	
 	@Test
 	public void testUpdateProject() {
+		Developer existingDev = this.db.developer().create("WE", "What Ever");
+		Project existing = this.db.project().create("What Ever", 1, 1, existingDev);
+		
 		Developer man = this.db.developer().create("MD", "Moby Dick");
 		Developer newMan = this.db.developer().create("RS", "Richard Stallman");
 		Project proj = this.db.project().create("Tidslampe", 666, 1337, man);
@@ -126,7 +129,13 @@ public class TestDatabase extends BaseTestDatabase {
 		proj.setDeadline(321);
 		proj.setManager(newMan);
 		
+		this.db.project().update(proj);
 		Project actual = this.db.project().read(proj.getId());
+		
+		assertEquals("Project existing name", "What Ever", existing.getName());
+		assertEquals("Project existing hour budget", 1, existing.getHourBudget());
+		assertEquals("Project existing deadline", 1, existing.getDeadline());
+		assertEquals("Project existing manager", "What Ever", existing.getManager().getName());
 		
 		assertEquals("Project name", "Lampekost", actual.getName());
 		assertEquals("Project hour budget", 123, actual.getHourBudget());
@@ -136,6 +145,7 @@ public class TestDatabase extends BaseTestDatabase {
 
 	@Test
 	public void testUpdateDeveloper() {
+		Developer existing = this.db.developer().create("LO", "Lol");
 		Developer dev = this.db.developer().create("MD", "Moby Dick");
 		
 		dev.setInitials("RS");
@@ -143,6 +153,9 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.developer().update(dev);
 		Developer actual = this.db.developer().read(dev.getId());
+
+		assertEquals("Developer existing initials", "LO", existing.getInitials());
+		assertEquals("Developer existing name", "Lol", existing.getName());
 
 		assertEquals("Developer initials", "RS", actual.getInitials());
 		assertEquals("Developer name", "Richard Stallman", actual.getName());
@@ -159,6 +172,7 @@ public class TestDatabase extends BaseTestDatabase {
 		long newDate = timeService.convertToMillis(year, month, day, 10, 0);
 		long newDate2 = timeService.convertToMillis(year, month, day, 12, 0);
 		
+		Activity existing = this.db.activity().createProjectActivity(1, "Loadfactor", 3, date, date2);
 		Activity activity = this.db.activity().createProjectActivity(1,"Catch Moby Dick", 2, date, date2);
 
 		activity.setDescription("Leave Moby Dick alone");
@@ -168,6 +182,11 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.activity().update(activity);
 		Activity actual = (Activity) this.db.activity().read(activity.getId());
+		
+		assertEquals("Activity existing description", "Loadfactor", existing.getDescription());
+		assertEquals("Activity existing expected time", 3, existing.getExpectedTime());
+		assertEquals("Activity existing start time", date, existing.getStartTime());
+		assertEquals("Activity existing end time", date2, existing.getEndTime());
 		
 		assertEquals("Activity description", "Leave Moby Dick alone", actual.getDescription());
 		assertEquals("Activity expected time", 666, actual.getExpectedTime());
@@ -188,6 +207,7 @@ public class TestDatabase extends BaseTestDatabase {
 		Developer dev = this.db.developer().create("MD", "Moby Dick");
 		Activity newActivity = this.db.activity().createProjectActivity(1,"Leave Moby Dick alone", 666, newDate, newDate);
 		Developer newDev = this.db.developer().create("RS", "Richard Stallman");
+		ActivityDeveloperRelation existing = this.db.activityDeveloperRelation().create(activity, dev);
 		ActivityDeveloperRelation rel = this.db.activityDeveloperRelation().create(activity, dev);
 		
 		rel.setActivity(newActivity);
@@ -195,6 +215,11 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.activityDeveloperRelation().update(rel);
 		ActivityDeveloperRelation actual = this.db.activityDeveloperRelation().read(rel.getId());
+		
+		assertEquals("ActivityDeveloperRelation existing activity", "Catch Moby Dick", 
+				existing.getActivity().getDescription());
+		assertEquals("ActivityDeveloperRelation existing developer", "Moby Dick", 
+				existing.getDeveloper().getName());
 		
 		assertEquals("ActivityDeveloperRelation activity", "Leave Moby Dick alone", 
 				actual.getActivity().getDescription());
@@ -206,6 +231,7 @@ public class TestDatabase extends BaseTestDatabase {
 	public void testUpdateAssist() {
 		Developer dev = this.db.developer().create("MD", "Moby Dick");
 		Developer newDev = this.db.developer().create("RS", "Richard Stallman");
+		Assist existing = this.db.assist().create(dev, 2.0);
 		Assist assist = this.db.assist().create(dev, 1.5);
 		
 		assist.setDeveloper(newDev);
@@ -213,6 +239,9 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		this.db.assist().update(assist);
 		Assist actual = this.db.assist().read(assist.getId());
+		
+		assertEquals("Assist existing developer", "Moby Dick", existing.getDeveloper().getName());
+		assertEquals("Assist existing spent time", 2.0, existing.getSpentTime());
 		
 		assertEquals("Assist developer", "Richard Stallman", actual.getDeveloper().getName());
 		assertEquals("Assist spent time", 666.0, actual.getSpentTime());
