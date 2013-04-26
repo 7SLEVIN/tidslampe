@@ -106,7 +106,10 @@ public class CalendarViewController extends AbstractViewController {
             startDate.setTime(df.parse(startString));
             endDate.setTime(df.parse(endString));
             
-    		database.registerTime().create(startDate.getTimeInMillis(), endDate.getTimeInMillis(), this.developer.getId(), this.viewState.getSelectedActivity().getId());
+    		database.registerTime().create(startDate.getTimeInMillis(), 
+    				endDate.getTimeInMillis(), 
+    				this.developer.getId(), 
+    				this.viewState.getSelectedActivity().getId());
         } 
         catch (ParseException e) {
         	Dialog.message("Could not register time entry");
@@ -133,7 +136,7 @@ public class CalendarViewController extends AbstractViewController {
 			for (TimeEntry entry : timeEntries) {
 				String startDateFormat = df.format(entry.getStartDate().getTime());
 				String currentDateFormat = df.format(iterDate.getTime());
-				if (j == 0) System.out.println(startDateFormat + " --- " + currentDateFormat);
+
 				if (startDateFormat.equals(currentDateFormat)) {
 					this.viewState.addTimeEntry(entry, j);
 				}

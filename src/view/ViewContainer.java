@@ -12,13 +12,15 @@ import controller.view.AbstractViewController;
 
 @SuppressWarnings("serial")
 public class ViewContainer extends JFrame {
+	public final static int WINDOW_WIDTH = 600;
+	public final static int WINDOW_HEIGHT = 580;
 	private AbstractViewController currentViewController;
 	
 	public ViewContainer() {
 		super("Tidslampe");
 		
 		this.setResizable(false);
-		this.setSize(new Dimension(500, 580));
+		this.setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setIconImage(SpriteHandler.getInstance().get("alien.png").getImage());
 		this.setVisible(true);
