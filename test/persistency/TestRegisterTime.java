@@ -47,7 +47,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		//Initialization done, moving on to registration
 		
 //Register legal entry		
-		TimeEntry firstEntry = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry firstEntry = this.db.registerTime().create(startTime, endTime, relation);
 		
 		assertEquals(false, firstEntry == null);
 
@@ -58,7 +58,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		hour = 11;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 		
-		TimeEntry beginningOverlap = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry beginningOverlap = this.db.registerTime().create(startTime, endTime, relation);
 
 		assertEquals(true, beginningOverlap == null);
 		
@@ -69,7 +69,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		hour = 17;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 		
-		TimeEntry endOverlap = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry endOverlap = this.db.registerTime().create(startTime, endTime, relation);
 
 		assertEquals(true, endOverlap == null);
 		
@@ -79,7 +79,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		hour = 17;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 		
-		TimeEntry totalOverlap = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry totalOverlap = this.db.registerTime().create(startTime, endTime, relation);
 
 		assertEquals(true, totalOverlap == null);
 		
@@ -90,7 +90,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		hour = 10;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 	
-		TimeEntry secondEntry = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry secondEntry = this.db.registerTime().create(startTime, endTime, relation);
 
 		assertEquals(false, secondEntry == null);
 		
@@ -101,7 +101,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		hour = 24;
 		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
 	
-		TimeEntry illegalEntry = this.db.registerTime().create(startTime, endTime, relation.getId(), relation.getDeveloper().getId());
+		TimeEntry illegalEntry = this.db.registerTime().create(startTime, endTime, relation);
 
 		assertEquals(true, illegalEntry == null);
 		

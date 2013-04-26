@@ -3,6 +3,7 @@ package persistency;
 import java.util.List;
 
 import utils.Query;
+import model.ActivityDeveloperRelation;
 import model.TimeEntry;
 
 public class ReserveTimeRepository extends TimeRepository {
@@ -13,20 +14,26 @@ public class ReserveTimeRepository extends TimeRepository {
 		super(db);
 		this.table = "reserve_time";
 	}
-
 	@Override
-	public TimeEntry create(long startTime, long endTime, int devActRelID,int devID) {
+	public TimeEntry create(long startTime, long endTime, int devID, int actID) {
+		ActivityDeveloperRelation actDevRel = this.db.activityDeveloperRelation().readOrCreate(devID, actID);
+		return this.create(startTime, endTime, actDevRel);
+	}
+	
+	public TimeEntry create(long startTime, long endTime, ActivityDeveloperRelation rel) {
+		int activityID = rel.getActivity().getId();
+		int devID = rel.getDeveloper().getId();
+		
 		if(this.isTimeUsed(startTime, endTime, devID))
 			return null;
 		
-		int activityID = this.db.activityDeveloperRelation().read(devActRelID).getId();
 		if(this.db.activity().isFixed(activityID)){
 //Hvis aktiviteten er fixed, s� skal den bare registreres med det samme
-			return this.db.registerTime().create(startTime, endTime, devActRelID, devID);
+			return this.db.registerTime().create(startTime, endTime, rel);
 		}else{
-			int id = this.create(new String[]{String.valueOf(startTime), String.valueOf(endTime),String.valueOf(devActRelID),String.valueOf(devID)});
+			int id = this.create(new String[]{String.valueOf(startTime), String.valueOf(endTime),String.valueOf(rel.getId()),String.valueOf(devID)});
 			
-			TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, devActRelID, devID); 
+			TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel.getId()); 
 			return entry;
 		}
 	}

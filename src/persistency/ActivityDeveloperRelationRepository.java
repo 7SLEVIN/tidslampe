@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Query;
+
 import model.Activity;
 import model.ActivityDeveloperRelation;
 import model.Developer;
@@ -25,6 +27,10 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 		return rel;
 	}
 
+	public ActivityDeveloperRelation create(int developerId, int activityId) {
+		return this.create(this.db.activity().read(activityId), this.db.developer().read(developerId));
+	}
+
 	@Override
 	protected List<ActivityDeveloperRelation> parse(ResultSet rs) {
 		List<ActivityDeveloperRelation> rel = new ArrayList<ActivityDeveloperRelation>();
@@ -39,6 +45,23 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return rel;
+	}
+	
+	public ActivityDeveloperRelation readByDeveloperAndActivityId(int devID, int actID) {
+		Query query = Query.SelectAllFrom(this.table).WhereEquals("developer_id", devID).WhereEquals("activity_id", actID);
+		List<ActivityDeveloperRelation> matches = this.parse(this.db.getConn().execQuery(query));
+		if (matches.isEmpty())
+			return null;
+		else 
+			return matches.get(0);
+	}
+
+	public ActivityDeveloperRelation readOrCreate(int devID, int actID) {
+		ActivityDeveloperRelation rel = this.readByDeveloperAndActivityId(devID, actID);
+		if (rel == null)
+			return this.create(devID, actID);
+		
 		return rel;
 	}
 

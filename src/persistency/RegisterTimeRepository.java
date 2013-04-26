@@ -4,6 +4,7 @@ import java.util.List;
 
 import utils.Query;
 import model.Activity;
+import model.ActivityDeveloperRelation;
 import model.TimeEntry;
 
 public class RegisterTimeRepository extends TimeRepository {
@@ -13,26 +14,30 @@ public class RegisterTimeRepository extends TimeRepository {
 		this.table = "register_time";
 	}
 	
-	
 	/**
 	 * 
 	 * @param startTime
 	 * @param endTime
-	 * @param devActRelID
 	 * @param devID
+	 * @param actID
 	 * @return returns null if time is already in use!
 	 */
 	@Override
-	public TimeEntry create(long startTime, long endTime, int devActRelID, int devID) {
-		if(this.isTimeUsed(startTime, endTime, devID))
+	public TimeEntry create(long startTime, long endTime, int devID, int actID) {
+		ActivityDeveloperRelation actDevRel = this.db.activityDeveloperRelation().readOrCreate(devID, actID);
+		return this.create(startTime, endTime, actDevRel);
+	}
+	
+	public TimeEntry create(long startTime, long endTime, ActivityDeveloperRelation rel) {
+		if(this.isTimeUsed(startTime, endTime, rel.getDeveloper().getId()))
 			return null;
 		
 		if(startTime == -1L || endTime == -1L)
 			return null;
 		
-		int id = this.create(new String[]{String.valueOf(startTime), String.valueOf(endTime),String.valueOf(devActRelID),String.valueOf(devID)});
+		int id = this.create(new String[]{String.valueOf(startTime), String.valueOf(endTime),String.valueOf(rel.getId()),String.valueOf(rel.getDeveloper().getId())});
 		
-		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, devActRelID, devID); 
+		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel.getId()); 
 		return entry;
 	}
 	

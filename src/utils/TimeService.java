@@ -22,6 +22,17 @@ public class TimeService {
 		return (Calendar) this.date.clone();
 	}
 	
+	public String convertCalendarToInputString(Calendar cal) {
+		return String.format("%s-%s-%s", 	StringUtils.trailingZero(cal.get(Calendar.DAY_OF_MONTH)), 
+											StringUtils.trailingZero(cal.get(Calendar.MONTH)+1), cal.get(Calendar.YEAR));
+	}
+
+	public Calendar convertToCalendar(int year, int month, int day, int hour, int minute){	
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(this.convertToMillis(year, month, day, hour, minute));
+		return cal;
+	}
+	
 	public long convertToMillis(int year, int month, int day, int hour, int minute){		
 		if(!this.isDateValid(year, month, day, hour, minute)){
 			return -1L;
@@ -51,23 +62,23 @@ public class TimeService {
 	
 	public boolean isDateValid(int year, int month, int day, int hour, int minute)
 	{
-		if(hour == 0)
-			hour = 24;
-		else if(hour >= 24){
-			System.out.println("INVALID DATE! hilsen TimeService");
-			return false;
-		}
+//		if(hour == 0)
+//			hour = 24;
+//		else if(hour >= 24){
+//			//System.out.println("INVALID DATE! hilsen TimeService");
+//			return false;
+//		}
 			
 		
 		String date = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day)+"-"+String.valueOf(hour)+"-"+String.valueOf(minute);
-		String DATE_FORMAT = "yyyy-MM-dd-kk-mm";
+		String DATE_FORMAT = "yyyy-MM-dd-HH-mm";
 	        try {
 	            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
 	            df.setLenient(false);
 	            Date d = df.parse(date);
 	            return true;
 	        } catch (ParseException e) {
-	        	System.out.println("INVALID DATE! hilsen TimeService");
+	        	//System.out.println("INVALID DATE! hilsen TimeService");
 	            return false;
 	        }
 	}

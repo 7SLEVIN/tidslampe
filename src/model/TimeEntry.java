@@ -11,15 +11,13 @@ public class TimeEntry extends DatabaseObject{
 	long startTime; //TODO brugeren skal v�lge tid fra liste. 
 	long endTime; //TODO endTime = startTime + 0.5h * n?
 	int developerActivityRelationID;
-	int developerID; //TODO for effektiv database-s�gning for kollision med tidligere time-registrering?
 	
-	public TimeEntry(Database db, int id, long startTime, long endTime, int devActRelID, int devID) {
+	public TimeEntry(Database db, int id, long startTime, long endTime, int devActRelID) {
 		super(id,db);
 		
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.developerActivityRelationID = devActRelID;
-		this.developerID = devID;
 	}
 	
 	@Override
@@ -67,8 +65,8 @@ public class TimeEntry extends DatabaseObject{
 		return developerActivityRelationID;
 	}
 
-	public int getDeveloperID() {
-		return this.db.activityDeveloperRelation().read(this.developerActivityRelationID).getDeveloper().getId();
+	public Developer getDeveloper() {
+		return this.db.activityDeveloperRelation().read(this.developerActivityRelationID).getDeveloper();
 	}
 
 	public Activity getActivity() {

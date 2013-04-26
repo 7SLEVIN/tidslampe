@@ -36,8 +36,8 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 			while (rs.next()) {
 				timeEntries.add(new TimeEntry(
 						this.db, rs.getInt("id"), 
-						rs.getInt(this.columns[0]), rs.getInt(this.columns[1]), 
-						rs.getInt(this.columns[2]), rs.getInt(this.columns[3])));
+						rs.getLong(this.columns[0]), rs.getLong(this.columns[1]), 
+						rs.getInt(this.columns[2])));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
