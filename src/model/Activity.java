@@ -131,6 +131,14 @@ public class Activity extends DatabaseObject {
 		this.db.activity().update(this);
 	}
 	
+	public ActivityType getType() {
+		return this.type;
+	}
+	
+	public boolean isFixed() {
+		return this.projectID == -1;
+	}
+	
 	public Project getProject() {
 		return this.db.project().read(this.projectID);
 	}

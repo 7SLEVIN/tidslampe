@@ -38,8 +38,6 @@ public class ReserveTimeRepository extends TimeRepository {
 		}
 	}
 	
-	
-
 	private List<TimeEntry> getCollidingEntries(long startTime, long endTime, int devID){ //Differs from RegisterTime's getColliding, as this returns both REGISTERED and RESERVED entries
 		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.SelectAllFrom(this.table)
 				.WhereLessThan("start_time", endTime)

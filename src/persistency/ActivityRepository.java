@@ -37,7 +37,7 @@ public class ActivityRepository extends Repository<Activity> {
 	}
 
 	public Activity createFixedActivity(ActivityType type, String description, long startTime, long endTime){
-		int id = this.create(new String[]{ActivityType.PROJECT.name(), description, 
+		int id = this.create(new String[]{type.name(), description, 
 				"-1", String.valueOf(startTime),
 				String.valueOf(endTime), "-1"});
 		
@@ -74,7 +74,7 @@ public class ActivityRepository extends Repository<Activity> {
 		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table).WhereEquals("id", id));
 		try {
 			while (rs.next()) {
-				isFixed = rs.getString("activity_type") != ActivityType.PROJECT.name(); //If not project-activity, then fixed-activity
+				isFixed = !rs.getString("activity_type").equals(ActivityType.PROJECT.name()); //If not project-activity, then fixed-activity
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

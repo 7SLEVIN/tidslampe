@@ -13,7 +13,7 @@ import controller.view.AbstractViewController;
 @SuppressWarnings("serial")
 public class ViewContainer extends JFrame {
 	public final static int WINDOW_WIDTH = 600;
-	public final static int WINDOW_HEIGHT = 580;
+	public final static int WINDOW_HEIGHT = 600;
 	private AbstractViewController currentViewController;
 	
 	public ViewContainer() {
