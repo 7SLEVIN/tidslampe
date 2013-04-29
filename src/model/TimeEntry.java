@@ -8,9 +8,10 @@ import persistency.Database;
  *
  */
 public class TimeEntry extends DatabaseObject{
-	long startTime; //TODO brugeren skal v�lge tid fra liste. 
-	long endTime; //TODO endTime = startTime + 0.5h * n?
-	int developerActivityRelationID;
+	private long startTime; //TODO brugeren skal v�lge tid fra liste. 
+	private long endTime; //TODO endTime = startTime + 0.5h * n?
+	private int developerActivityRelationID;
+	private ActivityDeveloperRelation activityDeveloperRelation;
 	
 	public TimeEntry(Database db, int id, long startTime, long endTime, int devActRelID) {
 		super(id,db);
@@ -28,7 +29,6 @@ public class TimeEntry extends DatabaseObject{
 	@Override
 	protected void delete() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -66,10 +66,16 @@ public class TimeEntry extends DatabaseObject{
 	}
 
 	public Developer getDeveloper() {
-		return this.db.activityDeveloperRelation().read(this.developerActivityRelationID).getDeveloper();
+		if (this.activityDeveloperRelation == null)
+			this.activityDeveloperRelation = this.db.activityDeveloperRelation().read(this.developerActivityRelationID);
+		
+		return this.activityDeveloperRelation.getDeveloper();
 	}
 
 	public Activity getActivity() {
-		return this.db.activityDeveloperRelation().read(this.developerActivityRelationID).getActivity();
+		if (this.activityDeveloperRelation == null)
+			this.activityDeveloperRelation = this.db.activityDeveloperRelation().read(this.developerActivityRelationID);
+
+		return this.activityDeveloperRelation.getActivity();
 	}
 }

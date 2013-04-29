@@ -49,14 +49,6 @@ public class RegisterTimeRepository extends TimeRepository {
 		return collidingEntries;
 	}
 	
-
-	public List<TimeEntry> readByDeveloperId(int developerId) {
-//select * from register_time where developer_activity_relation_id in (select id from activity_developer_relation where developer_id = 1);
-		String query = String.format("SELECT * FROM register_time WHERE developer_activity_relation_id IN (%s) ORDER BY start_time", 
-				Query.Select("id").From("activity_developer_relation").WhereEquals("developer_id", developerId).End());
-		return this.parse(this.db.conn.execQuery(query));
-	}
-	
 	/**
 	 * Tells whether or not some time is already in use. Accepts 5 minutes overlap
 	 * @param startTime
