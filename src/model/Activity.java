@@ -1,11 +1,13 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import persistency.Database;
 import utils.ArrayUtils;
+import utils.Dialog;
 import utils.Query;
 import utils.StringUtils;
 
@@ -76,19 +78,38 @@ public class Activity extends DatabaseObject {
 		
 	}
 	
-	public List<Developer> getDevelopers(){
-		if(this.assists == null){
-			//TODO panic, lazily
+	public void addDeveloper(Developer dev){
+		if(this.isDevAlreadyOnActivity(dev.getId())){
+			Dialog.message("The developer is already on the activity.");
+		}else{
+			ActivityDeveloperRelation relation = this.db.activityDeveloperRelation().create(this, dev);
+			Dialog.message(""+relation.getId());
+//			System.out.println("devName: "+ dev.getName()+", devID: "+dev.getId());
+			Dialog.message("Developer: " + dev.getName()+ " , activty: "+this.getDescription());
+			this.db.activity().update(this);
+			this.developers = this.getDevelopers();
+			this.db.activity().update(this);
 		}
+	}
+	
+	public List<Developer> getDevelopers(){
+		if(this.developers == null){
+			this.developers = new ArrayList<Developer>();
+		}else{
+			this.developers.clear();
+		}
+		List<ActivityDeveloperRelation> omgRelations = this.db.activityDeveloperRelation().getRelationsOfActivity(this.getId());
+		List<ActivityDeveloperRelation> omg2Relations = this.db.activityDeveloperRelation().getRelationsOfDeveloper(2);
+		List<ActivityDeveloperRelation> relations =	this.db.activityDeveloperRelation().readAllWhereEquals("activity_id", this.getId());
+		List<ActivityDeveloperRelation> debugRelations =	this.db.activityDeveloperRelation().readAllWhereEquals("developer_id", 2);
+		System.out.println(relations.size()+", debugSize: " + debugRelations.size() + ", omgSize: " + omgRelations.size() + ", omgSize_2: " + omg2Relations.size());
+		for(ActivityDeveloperRelation relation : relations){
+			this.developers.add(relation.getDeveloper());
+		}
+		
 		return this.developers;
 	}
 
-	public List<Assist> getAssists() {
-		if(this.assists == null){
-			//TODO panic, lazily
-		}
-		return this.assists;
-	}
 	
 	public String getDescription() {
 		return this.description;
@@ -136,10 +157,29 @@ public class Activity extends DatabaseObject {
 		this.db.activity().update(this);
 	}
 	
-	
+	private boolean isDevAlreadyOnActivity(int devID){
+		List<Developer> devs;
+		if(this.developers == null){
+			devs = this.getDevelopers();
+		}else{
+			devs = this.developers;
+		}
+		
+		for(int i = 0; i < devs.size(); i++){
+			if(devs.get(i).getId() == devID)
+				return true;
+		}
+		
+		return false;
+	}
 	
 	public String getAllDevsInitials(){
-		List<Developer> devs = this.db.activityDeveloperRelation().getDevelopersFromActivityID(this.getId());
+		List<Developer> devs;
+		if(this.developers == null)
+			devs = this.getDevelopers();
+		else
+			devs = this.developers;
+		System.out.println("" + devs.size()+", this.ID =" + this.getId());
 		String[] devIDs = new String[devs.size()];
 		
 		for (int i = 0; i < devIDs.length; i++) {

@@ -59,6 +59,24 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 		return rel;
 	}
 	
+	public List<ActivityDeveloperRelation> getRelationsOfActivity(int actID){
+		Query query = Query.SelectAllFrom(this.table).WhereEquals("activity_id", actID);
+		List<ActivityDeveloperRelation> matches = this.parse(this.db.getConn().execQuery(query));
+		if (matches.isEmpty())
+			return null;
+		else 
+			return matches;
+	}
+	
+	public List<ActivityDeveloperRelation> getRelationsOfDeveloper(int devID){
+		Query query = Query.SelectAllFrom(this.table).WhereEquals("developer_id", devID);
+		List<ActivityDeveloperRelation> matches = this.parse(this.db.getConn().execQuery(query));
+		if (matches.isEmpty())
+			return null;
+		else 
+			return matches;
+	}
+	
 	public ActivityDeveloperRelation readByDeveloperAndActivityId(int devID, int actID) {
 		Query query = Query.SelectAllFrom(this.table).WhereEquals("developer_id", devID).WhereEquals("activity_id", actID);
 		List<ActivityDeveloperRelation> matches = this.parse(this.db.getConn().execQuery(query));

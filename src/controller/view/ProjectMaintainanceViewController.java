@@ -6,6 +6,9 @@ import model.Activity;
 import model.Developer;
 import model.Project;
 import persistency.Database;
+import utils.ActionUtils;
+import utils.Dialog;
+import utils.DialogChoice;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.ProjectMaintainanceViewState;
@@ -31,19 +34,60 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 	@Override
 	public void initialize() {
 		this.viewState = new ProjectMaintainanceViewState(); 
-		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
-		
 		this.viewState.setProjectName(this.project.getName());
+		
+		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
+		ActionUtils.addListener(this.viewState.getAddDevButton(), this, "addDeveloper");
+		ActionUtils.addListener(this.viewState.getAssManagerButton(), this, "assignManager");
+		ActionUtils.addListener(this.viewState.getSplitActButton(), this, "fail");
+		
 		this.fillActivityList();
+		this.fillManagerList();
 		// TODO Auto-generated method stub
 	}
+	
+	public void addDeveloper(){
+		Activity selectedActivity = this.viewState.getSelectedActivity();
+		Developer selectedDev = this.viewState.getSelectedDeveloper();
+		
+		if(selectedActivity == null){
+			Dialog.message("Please select an activity to add a developer to.");
+			return;
+		}else if(selectedDev == null){
+			Dialog.message("Please select a developer to add to the selected activity.");
+			return;
+		}
+		
+		selectedActivity.addDeveloper(selectedDev);
+//		this.initialize();
+	}
+	
+	public void assignManager(Developer dev){
+		boolean setManager = false;
+		if(this.project.getManager() != null)
+		{
+			DialogChoice choice = Dialog.confirm("This project already has a manager, " + this.project.getManager().getName() + ", do you want him/her replaced?");
+			if(choice.equals(DialogChoice.Yes))
+				setManager = true;
+		}else if(dev != null)
+			setManager = true;
+		
+		if(setManager)
+			this.project.setManager(dev);
+	}
+	
 //TODO 
-	public void assignManager(int devID){
-		this.project.setManager(this.database.developer().read(devID));
+	public void assignManager(){
+		Developer developerInput = this.viewState.getSelectedDeveloper();
+		this.assignManager(developerInput);
 	}
 	
 	public Project getProject(){
 		return this.project;
+	}
+	
+	private void fillManagerList() {
+		this.viewState.setManagers(this.database.developer().readAll());
 	}
 	
 	private void fillActivityList() {
