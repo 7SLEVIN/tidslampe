@@ -22,7 +22,7 @@ public class ProjectMaintainanceViewState extends AbstractViewState {
 	private JButton backButton;
 	private JButton assManagerButton;
 	private JButton addDevButton;
-	private JButton splitActButton;
+	private JButton addActButton;
 	private JLabel labelProjectName;
 	private JTable table;
 	private List<Activity> activities;
@@ -32,7 +32,7 @@ public class ProjectMaintainanceViewState extends AbstractViewState {
 		this.backButton = new JButton("Back to menu");
 		this.assManagerButton = new JButton("Assign manager");
 		this.addDevButton = new JButton("Add developer to activity");
-		this.splitActButton = new JButton("Split activity");
+		this.addActButton = new JButton("Add activity (not implemented)");
 		
 		//TODO knapper: Assign manager, add developer to activity, split activity
 		this.table = new JTable();
@@ -50,7 +50,7 @@ public class ProjectMaintainanceViewState extends AbstractViewState {
 		
 		this.add(this.assManagerButton);
 		this.add(this.addDevButton);
-		this.add(this.splitActButton);
+		this.add(this.addActButton);
 		//TODO Drop-down med developers(assign manager / add developer)
 		
 		
@@ -95,7 +95,7 @@ public class ProjectMaintainanceViewState extends AbstractViewState {
 	}
 
 	public JButton getSplitActButton() {
-		return splitActButton;
+		return addActButton;
 	}
 	
 }

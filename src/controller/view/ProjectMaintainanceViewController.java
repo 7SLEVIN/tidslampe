@@ -39,11 +39,10 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
 		ActionUtils.addListener(this.viewState.getAddDevButton(), this, "addDeveloper");
 		ActionUtils.addListener(this.viewState.getAssManagerButton(), this, "assignManager");
-		ActionUtils.addListener(this.viewState.getSplitActButton(), this, "fail");
+		ActionUtils.addListener(this.viewState.getSplitActButton(), this, "addActivity");
 		
 		this.fillActivityList();
 		this.fillManagerList();
-		// TODO Auto-generated method stub
 	}
 	
 	public void addDeveloper(){
@@ -57,9 +56,10 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 			Dialog.message("Please select a developer to add to the selected activity.");
 			return;
 		}
-		
 		selectedActivity.addDeveloper(selectedDev);
-//		this.initialize();
+		
+//update view		
+		this.viewContainer.setViewState(ViewControllerFactory.CreateProjectMaintainanceViewController(this.project.getId()));
 	}
 	
 	public void assignManager(Developer dev){

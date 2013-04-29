@@ -45,16 +45,22 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 	@Override
 	protected List<ActivityDeveloperRelation> parse(ResultSet rs) {
 		List<ActivityDeveloperRelation> rel = new ArrayList<ActivityDeveloperRelation>();
+		List<Integer> activityIDs= new ArrayList<Integer>();
+		List<Integer> developerIDs= new ArrayList<Integer>();
+		List<Integer> relationIDs= new ArrayList<Integer>(); //Not so smooth, but made to avoid opening a db-connection while another is open.
 		try {
 			while (rs.next()) {
-				int activity_id = rs.getInt(this.columns[0]);
-				int developer_id = rs.getInt(this.columns[1]);
-				rel.add(new ActivityDeveloperRelation(this.db, rs.getInt("id"), 
-						this.db.activity().read(activity_id), 
-						this.db.developer().read(developer_id)));
+				activityIDs.add(rs.getInt(this.columns[0]));
+				developerIDs.add(rs.getInt(this.columns[1]));
+				relationIDs.add(rs.getInt("id"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		for(int i = 0; i < activityIDs.size(); i++){
+			rel.add(new ActivityDeveloperRelation(this.db, relationIDs.get(i), 
+					this.db.activity().read(activityIDs.get(i)), 
+					this.db.developer().read(developerIDs.get(i))));
 		}
 		return rel;
 	}

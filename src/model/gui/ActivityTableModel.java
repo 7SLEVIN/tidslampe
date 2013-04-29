@@ -34,6 +34,4 @@ public class ActivityTableModel extends DefaultTableModel implements TableModel 
 			default: return null;
 		}
 	}
-	
-	
 }
