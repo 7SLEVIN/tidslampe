@@ -42,7 +42,7 @@ public class TestProjectMaintainance extends BaseTestDatabase{
 		
 		assertEquals(testProject.getName(), project.getName());
 		
-		ProjectMaintainanceVC projectMaintainance = new ProjectMaintainanceVC(this.db, viewContainer, controllers, projectID);
+		ProjectMaintainanceViewController projectMaintainance = new ProjectMaintainanceViewController(this.db, viewContainer, controllers, projectID);
 		
 		assertEquals(null, projectMaintainance.getProject().getManager());
 		
@@ -61,7 +61,7 @@ public class TestProjectMaintainance extends BaseTestDatabase{
 		
 		Project testProject = this.db.project().readAll().get(0);
 		int projectID = testProject.getId();
-		ProjectMaintainanceVC projectMaintainance = new ProjectMaintainanceVC(this.db, viewContainer, controllers, projectID);
+		ProjectMaintainanceViewController projectMaintainance = new ProjectMaintainanceViewController(this.db, viewContainer, controllers, projectID);
 		
 		assertEquals(0, projectMaintainance.getProject().getActivities().size());
 		

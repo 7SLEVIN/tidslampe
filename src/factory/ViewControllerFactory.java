@@ -2,11 +2,13 @@ package factory;
 
 import persistency.Database;
 import view.ViewContainer;
+import view.state.ProjectMaintainanceViewState;
 import controller.ControllerCollection;
 import controller.view.CalendarViewController;
 import controller.view.DevelopersViewController;
 import controller.view.LoginViewController;
 import controller.view.MenuViewController;
+import controller.view.ProjectMaintainanceViewController;
 import controller.view.ProjectsViewController;
 
 public class ViewControllerFactory {
@@ -35,6 +37,10 @@ public class ViewControllerFactory {
 	
 	public static MenuViewController CreateMenuViewController() {
 		return new MenuViewController(database, viewContainer, controllerCollection);
+	}
+	
+	public static ProjectMaintainanceViewController CreateProjectMaintainanceViewController(int projectId){
+		return new ProjectMaintainanceViewController(database, viewContainer, controllerCollection, projectId);
 	}
 	
 	public static ProjectsViewController CreateProjectsViewController() {

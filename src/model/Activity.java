@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import persistency.Database;
+import utils.ArrayUtils;
+import utils.Query;
+import utils.StringUtils;
 
 public class Activity extends DatabaseObject {
 	
@@ -122,13 +125,28 @@ public class Activity extends DatabaseObject {
 		return this.endTime;
 	}
 	
-	public Date getEndDate() {
-		return new Date(this.endTime);
+	public Calendar getEndCalendar() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(this.endTime);
+		return cal;
 	}
 	
 	public void setEndTime(long newDate) {
 		this.endTime = newDate;
 		this.db.activity().update(this);
+	}
+	
+	
+	
+	public String getAllDevsInitials(){
+		List<Developer> devs = this.db.activityDeveloperRelation().getDevelopersFromActivityID(this.getId());
+		String[] devIDs = new String[devs.size()];
+		
+		for (int i = 0; i < devIDs.length; i++) {
+			devIDs[i] = devs.get(i).getInitials();
+		}
+		
+		return ArrayUtils.join(devIDs, ',');
 	}
 	
 	public Project getProject() {

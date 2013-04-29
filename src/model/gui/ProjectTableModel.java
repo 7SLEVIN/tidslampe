@@ -21,12 +21,13 @@ public class ProjectTableModel extends DefaultTableModel implements TableModel {
 		if (row >= this.data.size()) 
 			return null;
 		
-		Project o = this.data.get(row);
+		Project project = this.data.get(row);
 		switch (column) {
-			case 0: return o.getName();
-			case 1: return o.getHourBudget();
-			case 2: return o.getDeadline();
-			case 3: return o.getManager() != null ? o.getManager().getName() : "N/A" ;
+//Cases:		{ "name", "hour_budget", "deadline","manager_id" };
+			case 0: return project.getName();
+			case 1: return project.getHourBudget();
+			case 2: return project.getDeadline();
+			case 3: return project.getManager() != null ? project.getManager().getName() : "N/A" ;
 			default: return null;
 		}
 	}
