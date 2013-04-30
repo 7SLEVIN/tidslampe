@@ -27,6 +27,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 import model.Activity;
@@ -39,10 +40,6 @@ import model.gui.GenericComboBoxModel;
 import model.gui.ProjectListRenderer;
 import utils.Dialog;
 import view.ViewContainer;
-import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class CalendarViewState extends AbstractViewState {

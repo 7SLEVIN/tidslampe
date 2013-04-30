@@ -23,6 +23,7 @@ public class ProjectsViewState extends AbstractViewState {
 	private JButton backButton;
 	private JButton deleteButton;
 	private JButton createButton;
+	private JButton maintainButton;
 	private JTable table;
 	private List<Project> projects;
 	private JTextField nameInput;
@@ -33,6 +34,7 @@ public class ProjectsViewState extends AbstractViewState {
 	public ProjectsViewState() {
 		this.table = new JTable();
 		this.deleteButton = new JButton("Delete selected");
+		this.maintainButton = new JButton("Maintain selected");
 		this.backButton = new JButton("Back to menu");
 
 		// Creation GUI
@@ -59,12 +61,17 @@ public class ProjectsViewState extends AbstractViewState {
 		this.add(this.backButton);
 		this.add(scrollPane);
 		this.add(this.deleteButton);
+		this.add(this.maintainButton);
 		this.add(createPanel);
 		this.add(createPanel2);
 	}
 
 	public JButton getBackButton() {
 		return backButton;
+	}
+	
+	public JButton getMaintainButton() {
+		return maintainButton;
 	}
 	
 	public JButton getDeleteButton() {
@@ -96,11 +103,15 @@ public class ProjectsViewState extends AbstractViewState {
 	}
 
 	public int getHourBudgetInput() {
+		if(this.hourBudgetInput.getText().isEmpty())
+			return 0;
 		return Integer.parseInt(this.hourBudgetInput.getText());
 	}
 
-	public int getDeadlineInput() {
-		return Integer.parseInt(this.deadlineInput.getText());
+	public long getDeadlineInput() {
+		if(this.hourBudgetInput.getText().isEmpty())
+			return 0;
+		return Long.parseLong(this.deadlineInput.getText());
 	}
 
 	public Developer getManagerInput() {

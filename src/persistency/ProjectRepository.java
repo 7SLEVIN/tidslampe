@@ -19,6 +19,9 @@ public class ProjectRepository extends Repository<Project> {
 	}
 
 	public Project create(String name, int hourBudget, long deadline, Developer manager) {
+		if(manager == null)
+			return this.create(name, hourBudget, deadline);
+		
 		int id = this.create(new String[] { name, String.valueOf(hourBudget),
 				String.valueOf(deadline), String.valueOf(manager.getId()) });
 		Project project = new Project(this.db, id, name, hourBudget, deadline,

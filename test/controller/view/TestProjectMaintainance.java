@@ -15,7 +15,8 @@ import persistency.BaseTestDatabase;
 import view.ViewContainer;
 
 public class TestProjectMaintainance extends BaseTestDatabase{
-
+//TODO fjern denne test, den er GUI-agtig
+	
 	private ControllerCollection controllers;
 	private ViewContainer viewContainer;
 	
@@ -42,11 +43,11 @@ public class TestProjectMaintainance extends BaseTestDatabase{
 		
 		assertEquals(testProject.getName(), project.getName());
 		
-		ProjectMaintainanceVC projectMaintainance = new ProjectMaintainanceVC(this.db, viewContainer, controllers, projectID);
+		ProjectMaintainanceViewController projectMaintainance = new ProjectMaintainanceViewController(this.db, viewContainer, controllers, projectID);
 		
 		assertEquals(null, projectMaintainance.getProject().getManager());
 		
-		projectMaintainance.assignManager(developer.getId());
+		projectMaintainance.assignManager(developer);
 		
 		assertEquals(developer.getId(), projectMaintainance.getProject().getManager().getId());
 	}
@@ -61,7 +62,7 @@ public class TestProjectMaintainance extends BaseTestDatabase{
 		
 		Project testProject = this.db.project().readAll().get(0);
 		int projectID = testProject.getId();
-		ProjectMaintainanceVC projectMaintainance = new ProjectMaintainanceVC(this.db, viewContainer, controllers, projectID);
+		ProjectMaintainanceViewController projectMaintainance = new ProjectMaintainanceViewController(this.db, viewContainer, controllers, projectID);
 		
 		assertEquals(0, projectMaintainance.getProject().getActivities().size());
 		

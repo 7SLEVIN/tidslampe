@@ -20,6 +20,17 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 		this.columns = new String[]{"activity_id", "developer_id"};
 	}
 	
+	public List<Developer> getDevelopersFromActivityID(int id){
+		List<ActivityDeveloperRelation> relations = this.db.activityDeveloperRelation().readAllWhereEquals("activity_id", id);
+		List<Developer> devs = new ArrayList<Developer>();
+		
+		for(ActivityDeveloperRelation relation : relations){
+			devs.add(relation.getDeveloper());
+		}
+		
+		return devs;
+	}
+	
 	public ActivityDeveloperRelation create(Activity activity, Developer developer) {
 		int id = this.create(new String[]{String.valueOf(activity.getId()), 
 				String.valueOf(developer.getId())});
@@ -34,18 +45,42 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 	@Override
 	protected List<ActivityDeveloperRelation> parse(ResultSet rs) {
 		List<ActivityDeveloperRelation> rel = new ArrayList<ActivityDeveloperRelation>();
+		List<Integer> activityIDs= new ArrayList<Integer>();
+		List<Integer> developerIDs= new ArrayList<Integer>();
+		List<Integer> relationIDs= new ArrayList<Integer>(); //Not so smooth, but made to avoid opening a db-connection while another is open.
 		try {
 			while (rs.next()) {
-				int activity_id = rs.getInt(this.columns[0]);
-				int developer_id = rs.getInt(this.columns[1]);
-				rel.add(new ActivityDeveloperRelation(this.db, rs.getInt("id"), 
-						this.db.activity().read(activity_id), 
-						this.db.developer().read(developer_id)));
+				activityIDs.add(rs.getInt(this.columns[0]));
+				developerIDs.add(rs.getInt(this.columns[1]));
+				relationIDs.add(rs.getInt("id"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		for(int i = 0; i < activityIDs.size(); i++){
+			rel.add(new ActivityDeveloperRelation(this.db, relationIDs.get(i), 
+					this.db.activity().read(activityIDs.get(i)), 
+					this.db.developer().read(developerIDs.get(i))));
+		}
 		return rel;
+	}
+	
+	public List<ActivityDeveloperRelation> getRelationsOfActivity(int actID){
+		Query query = Query.SelectAllFrom(this.table).WhereEquals("activity_id", actID);
+		List<ActivityDeveloperRelation> matches = this.parse(this.db.getConn().execQuery(query));
+		if (matches.isEmpty())
+			return null;
+		else 
+			return matches;
+	}
+	
+	public List<ActivityDeveloperRelation> getRelationsOfDeveloper(int devID){
+		Query query = Query.SelectAllFrom(this.table).WhereEquals("developer_id", devID);
+		List<ActivityDeveloperRelation> matches = this.parse(this.db.getConn().execQuery(query));
+		if (matches.isEmpty())
+			return null;
+		else 
+			return matches;
 	}
 	
 	public ActivityDeveloperRelation readByDeveloperAndActivityId(int devID, int actID) {

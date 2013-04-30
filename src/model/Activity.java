@@ -1,10 +1,13 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import persistency.Database;
+import utils.ArrayUtils;
+import utils.Dialog;
 
 public class Activity extends DatabaseObject {
 	
@@ -73,19 +76,29 @@ public class Activity extends DatabaseObject {
 		
 	}
 	
-	public List<Developer> getDevelopers(){
-		if(this.assists == null){
-			//TODO panic, lazily
+	public void addDeveloper(Developer dev){
+		if(this.isDevAlreadyOnActivity(dev.getId())){
+			Dialog.message("The developer is already on the activity.");
+		}else{
+			this.db.activityDeveloperRelation().create(this, dev);
+			this.developers = this.getDevelopers();
 		}
+	}
+	
+	public List<Developer> getDevelopers(){
+		if(this.developers == null){
+			this.developers = new ArrayList<Developer>();
+		}else{
+			this.developers.clear();
+		}
+		List<ActivityDeveloperRelation> relations =	this.db.activityDeveloperRelation().readAllWhereEquals("activity_id", this.getId());
+		for(ActivityDeveloperRelation relation : relations){
+			this.developers.add(relation.getDeveloper());
+		}
+		
 		return this.developers;
 	}
 
-	public List<Assist> getAssists() {
-		if(this.assists == null){
-			//TODO panic, lazily
-		}
-		return this.assists;
-	}
 	
 	public String getDescription() {
 		return this.description;
@@ -122,8 +135,10 @@ public class Activity extends DatabaseObject {
 		return this.endTime;
 	}
 	
-	public Date getEndDate() {
-		return new Date(this.endTime);
+	public Calendar getEndCalendar() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(this.endTime);
+		return cal;
 	}
 	
 	public void setEndTime(long newDate) {
@@ -131,6 +146,37 @@ public class Activity extends DatabaseObject {
 		this.db.activity().update(this);
 	}
 	
+	private boolean isDevAlreadyOnActivity(int devID){
+		List<Developer> devs;
+		if(this.developers == null){
+			devs = this.getDevelopers();
+		}else{
+			devs = this.developers;
+		}
+		
+		for(int i = 0; i < devs.size(); i++){
+			if(devs.get(i).getId() == devID)
+				return true;
+		}
+		
+		return false;
+	}
+	
+	public String getAllDevsInitials(){
+		List<Developer> devs;
+		if(this.developers == null)
+			devs = this.getDevelopers();
+		else
+			devs = this.developers;
+		String[] devIDs = new String[devs.size()];
+		
+		for (int i = 0; i < devIDs.length; i++) {
+			devIDs[i] = devs.get(i).getInitials();
+		}
+		
+		return ArrayUtils.join(devIDs, ',');
+	}
+
 	public ActivityType getType() {
 		return this.type;
 	}
