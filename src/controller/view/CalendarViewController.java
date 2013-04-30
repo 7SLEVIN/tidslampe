@@ -6,11 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.swing.JPanel;
 
 import model.Activity;
 import model.Developer;
@@ -55,7 +59,7 @@ public class CalendarViewController extends AbstractViewController {
 		this.developers = this.database.developer().readAll();
 		
 		this.currentStartDate = this.timeService.getCurrentDateTime();
-		this.currentStartDate.add(Calendar.DAY_OF_YEAR, -3);
+		this.currentStartDate.add(Calendar.DAY_OF_YEAR, -2);
 		
 		this.viewState.setDeveloperName((this.isSelf ? "(You) " : "") + this.developer.getName());
 		this.viewState.setProjects(this.database.project().readAll());
@@ -256,6 +260,22 @@ public class CalendarViewController extends AbstractViewController {
 				}
 			}
 			iterDate.add(Calendar.DAY_OF_YEAR, 1);
+		}
+		
+		for (final TimeEntry te : this.viewState.getTimeEntryPanels().keySet()) {
+			final JPanel panel = this.viewState.getTimeEntryPanels().get(te);
+
+			panel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if (panel.getBackground().equals(Color.MAGENTA))
+						database.reserveTime().delete(te.getId());
+					else
+						database.registerTime().delete(te.getId());
+					
+					updateStartDate();
+				}
+			});
 		}
 	}
 }

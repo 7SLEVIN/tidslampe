@@ -14,7 +14,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -108,6 +112,10 @@ public class CalendarViewState extends AbstractViewState {
 	private JLabel lblActivityType;
 	private JComboBox<ActivityType> cmbActivityType;
 	private JPanel panel_3;
+	private JLabel lblKl_10;
+	private JPanel panel_9;
+	private JLabel lblDato;
+	private HashMap<TimeEntry, JPanel> timeEntryPanels;
 
 	public CalendarViewState() {
 		setMinimumSize(new Dimension(ViewContainer.WINDOW_WIDTH, ViewContainer.WINDOW_HEIGHT));
@@ -143,61 +151,67 @@ public class CalendarViewState extends AbstractViewState {
 						weekPanel.setPreferredSize(new Dimension(ViewContainer.WINDOW_WIDTH, 300));
 						weekPanel.setMinimumSize(new Dimension(ViewContainer.WINDOW_WIDTH, 300));
 						weekPanel.setMaximumSize(new Dimension(ViewContainer.WINDOW_WIDTH, 300));
-						GridBagLayout gbl_weekPanel = new GridBagLayout();
-						gbl_weekPanel.columnWidths = new int[] {40, 75, 75, 75, 75, 75, 75, 75, 0};
-						gbl_weekPanel.rowHeights = new int[]{300, 0};
-						gbl_weekPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-						gbl_weekPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-						weekPanel.setLayout(gbl_weekPanel);
+						weekPanel.setLayout(new GridLayout(0, 8, 1, 0));
 						
 						panel = new JPanel();
 						panel.setPreferredSize(new Dimension(40, 300));
 						panel.setMinimumSize(new Dimension(40, 300));
 						panel.setMaximumSize(new Dimension(40, 300));
 						panel.setBackground(Color.LIGHT_GRAY);
-						GridBagConstraints gbc_panel = new GridBagConstraints();
-						gbc_panel.fill = GridBagConstraints.BOTH;
-						gbc_panel.insets = new Insets(0, 0, 0, 5);
-						gbc_panel.gridx = 0;
-						gbc_panel.gridy = 0;
-						weekPanel.add(panel, gbc_panel);
-						panel.setLayout(new GridLayout(12, 1, 0, 0));
+						weekPanel.add(panel);
+						panel.setLayout(new GridLayout(13, 1, 0, 0));
 						
 						lblTime1 = new JLabel("Kl. 00");
+						lblTime1.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblTime1);
 						
 						lblTime2 = new JLabel("Kl. 02");
+						lblTime2.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblTime2);
 						
 						lblKl = new JLabel("Kl. 04");
+						lblKl.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblKl);
 						
 						lblKl_1 = new JLabel("Kl. 06");
+						lblKl_1.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblKl_1);
 						
 						lblKl_2 = new JLabel("Kl. 08");
+						lblKl_2.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblKl_2);
 						
 						lblKl_3 = new JLabel("Kl. 10");
+						lblKl_3.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblKl_3);
 						
 						lblKl_4 = new JLabel("Kl. 12");
+						lblKl_4.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblKl_4);
 						
 						lblKl_5 = new JLabel("Kl. 14");
+						lblKl_5.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblKl_5);
 						
 						lblKl_6 = new JLabel("Kl. 16");
+						lblKl_6.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblKl_6);
 						
 						lblKl_7 = new JLabel("Kl. 18");
+						lblKl_7.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblKl_7);
 						
 						lblKl_8 = new JLabel("Kl. 20");
+						lblKl_8.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblKl_8);
 						
 						lblKl_9 = new JLabel("Kl. 22");
+						lblKl_9.setHorizontalAlignment(SwingConstants.CENTER);
 						panel.add(lblKl_9);
+						
+						lblKl_10 = new JLabel("Kl. 24");
+						lblKl_10.setHorizontalAlignment(SwingConstants.CENTER);
+						panel.add(lblKl_10);
 						
 								day1 = new JPanel();
 								day1.setMaximumSize(new Dimension(80, 300));
@@ -205,83 +219,49 @@ public class CalendarViewState extends AbstractViewState {
 								day1.setPreferredSize(new Dimension(80, 300));
 								day1.setMinimumSize(new Dimension(80, 300));
 								day1.setLayout(null);
-								GridBagConstraints gbc_day1 = new GridBagConstraints();
-								gbc_day1.fill = GridBagConstraints.BOTH;
-								gbc_day1.insets = new Insets(0, 0, 0, 5);
-								gbc_day1.gridx = 1;
-								gbc_day1.gridy = 0;
-								weekPanel.add(day1, gbc_day1);
+								weekPanel.add(day1);
 								
 								day2 = new JPanel();
 								day2.setBackground(Color.GRAY);
 								day2.setPreferredSize(new Dimension(70, 300));
 								day2.setMinimumSize(new Dimension(70, 300));
 								day2.setLayout(null);
-								GridBagConstraints gbc_day2 = new GridBagConstraints();
-								gbc_day2.fill = GridBagConstraints.BOTH;
-								gbc_day2.insets = new Insets(0, 0, 0, 5);
-								gbc_day2.gridx = 2;
-								gbc_day2.gridy = 0;
-								weekPanel.add(day2, gbc_day2);
+								weekPanel.add(day2);
 								
 										day3 = new JPanel();
 										day3.setBackground(Color.GRAY);
 										day3.setPreferredSize(new Dimension(70, 300));
 										day3.setMinimumSize(new Dimension(70, 300));
 										day3.setLayout(null);
-										GridBagConstraints gbc_day3 = new GridBagConstraints();
-										gbc_day3.fill = GridBagConstraints.BOTH;
-										gbc_day3.insets = new Insets(0, 0, 0, 5);
-										gbc_day3.gridx = 3;
-										gbc_day3.gridy = 0;
-										weekPanel.add(day3, gbc_day3);
+										weekPanel.add(day3);
 										
 												day4 = new JPanel();
 												day4.setBackground(Color.GRAY);
 												day4.setPreferredSize(new Dimension(70, 300));
 												day4.setMinimumSize(new Dimension(70, 300));
 												day4.setLayout(null);
-												GridBagConstraints gbc_day4 = new GridBagConstraints();
-												gbc_day4.fill = GridBagConstraints.BOTH;
-												gbc_day4.insets = new Insets(0, 0, 0, 5);
-												gbc_day4.gridx = 4;
-												gbc_day4.gridy = 0;
-												weekPanel.add(day4, gbc_day4);
+												weekPanel.add(day4);
 												
 														day5 = new JPanel();
 														day5.setBackground(Color.GRAY);
 														day5.setPreferredSize(new Dimension(70, 300));
 														day5.setMinimumSize(new Dimension(70, 300));
 														day5.setLayout(null);
-														GridBagConstraints gbc_day5 = new GridBagConstraints();
-														gbc_day5.fill = GridBagConstraints.BOTH;
-														gbc_day5.insets = new Insets(0, 0, 0, 5);
-														gbc_day5.gridx = 5;
-														gbc_day5.gridy = 0;
-														weekPanel.add(day5, gbc_day5);
+														weekPanel.add(day5);
 														
 																day6 = new JPanel();
 																day6.setBackground(Color.GRAY);
 																day6.setPreferredSize(new Dimension(70, 300));
 																day6.setMinimumSize(new Dimension(70, 300));
 																day6.setLayout(null);
-																GridBagConstraints gbc_day6 = new GridBagConstraints();
-																gbc_day6.fill = GridBagConstraints.BOTH;
-																gbc_day6.insets = new Insets(0, 0, 0, 5);
-																gbc_day6.gridx = 6;
-																gbc_day6.gridy = 0;
-																weekPanel.add(day6, gbc_day6);
+																weekPanel.add(day6);
 																
 																		day7 = new JPanel();
 																		day7.setBackground(Color.GRAY);
 																		day7.setPreferredSize(new Dimension(70, 300));
 																		day7.setMinimumSize(new Dimension(70, 300));
 																		day7.setLayout(null);
-																		GridBagConstraints gbc_day7 = new GridBagConstraints();
-																		gbc_day7.fill = GridBagConstraints.BOTH;
-																		gbc_day7.gridx = 7;
-																		gbc_day7.gridy = 0;
-																		weekPanel.add(day7, gbc_day7);
+																		weekPanel.add(day7);
 																		add(weekPanel);
 				
 				legend = new JPanel();
@@ -289,23 +269,26 @@ public class CalendarViewState extends AbstractViewState {
 				legend.setMinimumSize(new Dimension(ViewContainer.WINDOW_WIDTH, 20));
 				legend.setMaximumSize(new Dimension(ViewContainer.WINDOW_WIDTH, 20));
 				add(legend);
-				GridBagLayout gbl_legend = new GridBagLayout();
-				gbl_legend.columnWidths = new int[] {71, 71, 71, 71, 71, 71, 71};
-				gbl_legend.rowHeights = new int[] {300, 300, 0};
-				gbl_legend.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-				gbl_legend.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-				legend.setLayout(gbl_legend);
+				legend.setLayout(new GridLayout(0, 8, 0, 0));
+				
+				panel_9 = new JPanel();
+				panel_9.setPreferredSize(new Dimension(70, 70));
+				panel_9.setMinimumSize(new Dimension(70, 70));
+				panel_9.setMaximumSize(new Dimension(70, 70));
+				legend.add(panel_9);
+				panel_9.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+				
+				lblDato = new JLabel("Dato:");
+				lblDato.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+				lblDato.setHorizontalAlignment(SwingConstants.CENTER);
+				lblDato.setAlignmentX(0.5f);
+				panel_9.add(lblDato);
 				
 				panel_1 = new JPanel();
 				panel_1.setMaximumSize(new Dimension(70, 70));
 				panel_1.setPreferredSize(new Dimension(70, 70));
 				panel_1.setMinimumSize(new Dimension(70, 70));
-				GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-				gbc_panel_1.fill = GridBagConstraints.BOTH;
-				gbc_panel_1.insets = new Insets(0, 0, 0, 1);
-				gbc_panel_1.gridx = 0;
-				gbc_panel_1.gridy = 0;
-				legend.add(panel_1, gbc_panel_1);
+				legend.add(panel_1);
 				panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				
 				lblDay1 = new JLabel("Mon 13/4");
@@ -317,12 +300,7 @@ public class CalendarViewState extends AbstractViewState {
 				panel_2.setMaximumSize(new Dimension(70, 70));
 				panel_2.setPreferredSize(new Dimension(70, 70));
 				panel_2.setMinimumSize(new Dimension(70, 70));
-				GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-				gbc_panel_2.fill = GridBagConstraints.BOTH;
-				gbc_panel_2.insets = new Insets(0, 0, 0, 1);
-				gbc_panel_2.gridx = 1;
-				gbc_panel_2.gridy = 0;
-				legend.add(panel_2, gbc_panel_2);
+				legend.add(panel_2);
 				panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				
 				lblDay2 = new JLabel("Mon 13/4");
@@ -334,12 +312,7 @@ public class CalendarViewState extends AbstractViewState {
 				panel_4.setMaximumSize(new Dimension(70, 70));
 				panel_4.setPreferredSize(new Dimension(70, 70));
 				panel_4.setMinimumSize(new Dimension(70, 70));
-				GridBagConstraints gbc_panel_4 = new GridBagConstraints();
-				gbc_panel_4.fill = GridBagConstraints.BOTH;
-				gbc_panel_4.insets = new Insets(0, 0, 0, 1);
-				gbc_panel_4.gridx = 2;
-				gbc_panel_4.gridy = 0;
-				legend.add(panel_4, gbc_panel_4);
+				legend.add(panel_4);
 				panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				
 				lblDay3 = new JLabel("Mon 13/4");
@@ -351,12 +324,7 @@ public class CalendarViewState extends AbstractViewState {
 				panel_5.setMaximumSize(new Dimension(70, 70));
 				panel_5.setPreferredSize(new Dimension(70, 70));
 				panel_5.setMinimumSize(new Dimension(70, 70));
-				GridBagConstraints gbc_panel_5 = new GridBagConstraints();
-				gbc_panel_5.fill = GridBagConstraints.BOTH;
-				gbc_panel_5.insets = new Insets(0, 0, 0, 1);
-				gbc_panel_5.gridx = 3;
-				gbc_panel_5.gridy = 0;
-				legend.add(panel_5, gbc_panel_5);
+				legend.add(panel_5);
 				panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				
 				lblDay4 = new JLabel("Mon 13/4");
@@ -368,12 +336,7 @@ public class CalendarViewState extends AbstractViewState {
 				panel_6.setMaximumSize(new Dimension(70, 70));
 				panel_6.setPreferredSize(new Dimension(70, 70));
 				panel_6.setMinimumSize(new Dimension(70, 70));
-				GridBagConstraints gbc_panel_6 = new GridBagConstraints();
-				gbc_panel_6.fill = GridBagConstraints.BOTH;
-				gbc_panel_6.insets = new Insets(0, 0, 0, 1);
-				gbc_panel_6.gridx = 4;
-				gbc_panel_6.gridy = 0;
-				legend.add(panel_6, gbc_panel_6);
+				legend.add(panel_6);
 				panel_6.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				
 				lblDay5 = new JLabel("Mon 13/4");
@@ -385,12 +348,7 @@ public class CalendarViewState extends AbstractViewState {
 				panel_7.setMaximumSize(new Dimension(70, 70));
 				panel_7.setPreferredSize(new Dimension(70, 70));
 				panel_7.setMinimumSize(new Dimension(70, 70));
-				GridBagConstraints gbc_panel_7 = new GridBagConstraints();
-				gbc_panel_7.fill = GridBagConstraints.BOTH;
-				gbc_panel_7.insets = new Insets(0, 0, 0, 1);
-				gbc_panel_7.gridx = 5;
-				gbc_panel_7.gridy = 0;
-				legend.add(panel_7, gbc_panel_7);
+				legend.add(panel_7);
 				panel_7.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				
 				lblDay6 = new JLabel("Mon 13/4");
@@ -402,12 +360,7 @@ public class CalendarViewState extends AbstractViewState {
 				panel_8.setMaximumSize(new Dimension(70, 70));
 				panel_8.setPreferredSize(new Dimension(70, 70));
 				panel_8.setMinimumSize(new Dimension(70, 70));
-				GridBagConstraints gbc_panel_8 = new GridBagConstraints();
-				gbc_panel_8.insets = new Insets(0, 0, 0, 1);
-				gbc_panel_8.fill = GridBagConstraints.BOTH;
-				gbc_panel_8.gridx = 6;
-				gbc_panel_8.gridy = 0;
-				legend.add(panel_8, gbc_panel_8);
+				legend.add(panel_8);
 				panel_8.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				
 				lblDay7 = new JLabel("Mon 13/4");
@@ -509,6 +462,8 @@ public class CalendarViewState extends AbstractViewState {
 		
 		btnReserve = new JButton("Reserve");
 		pnlAddButtons.add(btnReserve);
+		
+		this.timeEntryPanels = new HashMap<TimeEntry, JPanel>();
 	}
 	
 	// Add an entry to the calendar view
@@ -516,20 +471,18 @@ public class CalendarViewState extends AbstractViewState {
 
 		int fromMinute = timeEntry.getStartDate().get(Calendar.HOUR_OF_DAY) * 60 + timeEntry.getStartDate().get(Calendar.MINUTE);
 
-		float minuteHeight =   Float.valueOf(this.dayPanels[day].getHeight()) / (24f * 60f);
-
+		float minuteHeight = Float.valueOf(this.dayPanels[day].getHeight()) / (24f * 60f);
+		
 		JPanel timeEntryPanel = new JPanel();
-		timeEntryPanel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Dialog.message("" + timeEntry.getId());
-			}
-		});
+		
+		this.timeEntryPanels.put(timeEntry, timeEntryPanel);
 		
 		timeEntryPanel.setBackground(color);
 		int durationInMinutes = timeEntry.getDurationInMinutes();
 		
-		timeEntryPanel.setBounds(0, (int)(minuteHeight * fromMinute), this.dayPanels[day].getWidth(), (int)(minuteHeight * (fromMinute + durationInMinutes)));
+		timeEntryPanel.setBounds(0, (int)(minuteHeight * fromMinute), 
+				this.dayPanels[day].getWidth(), (int)(minuteHeight * (fromMinute + durationInMinutes)));
+		
 		timeEntryPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
 		DateFormat format = new SimpleDateFormat("HH:mm");
@@ -551,11 +504,15 @@ public class CalendarViewState extends AbstractViewState {
 	}
 
 	public void clearTimeEntries() {
+		
 		for (JPanel dayPanel : this.dayPanels) {
 			dayPanel.removeAll();
 			dayPanel.revalidate();
 			dayPanel.repaint();
+			this.timeEntryPanels.remove(dayPanel);
 		}
+
+		this.timeEntryPanels = new HashMap<TimeEntry, JPanel>();
 	}
 	
 	public void setFixedEnabled(boolean fixed) {
@@ -567,6 +524,10 @@ public class CalendarViewState extends AbstractViewState {
 	}
 	
 	// Component getters
+	public HashMap<TimeEntry, JPanel> getTimeEntryPanels() {
+		return this.timeEntryPanels;
+	}
+	
 	public JComboBox<Project> getProjectComboBox() {
 		return this.cmbProject;
 	}
