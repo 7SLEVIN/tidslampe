@@ -194,7 +194,7 @@ public class CalendarViewController extends AbstractViewController {
         Calendar endDate = Calendar.getInstance();
         
         Activity act = this.viewState.getSelectedActivity();
-        if (act == null) {
+        if (act == null && !this.viewState.getFixedState()) {
         	Dialog.message("You must select project and activity");
         	return;
         }

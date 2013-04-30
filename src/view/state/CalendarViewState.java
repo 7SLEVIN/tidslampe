@@ -465,11 +465,10 @@ public class CalendarViewState extends AbstractViewState {
 	
 	// Add an entry to the calendar view
 	public void addTimeEntry(final TimeEntry timeEntry, int day, Color color) {
-
-		int fromMinute = timeEntry.getStartDate().get(Calendar.HOUR_OF_DAY) * 60 + timeEntry.getStartDate().get(Calendar.MINUTE);
-
 		float minuteHeight = Float.valueOf(this.dayPanels[day].getHeight()) / (24f * 60f);
 		
+		int fromMinute = timeEntry.getStartDate().get(Calendar.HOUR_OF_DAY) * 60 + timeEntry.getStartDate().get(Calendar.MINUTE);
+
 		JPanel timeEntryPanel = new JPanel();
 		
 		this.timeEntryPanels.put(timeEntry, timeEntryPanel);
@@ -477,8 +476,7 @@ public class CalendarViewState extends AbstractViewState {
 		timeEntryPanel.setBackground(color);
 		int durationInMinutes = timeEntry.getDurationInMinutes();
 		
-		timeEntryPanel.setBounds(0, (int)(minuteHeight * fromMinute), 
-				this.dayPanels[day].getWidth(), (int)(minuteHeight * (fromMinute + durationInMinutes)));
+		timeEntryPanel.setBounds(0, (int)(minuteHeight * fromMinute), this.dayPanels[day].getWidth(), (int)(minuteHeight * durationInMinutes));
 		
 		timeEntryPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
