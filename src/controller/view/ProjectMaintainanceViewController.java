@@ -47,6 +47,7 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 		ActionUtils.addListener(this.viewState.getAddDevButton(), this, "addDeveloper");
 		ActionUtils.addListener(this.viewState.getAssManagerButton(), this, "assignManager");
 		ActionUtils.addListener(this.viewState.getAddActivityButton(), this, "addActivity");
+		this.viewState.getCreateRapportButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectRapportViewController(this.project.getId())));
 		
 		this.fillActivityList();
 		this.fillManagerList();
@@ -102,6 +103,13 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 	}
 	
 	public void addActivity() {
+		if (this.viewState.getNameInput().isEmpty() ||
+				this.viewState.getHourBudgetInput().isEmpty() ||
+				this.viewState.getDeadlineInput().isEmpty()) {
+			Dialog.message("You must fill out all fields!");
+			return;
+		}
+		
 		String name = this.viewState.getNameInput();
 		int hourBudget = Integer.valueOf(this.viewState.getHourBudgetInput());
 		String deadline = this.viewState.getDeadlineInput();

@@ -24,6 +24,9 @@ import java.awt.Insets;
 import java.awt.FlowLayout;
 import javax.swing.JTextField;
 
+import utils.GuiUtils;
+import view.ViewContainer;
+
 @SuppressWarnings("serial")
 public class ProjectMaintainanceViewState extends AbstractViewState {
 	private JButton backButton;
@@ -45,6 +48,7 @@ public class ProjectMaintainanceViewState extends AbstractViewState {
 	private JLabel lblHourBudget;
 	private JLabel lblDeadline;
 	private JTextField txtDeadline;
+	private JButton createRapportButton;
 
 	public ProjectMaintainanceViewState() {
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -113,6 +117,12 @@ public class ProjectMaintainanceViewState extends AbstractViewState {
 		add(panel);
 		this.addActivityButton = new JButton("Add activity");
 		panel.add(addActivityButton);
+		
+		JPanel rapportPanel = new JPanel();
+		this.createRapportButton = new JButton("Create rapport");
+		rapportPanel.add(this.createRapportButton);
+		GuiUtils.setSize(rapportPanel, new Dimension(ViewContainer.WINDOW_WIDTH, 30));
+		this.add(rapportPanel);
 		// TODO Drop-down med developers(assign manager / add developer)
 
 		// TODO Tabel/liste med Activities (split activity)
@@ -158,6 +168,10 @@ public class ProjectMaintainanceViewState extends AbstractViewState {
 
 	public JButton getAddActivityButton() {
 		return this.addActivityButton;
+	}
+	
+	public JButton getCreateRapportButton() {
+		return this.createRapportButton;
 	}
 
 	// Model getters
