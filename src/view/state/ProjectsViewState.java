@@ -11,6 +11,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import utils.GuiUtils;
+import view.ViewContainer;
+
 import model.Developer;
 import model.Project;
 import model.gui.GenericComboBoxModel;
@@ -33,37 +36,44 @@ public class ProjectsViewState extends AbstractViewState {
 	
 	public ProjectsViewState() {
 		this.table = new JTable();
+		this.backButton = new JButton("Back to menu");
 		this.deleteButton = new JButton("Delete selected");
 		this.maintainButton = new JButton("Maintain selected");
-		this.backButton = new JButton("Back to menu");
 
-		// Creation GUI
 		this.createButton = new JButton("Create new");
 		this.nameInput = new JTextField(10);
 		this.hourBudgetInput = new JTextField(3);
 		this.deadlineInput = new JTextField(3);
 		this.managerInput = new JComboBox<Developer>();
 
+		JPanel titlePanel = new JPanel();
+		GuiUtils.setSize(titlePanel, new Dimension(ViewContainer.WINDOW_WIDTH, 30));
+		titlePanel.add(this.backButton);
+		
+		JScrollPane scrollPane = new JScrollPane(this.table);
+		scrollPane.setPreferredSize(new Dimension(400, 300));
+
+		JPanel maintainancePanel = new JPanel();
+		GuiUtils.setSize(maintainancePanel, new Dimension(ViewContainer.WINDOW_WIDTH, 30));
+		maintainancePanel.add(this.maintainButton);
+		maintainancePanel.add(this.deleteButton);
+		
 		JPanel createPanel = new JPanel();
-		JPanel createPanel2 = new JPanel();
+		GuiUtils.setSize(createPanel, new Dimension(ViewContainer.WINDOW_WIDTH, 50));
 		createPanel.add(new JLabel("Name"));
 		createPanel.add(this.nameInput);
 		createPanel.add(new JLabel("Hour Budget"));
 		createPanel.add(this.hourBudgetInput);
 		createPanel.add(new JLabel("Deadline"));
 		createPanel.add(this.deadlineInput);
-		createPanel2.add(new JLabel("Manager"));
-		createPanel2.add(this.managerInput);
-		createPanel2.add(this.createButton);
+		createPanel.add(new JLabel("Manager"));
+		createPanel.add(this.managerInput);
+		createPanel.add(this.createButton);
 		
-		JScrollPane scrollPane = new JScrollPane(this.table);
-		scrollPane.setPreferredSize(new Dimension(400, 300));
-		this.add(this.backButton);
+		this.add(titlePanel);
 		this.add(scrollPane);
-		this.add(this.deleteButton);
-		this.add(this.maintainButton);
+		this.add(maintainancePanel);
 		this.add(createPanel);
-		this.add(createPanel2);
 	}
 
 	public JButton getBackButton() {
@@ -80,6 +90,10 @@ public class ProjectsViewState extends AbstractViewState {
 
 	public JButton getCreateButton() {
 		return this.createButton;
+	}
+	
+	public JTable getProjectTable() {
+		return this.table;
 	}
 
 	public void setProjects(List<Project> projects) {

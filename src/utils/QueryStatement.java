@@ -8,5 +8,6 @@ public enum QueryStatement {
 	Update,
 	OrderBy,
 	Limit, 
-	Delete
+	Delete,
+	In
 }

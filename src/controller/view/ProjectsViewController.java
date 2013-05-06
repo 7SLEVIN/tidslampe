@@ -1,5 +1,8 @@
 package controller.view;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import model.Developer;
 import model.Project;
 import persistency.Database;
@@ -38,6 +41,14 @@ public class ProjectsViewController extends AbstractViewController {
 		ActionUtils.addListener(this.viewState.getCreateButton(), this, "createNewProject");
 		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
 
+		this.viewState.getProjectTable().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() >= 2) {
+					viewContainer.setViewState(ViewControllerFactory.CreateProjectMaintainanceViewController(viewState.getSelectedProject().getId()));
+				}
+			}
+		});
+		
 		this.fillProjectList();
 		this.fillManagerList();
 	}
