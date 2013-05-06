@@ -26,6 +26,12 @@ public class TimeService {
 		return String.format("%s-%s-%s", 	StringUtils.trailingZero(cal.get(Calendar.DAY_OF_MONTH)), 
 											StringUtils.trailingZero(cal.get(Calendar.MONTH)+1), cal.get(Calendar.YEAR));
 	}
+	
+	public String convertLongToString(long longtime){
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(longtime);
+		return this.convertCalendarToInputString(cal);
+	}
 
 	public Calendar convertToCalendar(int year, int month, int day, int hour, int minute){	
 		Calendar cal = Calendar.getInstance();

@@ -73,9 +73,6 @@ public class TestProjectMaintainance extends BaseTestDatabase{
 		
 		int activityID = projectMaintainance.getProject().getActivities().get(0).getId();
 		
-		fail("projectMaintainance.splitActivity() mangler");
-		
-		
 		fail("Activities skal have developer relations");
 	}
 	
