@@ -81,4 +81,16 @@ public class ActivityRepository extends Repository<Activity> {
 		}
 		return isFixed;
 	}
+
+	public List<Activity> readByDeveloperAndProjectId(int projectId, int developerId) {
+		String query = 	"SELECT * " +
+						"FROM activity a " +
+						"WHERE a.project_id = " + projectId + " AND a.id IN ( " +
+							"SELECT activity_id " +
+							"FROM activity_developer_relation adr " +
+							"WHERE  adr.developer_id = " + developerId + 
+						")";
+		ResultSet rs = this.db.conn.execQuery(query);
+		return this.parse(rs);
+	}
 }

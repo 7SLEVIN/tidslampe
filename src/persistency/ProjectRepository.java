@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Query;
+
 import model.Developer;
 import model.Project;
 
@@ -16,6 +18,16 @@ public class ProjectRepository extends Repository<Project> {
 		this.table = "project";
 		this.columns = new String[] { "name", "hour_budget", "deadline",
 				"manager_id" };
+	}
+	
+	public List<Project> readByDeveloper(int developerId) {
+		Query q = Query.SelectAllFrom(this.table).WhereIn("project.id",
+						Query.Select("project_id").From("activity").WhereIn("activity.id", 
+							Query.Select("activity_id").From("activity_developer_relation adr").WhereEquals("adr.developer_id", developerId)));
+		
+		ResultSet rs = this.db.conn.execQuery(q);
+		
+		return this.parse(rs);
 	}
 
 	public Project create(String name, int hourBudget, long deadline, Developer manager) {
