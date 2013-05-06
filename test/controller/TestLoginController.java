@@ -145,17 +145,17 @@ public class TestLoginController extends BaseTestDatabase {
 		
 		
 //Register work 
-		TimeEntry timeEntry = this.db.registerTime().create(testMillis, testMillis+1000*60*120, relation);
+		TimeEntry timeEntry = this.db.registerTime().create(testMillis, testMillis+1000*60*120, relation, false);
 		assertEquals(120, timeEntry.getDurationInMinutes());
 		loginControl.logout();
 		
 //"Register" work 
-		TimeEntry nullEntry = this.db.registerTime().create(testMillis+1000*60*30, testMillis+1000*60*180, relation);
+		TimeEntry nullEntry = this.db.registerTime().create(testMillis+1000*60*30, testMillis+1000*60*180, relation, false);
 		assertEquals(null, nullEntry);
 		loginControl.logout();
 
 //Register remaining work 
-		TimeEntry secondEntry = this.db.registerTime().create(testMillis+1000*60*120, testMillis+1000*60*290, relation);
+		TimeEntry secondEntry = this.db.registerTime().create(testMillis+1000*60*120, testMillis+1000*60*290, relation, false);
 		assertEquals(170, secondEntry.getDurationInMinutes());
 		loginControl.logout();
 		

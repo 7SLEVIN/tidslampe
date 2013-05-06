@@ -15,30 +15,33 @@ public class ReserveTimeRepository extends TimeRepository {
 		this.table = "reserve_time";
 	}
 	@Override
-	public TimeEntry create(long startTime, long endTime, int devID, int actID) {
+	public TimeEntry create(long startTime, long endTime, int devID, int actID, boolean isAssist) {
 		ActivityDeveloperRelation actDevRel = this.db.activityDeveloperRelation().readOrCreate(devID, actID);
-		return this.create(startTime, endTime, actDevRel);
+		return this.create(startTime, endTime, actDevRel, isAssist);
 	}
 	
-	public TimeEntry create(long startTime, long endTime, ActivityDeveloperRelation rel) {
+	public TimeEntry create(long startTime, long endTime, ActivityDeveloperRelation rel, boolean isAssist) {
 		int activityID = rel.getActivity().getId();
 		int devID = rel.getDeveloper().getId();
-		
+		String assistString = isAssist ? "1" : "0";
 		if(this.isTimeUsed(startTime, endTime, devID))
 			return null;
 		
-		if(this.db.activity().isFixed(activityID)){
-//Hvis aktiviteten er fixed, s� skal den bare registreres med det samme
-			return this.db.registerTime().create(startTime, endTime, rel);
-		}else{
-			int id = this.create(new String[]{String.valueOf(startTime), String.valueOf(endTime),String.valueOf(rel.getId()),String.valueOf(devID)});
+		if (this.db.activity().isFixed(activityID)) {
+			//Hvis aktiviteten er fixed, s� skal den bare registreres med det samme
+			return this.db.registerTime().create(startTime, endTime, rel, isAssist);
+		} else {
+			int id = this.create(new String[]{String.valueOf(startTime), 
+					String.valueOf(endTime),
+					String.valueOf(rel.getId()),
+					String.valueOf(devID), assistString});
 			
-			TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel.getId()); 
+			TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel.getId(), isAssist); 
 			return entry;
 		}
 	}
 	
-	private List<TimeEntry> getCollidingEntries(long startTime, long endTime, int devID){ //Differs from RegisterTime's getColliding, as this returns both REGISTERED and RESERVED entries
+	private List<TimeEntry> getCollidingEntries(long startTime, long endTime, int devID){ 
 		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.SelectAllFrom(this.table)
 				.WhereLessThan("start_time", endTime)
 				.WhereMoreThan("end_time", startTime)

@@ -8,17 +8,19 @@ import persistency.Database;
  *
  */
 public class TimeEntry extends DatabaseObject{
-	private long startTime; //TODO brugeren skal v�lge tid fra liste. 
-	private long endTime; //TODO endTime = startTime + 0.5h * n?
+	private long startTime; 
+	private long endTime; 
+	private boolean isAssist; 
 	private int developerActivityRelationID;
 	private ActivityDeveloperRelation activityDeveloperRelation;
 	
-	public TimeEntry(Database db, int id, long startTime, long endTime, int devActRelID) {
+	public TimeEntry(Database db, int id, long startTime, long endTime, int devActRelID, boolean isAssist) {
 		super(id,db);
 		
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.developerActivityRelationID = devActRelID;
+		this.isAssist = isAssist;
 	}
 	
 	@Override
@@ -41,8 +43,12 @@ public class TimeEntry extends DatabaseObject{
 		return (int) (this.endTime - this.startTime)/1000/60;
 	}
 
+	public boolean getIsAssist() {
+		return this.isAssist;
+	}
+
 	public long getStartTime() {
-		return startTime;
+		return this.startTime;
 	}
 	
 	public Calendar getStartDate() {
@@ -52,7 +58,7 @@ public class TimeEntry extends DatabaseObject{
 	}
 
 	public long getEndTime() {
-		return endTime;
+		return this.endTime;
 	}
 	
 	public Calendar getEndDate() {
@@ -62,7 +68,7 @@ public class TimeEntry extends DatabaseObject{
 	}
 
 	public int getDeveloperActivityRelationID() {
-		return developerActivityRelationID;
+		return this.developerActivityRelationID;
 	}
 
 	public Developer getDeveloper() {

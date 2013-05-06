@@ -34,7 +34,7 @@ public class TestReserveTime extends BaseTestDatabase {
 		Activity activity = this.db.activity().createProjectActivity(project.getId(),description, expectedTime, startTime, endTime);
 		ActivityDeveloperRelation relation = this.db.activityDeveloperRelation().create(activity, developer);
 
-		TimeEntry reservedTime = this.db.reserveTime().create(startTime, endTime, relation);
+		TimeEntry reservedTime = this.db.reserveTime().create(startTime, endTime, relation, false);
 		assertEquals(false, reservedTime == null);
 		
 		String descriptionCollision = "go to bed early";
@@ -44,8 +44,8 @@ public class TestReserveTime extends BaseTestDatabase {
 		Activity activityCollision = this.db.activity().createFixedActivity(ActivityType.VACATION, descriptionCollision, startTime2, endTime);
 		ActivityDeveloperRelation relationCollision = this.db.activityDeveloperRelation().create(activityCollision, developer);
 		
-		TimeEntry reservedTime2 = this.db.reserveTime().create(startTime2, endTime, relationCollision);
-		TimeEntry reservedTime3 = this.db.registerTime().create(startTime2, endTime, relationCollision);
+		TimeEntry reservedTime2 = this.db.reserveTime().create(startTime2, endTime, relationCollision, false);
+		TimeEntry reservedTime3 = this.db.registerTime().create(startTime2, endTime, relationCollision, false);
 		
 //Paul is singing from 20:30 to 23:30
 //He cannot plan to go to bed at 22:00
