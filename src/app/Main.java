@@ -11,7 +11,6 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Database database = new Database("dev_db.db");
-		
 		// Wire up
 		TimeService timeService = new TimeService();
 		
