@@ -9,6 +9,7 @@ import controller.view.DevelopersViewController;
 import controller.view.LoginViewController;
 import controller.view.MenuViewController;
 import controller.view.ProjectMaintainanceViewController;
+import controller.view.ProjectRapportViewController;
 import controller.view.ProjectsViewController;
 
 public class ViewControllerFactory {
@@ -45,6 +46,10 @@ public class ViewControllerFactory {
 	
 	public static ProjectsViewController CreateProjectsViewController() {
 		return new ProjectsViewController(database, viewContainer, controllerCollection);
+	}
+	
+	public static ProjectRapportViewController CreateProjectRapportViewController(int rapportId) {
+		return new ProjectRapportViewController(database, viewContainer, controllerCollection, rapportId);
 	}
 
 }
