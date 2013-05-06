@@ -6,7 +6,9 @@ import java.util.List;
 import model.Activity;
 import model.ActivityDeveloperRelation;
 import model.Project;
+import model.TimeEntry;
 import persistency.Database;
+import utils.Query;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.ProjectRapportViewState;
@@ -43,10 +45,8 @@ public class ProjectRapportViewController extends AbstractViewController {
 	
 	private void setTimeUsed() {
 		long timeUsed = 0;
-		for (Activity activity : this.project.getActivities()) {
-			List<ActivityDeveloperRelation> rel = new ArrayList<ActivityDeveloperRelation>();
-//			this.database.registerTime().readAllWhereEquals(, value);
-			
+		for (TimeEntry entry : this.database.registerTime().readByProjectId(this.project.getId())) {
+			timeUsed += entry.getDurationInMinutes();
 		}
 		this.viewState.setTimeUsed(timeUsed);
 	}

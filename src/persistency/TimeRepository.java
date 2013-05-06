@@ -46,5 +46,12 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 	}
 
 	abstract public TimeEntry create(long startTime, long endTime, int devActRelID,int devID);
+	
+	public List<TimeEntry> readByProjectId(int projectId) {
+		Query query = Query.SelectAllFrom(this.table).WhereIn("developer_activity_relation_id",
+				Query.Select("id").From("activity_developer_relation").WhereIn("activity_id",
+						Query.Select("id").From("activity").WhereEquals("project_id", projectId)));
+		return this.parse(this.db.conn.execQuery(query));
+	}
 
 }

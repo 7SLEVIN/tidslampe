@@ -29,6 +29,7 @@ public class ProjectRapportViewState extends AbstractViewState {
 		this.nameLabel = new JLabel(project.getName());
 		this.nameLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 		this.activityCountLabel = new JLabel("Number of activities: " + String.valueOf(this.project.getActivities().size()));
+		this.timeUsedLabel = new JLabel();
 		
 		JPanel titlePanel = new JPanel();
 		GuiUtils.setSize(titlePanel, new Dimension(ViewContainer.WINDOW_WIDTH, 30));
@@ -36,7 +37,7 @@ public class ProjectRapportViewState extends AbstractViewState {
 		titlePanel.add(this.nameLabel);
 
 		JPanel infoPanel = new JPanel();
-		GuiUtils.setSize(infoPanel, new Dimension(ViewContainer.WINDOW_WIDTH, 100));
+		GuiUtils.setSize(infoPanel, new Dimension(ViewContainer.WINDOW_WIDTH, 50));
 		infoPanel.add(this.activityCountLabel);
 		infoPanel.add(this.timeUsedLabel);
 		
@@ -46,7 +47,7 @@ public class ProjectRapportViewState extends AbstractViewState {
 	
 	public void setTimeUsed(long timeUsed) {
 		this.timeUsed = timeUsed;
-		this.timeUsedLabel = new JLabel("Total time used" + String.valueOf(timeUsed));
+		this.timeUsedLabel.setText("Total time used: " + String.valueOf(timeUsed));
 	}
 	
 	public JButton getBackButton() {

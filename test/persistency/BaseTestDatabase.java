@@ -14,7 +14,7 @@ public class BaseTestDatabase {
 		this.db = new Database("test_db.db");
 		this.projectPlanner = new ProjectPlanner(this.db);
 
-		this.db.getConn().execUpdate("create table if not exists project (id integer primary key autoincrement, name string, hour_budget float, deadline integer, manager_id integer)");
+		this.db.getConn().execUpdate("create table if not exists project (id integer primary key autoincrement, name string, hour_budget float, deadline BIGINT, manager_id integer)");
 		this.db.getConn().execUpdate("create table if not exists developer (id integer primary key autoincrement, initials string, name string)");
 		this.db.getConn().execUpdate("create table if not exists activity (id integer primary key autoincrement,activity_type string, description string, expected_time integer, start_time BIGINT, end_time BIGINT, project_id integer)");
 		this.db.getConn().execUpdate("create table if not exists activity_developer_relation (id integer primary key autoincrement, activity_id integer, developer_id integer)");
