@@ -111,15 +111,24 @@ public class Query {
 		return this;
 	}
 	
-	private Query WhereRaw(String key, String value, String operator) {
+	private Query WhereRaw(String key, String value, String operator, boolean suppressLiteral) {
 		if (this.lastStatement == QueryStatement.Where)
 			this.query += "AND ";
 		else
 			this.query += "WHERE ";
-
-		this.query += String.format("%s %s '%s' ", key, operator ,value);
+		
+		String q = suppressLiteral ? "%s %s %s " : "%s %s '%s' ";
+		this.query += String.format(q, key, operator ,value);
 		this.lastStatement = QueryStatement.Where;
 		return this;
+	}
+
+	private Query WhereRaw(String key, String value, String operator) {
+		return this.WhereRaw(key, value, operator, false);
+	}
+
+	public Query WhereIn(String key, Query query) {
+		return this.WhereRaw(key, String.format("(%s)", query.End()), "IN", true);
 	}
 
 	public Query WhereEquals(String key, String value) {

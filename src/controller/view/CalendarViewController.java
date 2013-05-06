@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -62,13 +63,39 @@ public class CalendarViewController extends AbstractViewController {
 		this.currentStartDate.add(Calendar.DAY_OF_YEAR, -2);
 		
 		this.viewState.setDeveloperName((this.isSelf ? "(You) " : "") + this.developer.getName());
-		this.viewState.setProjects(this.database.project().readAll());
 		this.viewState.setDateString(this.timeService.convertCalendarToInputString(this.currentStartDate));
 		this.viewState.setActivityTypes();
 		this.viewState.setFixedEnabled(false);
+
+		this.fillProjectList();
 		
 		this.initListeners();	
 		this.updateStartDate();
+	}
+	
+	public void fillProjectList() {
+		List<Project> projects = null;
+		if (this.viewState.getAssistState()) 
+			projects = this.database.project().readAll();
+		else
+			projects = this.database.project().readByDeveloper(this.developer.getId());
+		this.viewState.setProjects(projects);
+	}
+	
+	private void fillActivityList() {
+		Project selectedProject = this.viewState.getSelectedProject();
+		
+		List<Activity> activities = null;
+		if (this.viewState.getAssistState())
+			activities = this.database.activity().readAllWhereEquals("project_id", selectedProject.getId());
+		else
+			activities = this.database.activity().readByDeveloperAndProjectId(selectedProject.getId(), this.developer.getId()); 
+		
+		this.viewState.setActivities(activities);
+	}
+	
+	private void clearActivityList() {
+		this.viewState.setActivities(new ArrayList<Activity>());
 	}
 
 	private void initListeners() {
@@ -77,7 +104,7 @@ public class CalendarViewController extends AbstractViewController {
 		ActionUtils.addListener(this.viewState.getReserveButton(), this, "addReserveTimeEntry");
 		
 		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
-		
+
 		this.viewState.getFixedToggleButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean selected = viewState.getFixedState();
@@ -85,10 +112,17 @@ public class CalendarViewController extends AbstractViewController {
 			}
 		});
 		
+		this.viewState.getAssistToggleButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fillProjectList();
+				clearActivityList();
+			}
+		});
+		
 		this.viewState.getProjectComboBox().addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent event) {
 				if (event.getStateChange() == ItemEvent.SELECTED)
-					updateActivities();
+					fillActivityList();
 			}
 		});
 		
@@ -221,11 +255,6 @@ public class CalendarViewController extends AbstractViewController {
         }
 
 		this.updateStartDate();
-	}
-	
-	private void updateActivities() {
-		Project selectedProject = this.viewState.getSelectedProject();
-		this.viewState.setActivities(this.database.activity().readAllWhereEquals("project_id", selectedProject.getId()));
 	}
 	
 	private void updateStartDate() {

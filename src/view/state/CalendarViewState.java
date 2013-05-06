@@ -113,6 +113,7 @@ public class CalendarViewState extends AbstractViewState {
 	private JPanel panel_9;
 	private JLabel lblDato;
 	private HashMap<TimeEntry, JPanel> timeEntryPanels;
+	private JToggleButton tglIsAssist;
 
 	public CalendarViewState() {
 		setMinimumSize(new Dimension(ViewContainer.WINDOW_WIDTH,
@@ -427,6 +428,9 @@ public class CalendarViewState extends AbstractViewState {
 
 		tglIsFixed = new JToggleButton("Fixed");
 		pnlFixed.add(tglIsFixed);
+		
+		tglIsAssist = new JToggleButton("Assist");
+		pnlFixed.add(tglIsAssist);
 
 		lblActivityType = new JLabel("Type");
 		lblActivityType.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
@@ -476,8 +480,8 @@ public class CalendarViewState extends AbstractViewState {
 		float minuteHeight = Float.valueOf(this.dayPanels[day].getHeight())
 				/ (24f * 60f);
 
-		int fromMinute = timeEntry.getStartDate().get(Calendar.HOUR_OF_DAY) * 60 
-				+ timeEntry.getStartDate().get(Calendar.MINUTE);
+		int fromMinute = timeEntry.getStartDate().get(Calendar.HOUR_OF_DAY)
+				* 60 + timeEntry.getStartDate().get(Calendar.MINUTE);
 
 		JPanel timeEntryPanel = new JPanel();
 
@@ -527,6 +531,7 @@ public class CalendarViewState extends AbstractViewState {
 		this.cmbProject.setVisible(!fixed);
 		this.lblProject.setVisible(!fixed);
 		this.btnReserve.setVisible(!fixed);
+		this.tglIsAssist.setVisible(!fixed);
 
 		this.cmbActivityType.setVisible(fixed);
 		this.lblActivityType.setVisible(fixed);
@@ -579,6 +584,10 @@ public class CalendarViewState extends AbstractViewState {
 
 	public JToggleButton getFixedToggleButton() {
 		return this.tglIsFixed;
+	}
+
+	public JToggleButton getAssistToggleButton() {
+		return this.tglIsAssist;
 	}
 
 	// Model setters
@@ -638,6 +647,13 @@ public class CalendarViewState extends AbstractViewState {
 
 	public boolean getFixedState() {
 		return this.getFixedToggleButton().getModel().isSelected();
+	}
+
+	public boolean getAssistState() {
+		if (this.getFixedState()) 
+			return false;
+		
+		return this.getAssistToggleButton().getModel().isSelected();
 	}
 
 	public ActivityType getSelectedActivityType() {
