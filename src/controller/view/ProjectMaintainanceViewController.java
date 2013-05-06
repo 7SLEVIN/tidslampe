@@ -1,6 +1,12 @@
 package controller.view;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import model.Activity;
 import model.Developer;
@@ -9,6 +15,7 @@ import persistency.Database;
 import utils.ActionUtils;
 import utils.Dialog;
 import utils.DialogChoice;
+import utils.TimeService;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.ProjectMaintainanceViewState;
@@ -36,10 +43,10 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 		this.viewState = new ProjectMaintainanceViewState(); 
 		this.viewState.setProjectName(this.project.getName());
 		
-		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
+		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectsViewController()));
 		ActionUtils.addListener(this.viewState.getAddDevButton(), this, "addDeveloper");
 		ActionUtils.addListener(this.viewState.getAssManagerButton(), this, "assignManager");
-		ActionUtils.addListener(this.viewState.getSplitActButton(), this, "addActivity");
+		ActionUtils.addListener(this.viewState.getAddActivityButton(), this, "addActivity");
 		
 		this.fillActivityList();
 		this.fillManagerList();
@@ -94,22 +101,23 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 		this.viewState.setActivities(this.database.activity().readAllWhereEquals("project_id", this.project.getId()));
 	}
 	
+	public void addActivity() {
+		String name = this.viewState.getNameInput();
+		int hourBudget = Integer.valueOf(this.viewState.getHourBudgetInput());
+		String deadline = this.viewState.getDeadlineInput();
+		
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		try {
+			Calendar deadlineDate = Calendar.getInstance();
+			deadlineDate.setTime(format.parse(deadline.trim()));
+			this.addNewActivity(name, hourBudget, 0, deadlineDate.getTimeInMillis());
+			this.fillActivityList();
+		} catch (ParseException e) {
+			Dialog.message("Invalid date format, must use dd-mm-yyy");
+		}
+	}
+	
 	public void addNewActivity(String description, int expectedTime, long startTime, long endTime){
 		this.database.activity().createProjectActivity(this.project.getId(), description, expectedTime, startTime, endTime);
 	}
-	
-	public void splitActivity(int activityID){
-		Activity activity = this.database.activity().read(activityID);
-		String description = activity.getDescription();
-		int expectedTime = activity.getExpectedTime();
-//		private List<Assist> assists;
-		long startTime = activity.getStartTime();
-		long endTime = activity.getEndTime();
-		List<Developer> developers = activity.getDevelopers();
-		
-		
-		
-	}
-	
-	
 }

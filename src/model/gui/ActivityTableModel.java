@@ -16,7 +16,7 @@ public class ActivityTableModel extends DefaultTableModel implements TableModel 
 	private TimeService timeService;
 
 	public ActivityTableModel(List<Activity> activities) {
-		super(new String[] {"Description", "Hour Budget", "Deadline (DD-MM-YY)", "Developers"}, activities.size());
+		super(new String[] {"Description", "Hour Budget", "Deadline", "Developers"}, activities.size());
 		this.timeService = new TimeService();
 		this.data = activities;
 	}
