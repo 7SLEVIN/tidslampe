@@ -34,4 +34,10 @@ public class ActivityTableModel extends DefaultTableModel implements TableModel 
 			default: return null;
 		}
 	}
+	
+	@Override
+    public boolean isCellEditable(int row, int column) {
+       // None are editable
+       return false;
+    }
 }

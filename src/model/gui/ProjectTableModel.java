@@ -32,5 +32,10 @@ public class ProjectTableModel extends DefaultTableModel implements TableModel {
 		}
 	}
 	
+	@Override
+    public boolean isCellEditable(int row, int column) {
+       // None are editable
+       return false;
+    }
 	
 }
