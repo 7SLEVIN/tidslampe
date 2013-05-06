@@ -1,7 +1,12 @@
 package controller.view;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JList;
 
 import model.Project;
 import persistency.Database;
@@ -34,6 +39,14 @@ public class MenuViewController extends AbstractViewController {
 		this.viewState.getCalendarButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateCalendarViewController(currentDeveloperId)));
 		this.viewState.getProjectsButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectsViewController()));
 		ActionUtils.addListener(this.viewState.getGotoProjectButton(), this, "gotoProject");
+
+		this.viewState.getProjectList().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() >= 2) {
+					viewContainer.setViewState(ViewControllerFactory.CreateProjectMaintainanceViewController(viewState.getSelectedProject()));
+				}
+			}
+		});
 		
 		this.fillProjectList();
 	}

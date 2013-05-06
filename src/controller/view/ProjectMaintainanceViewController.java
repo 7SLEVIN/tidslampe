@@ -105,6 +105,13 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 	}
 	
 	public void addActivity() {
+		if (this.viewState.getNameInput().isEmpty() ||
+				this.viewState.getHourBudgetInput().isEmpty() ||
+				this.viewState.getDeadlineInput().isEmpty()) {
+			Dialog.message("You must fill out all fields!");
+			return;
+		}
+		
 		String name = this.viewState.getNameInput();
 		int hourBudget = Integer.valueOf(this.viewState.getHourBudgetInput());
 		String deadline = this.viewState.getDeadlineInput();

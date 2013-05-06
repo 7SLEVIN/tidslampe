@@ -78,5 +78,7 @@ public class MenuViewState extends AbstractViewState {
 		return this.gotoProjectButton;
 	}
 	
-	
+	public JList<Project> getProjectList() {
+		return this.projectsList;
+	}
 }
