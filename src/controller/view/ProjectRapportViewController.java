@@ -39,16 +39,26 @@ public class ProjectRapportViewController extends AbstractViewController {
 		this.viewState = new ProjectRapportViewState(this.project);
 		
 		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectMaintainanceViewController(this.project.getId())));
-		
+
 		this.setTimeUsed();
+		this.setTimeExpected();
+		this.viewState.setTimeLeft();
 	}
 	
 	private void setTimeUsed() {
-		long timeUsed = 0;
+		long time = 0;
 		for (TimeEntry entry : this.database.registerTime().readByProjectId(this.project.getId())) {
-			timeUsed += entry.getDurationInMinutes();
+			time += entry.getDurationInMinutes();
 		}
-		this.viewState.setTimeUsed(timeUsed);
+		this.viewState.setTimeUsed(time);
+	}
+	
+	private void setTimeExpected() {
+		long time = 0;
+		for (Activity activity : this.project.getActivities()) {
+			time += 60 * activity.getExpectedTime();
+		}
+		this.viewState.setTimeExpected(time);
 	}
 
 }
