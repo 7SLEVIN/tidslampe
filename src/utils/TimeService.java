@@ -33,6 +33,25 @@ public class TimeService {
 		return cal;
 	}
 	
+	public long convertToMillis(String deadlineString){
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		try {
+			Calendar deadlineDate = Calendar.getInstance();
+			deadlineDate.setTime(format.parse(deadlineString.trim()));
+			long longDeadline = deadlineDate.getTimeInMillis(); 
+			if(this.getCurrentDateTime().getTimeInMillis() > longDeadline){ //Deadline already surpassed? Think not.
+				Dialog.message("You can't make a deadline which is already passed");
+				return -1L;
+			}
+			return longDeadline;
+			
+		} catch (ParseException e) {
+			Dialog.message("Invalid date format, must use dd-mm-yyyy");
+			return -1L;
+		}
+		
+	}
+	
 	public long convertToMillis(int year, int month, int day, int hour, int minute){		
 		if(!this.isDateValid(year, month, day, hour, minute)){
 			return -1L;

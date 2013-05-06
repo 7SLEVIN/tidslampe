@@ -14,6 +14,7 @@ public class Main {
 		
 		// Wire up
 		TimeService timeService = new TimeService();
+		
 		ControllerCollection controllerCollection = new ControllerCollection(database, timeService);
 		ViewContainer viewContainer = new ViewContainer();
 		ViewControllerFactory.initialize(database, viewContainer, controllerCollection);
