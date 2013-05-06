@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import persistency.Database;
@@ -98,6 +97,10 @@ public class Project extends DatabaseObject {
 	public List<Activity> getActivities() {
 		this.activities = this.db.activity().readAllWhereEquals("project_id", this.getId());
 		return this.activities;
+	}
+	
+	public String toString() {
+		return this.name;
 	}
 
 }
