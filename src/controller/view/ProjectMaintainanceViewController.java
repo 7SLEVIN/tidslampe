@@ -27,6 +27,7 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 
 	private Project project;
 	private ProjectMaintainanceViewState viewState;
+	private TimeService timeService;
 	
 	public ProjectMaintainanceViewController(Database database, ViewContainer viewContainer, ControllerCollection controllers, int projectID){
 		super(database,viewContainer,controllers);
@@ -42,6 +43,7 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 	public void initialize() {
 		this.viewState = new ProjectMaintainanceViewState(); 
 		this.viewState.setProjectName(this.project.getName());
+		this.timeService = new TimeService();
 		
 		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectsViewController()));
 		ActionUtils.addListener(this.viewState.getAddDevButton(), this, "addDeveloper");
@@ -113,15 +115,11 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 		String name = this.viewState.getNameInput();
 		int hourBudget = Integer.valueOf(this.viewState.getHourBudgetInput());
 		String deadline = this.viewState.getDeadlineInput();
+		long milliDeadline = this.timeService.convertToMillis(deadline);
 		
-		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-		try {
-			Calendar deadlineDate = Calendar.getInstance();
-			deadlineDate.setTime(format.parse(deadline.trim()));
-			this.addNewActivity(name, hourBudget, 0, deadlineDate.getTimeInMillis());
+		if(milliDeadline > 0){
+			this.addNewActivity(name, hourBudget, 0, milliDeadline);
 			this.fillActivityList();
-		} catch (ParseException e) {
-			Dialog.message("Invalid date format, must use dd-mm-yyy");
 		}
 	}
 	

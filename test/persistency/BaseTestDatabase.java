@@ -19,8 +19,8 @@ public class BaseTestDatabase {
 		this.db.getConn().execUpdate("create table if not exists activity (id integer primary key autoincrement,activity_type string, description string, expected_time integer, start_time BIGINT, end_time BIGINT, project_id integer)");
 		this.db.getConn().execUpdate("create table if not exists activity_developer_relation (id integer primary key autoincrement, activity_id integer, developer_id integer)");
 		this.db.getConn().execUpdate("create table if not exists assist (id integer primary key autoincrement, developer_id integer, spent_time float)");
-		this.db.getConn().execUpdate("create table if not exists register_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
-		this.db.getConn().execUpdate("create table if not exists reserve_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
+		this.db.getConn().execUpdate("create table if not exists register_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer, is_assist integer)");
+		this.db.getConn().execUpdate("create table if not exists reserve_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer, is_assist integer)");
 	}
 	
 	protected void addProjects(){

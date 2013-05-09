@@ -9,6 +9,7 @@ import persistency.Database;
 import utils.ActionUtils;
 import utils.Dialog;
 import utils.DialogChoice;
+import utils.TimeService;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.ProjectsViewState;
@@ -19,6 +20,7 @@ import factory.ViewControllerFactory;
 public class ProjectsViewController extends AbstractViewController {
 
 	private ProjectsViewState viewState;
+	private TimeService timeService;
 
 	public ProjectsViewController(Database database, ViewContainer viewContainer, ControllerCollection controllers) {
 		super(database, viewContainer, controllers);
@@ -32,6 +34,7 @@ public class ProjectsViewController extends AbstractViewController {
 	@Override
 	public void initialize() {
 		this.viewState = new ProjectsViewState(); 
+		this.timeService = new TimeService();
 		
 		ActionUtils.addListener(this.viewState.getDeleteButton(), this, "deleteSelectedProject");
 		ActionUtils.addListener(this.viewState.getMaintainButton(), this, "maintainSelectedProject");
@@ -61,17 +64,20 @@ public class ProjectsViewController extends AbstractViewController {
 	public void createNewProject() {
 		String nameInput = this.viewState.getNameInput().trim();
 		int hourBudgetInput = this.viewState.getHourBudgetInput();
-		long deadlineInput = this.viewState.getDeadlineInput();
+		String deadlineInput = this.viewState.getDeadlineInput();
 		Developer managerInput = this.viewState.getManagerInput();
 		
+		long milliDeadline = this.timeService.convertToMillis(deadlineInput);
+		
 		if (nameInput.length() == 0 ||
-				hourBudgetInput < 0 ||
-				deadlineInput < 0) {
+				hourBudgetInput < 0) {
 			Dialog.message("You must fill out all fields");
+			return;
+		}else if(milliDeadline < 0){
 			return;
 		}
 		
-		if (this.database.project().create(nameInput, hourBudgetInput, deadlineInput, managerInput) == null) {
+		if (this.database.project().create(nameInput, hourBudgetInput, milliDeadline, managerInput) == null) {
 			Dialog.message("Could not create project");
 		}
 		this.fillProjectList();

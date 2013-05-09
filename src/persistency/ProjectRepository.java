@@ -56,9 +56,9 @@ public class ProjectRepository extends Repository<Project> {
 		try {
 			while (rs.next()) {
 				managerIDs.add(rs.getInt(this.columns[3]));
-				projects.add(new Project(this.db, rs.getInt("id"), rs
-						.getString(this.columns[0]),
-						rs.getInt(this.columns[1]), rs.getInt(this.columns[2])));
+				projects.add(new Project(this.db, rs.getInt("id"), 
+						rs.getString(this.columns[0]),
+						rs.getInt(this.columns[1]), rs.getLong(this.columns[2])));
 			}
 			rs.close();
 		} catch (SQLException e) {

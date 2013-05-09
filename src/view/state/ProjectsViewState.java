@@ -122,10 +122,8 @@ public class ProjectsViewState extends AbstractViewState {
 		return Integer.parseInt(this.hourBudgetInput.getText());
 	}
 
-	public long getDeadlineInput() {
-		if(this.hourBudgetInput.getText().isEmpty())
-			return 0;
-		return Long.parseLong(this.deadlineInput.getText());
+	public String getDeadlineInput() {
+		return this.deadlineInput.getText();
 	}
 
 	public Developer getManagerInput() {

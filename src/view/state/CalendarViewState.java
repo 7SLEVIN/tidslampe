@@ -114,6 +114,13 @@ public class CalendarViewState extends AbstractViewState {
 	private JLabel lblDato;
 	private HashMap<TimeEntry, JPanel> timeEntryPanels;
 	private JToggleButton tglIsAssist;
+	private JLabel lblLegendNormal;
+	private JPanel panel_10;
+	private JPanel panel_11;
+	private JLabel lblAssist;
+	private JPanel panel_12;
+	private JLabel lblFixed;
+	private JLabel lblNewLabel_1;
 
 	public CalendarViewState() {
 		setMinimumSize(new Dimension(ViewContainer.WINDOW_WIDTH,
@@ -382,6 +389,37 @@ public class CalendarViewState extends AbstractViewState {
 		add(panel_3);
 		panel_3.setLayout(new GridLayout(5, 1, 0, 0));
 
+		pnlInputActivity = new JPanel();
+		panel_3.add(pnlInputActivity);
+
+		lblNewLabel_1 = new JLabel("Legend:");
+		lblNewLabel_1.setFont(new Font("DejaVu Sans", Font.BOLD, 13));
+		pnlInputActivity.add(lblNewLabel_1);
+
+		panel_10 = new JPanel();
+		panel_10.setBackground(Color.ORANGE);
+		pnlInputActivity.add(panel_10);
+
+		lblLegendNormal = new JLabel("NORMAL");
+		panel_10.add(lblLegendNormal);
+		lblLegendNormal.setBackground(Color.ORANGE);
+
+		panel_11 = new JPanel();
+		panel_11.setBackground(Color.CYAN);
+		pnlInputActivity.add(panel_11);
+
+		lblAssist = new JLabel("ASSIST");
+		lblAssist.setBackground(Color.ORANGE);
+		panel_11.add(lblAssist);
+
+		panel_12 = new JPanel();
+		panel_12.setBackground(Color.MAGENTA);
+		pnlInputActivity.add(panel_12);
+
+		lblFixed = new JLabel("RESERVED");
+		lblFixed.setBackground(Color.ORANGE);
+		panel_12.add(lblFixed);
+
 		JPanel controls = new JPanel();
 		panel_3.add(controls);
 
@@ -428,7 +466,7 @@ public class CalendarViewState extends AbstractViewState {
 
 		tglIsFixed = new JToggleButton("Fixed");
 		pnlFixed.add(tglIsFixed);
-		
+
 		tglIsAssist = new JToggleButton("Assist");
 		pnlFixed.add(tglIsAssist);
 
@@ -440,28 +478,25 @@ public class CalendarViewState extends AbstractViewState {
 		cmbActivityType.setMinimumSize(new Dimension(80, 25));
 		cmbActivityType.setMaximumSize(new Dimension(200, 25));
 		pnlFixed.add(cmbActivityType);
-		
-				lblProject = new JLabel("Project");
-				pnlFixed.add(lblProject);
-				lblProject.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-				
-						cmbProject = new JComboBox<Project>();
-						pnlFixed.add(cmbProject);
-						cmbProject.setMinimumSize(new Dimension(80, 25));
-						cmbProject.setMaximumSize(new Dimension(200, 25));
-						
-								lblActivity = new JLabel("Activity");
-								pnlFixed.add(lblActivity);
-								lblActivity.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-								
-										cmbActivity = new JComboBox<Activity>();
-										pnlFixed.add(cmbActivity);
-										cmbActivity.setMaximumSize(new Dimension(150, 25));
-										cmbActivity.setMinimumSize(new Dimension(80, 25));
-										cmbActivity.setBounds(new Rectangle(0, 0, 80, 0));
 
-		pnlInputActivity = new JPanel();
-		panel_3.add(pnlInputActivity);
+		lblProject = new JLabel("Project");
+		pnlFixed.add(lblProject);
+		lblProject.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+
+		cmbProject = new JComboBox<Project>();
+		pnlFixed.add(cmbProject);
+		cmbProject.setMinimumSize(new Dimension(80, 25));
+		cmbProject.setMaximumSize(new Dimension(200, 25));
+
+		lblActivity = new JLabel("Activity");
+		pnlFixed.add(lblActivity);
+		lblActivity.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+
+		cmbActivity = new JComboBox<Activity>();
+		pnlFixed.add(cmbActivity);
+		cmbActivity.setMaximumSize(new Dimension(150, 25));
+		cmbActivity.setMinimumSize(new Dimension(80, 25));
+		cmbActivity.setBounds(new Rectangle(0, 0, 80, 0));
 
 		pnlAddButtons = new JPanel();
 		panel_3.add(pnlAddButtons);
@@ -650,9 +685,9 @@ public class CalendarViewState extends AbstractViewState {
 	}
 
 	public boolean getAssistState() {
-		if (this.getFixedState()) 
+		if (this.getFixedState())
 			return false;
-		
+
 		return this.getAssistToggleButton().getModel().isSelected();
 	}
 

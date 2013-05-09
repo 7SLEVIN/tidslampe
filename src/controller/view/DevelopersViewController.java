@@ -47,6 +47,9 @@ public class DevelopersViewController extends AbstractViewController {
 		if (initialsInput.length() == 0 || nameInput.length() == 0) {
 			Dialog.message("You must fill out both initials and name");
 			return;
+		}else if(initialsInput.length() > 4){
+			Dialog.message("The length of initials can at most be 4.");
+			return;
 		}
 		
 		if (this.database.developer().create(initialsInput, nameInput) == null) {

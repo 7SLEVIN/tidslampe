@@ -207,7 +207,8 @@ public class CalendarViewController extends AbstractViewController {
             TimeEntry entry = database.registerTime().create(startDate.getTimeInMillis(), 
         			endDate.getTimeInMillis(), 
     				this.developer.getId(), 
-    				actId);
+    				actId, 
+    				this.viewState.getAssistState());
 			if (entry == null)
         		Dialog.message("Specified date and time is overlapping existing time registrations");
             
@@ -245,7 +246,8 @@ public class CalendarViewController extends AbstractViewController {
     		TimeEntry entry = database.reserveTime().create(startDate.getTimeInMillis(), 
     				endDate.getTimeInMillis(), 
     				this.developer.getId(), 
-    				act.getId());
+    				act.getId(),
+    				false);
     		
     		if (entry == null)
     			Dialog.message("Specified date and time is overlapping existing time reservations");
@@ -275,7 +277,7 @@ public class CalendarViewController extends AbstractViewController {
 				String currentDateFormat = df.format(iterDate.getTime());
 
 				if (startDateFormat.equals(currentDateFormat)) {
-					this.viewState.addTimeEntry(entry, j, Color.ORANGE);
+					this.viewState.addTimeEntry(entry, j, entry.getIsAssist() ? Color.CYAN : Color.ORANGE);
 				}
 			}
 			

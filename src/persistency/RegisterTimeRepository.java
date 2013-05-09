@@ -15,29 +15,30 @@ public class RegisterTimeRepository extends TimeRepository {
 	}
 	
 	/**
-	 * 
-	 * @param startTime
-	 * @param endTime
-	 * @param devID
-	 * @param actID
 	 * @return returns null if time is already in use!
 	 */
 	@Override
-	public TimeEntry create(long startTime, long endTime, int devID, int actID) {
+	public TimeEntry create(long startTime, long endTime, int devID, int actID, boolean isAssist) {
 		ActivityDeveloperRelation actDevRel = this.db.activityDeveloperRelation().readOrCreate(devID, actID);
-		return this.create(startTime, endTime, actDevRel);
+		return this.create(startTime, endTime, actDevRel, isAssist);
 	}
 	
-	public TimeEntry create(long startTime, long endTime, ActivityDeveloperRelation rel) {
+	public TimeEntry create(long startTime, long endTime, ActivityDeveloperRelation rel, boolean isAssist) {
+		String assistString = isAssist ? "1" : "0";
+		
 		if(this.isTimeUsed(startTime, endTime, rel.getDeveloper().getId()))
 			return null;
 		
 		if(startTime == -1L || endTime == -1L)
 			return null;
 		
-		int id = this.create(new String[]{String.valueOf(startTime), String.valueOf(endTime),String.valueOf(rel.getId()),String.valueOf(rel.getDeveloper().getId())});
+		int id = this.create(new String[]{ String.valueOf(startTime), 
+				String.valueOf(endTime),
+				String.valueOf(rel.getId()),
+				String.valueOf(rel.getDeveloper().getId()),
+				assistString});
 		
-		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel.getId()); 
+		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel.getId(), isAssist); 
 		return entry;
 	}
 	

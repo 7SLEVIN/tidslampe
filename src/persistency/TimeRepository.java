@@ -17,7 +17,7 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 	public TimeRepository(Database db) {
 		super(db);
 		this.timeService = new TimeService();
-		this.columns = new String[]{"start_time", "end_time","developer_activity_relation_id","developer_id"};
+		this.columns = new String[]{"start_time", "end_time","developer_activity_relation_id","developer_id", "is_assist"};
 	}
 	
 	public List<TimeEntry> readByDeveloperId(int developerId) {
@@ -37,7 +37,7 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 				timeEntries.add(new TimeEntry(
 						this.db, rs.getInt("id"), 
 						rs.getLong(this.columns[0]), rs.getLong(this.columns[1]), 
-						rs.getInt(this.columns[2])));
+						rs.getInt(this.columns[2]), rs.getBoolean("is_assist")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,7 +45,7 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 		return timeEntries;
 	}
 
-	abstract public TimeEntry create(long startTime, long endTime, int devActRelID,int devID);
+	abstract public TimeEntry create(long startTime, long endTime, int devActRelID,int devID, boolean isAssist);
 	
 	public List<TimeEntry> readByProjectId(int projectId) {
 		Query query = Query.SelectAllFrom(this.table).WhereIn("developer_activity_relation_id",
