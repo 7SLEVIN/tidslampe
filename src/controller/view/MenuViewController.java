@@ -30,10 +30,7 @@ public class MenuViewController extends AbstractViewController {
 	@Override
 	public void initialize() {
 		this.viewState = new MenuViewState();
-		this.viewState.getDevelopersButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateDevelopersViewController()));
 		int currentDeveloperId = this.controllers.getLoginController().getUser().getId();
-		this.viewState.getCalendarButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateCalendarViewController(currentDeveloperId)));
-		this.viewState.getProjectsButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectsViewController()));
 		ActionUtils.addListener(this.viewState.getGotoProjectButton(), this, "gotoProject");
 		ActionUtils.addListener(this.viewState.getLogoutButton(), this, "logout");
 

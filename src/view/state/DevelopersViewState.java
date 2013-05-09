@@ -15,7 +15,6 @@ import model.gui.DeveloperTableModel;
 
 @SuppressWarnings("serial")
 public class DevelopersViewState extends AbstractViewState {
-	private JButton backButton;
 	private JButton deleteButton;
 	private JButton createButton;
 	private JTable table;
@@ -26,7 +25,6 @@ public class DevelopersViewState extends AbstractViewState {
 	public DevelopersViewState() {
 		this.table = new JTable();
 		this.deleteButton = new JButton("Delete selected");
-		this.backButton = new JButton("Back to menu");
 
 		// Creation GUI
 		this.createButton = new JButton("Create new");
@@ -42,7 +40,6 @@ public class DevelopersViewState extends AbstractViewState {
 		
 		JScrollPane scrollPane = new JScrollPane(this.table);
 		scrollPane.setPreferredSize(new Dimension(400, 300));
-		this.add(this.backButton);
 		this.add(scrollPane);
 		this.add(this.getDeleteButton());
 		this.add(createPanel);
@@ -73,9 +70,5 @@ public class DevelopersViewState extends AbstractViewState {
 
 	public JButton getDeleteButton() {
 		return this.deleteButton;
-	}
-
-	public JButton getBackButton() {
-		return this.backButton;
 	}
 }
