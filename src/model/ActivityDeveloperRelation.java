@@ -28,9 +28,8 @@ public class ActivityDeveloperRelation extends DatabaseObject {
 	}
 
 	@Override
-	protected void delete() {
-		// TODO Auto-generated method stub
-		
+	public void delete() {
+		this.db.activityDeveloperRelation().delete(this.getId());
 	}
 
 	@Override

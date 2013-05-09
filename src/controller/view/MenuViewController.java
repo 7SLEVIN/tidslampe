@@ -55,7 +55,8 @@ public class MenuViewController extends AbstractViewController {
 		int userId = this.controllers.getLoginController().getUser().getId();
 		List<Project> projects = new ArrayList<Project>();
 		for (Project project : this.database.project().readAll()) {
-			if (project.getManager().getId() == userId) projects.add(project);
+			if(project.getManager() == null) continue;
+			else if (project.getManager().getId() == userId) projects.add(project);
 		}
 		this.viewState.setProjects(projects);
 	}

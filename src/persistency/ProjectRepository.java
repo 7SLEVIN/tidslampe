@@ -47,6 +47,13 @@ public class ProjectRepository extends Repository<Project> {
 		Project project = new Project(this.db, id, name, hourBudget, deadline);
 		return project;
 	}
+	
+	public void removeManager(int id){
+		List<Project> projects = this.readAllWhereEquals("manager_id", id);
+		for(Project project : projects){
+			project.setManager(null);
+		}
+	}
 
 	@Override
 	protected List<Project> parse(ResultSet rs) {

@@ -20,6 +20,14 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 		this.columns = new String[]{"activity_id", "developer_id"};
 	}
 	
+	public void deleteRelationsByDevID(int id){
+		List<ActivityDeveloperRelation> relations = this.getRelationsOfDeveloper(id);
+		for(ActivityDeveloperRelation relation : relations){
+			System.out.println(relation.getId());
+			this.delete(relation.getId());
+		}
+	}
+	
 	public List<Developer> getDevelopersFromActivityID(int id){
 		List<ActivityDeveloperRelation> relations = this.db.activityDeveloperRelation().readAllWhereEquals("activity_id", id);
 		List<Developer> devs = new ArrayList<Developer>();
@@ -81,6 +89,11 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 			return null;
 		else 
 			return matches;
+	}
+	
+	public void RemoveRelationsByDev(int id){
+		List<ActivityDeveloperRelation> relations = this.getRelationsOfDeveloper(id);
+		
 	}
 	
 	public ActivityDeveloperRelation readByDeveloperAndActivityId(int devID, int actID) {

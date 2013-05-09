@@ -91,6 +91,7 @@ public class Activity extends DatabaseObject {
 		}else{
 			this.developers.clear();
 		}
+
 		List<ActivityDeveloperRelation> relations =	this.db.activityDeveloperRelation().readAllWhereEquals("activity_id", this.getId());
 		for(ActivityDeveloperRelation relation : relations){
 			this.developers.add(relation.getDeveloper());
