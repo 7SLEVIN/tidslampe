@@ -11,7 +11,6 @@ import view.state.DevelopersViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
 import exceptions.DeleteNonExistingException;
-import factory.ViewControllerFactory;
 
 public class DevelopersViewController extends AbstractViewController {
 

@@ -42,10 +42,10 @@ public class ReserveTimeRepository extends TimeRepository {
 	}
 	
 	private List<TimeEntry> getCollidingEntries(long startTime, long endTime, int devID){ 
-		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.SelectAllFrom(this.table)
-				.WhereLessThan("start_time", endTime)
-				.WhereMoreThan("end_time", startTime)
-				.WhereEquals("developer_id", devID)));
+		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.selectAllFrom(this.table)
+				.whereLessOrEquals("start_time", endTime)
+				.whereGreaterOrEquals("end_time", startTime)
+				.whereEquals("developer_id", devID)));
 		
 		collidingEntries.addAll(this.db.registerTime().getCollidingEntries(startTime, endTime, devID));
 		

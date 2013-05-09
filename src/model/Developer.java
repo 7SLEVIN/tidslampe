@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.DeleteNonExistingException;
 import exceptions.UpdateNonExistingException;
 import persistency.Database;
 
@@ -19,6 +20,14 @@ public class Developer extends DatabaseObject {
 		
 		this.initials = initials;
 		this.name = name;
+	}
+
+	@Override
+	public void delete() throws DeleteNonExistingException {
+		this.database.project().removeManager(this.getId());
+		this.database.activityDeveloperRelation().deleteRelationsByDevID(this.getId());
+		System.out.println(this.database.developer().exists(this.getId()));
+		super.delete();
 	}
 	
 	@Override

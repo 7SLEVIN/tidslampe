@@ -16,7 +16,6 @@ import view.state.ProjectsViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
 import exceptions.DeleteNonExistingException;
-import factory.ViewControllerFactory;
 
 public class ProjectsViewController extends AbstractViewController {
 

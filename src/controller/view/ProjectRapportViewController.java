@@ -9,7 +9,6 @@ import view.state.AbstractViewState;
 import view.state.ProjectRapportViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
-import factory.ViewControllerFactory;
 
 
 public class ProjectRapportViewController extends AbstractViewController {

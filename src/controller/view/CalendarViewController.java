@@ -31,7 +31,6 @@ import view.state.CalendarViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
 import exceptions.DeleteNonExistingException;
-import factory.ViewControllerFactory;
 
 public class CalendarViewController extends AbstractViewController {
 
@@ -110,6 +109,13 @@ public class CalendarViewController extends AbstractViewController {
 			public void actionPerformed(ActionEvent e) {
 				boolean selected = viewState.getFixedState();
 				viewState.setFixedEnabled(selected);
+			}
+		});
+		
+		this.viewState.getAssistToggleButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean selected = viewState.getAssistState();
+				viewState.setAssistEnabled(selected);
 			}
 		});
 		
