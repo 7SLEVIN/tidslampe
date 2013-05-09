@@ -27,9 +27,10 @@ public class Developer extends DatabaseObject {
 	}
 
 	@Override
-	protected void delete() {
-		// TODO Auto-generated method stub	
-		
+	public void delete() {
+		this.db.project().removeManager(this.getId());
+		this.db.activityDeveloperRelation().deleteRelationsByDevID(this.getId());	
+		this.db.developer().delete(this.getId());
 	}
 	
 	@Override

@@ -69,7 +69,8 @@ public class DevelopersViewController extends AbstractViewController {
 		
 		DialogChoice confirm = Dialog.confirm(String.format("Really delete %s?", sel.getName()));
 		if (confirm == DialogChoice.Yes) {
-			this.database.developer().delete(sel.getId());
+//TODO remove relations to projects and activities.						
+			sel.delete();
 			this.fillDeveloperList();
 		}
 	}
