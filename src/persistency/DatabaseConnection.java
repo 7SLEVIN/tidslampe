@@ -46,7 +46,7 @@ public class DatabaseConnection {
 		return this.execQuery(query.End());
 	}
 
-	public ResultSet execQuery(String query) {
+	private ResultSet execQuery(String query) {
 		//System.out.println(query);
 		try {
 			return this.stmt.executeQuery(query);

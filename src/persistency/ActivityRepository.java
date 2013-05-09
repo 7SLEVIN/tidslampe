@@ -22,8 +22,8 @@ public class ActivityRepository extends Repository<Activity> {
 	}
 	
 	public List<Activity> readByDeveloperId(int developerId) {
-		String query = String.format("SELECT * FROM activity WHERE id IN (%s) ORDER BY start_time", 
-				Query.Select("id").From("activity_developer_relation").WhereEquals("developer_id", developerId).End());
+		Query query = Query.SelectAllFrom(this.table).WhereIn("id", 
+					Query.Select("id").From("activity_developer_relation").WhereEquals("developer_id", developerId)).OrderBy("start_time");
 		return this.parse(this.db.conn.execQuery(query));
 	}
 	
@@ -50,7 +50,6 @@ public class ActivityRepository extends Repository<Activity> {
 		List<Activity> activities = new ArrayList<Activity>();
 		try {
 			while (rs.next()) {
-				
 				if(rs.getString("activity_type").equals(ActivityType.PROJECT.name())){
 					//Project-Activity
 					activities.add(new Activity(db, rs.getInt("id"), rs.getInt("project_id"),
@@ -83,13 +82,8 @@ public class ActivityRepository extends Repository<Activity> {
 	}
 
 	public List<Activity> readByDeveloperAndProjectId(int projectId, int developerId) {
-		String query = 	"SELECT * " +
-						"FROM activity a " +
-						"WHERE a.project_id = " + projectId + " AND a.id IN ( " +
-							"SELECT activity_id " +
-							"FROM activity_developer_relation adr " +
-							"WHERE  adr.developer_id = " + developerId + 
-						")";
+		Query query = Query.SelectAllFrom("activity a").WhereEquals("a.project_id", projectId).WhereIn("a.id", 
+					Query.Select("activity_id").From("activity_developer_relation adr").WhereEquals("adr.developer_id", developerId));
 		ResultSet rs = this.db.conn.execQuery(query);
 		return this.parse(rs);
 	}

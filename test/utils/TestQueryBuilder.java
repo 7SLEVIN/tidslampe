@@ -49,15 +49,33 @@ public class TestQueryBuilder {
 	}
 	
 	@Test
-	public void testSelectWhere() {
+	public void testWhere() {
 		String q1 = Query.SelectAllFrom("foo").WhereEquals("id", 1).End();
-		assertEquals("Select where", "SELECT * FROM foo WHERE id = 1", q1);
+		assertEquals("Where equals", "SELECT * FROM foo WHERE id = 1", q1);
 
 		String q2 = Query.SelectAllFrom("foo").WhereEquals("name", "bar").End();
-		assertEquals("Select where", "SELECT * FROM foo WHERE name = 'bar'", q2);
+		assertEquals("Where equals", "SELECT * FROM foo WHERE name = 'bar'", q2);
 
 		String q3 = Query.SelectAllFrom("foo").WhereEquals("name", "bar").WhereEquals("id", 1).End();
-		assertEquals("Select where", "SELECT * FROM foo WHERE name = 'bar' AND id = 1", q3);
+		assertEquals("Where equals", "SELECT * FROM foo WHERE name = 'bar' AND id = 1", q3);
+
+		String q4 = Query.SelectAllFrom("foo").WhereLessThan("name", "bar").End();
+		assertEquals("Where less", "SELECT * FROM foo WHERE name < 'bar'", q4);
+		
+		String q5 = Query.SelectAllFrom("foo").WhereLessThan("id", 5).End();
+		assertEquals("Where less", "SELECT * FROM foo WHERE id < 5", q5);
+
+		String q6 = Query.SelectAllFrom("foo").WhereMoreThan("name", "bar").End();
+		assertEquals("Where less", "SELECT * FROM foo WHERE name > 'bar'", q6);
+
+		String q7 = Query.SelectAllFrom("foo").WhereMoreThan("id", 6).End();
+		assertEquals("Where more", "SELECT * FROM foo WHERE name > 6", q7);
+	}
+	
+	@Test
+	public void testWhereIn() {
+		String q1 = Query.Select("foo").From("bar").WhereIn("id", Query.Select("id").From("baz")).End();
+		assertEquals("Where In", "SELECT foo FROM bar WHERE id IN (SELECT id FROM baz)", q1);
 	}
 	
 	@Test
@@ -96,7 +114,6 @@ public class TestQueryBuilder {
 		String q1 = Query.Exists("foo", 1).End();
 		assertEquals("Exists", "SELECT EXISTS(SELECT * FROM foo WHERE id=1)", q1);
 	}
-
 	
 	@Test
 	public void testCount() {

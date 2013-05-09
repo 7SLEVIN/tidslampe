@@ -21,10 +21,8 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 	}
 	
 	public List<TimeEntry> readByDeveloperId(int developerId) {
-//select * from register_time where developer_activity_relation_id in (select id from activity_developer_relation where developer_id = 1);
-		String query = String.format("SELECT * FROM %s WHERE developer_activity_relation_id IN (%s) ORDER BY start_time", 
-				this.table,
-				Query.Select("id").From("activity_developer_relation").WhereEquals("developer_id", developerId).End());
+		Query query = Query.SelectAllFrom(this.table).WhereIn("developer_activity_relation_id", 
+				Query.Select("id").From("activity_developer_relation").WhereEquals("developer_id", developerId));
 		return this.parse(this.db.conn.execQuery(query));
 	}
 	

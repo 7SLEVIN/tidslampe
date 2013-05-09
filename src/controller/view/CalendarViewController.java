@@ -114,6 +114,13 @@ public class CalendarViewController extends AbstractViewController {
 		
 		this.viewState.getAssistToggleButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean selected = viewState.getAssistState();
+				viewState.setAssistEnabled(selected);
+			}
+		});
+		
+		this.viewState.getAssistToggleButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				fillProjectList();
 				clearActivityList();
 			}

@@ -572,6 +572,10 @@ public class CalendarViewState extends AbstractViewState {
 		this.lblActivityType.setVisible(fixed);
 	}
 
+	public void setAssistEnabled(boolean state) {
+		this.btnReserve.setEnabled(!state);
+	}
+
 	// Component getters
 	public HashMap<TimeEntry, JPanel> getTimeEntryPanels() {
 		return this.timeEntryPanels;
