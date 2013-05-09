@@ -20,7 +20,6 @@ public class Database {
 	 * @param assist
 	 */
 	public Database(String dbFile) {
-		// TODO refactor db filename out of source code
 		this.conn = new DatabaseConnection(dbFile);
 		this.setUp();
 		
@@ -39,8 +38,8 @@ public class Database {
 		this.conn.execUpdate("create table if not exists activity (id integer primary key autoincrement,activity_type string, description string, expected_time integer, start_time BIGINT, end_time BIGINT, project_id integer)");
 		this.conn.execUpdate("create table if not exists activity_developer_relation (id integer primary key autoincrement, activity_id integer, developer_id integer)");
 		this.conn.execUpdate("create table if not exists assist (id integer primary key autoincrement, developer_id integer, spent_time float)");
-		this.conn.execUpdate("create table if not exists register_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
-		this.conn.execUpdate("create table if not exists reserve_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer)");
+		this.conn.execUpdate("create table if not exists register_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer, is_assist int)");
+		this.conn.execUpdate("create table if not exists reserve_time (id integer primary key autoincrement, start_time BIGINT, end_time BIGINT,developer_activity_relation_id integer,developer_id integer, is_assist int)");
 	}
 
 	public DatabaseConnection getConn() {

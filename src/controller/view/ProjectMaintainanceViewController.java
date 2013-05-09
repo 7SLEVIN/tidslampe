@@ -21,7 +21,6 @@ import view.state.AbstractViewState;
 import view.state.ProjectMaintainanceViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
-import factory.ViewControllerFactory;
 
 public class ProjectMaintainanceViewController extends AbstractViewController {
 

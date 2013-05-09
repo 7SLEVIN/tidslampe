@@ -6,7 +6,6 @@ import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.LoginViewState;
 import controller.ControllerCollection;
-import factory.ViewControllerFactory;
 
 public class LoginViewController extends AbstractViewController {
 

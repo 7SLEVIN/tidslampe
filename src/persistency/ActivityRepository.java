@@ -22,8 +22,8 @@ public class ActivityRepository extends Repository<Activity> {
 	}
 	
 	public List<Activity> readByDeveloperId(int developerId) {
-		Query query = Query.SelectAllFrom(this.table).WhereIn("id", 
-					Query.Select("id").From("activity_developer_relation").WhereEquals("developer_id", developerId)).OrderBy("start_time");
+		Query query = Query.selectAllFrom(this.table).whereIn("id", 
+					Query.select("id").from("activity_developer_relation").whereEquals("developer_id", developerId)).orderBy("start_time");
 		return this.parse(this.db.conn.execQuery(query));
 	}
 	
@@ -70,7 +70,7 @@ public class ActivityRepository extends Repository<Activity> {
 
 	public boolean isFixed(int id){
 		boolean isFixed = false;
-		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table).WhereEquals("id", id));
+		ResultSet rs = this.db.conn.execQuery(Query.selectAllFrom(this.table).whereEquals("id", id));
 		try {
 			while (rs.next()) {
 				isFixed = !rs.getString("activity_type").equals(ActivityType.PROJECT.name()); //If not project-activity, then fixed-activity
@@ -82,8 +82,8 @@ public class ActivityRepository extends Repository<Activity> {
 	}
 
 	public List<Activity> readByDeveloperAndProjectId(int projectId, int developerId) {
-		Query query = Query.SelectAllFrom("activity a").WhereEquals("a.project_id", projectId).WhereIn("a.id", 
-					Query.Select("activity_id").From("activity_developer_relation adr").WhereEquals("adr.developer_id", developerId));
+		Query query = Query.selectAllFrom("activity a").whereEquals("a.project_id", projectId).whereIn("a.id", 
+					Query.select("activity_id").from("activity_developer_relation adr").whereEquals("adr.developer_id", developerId));
 		ResultSet rs = this.db.conn.execQuery(query);
 		return this.parse(rs);
 	}

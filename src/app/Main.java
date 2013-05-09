@@ -4,7 +4,7 @@ import persistency.Database;
 import utils.TimeService;
 import view.ViewContainer;
 import controller.ControllerCollection;
-import factory.ViewControllerFactory;
+import controller.view.ViewControllerFactory;
 
 
 public class Main {
@@ -17,7 +17,6 @@ public class Main {
 		ControllerCollection controllerCollection = new ControllerCollection(database, timeService);
 		ViewContainer viewContainer = new ViewContainer();
 		ViewControllerFactory.initialize(database, viewContainer, controllerCollection);
-		
 		
 		// Bootstrap
 		viewContainer.setViewState(ViewControllerFactory.CreateLoginViewController());

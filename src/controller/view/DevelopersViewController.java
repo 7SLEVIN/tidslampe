@@ -10,7 +10,6 @@ import view.state.AbstractViewState;
 import view.state.DevelopersViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
-import factory.ViewControllerFactory;
 
 public class DevelopersViewController extends AbstractViewController {
 

@@ -15,7 +15,6 @@ import view.state.AbstractViewState;
 import view.state.ProjectsViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
-import factory.ViewControllerFactory;
 
 public class ProjectsViewController extends AbstractViewController {
 

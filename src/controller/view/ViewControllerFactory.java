@@ -1,16 +1,9 @@
-package factory;
+package controller.view;
 
 import persistency.Database;
 import view.ViewContainer;
 import view.state.ProjectMaintainanceViewState;
 import controller.ControllerCollection;
-import controller.view.CalendarViewController;
-import controller.view.DevelopersViewController;
-import controller.view.LoginViewController;
-import controller.view.MenuViewController;
-import controller.view.ProjectMaintainanceViewController;
-import controller.view.ProjectRapportViewController;
-import controller.view.ProjectsViewController;
 
 public class ViewControllerFactory {
 
