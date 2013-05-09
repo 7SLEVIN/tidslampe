@@ -16,7 +16,7 @@ public class Developer extends DatabaseObject {
 	 * @param name
 	 */
 	public Developer(Database db, int id, String initials, String name) {
-		super(id,db,db.activity());
+		super(id,db,db.developer());
 		
 		this.initials = initials;
 		this.name = name;

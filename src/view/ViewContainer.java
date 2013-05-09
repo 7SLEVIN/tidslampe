@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import controller.view.AbstractViewController;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
 
 /**
  * The main window inside which states are rendered
@@ -25,6 +27,9 @@ public class ViewContainer extends JFrame {
 		//this.setIconImage(SpriteHandler.getInstance().get("alien.png").getImage());
 		this.setVisible(true);
 		this.setFocusable(true);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		this.add(tabbedPane, BorderLayout.NORTH);
 		this.requestFocusInWindow();
 		//this.addKeyListener(Input.getInstance());
 	}
