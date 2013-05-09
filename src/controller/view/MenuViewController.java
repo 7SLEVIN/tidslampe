@@ -35,6 +35,7 @@ public class MenuViewController extends AbstractViewController {
 		this.viewState.getCalendarButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateCalendarViewController(currentDeveloperId)));
 		this.viewState.getProjectsButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectsViewController()));
 		ActionUtils.addListener(this.viewState.getGotoProjectButton(), this, "gotoProject");
+		ActionUtils.addListener(this.viewState.getLogoutButton(), this, "logout");
 
 		this.viewState.getProjectList().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -45,6 +46,11 @@ public class MenuViewController extends AbstractViewController {
 		});
 		
 		this.fillProjectList();
+	}
+	
+	public void logout() {
+		this.controllers.getLoginController().logout();
+		this.viewContainer.setViewState(ViewControllerFactory.CreateLoginViewController());
 	}
 	
 	private void fillProjectList() {

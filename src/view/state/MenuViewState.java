@@ -23,6 +23,7 @@ public class MenuViewState extends AbstractViewState {
 	private JList<Project> projectsList;
 	private List<Project> projects;
 	private JButton gotoProjectButton;
+	private JButton logoutButton;
 	
 	public MenuViewState() {
 		this.projectsButton = new JButton("Projects");
@@ -35,11 +36,16 @@ public class MenuViewState extends AbstractViewState {
 		pane.setPreferredSize(new Dimension(300, 300));
 		this.gotoProjectButton = new JButton("Goto project");
 		
+		this.logoutButton = new JButton("Logout");
+		
 		JPanel buttonPanel = new JPanel();
 		GuiUtils.setSize(buttonPanel, new Dimension(ViewContainer.WINDOW_WIDTH, 35));
 		
 		JPanel projectsPanel = new JPanel();
 		GuiUtils.setSize(projectsPanel, new Dimension(300, 400));
+		
+		JPanel logoutPanel = new JPanel();
+		GuiUtils.setSize(logoutPanel, new Dimension(ViewContainer.WINDOW_WIDTH, 35));
 		
 		buttonPanel.add(this.calendarButton);
 		buttonPanel.add(this.developersButton);
@@ -49,8 +55,11 @@ public class MenuViewState extends AbstractViewState {
 		projectsPanel.add(pane);
 		projectsPanel.add(this.gotoProjectButton);
 		
+		logoutPanel.add(this.logoutButton);
+		
 		this.add(buttonPanel);
 		this.add(projectsPanel);
+		this.add(logoutPanel);
 	}
 	
 	public void setProjects(List<Project> projects) {
@@ -80,5 +89,9 @@ public class MenuViewState extends AbstractViewState {
 	
 	public JList<Project> getProjectList() {
 		return this.projectsList;
+	}
+	
+	public JButton getLogoutButton() {
+		return this.logoutButton;
 	}
 }
