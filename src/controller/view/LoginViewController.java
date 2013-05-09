@@ -20,7 +20,6 @@ public class LoginViewController extends AbstractViewController {
 		this.viewState = new LoginViewState();
 		
 		ActionUtils.addListener(this.viewState.getLoginButton(), this, "tryLogin");
-		this.viewState.setMessage("Hello, login here");
 	}
 	
 	public void tryLogin() {
