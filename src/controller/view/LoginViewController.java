@@ -21,13 +21,19 @@ public class LoginViewController extends AbstractViewController {
 		
 		ActionUtils.addListener(this.viewState.getLoginButton(), this, "tryLogin");
 		this.viewState.setMessage("Hello, login here");
+		this.viewContainer.setToolbarVisible(false);
 	}
 	
 	public void tryLogin() {
-		if (this.controllers.getLoginController().login(this.viewState.getInputText())) 
+		if (this.controllers.getLoginController().login(this.viewState.getInputText())) {
 			this.viewContainer.setViewState(ViewControllerFactory.CreateMenuViewController());
-		else 
+			this.viewContainer.setupToolBar(this.controllers.getLoginController().getUser().getId());
+			this.viewContainer.setToolbarVisible(true);
+		}
+		else {
 			this.viewState.setMessage("Invalid login");
+			this.viewContainer.setToolbarVisible(false);
+		}
 	}
 
 	@Override

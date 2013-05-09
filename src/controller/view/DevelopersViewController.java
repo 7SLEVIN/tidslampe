@@ -31,7 +31,6 @@ public class DevelopersViewController extends AbstractViewController {
 
 		ActionUtils.addListener(this.viewState.getDeleteButton(), this, "deleteSelectedDeveloper");
 		ActionUtils.addListener(this.viewState.getCreateButton(), this, "createNewDeveloper");
-		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
 		
 		this.fillDeveloperList();
 	}

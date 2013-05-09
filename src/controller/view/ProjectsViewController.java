@@ -39,7 +39,6 @@ public class ProjectsViewController extends AbstractViewController {
 		ActionUtils.addListener(this.viewState.getDeleteButton(), this, "deleteSelectedProject");
 		ActionUtils.addListener(this.viewState.getMaintainButton(), this, "maintainSelectedProject");
 		ActionUtils.addListener(this.viewState.getCreateButton(), this, "createNewProject");
-		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
 
 		this.viewState.getProjectTable().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {

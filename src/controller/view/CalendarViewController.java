@@ -40,7 +40,7 @@ public class CalendarViewController extends AbstractViewController {
 	private Calendar currentStartDate;
 	private boolean isSelf;
 	private List<Developer> developers;
-	
+
 	public CalendarViewController(Database database, ViewContainer viewContainer, ControllerCollection controllers, int developerId) {
 		super(database, viewContainer, controllers);
 		this.developer = this.database.developer().read(developerId);
@@ -103,8 +103,6 @@ public class CalendarViewController extends AbstractViewController {
 		ActionUtils.addListener(this.viewState.getRegisterButton(), this, "addRegisterTimeEntry");
 		ActionUtils.addListener(this.viewState.getReserveButton(), this, "addReserveTimeEntry");
 		
-		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
-
 		this.viewState.getFixedToggleButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean selected = viewState.getFixedState();
