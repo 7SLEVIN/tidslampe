@@ -1,13 +1,5 @@
 package controller.view;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import model.Activity;
 import model.Developer;
 import model.Project;
@@ -21,7 +13,7 @@ import view.state.AbstractViewState;
 import view.state.ProjectMaintainanceViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
-import factory.ViewControllerFactory;
+import exceptions.UpdateNonExistingException;
 
 public class ProjectMaintainanceViewController extends AbstractViewController {
 
@@ -83,7 +75,11 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 			setManager = true;
 		
 		if(setManager)
-			this.project.setManager(dev);
+			try {
+				this.project.setManager(dev);
+			} catch (UpdateNonExistingException e) {
+				e.printStackTrace();
+			}
 	}
 	
 //TODO 

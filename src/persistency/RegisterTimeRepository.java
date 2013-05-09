@@ -2,10 +2,9 @@ package persistency;
 
 import java.util.List;
 
-import utils.Query;
-import model.Activity;
 import model.ActivityDeveloperRelation;
 import model.TimeEntry;
+import utils.Query;
 
 public class RegisterTimeRepository extends TimeRepository {
 
@@ -38,15 +37,15 @@ public class RegisterTimeRepository extends TimeRepository {
 				String.valueOf(rel.getDeveloper().getId()),
 				assistString});
 		
-		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel.getId(), isAssist); 
+		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel, isAssist); 
 		return entry;
 	}
 	
 	public List<TimeEntry> getCollidingEntries(long startTime, long endTime, int devID){
-		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.SelectAllFrom(this.table)
-				.WhereLessThan("start_time", endTime)
-				.WhereMoreThan("end_time", startTime)
-				.WhereEquals("developer_id", devID)));
+		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.selectAllFrom(this.table)
+				.whereLessOrEquals("start_time", endTime)
+				.whereGreaterOrEquals("end_time", startTime)
+				.whereEquals("developer_id", devID)));
 		return collidingEntries;
 	}
 	

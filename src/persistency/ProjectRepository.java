@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.UpdateNonExistingException;
+
 import utils.Query;
 
 import model.Developer;
@@ -21,9 +23,9 @@ public class ProjectRepository extends Repository<Project> {
 	}
 	
 	public List<Project> readByDeveloper(int developerId) {
-		Query q = Query.SelectAllFrom(this.table).WhereIn("project.id",
-						Query.Select("project_id").From("activity").WhereIn("activity.id", 
-							Query.Select("activity_id").From("activity_developer_relation adr").WhereEquals("adr.developer_id", developerId)));
+		Query q = Query.selectAllFrom(this.table).whereIn("project.id",
+						Query.select("project_id").from("activity").whereIn("activity.id", 
+							Query.select("activity_id").from("activity_developer_relation adr").whereEquals("adr.developer_id", developerId)));
 		
 		ResultSet rs = this.db.conn.execQuery(q);
 		
@@ -51,7 +53,11 @@ public class ProjectRepository extends Repository<Project> {
 	public void removeManager(int id){
 		List<Project> projects = this.readAllWhereEquals("manager_id", id);
 		for(Project project : projects){
-			project.setManager(null);
+			try {
+				project.setManager(null);
+			} catch (UpdateNonExistingException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -73,7 +79,11 @@ public class ProjectRepository extends Repository<Project> {
 		}
 		
 		for (int i = 0; i < projects.size(); i++) {
-			projects.get(i).setManager(this.db.developer().read(managerIDs.get(i)));
+			try {
+				projects.get(i).setManager(this.db.developer().read(managerIDs.get(i)));
+			} catch (UpdateNonExistingException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return projects;

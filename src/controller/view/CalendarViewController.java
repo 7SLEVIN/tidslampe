@@ -30,7 +30,7 @@ import view.state.AbstractViewState;
 import view.state.CalendarViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
-import factory.ViewControllerFactory;
+import exceptions.DeleteNonExistingException;
 
 public class CalendarViewController extends AbstractViewController {
 
@@ -40,7 +40,7 @@ public class CalendarViewController extends AbstractViewController {
 	private Calendar currentStartDate;
 	private boolean isSelf;
 	private List<Developer> developers;
-	
+
 	public CalendarViewController(Database database, ViewContainer viewContainer, ControllerCollection controllers, int developerId) {
 		super(database, viewContainer, controllers);
 		this.developer = this.database.developer().read(developerId);
@@ -103,12 +103,17 @@ public class CalendarViewController extends AbstractViewController {
 		ActionUtils.addListener(this.viewState.getRegisterButton(), this, "addRegisterTimeEntry");
 		ActionUtils.addListener(this.viewState.getReserveButton(), this, "addReserveTimeEntry");
 		
-		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
-
 		this.viewState.getFixedToggleButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean selected = viewState.getFixedState();
 				viewState.setFixedEnabled(selected);
+			}
+		});
+		
+		this.viewState.getAssistToggleButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean selected = viewState.getAssistState();
+				viewState.setAssistEnabled(selected);
 			}
 		});
 		
@@ -299,10 +304,11 @@ public class CalendarViewController extends AbstractViewController {
 			panel.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if (panel.getBackground().equals(Color.MAGENTA))
-						database.reserveTime().delete(te.getId());
-					else
-						database.registerTime().delete(te.getId());
+					try {
+						te.delete();
+					} catch (DeleteNonExistingException e1) {
+						e1.printStackTrace();
+					}
 					
 					updateStartDate();
 				}

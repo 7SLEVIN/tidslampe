@@ -28,7 +28,7 @@ public class ReserveTimeRepository extends TimeRepository {
 			return null;
 		
 		if (this.db.activity().isFixed(activityID)) {
-			//Hvis aktiviteten er fixed, s� skal den bare registreres med det samme
+			//Hvis aktiviteten er fixed, så skal den bare registreres med det samme
 			return this.db.registerTime().create(startTime, endTime, rel, isAssist);
 		} else {
 			int id = this.create(new String[]{String.valueOf(startTime), 
@@ -36,16 +36,16 @@ public class ReserveTimeRepository extends TimeRepository {
 					String.valueOf(rel.getId()),
 					String.valueOf(devID), assistString});
 			
-			TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel.getId(), isAssist); 
+			TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel, isAssist); 
 			return entry;
 		}
 	}
 	
 	private List<TimeEntry> getCollidingEntries(long startTime, long endTime, int devID){ 
-		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.SelectAllFrom(this.table)
-				.WhereLessThan("start_time", endTime)
-				.WhereMoreThan("end_time", startTime)
-				.WhereEquals("developer_id", devID)));
+		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.selectAllFrom(this.table)
+				.whereLessOrEquals("start_time", endTime)
+				.whereGreaterOrEquals("end_time", startTime)
+				.whereEquals("developer_id", devID)));
 		
 		collidingEntries.addAll(this.db.registerTime().getCollidingEntries(startTime, endTime, devID));
 		

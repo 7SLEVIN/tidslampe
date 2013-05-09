@@ -21,26 +21,32 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 	}
 	
 	public List<TimeEntry> readByDeveloperId(int developerId) {
-//select * from register_time where developer_activity_relation_id in (select id from activity_developer_relation where developer_id = 1);
-		String query = String.format("SELECT * FROM %s WHERE developer_activity_relation_id IN (%s) ORDER BY start_time", 
-				this.table,
-				Query.Select("id").From("activity_developer_relation").WhereEquals("developer_id", developerId).End());
+		Query query = Query.selectAllFrom(this.table).whereIn("developer_activity_relation_id", 
+				Query.select("id").from("activity_developer_relation").whereEquals("developer_id", developerId));
 		return this.parse(this.db.conn.execQuery(query));
 	}
 	
 	@Override
 	protected List<TimeEntry> parse(ResultSet rs) {
-
 		List<TimeEntry> timeEntries = new ArrayList<TimeEntry>();
+		List<Integer> actDevRel = new ArrayList<Integer>();
 		try {
 			while (rs.next()) {
+				actDevRel.add(rs.getInt(this.columns[2]));
 				timeEntries.add(new TimeEntry(
 						this.db, rs.getInt("id"), 
-						rs.getLong(this.columns[0]), rs.getLong(this.columns[1]), 
-						rs.getInt(this.columns[2]), rs.getBoolean("is_assist")));
+						rs.getLong(this.columns[0]), 
+						rs.getLong(this.columns[1]), 
+						rs.getBoolean("is_assist")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		for (int i = 0; i < timeEntries.size(); i++) {
+			Integer id = actDevRel.get(i);
+			if (id == null) break;
+			timeEntries.get(i).setActivityDeveloperRelation(
+					this.db.activityDeveloperRelation().read(id));
 		}
 		return timeEntries;
 	}
@@ -48,9 +54,9 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 	abstract public TimeEntry create(long startTime, long endTime, int devActRelID,int devID, boolean isAssist);
 	
 	public List<TimeEntry> readByProjectId(int projectId) {
-		Query query = Query.SelectAllFrom(this.table).WhereIn("developer_activity_relation_id",
-				Query.Select("id").From("activity_developer_relation").WhereIn("activity_id",
-						Query.Select("id").From("activity").WhereEquals("project_id", projectId)));
+		Query query = Query.selectAllFrom(this.table).whereIn("developer_activity_relation_id",
+				Query.select("id").from("activity_developer_relation").whereIn("activity_id",
+						Query.select("id").from("activity").whereEquals("project_id", projectId)));
 		return this.parse(this.db.conn.execQuery(query));
 	}
 

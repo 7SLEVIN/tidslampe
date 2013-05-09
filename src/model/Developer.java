@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.DeleteNonExistingException;
+import exceptions.UpdateNonExistingException;
 import persistency.Database;
 
 
@@ -14,23 +16,18 @@ public class Developer extends DatabaseObject {
 	 * @param name
 	 */
 	public Developer(Database db, int id, String initials, String name) {
-		super(id,db);
+		super(id,db,db.developer());
 		
 		this.initials = initials;
 		this.name = name;
 	}
 
 	@Override
-	protected void save() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete() {
-		this.db.project().removeManager(this.getId());
-		this.db.activityDeveloperRelation().deleteRelationsByDevID(this.getId());	
-		this.db.developer().delete(this.getId());
+	public void delete() throws DeleteNonExistingException {
+		this.database.project().removeManager(this.getId());
+		this.database.activityDeveloperRelation().deleteRelationsByDevID(this.getId());
+		System.out.println(this.database.developer().exists(this.getId()));
+		super.delete();
 	}
 	
 	@Override
@@ -42,17 +39,17 @@ public class Developer extends DatabaseObject {
 		return this.initials;
 	}
 
-	public void setInitials(String ints){
+	public void setInitials(String ints) throws UpdateNonExistingException{
 		this.initials = ints;
-		this.db.developer().update(this);
+		this.save();
 	}
 	
 	public String getName() {
 		return this.name;
 	}
 
-	public void setName(String name){
+	public void setName(String name) throws UpdateNonExistingException{
 		this.name = name;
-		this.db.developer().update(this);
+		this.save();
 	}
 }

@@ -7,13 +7,14 @@ import java.util.List;
 
 import model.Activity;
 import model.ActivityDeveloperRelation;
-import model.Assist;
 import model.Developer;
 import model.Project;
 
 import org.junit.Test;
 
 import utils.TimeService;
+import exceptions.DeleteNonExistingException;
+import exceptions.UpdateNonExistingException;
 
 
 public class TestDatabase extends BaseTestDatabase {
@@ -34,14 +35,14 @@ public class TestDatabase extends BaseTestDatabase {
 	}
 	
 	@Test
-	public void testCount() {
+	public void testCount() throws DeleteNonExistingException {
 		assertEquals("Database count", 0, this.db.developer().count());
 		Developer man = this.db.developer().create("MD", "Moby Dick");
 		assertEquals("Database count", 1, this.db.developer().count());
 		Developer man2 = this.db.developer().create("RS", "Richard Stallman");
 		assertEquals("Database count", 2, this.db.developer().count());
-		this.db.developer().delete(man.getId());
-		this.db.developer().delete(man2.getId());
+		man.delete();
+		man2.delete();
 		assertEquals("Database count", 0, this.db.developer().count());
 	}
 	
@@ -104,19 +105,9 @@ public class TestDatabase extends BaseTestDatabase {
 		assertEquals("ActivityDeveloperRelation developer", "Moby Dick", 
 				actual.getDeveloper().getName());
 	}
-
-	@Test
-	public void testCreateAssist() {
-		Developer dev = this.db.developer().create("MD", "Moby Dick");
-		Assist assist = this.db.assist().create(dev, 1.5);
-		Assist actual = this.db.assist().read(assist.getId());
-		
-		assertEquals("Assist developer", "Moby Dick", actual.getDeveloper().getName());
-		assertEquals("Assist spent time", 1.5, actual.getSpentTime());
-	}
 	
 	@Test
-	public void testUpdateProject() {
+	public void testUpdateProject() throws UpdateNonExistingException {
 		Developer existingDev = this.db.developer().create("WE", "What Ever");
 		Project existing = this.db.project().create("What Ever", 1, 1, existingDev);
 		
@@ -129,7 +120,6 @@ public class TestDatabase extends BaseTestDatabase {
 		proj.setDeadline(321);
 		proj.setManager(newMan);
 		
-		this.db.project().update(proj);
 		Project actual = this.db.project().read(proj.getId());
 		
 		assertEquals("Project existing name", "What Ever", existing.getName());
@@ -144,14 +134,13 @@ public class TestDatabase extends BaseTestDatabase {
 	}
 
 	@Test
-	public void testUpdateDeveloper() {
+	public void testUpdateDeveloper() throws UpdateNonExistingException {
 		Developer existing = this.db.developer().create("LO", "Lol");
 		Developer dev = this.db.developer().create("MD", "Moby Dick");
 		
 		dev.setInitials("RS");
 		dev.setName("Richard Stallman");
 		
-		this.db.developer().update(dev);
 		Developer actual = this.db.developer().read(dev.getId());
 
 		assertEquals("Developer existing initials", "LO", existing.getInitials());
@@ -162,7 +151,7 @@ public class TestDatabase extends BaseTestDatabase {
 	}
 
 	@Test
-	public void testUpdateActivity() throws ParseException {
+	public void testUpdateActivity() throws ParseException, UpdateNonExistingException {
 		TimeService timeService = new TimeService();
 		int year = 1991;		int month = 4;		int day = 22;
 		long date = timeService.convertToMillis(year, month, day, 0, 0);
@@ -180,7 +169,6 @@ public class TestDatabase extends BaseTestDatabase {
 		activity.setStartTime(newDate);
 		activity.setEndTime(newDate2);
 		
-		this.db.activity().update(activity);
 		Activity actual = (Activity) this.db.activity().read(activity.getId());
 		
 		assertEquals("Activity existing description", "Loadfactor", existing.getDescription());
@@ -195,7 +183,7 @@ public class TestDatabase extends BaseTestDatabase {
 	}
 
 	@Test
-	public void testUpdateActivityDeveloperRelation() throws ParseException {
+	public void testUpdateActivityDeveloperRelation() throws ParseException, UpdateNonExistingException {
 		TimeService timeService = new TimeService();
 		int year = 1991;		int month = 4;		int day = 22;
 		long date = timeService.convertToMillis(year, month, day, 0, 0);
@@ -213,7 +201,6 @@ public class TestDatabase extends BaseTestDatabase {
 		rel.setActivity(newActivity);
 		rel.setDeveloper(newDev);
 		
-		this.db.activityDeveloperRelation().update(rel);
 		ActivityDeveloperRelation actual = this.db.activityDeveloperRelation().read(rel.getId());
 		
 		assertEquals("ActivityDeveloperRelation existing activity", "Catch Moby Dick", 
@@ -226,34 +213,9 @@ public class TestDatabase extends BaseTestDatabase {
 		assertEquals("ActivityDeveloperRelation developer", "Richard Stallman", 
 				actual.getDeveloper().getName());
 	}
-
-	@Test
-	public void testUpdateAssist() {
-		Developer dev = this.db.developer().create("MD", "Moby Dick");
-		Developer newDev = this.db.developer().create("RS", "Richard Stallman");
-		Assist existing = this.db.assist().create(dev, 2.0);
-		Assist assist = this.db.assist().create(dev, 1.5);
-		
-		assist.setDeveloper(newDev);
-		assist.setSpentTime(666.0);
-		
-		this.db.assist().update(assist);
-		Assist actual = this.db.assist().read(assist.getId());
-		
-		assertEquals("Assist existing developer", "Moby Dick", existing.getDeveloper().getName());
-		assertEquals("Assist existing spent time", 2.0, existing.getSpentTime());
-		
-		assertEquals("Assist developer", "Richard Stallman", actual.getDeveloper().getName());
-		assertEquals("Assist spent time", 666.0, actual.getSpentTime());
-	}
-	
-//	@Test
-//	public void testUpdateNonexisting() {
-//		this.db.developer.update(new Developer(-1, "MD", "Moby Dick"));
-//	}
 	
 	@Test
-	public void testDeleteProject() {
+	public void testDeleteProject() throws DeleteNonExistingException {
 		Developer man = this.db.developer().create("MD", "Moby Dick");
 		Project proj = this.db.project().create("Tidslampe", 666, 1337, man);
 		Project actual = this.db.project().read(proj.getId());
@@ -263,26 +225,26 @@ public class TestDatabase extends BaseTestDatabase {
 		assertEquals("Project deadline", 1337, actual.getDeadline());
 		assertEquals("Project manager", "Moby Dick", actual.getManager().getName());
 		
-		this.db.project().delete(actual.getId());
+		actual.delete();
 		
 		assertEquals("Project count", 0, this.db.project().count());
 	}
 
 	@Test
-	public void testDeleteDeveloper() {
+	public void testDeleteDeveloper() throws DeleteNonExistingException {
 		Developer dev = this.db.developer().create("MD", "Moby Dick");
 		Developer actual = this.db.developer().read(dev.getId());
 
 		assertEquals("Developer name", "Moby Dick", actual.getName());
 		assertEquals("Developer initials", "MD", actual.getInitials());
 		
-		this.db.developer().delete(actual.getId());
+		actual.delete();
 		
 		assertEquals("Developer count", 0, this.db.developer().count());
 	}
 
 	@Test
-	public void testDeleteActivity() throws ParseException {
+	public void testDeleteActivity() throws ParseException, DeleteNonExistingException {
 		TimeService timeService = new TimeService();
 		int year = 1991;		int month = 4;		int day = 22;
 		long date = timeService.convertToMillis(year, month, day, 0, 0);
@@ -294,13 +256,13 @@ public class TestDatabase extends BaseTestDatabase {
 		assertEquals("Activity start time", date, actual.getStartTime());
 		assertEquals("Activity end time", date, actual.getEndTime());
 		
-		this.db.activity().delete(actual.getId());
+		actual.delete();
 		
 		assertEquals("Activity count", 0, this.db.activity().count());
 	}
 
 	@Test
-	public void testDeleteActivityDeveloperRelation() throws ParseException {
+	public void testDeleteActivityDeveloperRelation() throws ParseException, DeleteNonExistingException {
 		TimeService timeService = new TimeService();
 		int year = 1991;		int month = 4;		int day = 22;
 		long date = timeService.convertToMillis(year, month, day, 0, 0);
@@ -314,23 +276,9 @@ public class TestDatabase extends BaseTestDatabase {
 		assertEquals("ActivityDeveloperRelation developer", "Moby Dick", 
 				actual.getDeveloper().getName());
 		
-		this.db.activityDeveloperRelation().delete(actual.getId());
+		actual.delete();
 		
 		assertEquals("ActivityDeveloperRelation count", 0, this.db.activityDeveloperRelation().count());
-	}
-
-	@Test
-	public void testDeleteAssist() {
-		Developer dev = this.db.developer().create("MD", "Moby Dick");
-		Assist assist = this.db.assist().create(dev, 1.5);
-		Assist actual = this.db.assist().read(assist.getId());
-		
-		assertEquals("Assist developer", "Moby Dick", actual.getDeveloper().getName());
-		assertEquals("Assist spent time", 1.5, actual.getSpentTime());
-		
-		this.db.assist().delete(actual.getId());
-		
-		assertEquals("Assist count", 0, this.db.assist().count());
 	}
 	
 }

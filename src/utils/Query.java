@@ -8,37 +8,37 @@ public class Query {
 	private QueryStatement lastStatement;
 
 	// Factory methods
-	public static Query SelectAllFrom(String table) {
-		return new Query()._SelectAllFrom(table);
+	public static Query selectAllFrom(String table) {
+		return new Query().innerSelectAllFrom(table);
 	}
 	
-	public static Query Select(String field) {
-		return new Query()._Select(field);
+	public static Query select(String field) {
+		return new Query().innerSelect(field);
 	}
 	
-	public static Query DeleteFrom(String table) {
-		return new Query()._DeleteFrom(table);
+	public static Query deleteFrom(String table) {
+		return new Query().innerDeleteFrom(table);
 	}
 	
-	public static Query Update(String table, String[] columns, String[] values) {
-		return new Query()._Update(table, columns, values);
+	public static Query update(String table, String[] columns, String[] values) {
+		return new Query().innerUpdate(table, columns, values);
 	}
 	
-	public static Query Update(String table, String column, String value) {
-		return new Query()._Update(table, new String[]{column}, new String[]{value});
+	public static Query update(String table, String column, String value) {
+		return new Query().innerUpdate(table, new String[]{column}, new String[]{value});
 	}
 
-	public static Query InsertInto(String table, String[] columns,
+	public static Query insertInto(String table, String[] columns,
 			String[] values) {
-		return new Query()._InsertInto(table, columns, values);
+		return new Query().innerInsertInto(table, columns, values);
 	}
 	
-	public static Query Exists(String table, int id) {
-		return new Query()._Exists(table, id);
+	public static Query exists(String table, int id) {
+		return new Query().innerExists(table, id);
 	}
 	
-	public static Query Count(String table) {
-		return new Query()._Count(table);
+	public static Query count(String table) {
+		return new Query().innerCount(table);
 	}
 
 	// Instance
@@ -47,23 +47,23 @@ public class Query {
 		this.lastStatement = QueryStatement.Empty;
 	}
 
-	public String End() {
+	public String end() {
 		return this.query.trim();
 	}
 
-	private Query _SelectAllFrom(String table) {
-		return this._Select("*").From(table);
+	private Query innerSelectAllFrom(String table) {
+		return this.innerSelect("*").from(table);
 	}
 
-	private Query _DeleteFrom(String table) {
+	private Query innerDeleteFrom(String table) {
 		if (this.lastStatement != QueryStatement.Empty)
 			System.err.println("Invalid query");
 		this.query = "DELETE ";
 		this.lastStatement = QueryStatement.Delete;
-		return this.From(table);
+		return this.from(table);
 	}
 
-	private Query _Select(String field) {
+	private Query innerSelect(String field) {
 		if (this.lastStatement != QueryStatement.Empty)
 			System.err.println("Invalid query");
 
@@ -72,7 +72,7 @@ public class Query {
 		return this;
 	}
 
-	public Query From(String field) {
+	public Query from(String field) {
 		if (this.lastStatement != QueryStatement.Select && this.lastStatement != QueryStatement.Delete)
 			System.err.println("Invalid query");
 
@@ -82,7 +82,7 @@ public class Query {
 	}
 
 
-	private Query _Update(String table, String[] columns, String[] values) {
+	private Query innerUpdate(String table, String[] columns, String[] values) {
 		if (this.lastStatement != QueryStatement.Empty)
 			System.err.println("Invalid query");
 			
@@ -100,7 +100,7 @@ public class Query {
 		return this;
 	}
 	
-	private Query WhereRaw(String key, long value, String operator) {
+	private Query whereRaw(String key, long value, String operator) {
 		if (this.lastStatement == QueryStatement.Where)
 			this.query += "AND ";
 		else
@@ -111,7 +111,7 @@ public class Query {
 		return this;
 	}
 	
-	private Query WhereRaw(String key, String value, String operator, boolean suppressLiteral) {
+	private Query whereRaw(String key, String value, String operator, boolean suppressLiteral) {
 		if (this.lastStatement == QueryStatement.Where)
 			this.query += "AND ";
 		else
@@ -123,39 +123,39 @@ public class Query {
 		return this;
 	}
 
-	private Query WhereRaw(String key, String value, String operator) {
-		return this.WhereRaw(key, value, operator, false);
+	private Query whereRaw(String key, String value, String operator) {
+		return this.whereRaw(key, value, operator, false);
 	}
 
-	public Query WhereIn(String key, Query query) {
-		return this.WhereRaw(key, String.format("(%s)", query.End()), "IN", true);
+	public Query whereIn(String key, Query query) {
+		return this.whereRaw(key, String.format("(%s)", query.end()), "IN", true);
 	}
 
-	public Query WhereEquals(String key, String value) {
-		return this.WhereRaw(key, value , "=");
+	public Query whereEquals(String key, String value) {
+		return this.whereRaw(key, value , "=");
 	}
 	
-	public Query WhereEquals(String key, long value) {
-		return this.WhereRaw(key, value, "=");
+	public Query whereEquals(String key, long value) {
+		return this.whereRaw(key, value, "=");
 	}
 	
-	public Query WhereLessThan(String key, long value) {
-		return this.WhereRaw(key, value, "<=");
+	public Query whereLessOrEquals(String key, long value) {
+		return this.whereRaw(key, value, "<=");
 	}
 	
-	public Query WhereLessThan(String key, String value) {
-		return this.WhereRaw(key,  value, "<=");
+	public Query whereLessOrEquals(String key, String value) {
+		return this.whereRaw(key,  value, "<=");
 	}
 	
-	public Query WhereMoreThan(String key, long value) {
-		return this.WhereRaw(key, value, ">=");
+	public Query whereGreaterOrEquals(String key, long value) {
+		return this.whereRaw(key, value, ">=");
 	}
 	
-	public Query WhereMoreThan(String key, String value) {
-		return this.WhereRaw(key,  value , ">=");
+	public Query whereGreaterOrEquals(String key, String value) {
+		return this.whereRaw(key,  value , ">=");
 	}	
 
-	private Query _InsertInto(String table, String[] columns, String[] values) {
+	private Query innerInsertInto(String table, String[] columns, String[] values) {
 		if (this.lastStatement != QueryStatement.Empty || columns.length != values.length)
 			System.err.println("Invalid query");
 		if (columns.length == 0)
@@ -170,11 +170,11 @@ public class Query {
 		return this;
 	}
 	
-	public Query OrderBy(String key) {
-		return this.OrderBy(key, SortDirection.Asc);
+	public Query orderBy(String key) {
+		return this.orderBy(key, SortDirection.Asc);
 	}
 
-	public Query OrderBy(String key, SortDirection direction) {
+	public Query orderBy(String key, SortDirection direction) {
 		if (this.lastStatement != QueryStatement.Where
 			&& this.lastStatement != QueryStatement.Select)
 			System.err.println("Invalid query");
@@ -185,7 +185,7 @@ public class Query {
 		return this;
 	}
 
-	public Query Limit(int lim) {
+	public Query limit(int lim) {
 		if (this.lastStatement != QueryStatement.Where
 			&& this.lastStatement != QueryStatement.Select
 			&& this.lastStatement != QueryStatement.OrderBy)
@@ -196,16 +196,16 @@ public class Query {
 		return this;
 	}
 	
-	private Query _Exists(String table, int id) {
+	private Query innerExists(String table, int id) {
 		if (this.lastStatement != QueryStatement.Empty)
 			System.err.println("Inavlid query");
 		this.query += String.format("SELECT EXISTS(SELECT * FROM %s WHERE id=%d)", table, id);
 		return this;
 	}
 	
-	private Query _Count(String table) {
+	private Query innerCount(String table) {
 		if (this.lastStatement != QueryStatement.Empty)
 			System.err.println("Inavlid query");
-		return this._Select("COUNT(*)").From(table);
+		return this.innerSelect("COUNT(*)").from(table);
 	}
 }

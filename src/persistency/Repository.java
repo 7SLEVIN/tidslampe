@@ -3,6 +3,9 @@ package persistency;
 import java.sql.ResultSet;
 import java.util.List;
 
+import exceptions.DeleteNonExistingException;
+import exceptions.UpdateNonExistingException;
+
 import utils.Query;
 
 import model.DatabaseObject;
@@ -28,36 +31,40 @@ public abstract class Repository<T extends DatabaseObject> {
 	}
 
 	public List<T> readAllWhereEquals(String key, String value)  {
-		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table).WhereEquals(key, value));
+		ResultSet rs = this.db.conn.execQuery(Query.selectAllFrom(this.table).whereEquals(key, value));
 		return this.parse(rs);
 	}
 
 	public List<T> readAllWhereEquals(String key, int value)  {
-		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table).WhereEquals(key, value));
+		ResultSet rs = this.db.conn.execQuery(Query.selectAllFrom(this.table).whereEquals(key, value));
 		return this.parse(rs);
 	}
 
 	public List<T> readAll()  {
-		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table));
+		ResultSet rs = this.db.conn.execQuery(Query.selectAllFrom(this.table));
 		return this.parse(rs);
 	}
 	
 	public T read(int id)  {
-		ResultSet rs = this.db.conn.execQuery(Query.SelectAllFrom(this.table).WhereEquals("id", id));
+		ResultSet rs = this.db.conn.execQuery(Query.selectAllFrom(this.table).whereEquals("id", id));
 		List<T> results = this.parse(rs);
 		return results.isEmpty() ? null : results.get(0);
 	}
 	
-	public void update(T entity) {
+	public void update(T entity) throws UpdateNonExistingException {
 		String[] values = entity.getValueArray();
 		this.db.conn.update(this.table, entity.getId(), this.columns, values);
 	}
 	
-	public void delete(int id) {
-		this.db.conn.delete(this.table, id);
+	public void delete(T entity) throws DeleteNonExistingException {
+		this.db.conn.delete(this.table, entity.getId());
 	}
 	
 	public int count() {
 		return this.db.conn.count(this.table);
+	}
+	
+	public boolean exists(int id) {
+		return this.db.conn.exists(this.table, id);
 	}
 }

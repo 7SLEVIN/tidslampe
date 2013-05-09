@@ -1,6 +1,7 @@
 package model;
 
 import persistency.Database;
+import exceptions.UpdateNonExistingException;
 
 
 public class ActivityDeveloperRelation extends DatabaseObject {
@@ -13,23 +14,12 @@ public class ActivityDeveloperRelation extends DatabaseObject {
 	 * @param activity
 	 * @param developer
 	 */
-	public ActivityDeveloperRelation(Database db, int id, Activity activity,
+	public ActivityDeveloperRelation(Database database, int id, Activity activity,
 			Developer developer) {
-		super(id,db);
-		
+		super(id,database,database.activityDeveloperRelation());
+				
 		this.activity = activity;
 		this.developer = developer;
-	}
-
-	@Override
-	protected void save() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete() {
-		this.db.activityDeveloperRelation().delete(this.getId());
 	}
 
 	@Override
@@ -42,18 +32,18 @@ public class ActivityDeveloperRelation extends DatabaseObject {
 		return activity;
 	}
 	
-	public void setActivity(Activity activity){
+	public void setActivity(Activity activity) throws UpdateNonExistingException{
 		this.activity = activity;
-		this.db.activityDeveloperRelation().update(this);
+		this.save();
 	}
 
 	public Developer getDeveloper() {
 		return developer;
 	}
 	
-	public void setDeveloper(Developer developer){
+	public void setDeveloper(Developer developer) throws UpdateNonExistingException{
 		this.developer = developer;
-		this.db.activityDeveloperRelation().update(this);
+		this.save();
 	}
 
 

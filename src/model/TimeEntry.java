@@ -4,35 +4,32 @@ import java.util.Calendar;
 
 import persistency.Database;
 /**
- * TimeEntries bruges b�de til RegisteredEntries og ReservedEntries 
+ * TimeEntries bruges både til RegisteredEntries og ReservedEntries 
  *
  */
 public class TimeEntry extends DatabaseObject{
 	private long startTime; 
 	private long endTime; 
 	private boolean isAssist; 
-	private int developerActivityRelationID;
 	private ActivityDeveloperRelation activityDeveloperRelation;
 	
-	public TimeEntry(Database db, int id, long startTime, long endTime, int devActRelID, boolean isAssist) {
-		super(id,db);
+	public TimeEntry(Database db, int id, long startTime, long endTime, boolean isAssist) {
+		super(id,db,db.registerTime());
 		
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.developerActivityRelationID = devActRelID;
 		this.isAssist = isAssist;
 	}
 	
-	@Override
-	protected void save() {
-		// TODO Auto-generated method stub
+	public TimeEntry(Database db, int id, long startTime, long endTime, ActivityDeveloperRelation rel, boolean isAssist) {
+		super(id,db,db.registerTime());
 		
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.activityDeveloperRelation = rel;
+		this.isAssist = isAssist;
 	}
-	@Override
-	protected void delete() {
-		// TODO Auto-generated method stub
-	}
-
+	
 	@Override
 	public String[] getValueArray() {
 		// TODO Auto-generated method stub
@@ -45,6 +42,10 @@ public class TimeEntry extends DatabaseObject{
 
 	public boolean getIsAssist() {
 		return this.isAssist;
+	}
+
+	public void setActivityDeveloperRelation(ActivityDeveloperRelation activityDeveloperRelation) {
+		this.activityDeveloperRelation = activityDeveloperRelation;
 	}
 
 	public long getStartTime() {
@@ -67,21 +68,11 @@ public class TimeEntry extends DatabaseObject{
 		return cal;
 	}
 
-	public int getDeveloperActivityRelationID() {
-		return this.developerActivityRelationID;
-	}
-
 	public Developer getDeveloper() {
-		if (this.activityDeveloperRelation == null)
-			this.activityDeveloperRelation = this.db.activityDeveloperRelation().read(this.developerActivityRelationID);
-		
 		return this.activityDeveloperRelation.getDeveloper();
 	}
 
 	public Activity getActivity() {
-		if (this.activityDeveloperRelation == null)
-			this.activityDeveloperRelation = this.db.activityDeveloperRelation().read(this.developerActivityRelationID);
-
 		return this.activityDeveloperRelation.getActivity();
 	}
 }

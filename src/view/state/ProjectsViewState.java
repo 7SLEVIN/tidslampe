@@ -23,7 +23,6 @@ import model.gui.ProjectTableModel;
 @SuppressWarnings("serial")
 public class ProjectsViewState extends AbstractViewState {
 	
-	private JButton backButton;
 	private JButton deleteButton;
 	private JButton createButton;
 	private JButton maintainButton;
@@ -36,7 +35,6 @@ public class ProjectsViewState extends AbstractViewState {
 	
 	public ProjectsViewState() {
 		this.table = new JTable();
-		this.backButton = new JButton("Back to menu");
 		this.deleteButton = new JButton("Delete selected");
 		this.maintainButton = new JButton("Maintain selected");
 
@@ -48,7 +46,6 @@ public class ProjectsViewState extends AbstractViewState {
 
 		JPanel titlePanel = new JPanel();
 		GuiUtils.setSize(titlePanel, new Dimension(ViewContainer.WINDOW_WIDTH, 30));
-		titlePanel.add(this.backButton);
 		
 		JScrollPane scrollPane = new JScrollPane(this.table);
 		scrollPane.setPreferredSize(new Dimension(400, 300));
@@ -76,10 +73,6 @@ public class ProjectsViewState extends AbstractViewState {
 		this.add(createPanel);
 	}
 
-	public JButton getBackButton() {
-		return backButton;
-	}
-	
 	public JButton getMaintainButton() {
 		return maintainButton;
 	}

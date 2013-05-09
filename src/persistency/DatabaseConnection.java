@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import exceptions.DeleteNonExistingException;
+import exceptions.UpdateNonExistingException;
+
 import utils.Query;
 
 public class DatabaseConnection {
@@ -27,10 +30,10 @@ public class DatabaseConnection {
 	public int create(String table, String[] columns, String[] values) {
 		int id = -1;
 		try {
-			this.execUpdate(Query.InsertInto(table, columns, values));
+			this.execUpdate(Query.insertInto(table, columns, values));
 
 			// Get the id of the inserted row
-			ResultSet rs = this.execQuery(Query.Select("last_insert_rowid()"));
+			ResultSet rs = this.execQuery(Query.select("last_insert_rowid()"));
 			if (rs.next()) {
 				id = rs.getInt("last_insert_rowid()");
 			}
@@ -43,10 +46,10 @@ public class DatabaseConnection {
 	
 	
 	public ResultSet execQuery(Query query) {
-		return this.execQuery(query.End());
+		return this.execQuery(query.end());
 	}
 
-	public ResultSet execQuery(String query) {
+	private ResultSet execQuery(String query) {
 		//System.out.println(query);
 		try {
 			return this.stmt.executeQuery(query);
@@ -67,15 +70,15 @@ public class DatabaseConnection {
 	}
 
 	public int execUpdate(Query query)  {
-		return this.execUpdate(query.End());
+		return this.execUpdate(query.end());
 	}
 	 
 	public ResultSet readWhereEquals(String table, String key, String value){
-		return this.execQuery(Query.SelectAllFrom(table).WhereEquals(key, value));
+		return this.execQuery(Query.selectAllFrom(table).whereEquals(key, value));
 	}
 	 
 	public ResultSet readWhereEquals(String table, String key, int value){
-		return this.execQuery(Query.SelectAllFrom(table).WhereEquals(key, value));
+		return this.execQuery(Query.selectAllFrom(table).whereEquals(key, value));
 	}
 
 	public ResultSet readByID(String table, int id)  {
@@ -83,33 +86,34 @@ public class DatabaseConnection {
 	}
 
 	public ResultSet readAll(String table)  {
-		return this.execQuery(Query.SelectAllFrom(table));
+		return this.execQuery(Query.selectAllFrom(table));
 	}
 
 	public ResultSet readAllWhere(String table, String key, String value) {
-		return this.execQuery(Query.SelectAllFrom(table).WhereEquals(key, value));
+		return this.execQuery(Query.selectAllFrom(table).whereEquals(key, value));
 	}
 	
 	public boolean update(String table, int id, String column, String value) {
 		if (!this.exists(table, id)) return false;
-		this.execUpdate(Query.Update(table, column, value).WhereEquals("id", id));
+		this.execUpdate(Query.update(table, column, value).whereEquals("id", id));
 		return true;
 	}
 	
-	public boolean update(String table, int id, String[] columns, String[] values) {
-		if (!this.exists(table, id)) return false;
-		this.execUpdate(Query.Update(table, columns, values).WhereEquals("id", id));
+	public boolean update(String table, int id, String[] columns, String[] values) 
+			throws UpdateNonExistingException {
+		if (!this.exists(table, id)) throw new UpdateNonExistingException();
+		this.execUpdate(Query.update(table, columns, values).whereEquals("id", id));
 		return true;
 	}
-
-	public boolean delete(String table, int id) {
-		if (!this.exists(table, id)) return false;
-		this.execUpdate(Query.DeleteFrom(table).WhereEquals("id", id));
+	
+	public boolean delete(String table, int id) throws DeleteNonExistingException {
+		if (!this.exists(table, id)) throw new DeleteNonExistingException();
+		this.execUpdate(Query.deleteFrom(table).whereEquals("id", id));
 		return true;
 	}
 	
 	public int count(String table) {
-		ResultSet rs = this.execQuery(Query.Count(table));
+		ResultSet rs = this.execQuery(Query.count(table));
 		int count = 0;
 		try {
 			while (rs.next()) {
@@ -122,7 +126,7 @@ public class DatabaseConnection {
 	}
 	
 	public boolean exists(String table, int id) {
-		ResultSet rs = this.execQuery(Query.Exists(table, id));
+		ResultSet rs = this.execQuery(Query.exists(table, id));
 		try {
 			while (rs.next()) {
 				return rs.getBoolean(1);

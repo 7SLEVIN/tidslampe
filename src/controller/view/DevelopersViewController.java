@@ -10,7 +10,7 @@ import view.state.AbstractViewState;
 import view.state.DevelopersViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
-import factory.ViewControllerFactory;
+import exceptions.DeleteNonExistingException;
 
 public class DevelopersViewController extends AbstractViewController {
 
@@ -31,7 +31,6 @@ public class DevelopersViewController extends AbstractViewController {
 
 		ActionUtils.addListener(this.viewState.getDeleteButton(), this, "deleteSelectedDeveloper");
 		ActionUtils.addListener(this.viewState.getCreateButton(), this, "createNewDeveloper");
-		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateMenuViewController()));
 		
 		this.fillDeveloperList();
 	}
@@ -70,8 +69,11 @@ public class DevelopersViewController extends AbstractViewController {
 		
 		DialogChoice confirm = Dialog.confirm(String.format("Really delete %s?", sel.getName()));
 		if (confirm == DialogChoice.Yes) {
-//TODO remove relations to projects and activities.						
-			sel.delete();
+			try {
+				sel.delete();
+			} catch (DeleteNonExistingException e) {
+				e.printStackTrace();
+			}
 			this.fillDeveloperList();
 		}
 	}
