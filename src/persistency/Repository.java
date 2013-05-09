@@ -15,56 +15,53 @@ public abstract class Repository<T extends DatabaseObject> {
 	protected String table;
 	protected String[] columns;
 	
-	protected Database db;
+	protected Database database;
 	
-	/**
-	 * @param conn
-	 */
 	public Repository(Database db) {
-		this.db = db;
+		this.database = db;
 	}
 	
 	abstract protected List<T> parse(ResultSet rs);
 
 	protected int create(String[] values) {
-		return this.db.conn.create(this.table, this.columns, values);
+		return this.database.getConnnection().create(this.table, this.columns, values);
 	}
 
 	public List<T> readAllWhereEquals(String key, String value)  {
-		ResultSet rs = this.db.conn.execQuery(Query.selectAllFrom(this.table).whereEquals(key, value));
+		ResultSet rs = this.database.getConnnection().execQuery(Query.selectAllFrom(this.table).whereEquals(key, value));
 		return this.parse(rs);
 	}
 
 	public List<T> readAllWhereEquals(String key, int value)  {
-		ResultSet rs = this.db.conn.execQuery(Query.selectAllFrom(this.table).whereEquals(key, value));
+		ResultSet rs = this.database.getConnnection().execQuery(Query.selectAllFrom(this.table).whereEquals(key, value));
 		return this.parse(rs);
 	}
 
 	public List<T> readAll()  {
-		ResultSet rs = this.db.conn.execQuery(Query.selectAllFrom(this.table));
+		ResultSet rs = this.database.getConnnection().execQuery(Query.selectAllFrom(this.table));
 		return this.parse(rs);
 	}
 	
 	public T read(int id)  {
-		ResultSet rs = this.db.conn.execQuery(Query.selectAllFrom(this.table).whereEquals("id", id));
+		ResultSet rs = this.database.getConnnection().execQuery(Query.selectAllFrom(this.table).whereEquals("id", id));
 		List<T> results = this.parse(rs);
 		return results.isEmpty() ? null : results.get(0);
 	}
 	
 	public void update(T entity) throws UpdateNonExistingException {
 		String[] values = entity.getValueArray();
-		this.db.conn.update(this.table, entity.getId(), this.columns, values);
+		this.database.getConnnection().update(this.table, entity.getId(), this.columns, values);
 	}
 	
 	public void delete(T entity) throws DeleteNonExistingException {
-		this.db.conn.delete(this.table, entity.getId());
+		this.database.getConnnection().delete(this.table, entity.getId());
 	}
 	
 	public int count() {
-		return this.db.conn.count(this.table);
+		return this.database.getConnnection().count(this.table);
 	}
 	
 	public boolean exists(int id) {
-		return this.db.conn.exists(this.table, id);
+		return this.database.getConnnection().exists(this.table, id);
 	}
 }
