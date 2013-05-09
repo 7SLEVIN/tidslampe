@@ -1,12 +1,15 @@
 package utils;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
 import javax.swing.FocusManager;
 import javax.swing.JTextField;
+
+/**
+ * Creates a JTextField with custom placeholder text
+ */
 
 @SuppressWarnings("serial")
 public class TextFieldWithPrompt extends JTextField {
@@ -49,7 +52,5 @@ public class TextFieldWithPrompt extends JTextField {
 	public void setOffset(Point offset) {
 		this.offset = offset;
 	}
-
-
 	
 }

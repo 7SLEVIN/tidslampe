@@ -28,7 +28,7 @@ public class TestLoginController extends BaseTestDatabase {
 		
 		this.db.developer().create("PG", "Patrick Gadd");
 		this.db.developer().create("SA", "Simon Altschuler");
-		this.db.developer().create("MF", "Markus F�revaag");
+		this.db.developer().create("MF", "Markus F���revaag");
 		
 		LoginController loginControl = new LoginController(this.db,this.projectPlanner.getTimeService());
 		
