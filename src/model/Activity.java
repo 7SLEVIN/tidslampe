@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import exceptions.UpdateNonExistingException;
+
 import persistency.Database;
 import utils.ArrayUtils;
 import utils.Dialog;
@@ -14,7 +16,6 @@ public class Activity extends DatabaseObject {
 	private ActivityType type;
 	private String description;
 	private int expectedTime;
-	private List<Assist> assists;
 	private long startTime;
 	private long endTime;
 	private List<Developer> developers;
@@ -31,7 +32,7 @@ public class Activity extends DatabaseObject {
 	 * @param endTime
 	 */
 	public Activity(Database db, int id, int projectID, String description, int expectedTime, long startTime, long endTime){
-		super(id,db);
+		super(id,db,db.activity());
 		this.type = ActivityType.PROJECT;
 		this.description = description;
 		this.projectID = projectID;
@@ -49,7 +50,7 @@ public class Activity extends DatabaseObject {
 	 * @param endTime
 	 */
 	public Activity(Database db, int id, ActivityType type, String description, long startTime, long endTime) {
-		super(id,db);
+		super(id,db,db.activity());
 		this.type = type;
 		this.description = description;
 		this.expectedTime = -1;
@@ -65,22 +66,15 @@ public class Activity extends DatabaseObject {
 
 	
 	@Override
-	protected void save() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void delete() {
-		// TODO Auto-generated method stub
-		
+	protected void save() throws UpdateNonExistingException {
+		this.database.activity().update(this);
 	}
 	
 	public void addDeveloper(Developer dev){
 		if(this.isDevAlreadyOnActivity(dev.getId())){
 			Dialog.message("The developer is already on the activity.");
 		}else{
-			this.db.activityDeveloperRelation().create(this, dev);
+			this.database.activityDeveloperRelation().create(this, dev);
 			this.developers = this.getDevelopers();
 		}
 	}
@@ -91,7 +85,7 @@ public class Activity extends DatabaseObject {
 		}else{
 			this.developers.clear();
 		}
-		List<ActivityDeveloperRelation> relations =	this.db.activityDeveloperRelation().readAllWhereEquals("activity_id", this.getId());
+		List<ActivityDeveloperRelation> relations =	this.database.activityDeveloperRelation().readAllWhereEquals("activity_id", this.getId());
 		for(ActivityDeveloperRelation relation : relations){
 			this.developers.add(relation.getDeveloper());
 		}
@@ -104,18 +98,18 @@ public class Activity extends DatabaseObject {
 		return this.description;
 	}
 
-	public void setDescription(String description){
+	public void setDescription(String description) throws UpdateNonExistingException {
 		this.description = description;
-		this.db.activity().update(this);
+		this.save();
 	}
 
 	public int getExpectedTime() {
 		return this.expectedTime;
 	}
 	
-	public void setExpectedTime(int expTime){
+	public void setExpectedTime(int expTime) throws UpdateNonExistingException {
 		this.expectedTime = expTime;
-		this.db.activity().update(this);
+		this.save();
 	}
 	
 	public long getStartTime() {
@@ -126,9 +120,9 @@ public class Activity extends DatabaseObject {
 		return new Date(this.startTime);
 	}
 	
-	public void setStartTime(long newDate) {
+	public void setStartTime(long newDate) throws UpdateNonExistingException {
 		this.startTime = newDate;
-		this.db.activity().update(this);
+		this.save();
 	}
 	
 	public long getEndTime() {
@@ -141,9 +135,9 @@ public class Activity extends DatabaseObject {
 		return cal;
 	}
 	
-	public void setEndTime(long newDate) {
+	public void setEndTime(long newDate) throws UpdateNonExistingException {
 		this.endTime = newDate;
-		this.db.activity().update(this);
+		this.save();
 	}
 	
 	private boolean isDevAlreadyOnActivity(int devID){
@@ -186,7 +180,7 @@ public class Activity extends DatabaseObject {
 	}
 	
 	public Project getProject() {
-		return this.db.project().read(this.projectID);
+		return this.database.project().read(this.projectID);
 	}
 
 }

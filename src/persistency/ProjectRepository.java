@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.UpdateNonExistingException;
+
 import utils.Query;
 
 import model.Developer;
@@ -66,7 +68,11 @@ public class ProjectRepository extends Repository<Project> {
 		}
 		
 		for (int i = 0; i < projects.size(); i++) {
-			projects.get(i).setManager(this.db.developer().read(managerIDs.get(i)));
+			try {
+				projects.get(i).setManager(this.db.developer().read(managerIDs.get(i)));
+			} catch (UpdateNonExistingException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return projects;

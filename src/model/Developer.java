@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.UpdateNonExistingException;
 import persistency.Database;
 
 
@@ -14,22 +15,10 @@ public class Developer extends DatabaseObject {
 	 * @param name
 	 */
 	public Developer(Database db, int id, String initials, String name) {
-		super(id,db);
+		super(id,db,db.activity());
 		
 		this.initials = initials;
 		this.name = name;
-	}
-
-	@Override
-	protected void save() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void delete() {
-		// TODO Auto-generated method stub	
-		
 	}
 	
 	@Override
@@ -41,17 +30,17 @@ public class Developer extends DatabaseObject {
 		return this.initials;
 	}
 
-	public void setInitials(String ints){
+	public void setInitials(String ints) throws UpdateNonExistingException{
 		this.initials = ints;
-		this.db.developer().update(this);
+		this.save();
 	}
 	
 	public String getName() {
 		return this.name;
 	}
 
-	public void setName(String name){
+	public void setName(String name) throws UpdateNonExistingException{
 		this.name = name;
-		this.db.developer().update(this);
+		this.save();
 	}
 }

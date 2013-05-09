@@ -10,6 +10,7 @@ import view.state.AbstractViewState;
 import view.state.DevelopersViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
+import exceptions.DeleteNonExistingException;
 import factory.ViewControllerFactory;
 
 public class DevelopersViewController extends AbstractViewController {
@@ -70,7 +71,11 @@ public class DevelopersViewController extends AbstractViewController {
 		
 		DialogChoice confirm = Dialog.confirm(String.format("Really delete %s?", sel.getName()));
 		if (confirm == DialogChoice.Yes) {
-			this.database.developer().delete(sel.getId());
+			try {
+				sel.delete();
+			} catch (DeleteNonExistingException e) {
+				e.printStackTrace();
+			}
 			this.fillDeveloperList();
 		}
 	}

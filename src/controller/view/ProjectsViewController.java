@@ -15,6 +15,7 @@ import view.state.AbstractViewState;
 import view.state.ProjectsViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
+import exceptions.DeleteNonExistingException;
 import factory.ViewControllerFactory;
 
 public class ProjectsViewController extends AbstractViewController {
@@ -97,7 +98,11 @@ public class ProjectsViewController extends AbstractViewController {
 		
 		DialogChoice confirm = Dialog.confirm(String.format("Really delete %s?", sel.getName()));
 		if (confirm == DialogChoice.Yes) {
-			this.database.project().delete(sel.getId());
+			try {
+				sel.delete();
+			} catch (DeleteNonExistingException e) {
+				e.printStackTrace();
+			}
 			this.fillProjectList();
 		}
 	}

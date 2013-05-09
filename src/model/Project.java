@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 
+import exceptions.UpdateNonExistingException;
+
 import persistency.Database;
 
 public class Project extends DatabaseObject {
@@ -22,7 +24,7 @@ public class Project extends DatabaseObject {
 	 */
 	public Project(Database db, int id, String name, int hourBudget, 
 			long deadline, Developer manager) {
-		super(id,db);
+		super(id,db,db.project());
 		
 		this.name = name;
 		this.hourBudget = hourBudget;
@@ -32,23 +34,11 @@ public class Project extends DatabaseObject {
 	
 	public Project(Database db, int id, String name, int hourBudget, 
 			long deadline) {
-		super(id,db);
+		super(id,db,db.project());
 		
 		this.name = name;
 		this.hourBudget = hourBudget;
 		this.deadline = deadline;
-	}
-
-	@Override
-	protected void save() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void delete() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -62,40 +52,40 @@ public class Project extends DatabaseObject {
 		return name;
 	}
 	
-	public void setName(String name){
+	public void setName(String name) throws UpdateNonExistingException{
 		this.name = name;
-		this.db.project().update(this);
+		this.save();
 	}
 
 	public int getHourBudget() {
 		return hourBudget;
 	}
 	
-	public void setHourBudget(int i) {
+	public void setHourBudget(int i) throws UpdateNonExistingException {
 		this.hourBudget = i;
-		this.db.project().update(this);
+		this.save();
 	}
 
 	public long getDeadline() {
 		return deadline;
 	}
 	
-	public void setDeadline(int deadline){
+	public void setDeadline(int deadline) throws UpdateNonExistingException{
 		this.deadline = deadline;
-		this.db.project().update(this);
+		this.save();
 	}
 
 	public Developer getManager() {
 		return manager;
 	}
 	
-	public void setManager(Developer manager){
+	public void setManager(Developer manager) throws UpdateNonExistingException{
 		this.manager = manager;
-		this.db.project().update(this);
+		this.save();
 	}
 
 	public List<Activity> getActivities() {
-		this.activities = this.db.activity().readAllWhereEquals("project_id", this.getId());
+		this.activities = this.database.activity().readAllWhereEquals("project_id", this.getId());
 		return this.activities;
 	}
 	

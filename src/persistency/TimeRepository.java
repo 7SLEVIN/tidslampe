@@ -30,17 +30,25 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 	
 	@Override
 	protected List<TimeEntry> parse(ResultSet rs) {
-
 		List<TimeEntry> timeEntries = new ArrayList<TimeEntry>();
+		List<Integer> actDevRel = new ArrayList<Integer>();
 		try {
 			while (rs.next()) {
+				actDevRel.add(rs.getInt(this.columns[2]));
 				timeEntries.add(new TimeEntry(
 						this.db, rs.getInt("id"), 
-						rs.getLong(this.columns[0]), rs.getLong(this.columns[1]), 
-						rs.getInt(this.columns[2]), rs.getBoolean("is_assist")));
+						rs.getLong(this.columns[0]), 
+						rs.getLong(this.columns[1]), 
+						rs.getBoolean("is_assist")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		for (int i = 0; i < timeEntries.size(); i++) {
+			Integer id = actDevRel.get(i);
+			if (id == null) break;
+			timeEntries.get(i).setActivityDeveloperRelation(
+					this.db.activityDeveloperRelation().read(id));
 		}
 		return timeEntries;
 	}

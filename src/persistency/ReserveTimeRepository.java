@@ -28,7 +28,7 @@ public class ReserveTimeRepository extends TimeRepository {
 			return null;
 		
 		if (this.db.activity().isFixed(activityID)) {
-			//Hvis aktiviteten er fixed, s� skal den bare registreres med det samme
+			//Hvis aktiviteten er fixed, så skal den bare registreres med det samme
 			return this.db.registerTime().create(startTime, endTime, rel, isAssist);
 		} else {
 			int id = this.create(new String[]{String.valueOf(startTime), 
@@ -36,7 +36,7 @@ public class ReserveTimeRepository extends TimeRepository {
 					String.valueOf(rel.getId()),
 					String.valueOf(devID), assistString});
 			
-			TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel.getId(), isAssist); 
+			TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel, isAssist); 
 			return entry;
 		}
 	}

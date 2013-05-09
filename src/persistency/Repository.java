@@ -3,6 +3,9 @@ package persistency;
 import java.sql.ResultSet;
 import java.util.List;
 
+import exceptions.DeleteNonExistingException;
+import exceptions.UpdateNonExistingException;
+
 import utils.Query;
 
 import model.DatabaseObject;
@@ -48,13 +51,13 @@ public abstract class Repository<T extends DatabaseObject> {
 		return results.isEmpty() ? null : results.get(0);
 	}
 	
-	public void update(T entity) {
+	public void update(T entity) throws UpdateNonExistingException {
 		String[] values = entity.getValueArray();
 		this.db.conn.update(this.table, entity.getId(), this.columns, values);
 	}
 	
-	public void delete(int id) {
-		this.db.conn.delete(this.table, id);
+	public void delete(T entity) throws DeleteNonExistingException {
+		this.db.conn.delete(this.table, entity.getId());
 	}
 	
 	public int count() {

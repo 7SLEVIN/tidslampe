@@ -30,6 +30,7 @@ import view.state.AbstractViewState;
 import view.state.CalendarViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
+import exceptions.DeleteNonExistingException;
 import factory.ViewControllerFactory;
 
 public class CalendarViewController extends AbstractViewController {
@@ -299,10 +300,11 @@ public class CalendarViewController extends AbstractViewController {
 			panel.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if (panel.getBackground().equals(Color.MAGENTA))
-						database.reserveTime().delete(te.getId());
-					else
-						database.registerTime().delete(te.getId());
+					try {
+						te.delete();
+					} catch (DeleteNonExistingException e1) {
+						e1.printStackTrace();
+					}
 					
 					updateStartDate();
 				}

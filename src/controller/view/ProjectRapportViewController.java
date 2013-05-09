@@ -1,14 +1,9 @@
 package controller.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Activity;
-import model.ActivityDeveloperRelation;
 import model.Project;
 import model.TimeEntry;
 import persistency.Database;
-import utils.Query;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.ProjectRapportViewState;

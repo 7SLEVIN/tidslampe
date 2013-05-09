@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import exceptions.DeleteNonExistingException;
+import exceptions.UpdateNonExistingException;
+
 import utils.Query;
 
 public class DatabaseConnection {
@@ -96,14 +99,15 @@ public class DatabaseConnection {
 		return true;
 	}
 	
-	public boolean update(String table, int id, String[] columns, String[] values) {
-		if (!this.exists(table, id)) return false;
+	public boolean update(String table, int id, String[] columns, String[] values) 
+			throws UpdateNonExistingException {
+		if (!this.exists(table, id)) throw new UpdateNonExistingException();
 		this.execUpdate(Query.Update(table, columns, values).WhereEquals("id", id));
 		return true;
 	}
 
-	public boolean delete(String table, int id) {
-		if (!this.exists(table, id)) return false;
+	public boolean delete(String table, int id) throws DeleteNonExistingException {
+		if (!this.exists(table, id)) throw new DeleteNonExistingException();
 		this.execUpdate(Query.DeleteFrom(table).WhereEquals("id", id));
 		return true;
 	}

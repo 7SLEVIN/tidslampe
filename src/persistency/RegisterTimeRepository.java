@@ -2,10 +2,9 @@ package persistency;
 
 import java.util.List;
 
-import utils.Query;
-import model.Activity;
 import model.ActivityDeveloperRelation;
 import model.TimeEntry;
+import utils.Query;
 
 public class RegisterTimeRepository extends TimeRepository {
 
@@ -38,7 +37,7 @@ public class RegisterTimeRepository extends TimeRepository {
 				String.valueOf(rel.getDeveloper().getId()),
 				assistString});
 		
-		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel.getId(), isAssist); 
+		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel, isAssist); 
 		return entry;
 	}
 	

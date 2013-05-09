@@ -8,7 +8,6 @@ public class Database {
 	private DeveloperRepository developer;
 	private ActivityRepository activity;
 	private ActivityDeveloperRelationRepository activityDeveloperRelation;
-	private AssistRepository assist;
 	private RegisterTimeRepository registerTime;
 	private ReserveTimeRepository reserveTime;
 	
@@ -28,7 +27,6 @@ public class Database {
 		this.developer = new DeveloperRepository(this);
 		this.activity = new ActivityRepository(this);
 		this.activityDeveloperRelation = new ActivityDeveloperRelationRepository(this);
-		this.assist = new AssistRepository(this);
 		this.registerTime = new RegisterTimeRepository(this);
 		this.reserveTime = new ReserveTimeRepository(this);
 	}
@@ -61,10 +59,6 @@ public class Database {
 	
 	public ActivityDeveloperRelationRepository activityDeveloperRelation() {
 		return activityDeveloperRelation;
-	}
-
-	public AssistRepository assist() {
-		return assist;
 	}
 
 	public RegisterTimeRepository registerTime() {
