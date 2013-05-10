@@ -27,13 +27,10 @@ public class ProjectRapportViewState extends AbstractViewState {
 	private JLabel nameLabel;
 	private JLabel activityCountLabel;
 	private JLabel timeUsedLabel;
-//<<<<<<< HEAD
 	private JLabel estimatedPercentageComplete;
 	private JLabel estimatedTimeRemaining; 
-//=======
 	private JLabel timeExpectedLabel;
 	private JLabel timeLeftLabel;
-//>>>>>>> d8732b6f51145e3757e2f8a732ca594f67f08503
 	
 	public ProjectRapportViewState(String projectName, int noOfActivities) {
 		this.backButton = new JButton("Back to project");
@@ -53,7 +50,7 @@ public class ProjectRapportViewState extends AbstractViewState {
 		titlePanel.add(this.nameLabel);
 
 		JPanel infoPanel = new JPanel();
-		GuiUtils.setSize(infoPanel, new Dimension(250, 150));
+		GuiUtils.setSize(infoPanel, new Dimension(350, 150));
 		infoPanel.add(this.activityCountLabel);
 		infoPanel.add(this.timeExpectedLabel);
 		infoPanel.add(this.timeUsedLabel);
@@ -106,7 +103,8 @@ public class ProjectRapportViewState extends AbstractViewState {
 	}
 	
 	public void percentageUnassigned(){
-		this.timeLeftLabel.setText("skriv info om hvor mange procent af budgeted hours der er delt ud på aktiviteter");
+		// TODO
+//		this.timeLeftLabel.setText("skriv info om hvor mange procent af budgeted hours der er delt ud pï¿½ aktiviteter");
 	}
 	
 	public JButton getBackButton() {
