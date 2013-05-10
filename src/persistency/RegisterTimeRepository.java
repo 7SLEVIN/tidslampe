@@ -18,7 +18,7 @@ public class RegisterTimeRepository extends TimeRepository {
 	 */
 	@Override
 	public TimeEntry create(long startTime, long endTime, int devID, int actID, boolean isAssist) {
-		ActivityDeveloperRelation actDevRel = this.db.activityDeveloperRelation().readOrCreate(devID, actID);
+		ActivityDeveloperRelation actDevRel = this.database.activityDeveloperRelation().readOrCreate(devID, actID);
 		return this.create(startTime, endTime, actDevRel, isAssist);
 	}
 	
@@ -37,12 +37,12 @@ public class RegisterTimeRepository extends TimeRepository {
 				String.valueOf(rel.getDeveloper().getId()),
 				assistString});
 		
-		TimeEntry entry = new TimeEntry(this.db, id, startTime, endTime, rel, isAssist); 
+		TimeEntry entry = new TimeEntry(this.database, id, startTime, endTime, rel, isAssist); 
 		return entry;
 	}
 	
 	public List<TimeEntry> getCollidingEntries(long startTime, long endTime, int devID){
-		List<TimeEntry> collidingEntries = this.parse(this.db.getConn().execQuery(Query.selectAllFrom(this.table)
+		List<TimeEntry> collidingEntries = this.parse(this.database.getConn().execQuery(Query.selectAllFrom(this.table)
 				.whereLessOrEquals("start_time", endTime)
 				.whereGreaterOrEquals("end_time", startTime)
 				.whereEquals("developer_id", devID)));

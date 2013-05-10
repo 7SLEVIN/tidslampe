@@ -52,26 +52,21 @@ public class ProjectRapportViewController extends AbstractViewController {
 	private void setTimeRemaining(){
 		this.timeRemaining = (int) ((100.0f - this.percentage)/100.0f*this.project.getHourBudget());
 		this.viewState.setTimeRemaining(this.timeRemaining);
-//=======
 		this.setTimeExpected();
-		this.viewState.setTimeLeft();
-//>>>>>>> d8732b6f51145e3757e2f8a732ca594f67f08503
+		this.viewState.percentageUnassigned();
 	}
 	
 	private void setTimeChart(){
 		this.viewState.setChart(this.timeRemaining, this.timeUsed);
 	}
 	
-	
 	private void setTimeUsed() {
-//<<<<<<< HEAD
 		this.timeUsed = 0;
 		for (TimeEntry entry : this.database.registerTime().readByProjectId(this.project.getId())) {
 			this.timeUsed += entry.getDurationInMinutes();
 		}
 		this.timeUsed /= 60;
 		this.viewState.setTimeUsed(this.timeUsed);
-//=======
 //		long time = 0;
 //		for (TimeEntry entry : this.database.registerTime().readByProjectId(this.project.getId())) {
 //			time += entry.getDurationInMinutes();

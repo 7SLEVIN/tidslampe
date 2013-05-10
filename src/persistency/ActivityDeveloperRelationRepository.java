@@ -29,7 +29,7 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 	}
 	
 	public List<Developer> getDevelopersFromActivityID(int id){
-		List<ActivityDeveloperRelation> relations = this.db.activityDeveloperRelation().readAllWhereEquals("activity_id", id);
+		List<ActivityDeveloperRelation> relations = this.database.activityDeveloperRelation().readAllWhereEquals("activity_id", id);
 		List<Developer> devs = new ArrayList<Developer>();
 		
 		for(ActivityDeveloperRelation relation : relations){
@@ -42,12 +42,12 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 	public ActivityDeveloperRelation create(Activity activity, Developer developer) {
 		int id = this.create(new String[]{String.valueOf(activity.getId()), 
 				String.valueOf(developer.getId())});
-		ActivityDeveloperRelation rel = new ActivityDeveloperRelation(this.db, id, activity, developer);
+		ActivityDeveloperRelation rel = new ActivityDeveloperRelation(this.database, id, activity, developer);
 		return rel;
 	}
 
 	public ActivityDeveloperRelation create(int developerId, int activityId) {
-		return this.create(this.db.activity().read(activityId), this.db.developer().read(developerId));
+		return this.create(this.database.activity().read(activityId), this.database.developer().read(developerId));
 	}
 
 	@Override
@@ -66,16 +66,16 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 			e.printStackTrace();
 		}
 		for(int i = 0; i < activityIDs.size(); i++){
-			rel.add(new ActivityDeveloperRelation(this.db, relationIDs.get(i), 
-					this.db.activity().read(activityIDs.get(i)), 
-					this.db.developer().read(developerIDs.get(i))));
+			rel.add(new ActivityDeveloperRelation(this.database, relationIDs.get(i), 
+					this.database.activity().read(activityIDs.get(i)), 
+					this.database.developer().read(developerIDs.get(i))));
 		}
 		return rel;
 	}
 	
 	public List<ActivityDeveloperRelation> getRelationsOfActivity(int actID){
 		Query query = Query.selectAllFrom(this.table).whereEquals("activity_id", actID);
-		List<ActivityDeveloperRelation> matches = this.parse(this.db.getConn().execQuery(query));
+		List<ActivityDeveloperRelation> matches = this.parse(this.database.getConn().execQuery(query));
 		if (matches.isEmpty())
 			return null;
 		else 
@@ -84,7 +84,7 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 	
 	public List<ActivityDeveloperRelation> getRelationsOfDeveloper(int devID){
 		Query query = Query.selectAllFrom(this.table).whereEquals("developer_id", devID);
-		List<ActivityDeveloperRelation> matches = this.parse(this.db.getConn().execQuery(query));
+		List<ActivityDeveloperRelation> matches = this.parse(this.database.getConn().execQuery(query));
 		return matches;
 	}
 	
@@ -97,7 +97,7 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 	
 	public ActivityDeveloperRelation readByDeveloperAndActivityId(int devID, int actID) {
 		Query query = Query.selectAllFrom(this.table).whereEquals("developer_id", devID).whereEquals("activity_id", actID);
-		List<ActivityDeveloperRelation> matches = this.parse(this.db.getConn().execQuery(query));
+		List<ActivityDeveloperRelation> matches = this.parse(this.database.getConn().execQuery(query));
 		if (matches.isEmpty())
 			return null;
 		else 

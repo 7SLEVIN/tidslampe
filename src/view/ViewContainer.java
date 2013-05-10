@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
+import controller.LoginController;
 import controller.view.AbstractViewController;
 import controller.view.ViewControllerFactory;
 
@@ -65,7 +66,7 @@ public class ViewContainer extends JFrame {
 		this.requestFocusInWindow();
 	}
 
-	public void setupToolBar(final int developerId) {
+	public void setupToolBar(final int developerId, final LoginController loginController) {
 		this.toolbar.removeAll();
 
 		JButton homeButton = new JButton("Home");
@@ -110,7 +111,8 @@ public class ViewContainer extends JFrame {
 		logoutButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				setViewState(ViewControllerFactory.CreateProjectsViewController());
+				loginController.logout();
+				setViewState(ViewControllerFactory.CreateLoginViewController());
 			}
 		});
 		this.toolbar.add(logoutButton);

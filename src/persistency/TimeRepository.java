@@ -23,7 +23,7 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 	public List<TimeEntry> readByDeveloperId(int developerId) {
 		Query query = Query.selectAllFrom(this.table).whereIn("developer_activity_relation_id", 
 				Query.select("id").from("activity_developer_relation").whereEquals("developer_id", developerId));
-		return this.parse(this.db.conn.execQuery(query));
+		return this.parse(this.database.getConnnection().execQuery(query));
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 			while (rs.next()) {
 				actDevRel.add(rs.getInt(this.columns[2]));
 				timeEntries.add(new TimeEntry(
-						this.db, rs.getInt("id"), 
+						this.database, rs.getInt("id"), 
 						rs.getLong(this.columns[0]), 
 						rs.getLong(this.columns[1]), 
 						rs.getBoolean("is_assist")));
@@ -46,7 +46,7 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 			Integer id = actDevRel.get(i);
 			if (id == null) break;
 			timeEntries.get(i).setActivityDeveloperRelation(
-					this.db.activityDeveloperRelation().read(id));
+					this.database.activityDeveloperRelation().read(id));
 		}
 		return timeEntries;
 	}
@@ -57,7 +57,7 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 		Query query = Query.selectAllFrom(this.table).whereIn("developer_activity_relation_id",
 				Query.select("id").from("activity_developer_relation").whereIn("activity_id",
 						Query.select("id").from("activity").whereEquals("project_id", projectId)));
-		return this.parse(this.db.conn.execQuery(query));
+		return this.parse(this.database.getConnnection().execQuery(query));
 	}
 
 }
