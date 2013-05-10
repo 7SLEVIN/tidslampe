@@ -42,7 +42,6 @@ public class ProjectRapportViewController extends AbstractViewController {
 		this.viewState.hoursUnassigned(this.project.getHourBudget(),this.project.getHoursAssignedToActivities());
 		this.viewState.setChart(this.project.getEstHoursRemaining(), this.project.getHoursRegistered());
 		this.viewState.setTimeUsed(this.project.getHoursRegistered());
-		this.viewState.setTimeAssignedToActivities(this.project.getHoursAssignedToActivities());
 	}
 	
 	

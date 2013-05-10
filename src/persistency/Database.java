@@ -16,7 +16,6 @@ public class Database {
 	 * @param project
 	 * @param developer
 	 * @param activity
-	 * @param assist
 	 */
 	public Database(String dbFile) {
 		this.connection = new DatabaseConnection(dbFile);

@@ -28,7 +28,7 @@ public class RegisterTimeRepository extends TimeRepository {
 		if(this.isTimeUsed(startTime, endTime, rel.getDeveloper().getId()))
 			return null;
 		
-		if(startTime == -1L || endTime == -1L)
+		if(startTime < 0 || endTime < 0)
 			return null;
 		
 		int id = this.create(new String[]{ String.valueOf(startTime), 

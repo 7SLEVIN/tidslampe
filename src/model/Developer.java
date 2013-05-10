@@ -26,7 +26,6 @@ public class Developer extends DatabaseObject {
 	public void delete() throws DeleteNonExistingException {
 		this.database.project().removeManager(this.getId());
 		this.database.activityDeveloperRelation().deleteRelationsByDevID(this.getId());
-		System.out.println(this.database.developer().exists(this.getId()));
 		super.delete();
 	}
 	

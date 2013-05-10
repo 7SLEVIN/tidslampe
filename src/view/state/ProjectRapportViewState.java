@@ -3,6 +3,7 @@ package view.state;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,13 +25,9 @@ public class ProjectRapportViewState extends AbstractViewState {
 	private JLabel nameLabel;
 	private JLabel activityCountLabel;
 	private JLabel timeUsedLabel;
-//<<<<<<< HEAD
 	private JLabel estimatedPercentageComplete;
 	private JLabel estimatedTimeRemaining; 
-//=======
-	private JLabel timeExpectedLabel;
-	private JLabel timeLeftLabel;
-//>>>>>>> d8732b6f51145e3757e2f8a732ca594f67f08503
+	private JLabel hoursUnassignedLabel;
 	
 	public ProjectRapportViewState(String projectName, int noOfActivities) {
 		this.backButton = new JButton("Back to project");
@@ -40,9 +37,8 @@ public class ProjectRapportViewState extends AbstractViewState {
 		this.timeUsedLabel = new JLabel();
 		this.estimatedPercentageComplete = new JLabel();
 		this.estimatedTimeRemaining = new JLabel();
-		this.timeExpectedLabel = new JLabel();
 		this.timeUsedLabel = new JLabel();
-		this.timeLeftLabel = new JLabel();
+		this.hoursUnassignedLabel = new JLabel();
 		
 		JPanel titlePanel = new JPanel();
 		GuiUtils.setSize(titlePanel, new Dimension(ViewContainer.WINDOW_WIDTH, 30));
@@ -50,13 +46,15 @@ public class ProjectRapportViewState extends AbstractViewState {
 		titlePanel.add(this.nameLabel);
 
 		JPanel infoPanel = new JPanel();
-		GuiUtils.setSize(infoPanel, new Dimension(400, 150));
+
+//		GuiUtils.setSize(infoPanel, new Dimension(700, 150));
+		infoPanel.setLayout(new GridLayout(6, 0));
 		infoPanel.add(this.activityCountLabel);
-		infoPanel.add(this.timeExpectedLabel);
+		infoPanel.add(this.hoursUnassignedLabel);
 		infoPanel.add(this.timeUsedLabel);
 		infoPanel.add(this.estimatedPercentageComplete);
 		infoPanel.add(this.estimatedTimeRemaining);
-		infoPanel.add(this.timeLeftLabel);
+		infoPanel.setPreferredSize(new Dimension(700, 140));
 		
 		this.add(titlePanel);
 		this.add(infoPanel);
@@ -70,7 +68,7 @@ public class ProjectRapportViewState extends AbstractViewState {
 		JFreeChart chart = ChartFactory.createPieChart("Time-budget breakdown",data,true,true,false );
 		
 		ChartPanel chartPanel = new ChartPanel(chart);
-		
+		GuiUtils.setSize(chartPanel, new Dimension(700, 400));
 		this.add(chartPanel);
 	}
 	
@@ -87,12 +85,8 @@ public class ProjectRapportViewState extends AbstractViewState {
 		this.estimatedTimeRemaining.setText("Estimated time remaining: " + String.valueOf(timeRemaining) + " hours");
 	}
 	
-	public void setTimeAssignedToActivities(int timeAssignedToActivities) {
-		this.timeExpectedLabel.setText(String.format("Time assigned to activities: %d hours", timeAssignedToActivities));
-	}
-	
 	public void hoursUnassigned(int totalHourBudget, int hoursAssigned){
-		this.timeLeftLabel.setText("Of the " + totalHourBudget + " total budgeted hours " + hoursAssigned + " have been assigned to activities");
+		this.hoursUnassignedLabel.setText("Of the " + totalHourBudget + " total budgeted hours " + hoursAssigned + " have been assigned to activities");
 	}
 	
 	public JButton getBackButton() {

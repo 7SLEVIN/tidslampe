@@ -1,6 +1,9 @@
 package persistency;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.text.ParseException;
 import java.util.List;
@@ -44,6 +47,27 @@ public class TestDatabase extends BaseTestDatabase {
 		man.delete();
 		man2.delete();
 		assertEquals("Database count", 0, this.db.developer().count());
+	}
+	
+	@Test
+	public void testExists() throws DeleteNonExistingException {
+		Developer dev = this.db.developer().create("MD", "Moby Dick");
+		assertTrue(this.db.developer().exists(dev.getId()));
+		dev.delete();
+		assertFalse(this.db.developer().exists(dev.getId()));
+	}
+	
+	@Test
+	public void testDeleteNonExisting() throws DeleteNonExistingException {
+		Developer dev = this.db.developer().create("MD", "Moby Dick");
+		assertTrue(this.db.developer().exists(dev.getId()));
+		dev.delete();
+		try {
+			dev.delete();
+			fail("This should throw an DeleteNonExistingException");
+		} catch (DeleteNonExistingException e) {
+			assertEquals("Trying to delete nonexisting entry.", e.getMessage());
+		}
 	}
 	
 	@Test
