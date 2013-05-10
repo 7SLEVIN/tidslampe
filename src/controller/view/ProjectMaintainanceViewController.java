@@ -41,7 +41,7 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 		ActionUtils.addListener(this.viewState.getAddDevButton(), this, "addDeveloper");
 		ActionUtils.addListener(this.viewState.getAssManagerButton(), this, "assignManager");
 		ActionUtils.addListener(this.viewState.getAddActivityButton(), this, "addActivity");
-		this.viewState.getCreateRapportButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectRapportViewController(this.project.getId())));
+		this.viewState.getCreateReportButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectRapportViewController(this.project.getId())));
 		
 		this.fillActivityList();
 		this.fillManagerList();

@@ -5,6 +5,7 @@ import java.util.List;
 import exceptions.UpdateNonExistingException;
 
 import persistency.Database;
+import utils.TimeService;
 
 public class Project extends DatabaseObject {
 
@@ -91,6 +92,44 @@ public class Project extends DatabaseObject {
 	
 	public String toString() {
 		return this.name;
+	}
+	
+	public int getHoursRegistered(){
+		int timeUsed = 0;
+		for (TimeEntry entry : this.database.registerTime().readByProjectId(this.getId())) {
+			timeUsed += entry.getDurationInMinutes();
+		}
+		timeUsed /= 60;
+		return timeUsed;
+	}
+	
+	public int getEstPercentageCompletion(){
+		return this.getHoursRegistered()*100 / (this.getHourBudget());
+	}
+	
+	public int getEstHoursRemaining(){
+		return (int) ((100.0f - (float) this.getEstPercentageCompletion())/100.0f* (float) this.getHourBudget());
+	}
+	
+	public int getHoursAssignedToActivities(){
+		int time = 0;
+		for (Activity activity : this.getActivities()) {
+			time += activity.getExpectedTime();
+		}
+		return time;
+	}
+	
+	public String getSerialNumber(){
+		String serialNumber = ""+((new TimeService()).convertToValues(this.getDeadline())[0]%100);
+		if(this.getId() % 10000 < 10)
+			serialNumber += "000"+(this.getId()%10000);
+		else if(this.getId() % 10000 < 100)
+			serialNumber += "00"+(this.getId()%10000);
+		else if(this.getId() % 10000 < 1000)
+			serialNumber += "0"+(this.getId()%10000);
+		else
+			serialNumber += ""+(this.getId()%10000);
+		return serialNumber;
 	}
 
 }

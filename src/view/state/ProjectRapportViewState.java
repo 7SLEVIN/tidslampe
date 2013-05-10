@@ -20,9 +20,6 @@ import view.ViewContainer;
 public class ProjectRapportViewState extends AbstractViewState {
 	
 	private JButton backButton;
-
-	private long timeUsed;
-	private long timeAssignedToActivities;
 	
 	private JLabel nameLabel;
 	private JLabel activityCountLabel;
@@ -53,7 +50,7 @@ public class ProjectRapportViewState extends AbstractViewState {
 		titlePanel.add(this.nameLabel);
 
 		JPanel infoPanel = new JPanel();
-		GuiUtils.setSize(infoPanel, new Dimension(250, 150));
+		GuiUtils.setSize(infoPanel, new Dimension(400, 150));
 		infoPanel.add(this.activityCountLabel);
 		infoPanel.add(this.timeExpectedLabel);
 		infoPanel.add(this.timeUsedLabel);
@@ -67,8 +64,8 @@ public class ProjectRapportViewState extends AbstractViewState {
 	
 	public void setChart(int remainingTime, int registeredTime){
 		DefaultPieDataset data = new DefaultPieDataset();
-		data.setValue("Remaining time", remainingTime);
 		data.setValue("Registered time", registeredTime);
+		data.setValue("Remaining time", remainingTime);
 
 		JFreeChart chart = ChartFactory.createPieChart("Time-budget breakdown",data,true,true,false );
 		
@@ -77,36 +74,25 @@ public class ProjectRapportViewState extends AbstractViewState {
 		this.add(chartPanel);
 	}
 	
-	public void setPercentageComplete(float percentage){
+	public void setPercentageComplete(int percentage){
 		this.estimatedPercentageComplete.setText("Estimated percentage complete: " + String.valueOf((int) percentage)+"%");
 	}
 	
 	public void setTimeUsed(int timeUsed) {
-		this.timeUsed = timeUsed;
-		this.timeUsedLabel.setText("Total time registered1: " + String.valueOf(timeUsed) + (timeUsed == 1 ? "hour" :" hours"));
+		this.timeUsedLabel.setText("Total time registered: " + String.valueOf(timeUsed) + (timeUsed == 1 ? "hour" :" hours"));
 	}
 	
 	public void setTimeRemaining(int timeRemaining){
 		if (timeRemaining < 0) this.estimatedTimeRemaining.setForeground(Color.RED);
 		this.estimatedTimeRemaining.setText("Estimated time remaining: " + String.valueOf(timeRemaining) + " hours");
 	}
-
-	//TODO percentage of budgeted time assigned to activities
-
-	public void setTimeExpected(long timeAssignedToActivities) {
-		this.timeAssignedToActivities = timeAssignedToActivities;
-		this.timeExpectedLabel.setText(String.format("Time assigned to activities: %d hours", timeAssignedToActivities/60));
-	}
-
-	public void setTimeLeft() {
-		//TODO delete this
-//		long timeLeft = this.timeAssignedToActivities - this.timeUsed;
-//		
-//		this.timeLeftLabel.setText(String.format("Time left: %d hours", timeLeft/60));
+	
+	public void setTimeAssignedToActivities(int timeAssignedToActivities) {
+		this.timeExpectedLabel.setText(String.format("Time assigned to activities: %d hours", timeAssignedToActivities));
 	}
 	
-	public void percentageUnassigned(){
-		this.timeLeftLabel.setText("skriv info om hvor mange procent af budgeted hours der er delt ud på aktiviteter");
+	public void hoursUnassigned(int totalHourBudget, int hoursAssigned){
+		this.timeLeftLabel.setText("Of the " + totalHourBudget + " total budgeted hours " + hoursAssigned + " have been assigned to activities");
 	}
 	
 	public JButton getBackButton() {

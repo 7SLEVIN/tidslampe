@@ -42,6 +42,7 @@ public class TimeService {
 	public long convertToMillis(String deadlineString){
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		try {
+			format.setLenient(false);
 			Calendar deadlineDate = Calendar.getInstance();
 			deadlineDate.setTime(format.parse(deadlineString.trim()));
 			long longDeadline = deadlineDate.getTimeInMillis(); 
@@ -52,7 +53,7 @@ public class TimeService {
 			return longDeadline;
 			
 		} catch (ParseException e) {
-			Dialog.message("Invalid date format, must use dd-mm-yyyy");
+			Dialog.message("Invalid date format, you must use dd-mm-yyyy");
 			return -1L;
 		}
 		
@@ -87,12 +88,10 @@ public class TimeService {
 	
 	public boolean isDateValid(int year, int month, int day, int hour, int minute)
 	{
-//		if(hour == 0)
-//			hour = 24;
-//		else if(hour >= 24){
-//			//System.out.println("INVALID DATE! hilsen TimeService");
-//			return false;
-//		}
+		if(hour >= 24){
+			Dialog.message("Date invalid.");
+			return false;
+		}
 			
 		
 		String date = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day)+"-"+String.valueOf(hour)+"-"+String.valueOf(minute);
@@ -100,10 +99,10 @@ public class TimeService {
 	        try {
 	            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
 	            df.setLenient(false);
-	            Date d = df.parse(date);
+	            df.parse(date);
 	            return true;
 	        } catch (ParseException e) {
-	        	//System.out.println("INVALID DATE! hilsen TimeService");
+	        	Dialog.message("Date invalid.");
 	            return false;
 	        }
 	}

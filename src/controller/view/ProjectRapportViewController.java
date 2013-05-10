@@ -1,8 +1,6 @@
 package controller.view;
 
-import model.Activity;
 import model.Project;
-import model.TimeEntry;
 import persistency.Database;
 import view.ViewContainer;
 import view.state.AbstractViewState;
@@ -14,9 +12,6 @@ import controller.action.ChangeViewAction;
 public class ProjectRapportViewController extends AbstractViewController {
 	private ProjectRapportViewState viewState;
 	private Project project;
-	private int timeUsed;
-	private float percentage;
-	private int timeRemaining;
 
 	public ProjectRapportViewController(Database database,
 			ViewContainer viewContainer, 
@@ -37,50 +32,17 @@ public class ProjectRapportViewController extends AbstractViewController {
 		
 		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectMaintainanceViewController(this.project.getId())));
 
-		this.setTimeUsed();
-//<<<<<<< HEAD
-		this.setEstimatedPercentage();
-		this.setTimeRemaining();
-		this.setTimeChart();
+		this.setReportData();
 	}
 	
-	private void setEstimatedPercentage(){
-		this.percentage = this.timeUsed*100 / (float)(this.project.getHourBudget());
-		this.viewState.setPercentageComplete(this.percentage);
-	}
-	
-	private void setTimeRemaining(){
-		this.timeRemaining = (int) ((100.0f - this.percentage)/100.0f*this.project.getHourBudget());
-		this.viewState.setTimeRemaining(this.timeRemaining);
-		this.setTimeExpected();
-		this.viewState.percentageUnassigned();
-	}
-	
-	private void setTimeChart(){
-		this.viewState.setChart(this.timeRemaining, this.timeUsed);
-	}
-	
-	private void setTimeUsed() {
-		this.timeUsed = 0;
-		for (TimeEntry entry : this.database.registerTime().readByProjectId(this.project.getId())) {
-			this.timeUsed += entry.getDurationInMinutes();
-		}
-		this.timeUsed /= 60;
-		this.viewState.setTimeUsed(this.timeUsed);
-//		long time = 0;
-//		for (TimeEntry entry : this.database.registerTime().readByProjectId(this.project.getId())) {
-//			time += entry.getDurationInMinutes();
-//		}
-//		this.viewState.setTimeUsed(time);
-	}
-	
-	private void setTimeExpected() {
-		long time = 0;
-		for (Activity activity : this.project.getActivities()) {
-			time += 60 * activity.getExpectedTime();
-		}
-		this.viewState.setTimeExpected(time);
-//>>>>>>> d8732b6f51145e3757e2f8a732ca594f67f08503
+	private void setReportData(){
+		//Setting the values for the report
+		this.viewState.setPercentageComplete(this.project.getEstPercentageCompletion());
+		this.viewState.setTimeRemaining(this.project.getEstHoursRemaining());
+		this.viewState.hoursUnassigned(this.project.getHourBudget(),this.project.getHoursAssignedToActivities());
+		this.viewState.setChart(this.project.getEstHoursRemaining(), this.project.getHoursRegistered());
+		this.viewState.setTimeUsed(this.project.getHoursRegistered());
+		this.viewState.setTimeAssignedToActivities(this.project.getHoursAssignedToActivities());
 	}
 	
 	

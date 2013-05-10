@@ -69,11 +69,15 @@ public class ProjectsViewController extends AbstractViewController {
 		long milliDeadline = this.timeService.convertToMillis(deadlineInput);
 		
 		if (nameInput.length() == 0 ||
-				hourBudgetInput < 0) {
+				hourBudgetInput <= 0) {
 			Dialog.message("You must fill out all fields");
 			return;
 		}else if(milliDeadline < 0){
 			return;
+		}else{ 
+//			int[] dValues = this.timeService.convertToValues(milliDeadline);
+//			if(this.timeService.isDateValid(dValues[0],dValues[1],dValues[2],dValues[3],dValues[4])) 
+//				return;
 		}
 		
 		if (this.database.project().create(nameInput, hourBudgetInput, milliDeadline, managerInput) == null) {
