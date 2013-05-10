@@ -27,7 +27,7 @@ public class LoginViewController extends AbstractViewController {
 	public void tryLogin() {
 		if (this.controllers.getLoginController().login(this.viewState.getInputText())) {
 			this.viewContainer.setViewState(ViewControllerFactory.CreateMenuViewController());
-			this.viewContainer.setupToolBar(this.controllers.getLoginController().getUser().getId());
+			this.viewContainer.setupToolBar(this.controllers.getLoginController().getUser().getId(), this.controllers.getLoginController());
 			this.viewContainer.setToolbarVisible(true);
 		}
 		else {

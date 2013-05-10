@@ -25,12 +25,12 @@ public class DeveloperRepository extends Repository<Developer> {
 		}
 		
 		int id = this.create(new String[]{initials, name});
-		Developer dev = new Developer(this.db, id, initials, name); 
+		Developer dev = new Developer(this.database, id, initials, name); 
 		return dev;
 	}
 	
 	public List<Developer> readByInitials(String initials) {
-		return this.parse(this.db.conn.readWhereEquals(this.table, this.columns[0], initials));
+		return this.parse(this.database.getConnnection().readWhereEquals(this.table, this.columns[0], initials));
 	}
 	
 	
@@ -40,7 +40,7 @@ public class DeveloperRepository extends Repository<Developer> {
 		List<Developer> developers = new ArrayList<Developer>();
 		try {
 			while (rs.next()) {
-				developers.add(new Developer(this.db, rs.getInt("id"), 
+				developers.add(new Developer(this.database, rs.getInt("id"), 
 						rs.getString(this.columns[0]), rs.getString(this.columns[1])));
 			}
 		} catch (SQLException e) {

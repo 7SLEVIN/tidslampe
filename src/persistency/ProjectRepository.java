@@ -27,7 +27,7 @@ public class ProjectRepository extends Repository<Project> {
 						Query.select("project_id").from("activity").whereIn("activity.id", 
 							Query.select("activity_id").from("activity_developer_relation adr").whereEquals("adr.developer_id", developerId)));
 		
-		ResultSet rs = this.db.conn.execQuery(q);
+		ResultSet rs = this.database.getConnnection().execQuery(q);
 		
 		return this.parse(rs);
 	}
@@ -38,7 +38,7 @@ public class ProjectRepository extends Repository<Project> {
 		
 		int id = this.create(new String[] { name, String.valueOf(hourBudget),
 				String.valueOf(deadline), String.valueOf(manager.getId()) });
-		Project project = new Project(this.db, id, name, hourBudget, deadline,
+		Project project = new Project(this.database, id, name, hourBudget, deadline,
 				manager);
 		return project;
 	}
@@ -46,7 +46,7 @@ public class ProjectRepository extends Repository<Project> {
 	public Project create(String name, int hourBudget, long deadline) {
 		int id = this.create(new String[] { name, String.valueOf(hourBudget),
 				String.valueOf(deadline), "-1" });
-		Project project = new Project(this.db, id, name, hourBudget, deadline);
+		Project project = new Project(this.database, id, name, hourBudget, deadline);
 		return project;
 	}
 	
@@ -69,7 +69,7 @@ public class ProjectRepository extends Repository<Project> {
 		try {
 			while (rs.next()) {
 				managerIDs.add(rs.getInt(this.columns[3]));
-				projects.add(new Project(this.db, rs.getInt("id"), 
+				projects.add(new Project(this.database, rs.getInt("id"), 
 						rs.getString(this.columns[0]),
 						rs.getInt(this.columns[1]), rs.getLong(this.columns[2])));
 			}
@@ -80,7 +80,7 @@ public class ProjectRepository extends Repository<Project> {
 		
 		for (int i = 0; i < projects.size(); i++) {
 			try {
-				projects.get(i).setManager(this.db.developer().read(managerIDs.get(i)));
+				projects.get(i).setManager(this.database.developer().read(managerIDs.get(i)));
 			} catch (UpdateNonExistingException e) {
 				e.printStackTrace();
 			}

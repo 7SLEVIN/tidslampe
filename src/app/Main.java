@@ -1,5 +1,7 @@
 package app;
 
+import java.awt.AWTException;
+
 import persistency.Database;
 import utils.TimeService;
 import view.ViewContainer;
@@ -9,7 +11,7 @@ import controller.view.ViewControllerFactory;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws AWTException {
 		Database database = new Database("dev_db.db");
 		// Wire up
 		TimeService timeService = new TimeService();
