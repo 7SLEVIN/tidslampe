@@ -108,10 +108,10 @@ public class Project extends DatabaseObject {
 	}
 	
 	public int getEstHoursRemaining(){
-		return (int) ((100.0f - (float) this.getEstPercentageCompletion())/100.0f* (float) this.getHourBudget());
+		return this.getHourBudget() - this.getHoursRegistered();
 	}
 	
-	public int getHoursAssignedToActivities(){
+	public int getHoursAllocatedToActivities(){
 		int time = 0;
 		for (Activity activity : this.getActivities()) {
 			time += activity.getExpectedTime();

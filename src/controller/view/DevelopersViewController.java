@@ -9,7 +9,6 @@ import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.DevelopersViewState;
 import controller.ControllerCollection;
-import controller.action.ChangeViewAction;
 import exceptions.DeleteNonExistingException;
 
 public class DevelopersViewController extends AbstractViewController {
