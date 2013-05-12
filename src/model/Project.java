@@ -116,16 +116,7 @@ public class Project extends DatabaseObject {
 	}
 	
 	public String getSerialNumber(){
-		String serialNumber = ""+((new TimeService()).convertToValues(this.getDeadline())[0]%100);
-		if(this.getId() % 10000 < 10)
-			serialNumber += "000"+(this.getId()%10000);
-		else if(this.getId() % 10000 < 100)
-			serialNumber += "00"+(this.getId()%10000);
-		else if(this.getId() % 10000 < 1000)
-			serialNumber += "0"+(this.getId()%10000);
-		else
-			serialNumber += ""+(this.getId()%10000);
-		return serialNumber;
+		return ""+((new TimeService()).convertToValues(this.getDeadline())[0]%100) + String.format("%04d", this.getId() % 10000);
 	}
 
 	@Override
