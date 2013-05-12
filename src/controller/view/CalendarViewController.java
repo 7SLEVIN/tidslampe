@@ -28,6 +28,7 @@ import utils.TimeService;
 import view.ViewContainer;
 import view.state.AbstractViewState;
 import view.state.CalendarViewState;
+import view.state.DevelopersViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
 import exceptions.DeleteNonExistingException;
@@ -44,7 +45,8 @@ public class CalendarViewController extends AbstractViewController {
 	public CalendarViewController(Database database, ViewContainer viewContainer, ControllerCollection controllers, int developerId) {
 		super(database, viewContainer, controllers);
 		this.developer = this.database.developer().read(developerId);
-		this.isSelf = developerId == this.controllers.getLoginController().getUser().getId();
+		Developer loggedInUser = this.controllers.getLoginController().getUser();
+		this.isSelf = loggedInUser != null && developerId == loggedInUser.getId();
 	}
 
 	@Override
@@ -54,8 +56,12 @@ public class CalendarViewController extends AbstractViewController {
 
 	@Override
 	public void initialize() {
+		this.initialize(new CalendarViewState());
+	}
+	
+	public void initialize(CalendarViewState viewState) {
 		this.timeService = new TimeService();
-		this.viewState = new CalendarViewState();
+		this.viewState = viewState;
 		
 		this.developers = this.database.developer().readAll();
 		

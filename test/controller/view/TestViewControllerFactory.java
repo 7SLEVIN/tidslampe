@@ -34,7 +34,5 @@ public class TestViewControllerFactory extends BaseTestDatabase {
 		assertNotNull(ViewControllerFactory.CreateProjectMaintainanceViewController(1));
 		assertNotNull(ViewControllerFactory.CreateProjectRapportViewController(1));
 		assertNotNull(ViewControllerFactory.CreateProjectsViewController());
-		
 	}
-
 }

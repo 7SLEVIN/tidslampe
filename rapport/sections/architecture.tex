@@ -10,4 +10,4 @@ The repositories are used by \code{ViewControllers}, which are (as the name impl
 
 The \code{View}s are completely isolated objects, who know nothing of the other parts of the application, and other parts of the application know nothing of how they display the data. 
 
-This means that the actual GUI could easily be interchanged with a CLI\footnote{Command Line Interface}, or some other interface, except for the fact that there are some \code{Swing} components that the \code{ViewController}s make use of (for instance, adding a handler to a button), but these could be abstracted away with more time.
+This means that the actual GUI could easily be interchanged with a CLI\footnote{Command Line Interface}, or some other interface, except for the fact that there are some \code{Swing} components that the \code{ViewController}s make use of (for instance, adding a handler to a button). This could have been avoided by using Interfaces, but we felt that it was beyond the scope of this project.

@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import persistency.BaseTestDatabase;
 import utils.Dialog;
+import utils.DialogChoice;
 import utils.TimeService;
 import view.ViewContainer;
 import view.state.DevelopersViewState;
@@ -27,7 +28,7 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 	@Test
 	public void testMainScenario() {
 		this.init();
-		Dialog.setDebugMode(true,1);
+		Dialog.setDebugMode(true, DialogChoice.Yes);
 		TimeService timeService = new TimeService();
 		ControllerCollection controllerCollection = new ControllerCollection(this.db, timeService);
 		ViewContainer viewContainer = new ViewContainer();
@@ -36,7 +37,7 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 		DevelopersViewController devsViewController = new DevelopersViewController(this.db, viewContainer, controllerCollection);
 		
 		controllerCollection.getLoginController().login("JL");
-		
+
 		Developer developer2 = this.db.developer().readByInitials("PM").get(0);
 		int totalDevelopers = this.db.developer().readAll().size();
 		
@@ -71,7 +72,7 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 	@Test
 	public void testDeleteMyself() {
 		this.init();
-		Dialog.setDebugMode(true,1);
+		Dialog.setDebugMode(true, DialogChoice.Yes);
 		TimeService timeService = new TimeService();
 		ControllerCollection controllerCollection = new ControllerCollection(this.db, timeService);
 		ViewContainer viewContainer = new ViewContainer();
@@ -115,7 +116,7 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 	@Test
 	public void testNoToDeletion() {
 		this.init();
-		Dialog.setDebugMode(true,-1);
+		Dialog.setDebugMode(true, DialogChoice.No);
 		TimeService timeService = new TimeService();
 		ControllerCollection controllerCollection = new ControllerCollection(this.db, timeService);
 		ViewContainer viewContainer = new ViewContainer();
@@ -159,7 +160,7 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 	@Test
 	public void testNoDeveloperSelected() {
 		this.init();
-		Dialog.setDebugMode(true,1);
+		Dialog.setDebugMode(true, DialogChoice.No);
 		TimeService timeService = new TimeService();
 		ControllerCollection controllerCollection = new ControllerCollection(this.db, timeService);
 		ViewContainer viewContainer = new ViewContainer();
