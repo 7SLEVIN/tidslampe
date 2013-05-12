@@ -41,8 +41,8 @@ public class ViewControllerFactory {
 		return new ProjectsViewController(database, viewContainer, controllerCollection);
 	}
 	
-	public static ProjectRapportViewController CreateProjectRapportViewController(int rapportId) {
-		return new ProjectRapportViewController(database, viewContainer, controllerCollection, rapportId);
+	public static ProjectReportViewController CreateProjectRapportViewController(int rapportId) {
+		return new ProjectReportViewController(database, viewContainer, controllerCollection, rapportId);
 	}
 
 }
