@@ -39,7 +39,7 @@ public class ProjectRapportViewController extends AbstractViewController {
 		//Setting the values for the report
 		this.viewState.setPercentageComplete(this.project.getEstPercentageCompletion());
 		this.viewState.setTimeRemaining(this.project.getEstHoursRemaining());
-		this.viewState.hoursUnassigned(this.project.getHourBudget(),this.project.getHoursAssignedToActivities());
+		this.viewState.hoursUnassigned(this.project.getHourBudget(),this.project.getHoursAllocatedToActivities());
 		this.viewState.setChart(this.project.getEstHoursRemaining(), this.project.getHoursRegistered());
 		this.viewState.setTimeUsed(this.project.getHoursRegistered());
 	}
