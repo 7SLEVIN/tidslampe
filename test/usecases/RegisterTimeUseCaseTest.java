@@ -1,4 +1,9 @@
-package use_cases;
+package usecases;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
@@ -13,10 +18,8 @@ import model.Developer;
 import model.Project;
 import model.TimeEntry;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import utils.Dialog;
 import utils.DialogChoice;
@@ -38,7 +41,7 @@ public class RegisterTimeUseCaseTest extends BaseViewControllerTest {
 		super.setUp();
 		
 		Dialog.setDebugMode(true, DialogChoice.None);
-		this.dialogMock = Mockito.mock(Dialog.class);
+		this.dialogMock = mock(Dialog.class);
 		Dialog.setInstance(this.dialogMock);
 		
 		// Data setup
@@ -60,12 +63,12 @@ public class RegisterTimeUseCaseTest extends BaseViewControllerTest {
 		
 		// Assert
 		List<TimeEntry> timeEntries = this.db.registerTime().readAll();
-		Assert.assertEquals(1, timeEntries.size());
+		assertEquals(1, timeEntries.size());
 		
 		TimeEntry timeEntry = timeEntries.get(0);
-		Assert.assertEquals(this.activity.getDescription(), timeEntry.getActivity().getDescription());
-		Assert.assertEquals(this.activity.getId(), timeEntry.getActivity().getId());
-		Assert.assertEquals(this.developer.getId(), timeEntry.getDeveloper().getId());
+		assertEquals(this.activity.getDescription(), timeEntry.getActivity().getDescription());
+		assertEquals(this.activity.getId(), timeEntry.getActivity().getId());
+		assertEquals(this.developer.getId(), timeEntry.getDeveloper().getId());
 	}
 	
 	@Test
@@ -77,12 +80,12 @@ public class RegisterTimeUseCaseTest extends BaseViewControllerTest {
 		
 		// Assert
 		List<TimeEntry> timeEntries = this.db.reserveTime().readAll();
-		Assert.assertEquals(1, timeEntries.size());
+		assertEquals(1, timeEntries.size());
 		
 		TimeEntry timeEntry = timeEntries.get(0);
-		Assert.assertEquals(this.activity.getDescription(), timeEntry.getActivity().getDescription());
-		Assert.assertEquals(this.activity.getId(), timeEntry.getActivity().getId());
-		Assert.assertEquals(this.developer.getId(), timeEntry.getDeveloper().getId());
+		assertEquals(this.activity.getDescription(), timeEntry.getActivity().getDescription());
+		assertEquals(this.activity.getId(), timeEntry.getActivity().getId());
+		assertEquals(this.developer.getId(), timeEntry.getDeveloper().getId());
 	}
 
 	@Test
@@ -93,10 +96,10 @@ public class RegisterTimeUseCaseTest extends BaseViewControllerTest {
 		calendarController.addRegisterTimeEntry();
 		
 		// Assert
-		Mockito.verify(dialogMock).showMessage("Specified date is invalid");
+		verify(dialogMock).showMessage("Specified date is invalid");
 		
 		List<TimeEntry> timeEntries = this.db.registerTime().readAll();
-		Assert.assertEquals(timeEntries.size(), 0);
+		assertEquals(timeEntries.size(), 0);
 	}
 
 	@Test
@@ -107,10 +110,10 @@ public class RegisterTimeUseCaseTest extends BaseViewControllerTest {
 		calendarController.addRegisterTimeEntry();
 		
 		// Assert
-		Mockito.verify(dialogMock).showMessage("Specified date is invalid");
+		verify(dialogMock).showMessage("Specified date is invalid");
 		
 		List<TimeEntry> timeEntries = this.db.registerTime().readAll();
-		Assert.assertEquals(timeEntries.size(), 0);
+		assertEquals(timeEntries.size(), 0);
 	}
 
 	@Test
@@ -126,33 +129,33 @@ public class RegisterTimeUseCaseTest extends BaseViewControllerTest {
 		calendarController.addRegisterTimeEntry();
 		
 		// Assert
-		Mockito.verify(dialogMock).showMessage("Specified date and time is overlapping existing time registrations");
+		verify(dialogMock).showMessage("Specified date and time is overlapping existing time registrations");
 		
 		List<TimeEntry> timeEntries = this.db.registerTime().readAll();
-		Assert.assertEquals(timeEntries.size(), 1);
+		assertEquals(timeEntries.size(), 1);
 	}
 
 	private CalendarViewController getMockedCalendarController(String startTime, String endTime, String date) {
-		CalendarViewState calView = Mockito.mock(CalendarViewState.class);
-		Mockito.when(calView.getStartTimeString())		.thenReturn(startTime);
-		Mockito.when(calView.getEndTimeString())		.thenReturn(endTime);
-		Mockito.when(calView.getDateString())			.thenReturn(date);
-		Mockito.when(calView.getSelectedProject())		.thenReturn(this.project);
-		Mockito.when(calView.getSelectedActivity())		.thenReturn(this.activity);
+		CalendarViewState calView = mock(CalendarViewState.class);
+		when(calView.getStartTimeString())		.thenReturn(startTime);
+		when(calView.getEndTimeString())		.thenReturn(endTime);
+		when(calView.getDateString())			.thenReturn(date);
+		when(calView.getSelectedProject())		.thenReturn(this.project);
+		when(calView.getSelectedActivity())		.thenReturn(this.activity);
 		
 		// Swing component mock
-		Mockito.when(calView.getFixedToggleButton())	.thenReturn(new JToggleButton());
-		Mockito.when(calView.getAssistToggleButton())	.thenReturn(new JToggleButton());
-		Mockito.when(calView.getPrevButton())			.thenReturn(new JButton());
-		Mockito.when(calView.getNextButton())			.thenReturn(new JButton());
-		Mockito.when(calView.getNextDeveloperButton())	.thenReturn(new JButton());
-		Mockito.when(calView.getPrevDeveloperButton())	.thenReturn(new JButton());
-		Mockito.when(calView.getRegisterButton())		.thenReturn(new JButton());
-		Mockito.when(calView.getReserveButton())		.thenReturn(new JButton());
-		Mockito.when(calView.getProjectComboBox())		.thenReturn(new JComboBox<Project>());
-		Mockito.when(calView.getActivityTypeComboBox())	.thenReturn(new JComboBox<ActivityType>());
-		Mockito.when(calView.getReserveButton())		.thenReturn(new JButton());
-		Mockito.when(calView.getDayLabels())			.thenReturn(new JLabel[] {new JLabel(), new JLabel(), new JLabel(), new JLabel(), new JLabel(), new JLabel(), new JLabel()});
+		when(calView.getFixedToggleButton())	.thenReturn(new JToggleButton());
+		when(calView.getAssistToggleButton())	.thenReturn(new JToggleButton());
+		when(calView.getPrevButton())			.thenReturn(new JButton());
+		when(calView.getNextButton())			.thenReturn(new JButton());
+		when(calView.getNextDeveloperButton())	.thenReturn(new JButton());
+		when(calView.getPrevDeveloperButton())	.thenReturn(new JButton());
+		when(calView.getRegisterButton())		.thenReturn(new JButton());
+		when(calView.getReserveButton())		.thenReturn(new JButton());
+		when(calView.getProjectComboBox())		.thenReturn(new JComboBox<Project>());
+		when(calView.getActivityTypeComboBox())	.thenReturn(new JComboBox<ActivityType>());
+		when(calView.getReserveButton())		.thenReturn(new JButton());
+		when(calView.getDayLabels())			.thenReturn(new JLabel[] {new JLabel(), new JLabel(), new JLabel(), new JLabel(), new JLabel(), new JLabel(), new JLabel()});
 		
 		// Initialize the controller
 		CalendarViewController calendarController = ViewControllerFactory.CreateCalendarViewController(this.developer.getId());

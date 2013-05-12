@@ -1,4 +1,4 @@
-package use_cases;
+package usecases;
 
 import static org.junit.Assert.*;
 
@@ -11,15 +11,18 @@ import model.Activity;
 import model.Developer;
 import model.Project;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import persistency.BaseTestDatabase;
 import utils.Dialog;
 import utils.DialogChoice;
 
-public class UseCase3_GenerateReport extends BaseTestDatabase {
+public class GenerateReportUseCaseTest extends BaseTestDatabase {
 
-	private void init(){
+	@Before
+	public void setUp() throws Exception {
+		super.setUp();
 		this.addDevelopers();
 	}
 	
@@ -35,14 +38,9 @@ public class UseCase3_GenerateReport extends BaseTestDatabase {
 		return cal.getTimeInMillis();
 	}
 	
-//This test simply makes sure that the different report-parameters returns the expected values
+	//This test simply makes sure that the different report-parameters returns the expected values
 	@Test
 	public void testMainScenario() {
-		this.init();
-		Dialog.setDebugMode(true, DialogChoice.None);
-		
-		
-        
 		Project project = this.db.project().create("Test project", 200, "13-05-2014", null);
 		
 		assertEquals(project.getActivities().size(), 0);
@@ -71,17 +69,17 @@ public class UseCase3_GenerateReport extends BaseTestDatabase {
 		activity1.addDeveloper(developer3);
 		activity1.addDeveloper(developer4);
 
-//Tests that the initials of all developers are stored correctly		
+		//Tests that the initials of all developers are stored correctly		
 		assertEquals(activity1.getAllDevsInitials(),"JL,PM,GH,RS");
 		assertEquals(activity1.getAllDevsInitials() == "The Beatles", false); //Please fail!
 		
 		this.db.registerTime().create(this.stringDateTimeToLong("11-05-2013 06:30"), this.stringDateTimeToLong("11-05-2013 09:30"), developer.getId(), activity1.getId(), false);
 		this.db.registerTime().create(this.stringDateTimeToLong("11-05-2013 06:30"), this.stringDateTimeToLong("11-05-2013 09:30"), developer2.getId(), activity1.getId(), true);
 		
-//Showed in the project maintainance view, and is relevant to the report
+		//Showed in the project maintainance view, and is relevant to the report
 		assertEquals(activity1.getHoursRegistered(),6);
 		
-//Tests normal registration		
+		//Tests normal registration		
 		assertEquals(project.getEstPercentageCompletion(), 3);
 		assertEquals(project.getEstHoursRemaining(), 194);
 		assertEquals(project.getHourBudget(), 200);
@@ -90,7 +88,7 @@ public class UseCase3_GenerateReport extends BaseTestDatabase {
 		
 		this.db.registerTime().create(this.stringDateTimeToLong("12-05-2013 06:30"), this.stringDateTimeToLong("12-05-2013 09:30"), developer.getId(), activity2.getId(), true);
 		this.db.registerTime().create(this.stringDateTimeToLong("12-05-2013 06:30"), this.stringDateTimeToLong("12-05-2013 09:30"), developer2.getId(), activity2.getId(), true);
-//Tests that assits also count		
+		//Tests that assits also count		
 		assertEquals(project.getEstPercentageCompletion(), 6);
 		assertEquals(project.getEstHoursRemaining(), 188);
 		assertEquals(project.getHourBudget(), 200);
