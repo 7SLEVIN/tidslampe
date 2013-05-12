@@ -6,11 +6,13 @@ public class Dialog {
 	private static Dialog instance;
 	private static boolean isDebugMode;
 	private static int alwaysChoice;
-	private Dialog() {}
-	
-	
+		
 	public static Dialog getInstance() {
 		return instance == null ? instance = new Dialog() : instance;
+	}
+	
+	public static void setInstance(Dialog instance) {
+		Dialog.instance = instance;
 	}
 	
 	public static void setDebugMode(boolean enabled, int alwaysChoice) {
