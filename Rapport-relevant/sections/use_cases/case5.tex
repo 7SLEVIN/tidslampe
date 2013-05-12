@@ -1,0 +1,50 @@
+\begin{table}[H]
+  \begin{tabular}{|l|l|}
+    \multicolumn{2}{l}{
+      \bf{Register time entry}
+    }
+    \\ \hline
+    Description & A developer has spent time on an activity and needs to register that time in the system
+    \\ \hline
+    Actor & User
+    \\ \hline \multicolumn{2}{|l|}{
+      Main scenario 
+    }
+    \\ \hline \multicolumn{2}{|l|}{ \parbox{\textwidth}{
+        \begin{enumerate}
+        \item{The developer logs in (if not already logged in)}
+        \item{The user clicks the ``Register time'' button on the top menu bar}
+        \item{The user then types in what date and time span have been spent on the activity}
+        \item{The user chooses if the activity should be fixed}
+          \begin{itemize}
+          \item {If yes, the user then chooses which kind of fixed activity (eg. vacation, sickness, course etc)}
+            \item{If no, the user chooses the project and in turn the activity which has been worked on. Only projects and activities that the developer is assigned to is displayed}
+          \end{itemize}
+        \item{The user presses the ``Register'' button to register the time}
+        \item{The time entry is now displayed in the above calendar view as an orange colored slot which size represents the time span}
+        \end{enumerate}
+      }}
+    \\ \hline \multicolumn{2}{|l|} {
+      Alternative scenarios }
+    \\ \hline \multicolumn{2}{|c|}{\parbox{\textwidth}{
+        \begin{enumerate}
+        \item{The user inputs an invalid date}
+          \begin{itemize}
+          \item {The user is told that the date is invalid, and no time entry will be registered}
+          \end{itemize}
+
+        \item{The user inputs an invalid time in either start or end time}
+          \begin{itemize}
+          \item {The user is told that the time is invalid, and no time entry will be registered}
+          \end{itemize}
+
+        \item{The user tries to register time which overlaps existing time entries}
+          \begin{itemize}
+          \item {The user is told that the time entry overlaps existing entries, and no time entry will be registered}
+          \end{itemize}
+
+        \end{enumerate}
+      }}
+    \\ \hline
+  \end{tabular}
+\end{table}

@@ -1,0 +1,46 @@
+\begin{table}[H]
+  \begin{tabular}{|l|l|}
+    \multicolumn{2}{l}{
+      \bf{Create a new project}
+    }
+    \\ \hline
+    Description & A developer creates a new project 
+    \\ \hline
+    Actor & User
+    \\ \hline \multicolumn{2}{|l|}{
+      Main scenario 
+    }
+    \\ \hline \multicolumn{2}{|l|}{ \parbox{\textwidth}{
+        \begin{enumerate}
+        \item{The user logs in (if not already logged in)}
+        \item{The user clicks the ``Projects'' button in the top bar menu}
+        \item{The user fills out the ``Name'', ``Deadline'' and ``Budgetted hours'' fields}
+        \item{The user decides whether or not to assign a manager}
+          \begin{itemize}
+          \item {If yes, the user selects the user from the ``Manager'' drop down list}
+          \end{itemize}
+        \item{The user clicks the ``Create new'' button}
+        \item{The new project is displayed in above the list of all projects}
+        \end{enumerate}
+      }}
+    \\ \hline \multicolumn{2}{|l|} {
+      Alternative scenarios }
+    \\ \hline \multicolumn{2}{|c|}{\parbox{\textwidth}{
+        \begin{enumerate}
+        \item{The user does not fill in one or more of the three mandatory fields (``Name'', ``Deadline'' and/or ``Budgetted hours'')}
+          \begin{itemize}
+          \item {The user is prompted to fill in all fields, and no project is created}
+          \end{itemize}
+        \item{The user inputs an invalid date}
+          \begin{itemize}
+          \item{The user is prompted to format the date correctly, and no project is created}
+          \end{itemize}
+        \item{The user inputs an invalid number of hours}
+          \begin{itemize}
+          \item{The user is prompted to input a valid number of hours, and no project is created}
+          \end{itemize}
+        \end{enumerate}
+      }}
+    \\ \hline
+  \end{tabular}
+\end{table}

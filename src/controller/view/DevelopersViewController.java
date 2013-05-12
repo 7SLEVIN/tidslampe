@@ -58,8 +58,11 @@ public class DevelopersViewController extends AbstractViewController {
 	
 	public void deleteSelectedDeveloper() {
 		Developer sel = this.viewState.getSelectedDeveloper();
-		if (sel == null) 
+		if (sel == null) {
+			Dialog.message("You must select a developer to delete");
 			return;
+		}
+		
 		if (sel.getId() == this.controllers.getLoginController().getUser().getId())
 		{
 			Dialog.message("You can't delete yourself. Lol.");

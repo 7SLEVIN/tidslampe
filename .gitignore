@@ -7,3 +7,8 @@
 *.war
 *.ear
 /bin
+
+# tex files
+*.aux
+*.log
+*.out
