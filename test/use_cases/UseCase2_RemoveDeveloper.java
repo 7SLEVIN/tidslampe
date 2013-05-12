@@ -20,6 +20,7 @@ import controller.view.ViewControllerFactory;
 public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 
 	private void init(){
+		Dialog.setInstance(new Dialog());
 		this.addDevelopers();
 	}
 	
@@ -37,34 +38,43 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 		
 		controllerCollection.getLoginController().login("JL");
 		
-		Developer developer2 = this.db.developer().readByInitials("PM").get(0);
+		Developer developer = this.db.developer().readByInitials("PM").get(0);
 		int totalDevelopers = this.db.developer().readAll().size();
 		
 		DevelopersViewState devsViewState = mock(DevelopersViewState.class);
-		when(devsViewState.getSelectedDeveloper()).thenReturn(developer2);
+		when(devsViewState.getSelectedDeveloper()).thenReturn(developer);
 		devsViewController.setViewState(devsViewState);
 		
 		assertEquals(this.db.developer().readByInitials("PM").size(),1);
 		
 //Add developer as manager on a project		
-		int projectID = this.db.project().create("Test project", 42, "13-05-2014", developer2).getId();
-		assertEquals(this.db.project().read(projectID).getManager().getId(),developer2.getId());
+		int projectID = this.db.project().create("Test project", 42, "13-05-2014", developer).getId();
+		assertEquals(this.db.project().read(projectID).getManager().getId(),developer.getId());
 		
 		
 //Add developer to an activity on the project
 		Activity activity = this.db.activity().createProjectActivity(projectID, "An activity on the proejct", 2, 1337, 1337);
-		activity.addDeveloper(developer2);
-		assertEquals(activity.getDevelopers().get(0).getId(), developer2.getId());
+		activity.addDeveloper(developer);
+		assertEquals(activity.getDevelopers().get(0).getId(), developer.getId());
 		assertEquals(activity.getDevelopers().size(), 1);
+		assertEquals(this.db.activity().readByDeveloperAndProjectId(projectID, developer.getId()).size(),1);
+		assertEquals(this.db.project().readByDeveloper(developer.getId()).size(),1);
+		assertEquals(this.db.activityDeveloperRelation().getRelationsOfActivity(activity.getId()).size(), 1);
+		
+		
 		
 		devsViewController.deleteSelectedDeveloper();
 		
-//Is the developer removed from developers, projects and activities?
+//Is the developer removed from developers, projects and activities (and all possible relations)?
 		assertEquals(this.db.developer().readByInitials("PM").size(),0);
 		assertEquals(null,this.db.project().read(projectID).getManager());
 		activity = this.db.activity().read(activity.getId());
 		assertEquals(activity.getDevelopers().size(), 0);
 		assertEquals(totalDevelopers-1, this.db.developer().readAll().size());
+		assertEquals(this.db.activity().readByDeveloperAndProjectId(projectID, developer.getId()).size(),0);
+		assertEquals(this.db.project().readByDeveloper(developer.getId()).size(),0);
+		assertEquals(this.db.activityDeveloperRelation().getRelationsOfActivity(activity.getId()), null);
+		
 	}
 	
 	//Alt #1 This should not remove the developer
