@@ -1,0 +1,46 @@
+\begin{table}[h]
+  \begin{tabular}{|l|l|}
+    \multicolumn{2}{l}{
+      \bf{Remove a developer}
+    }
+    \\ \hline
+    Description & A developer is fired or quits, and his/hers user must be removed
+    \\ \hline
+    Actor & User
+    \\ \hline \multicolumn{2}{|l|}{
+      Main scenario 
+    }
+    \\ \hline \multicolumn{2}{|l|}{ \parbox{\textwidth}{
+        \begin{enumerate}
+        \item{The user logs in (if not already logged in)}
+        \item{The user clicks the ``Developers'' button in the top bar menu}
+        \item{The user selects the developer that must be deleted}
+        \item{The user clicks the ``Delete selected'' button}
+        \item{The user accepts a prompt to confirm the deletion}
+        \item{The developer is removed from the above list of developers}
+        \item{The deleted developer's registered time entries, activity- and manager assignments are all deleted from the system}
+        \end{enumerate}
+      }}
+    \\ \hline \multicolumn{2}{|l|} {
+      Alternative scenarios }
+    \\ \hline \multicolumn{2}{|c|}{\parbox{\textwidth}{
+        \begin{enumerate}
+        \item{The user tries to remove his/hers own account}
+          \begin{itemize}
+          \item {The user is prompted and told it cannot be done}
+          \end{itemize}
+
+        \item{The user denies the prompt to delete the develper}
+          \begin{itemize}
+          \item {The user is taken to the initial ``Developers'' screen, and no developer is deleted}
+          \end{itemize}
+
+        \item{The user clicks ``Delete selected'' button while no developer is selected}
+          \begin{itemize}
+          \item {The user is told that no developer is selected, and no developer is deleted}
+          \end{itemize}
+        \end{enumerate}
+      }}
+    \\ \hline
+  \end{tabular}
+\end{table}

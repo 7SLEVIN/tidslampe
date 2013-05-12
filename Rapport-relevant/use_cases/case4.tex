@@ -1,0 +1,36 @@
+\begin{table}[H]
+  \begin{tabular}{|l|l|}
+    \multicolumn{2}{l}{
+      \bf{Add a developer}
+    }
+    \\ \hline
+    Description & A developer is hired and must be added to the system 
+    \\ \hline
+    Actor & User (another developer)
+    \\ \hline \multicolumn{2}{|l|}{
+      Main scenario 
+    }
+    \\ \hline \multicolumn{2}{|l|}{ \parbox{\textwidth}{
+        \begin{enumerate}
+        \item{A developer is hired and needs a login}
+        \item{The user fills in initials and full name of the new developer, and creates the new account}
+        \end{enumerate}
+      }}
+    \\ \hline \multicolumn{2}{|l|} {
+      Alternative scenarios }
+    \\ \hline \multicolumn{2}{|c|}{\parbox{\textwidth}{
+        \begin{enumerate}
+        \item{The user forgets to fill in a name}
+          \begin{itemize}
+          \item {The user should be prompted, and no new account should be created}
+          \end{itemize}
+
+        \item{The length of the initials is greater than 4}
+          \begin{itemize}
+          \item {The user should be prompted, and no new account should be created}
+          \end{itemize}
+        \end{enumerate}
+      }}
+    \\ \hline
+  \end{tabular}
+\end{table}

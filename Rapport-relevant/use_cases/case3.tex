@@ -1,0 +1,56 @@
+\begin{table}[H]
+  \begin{tabular}{|l|l|}
+    \multicolumn{2}{l}{
+      \bf{Generate report}
+    }
+    \\ \hline
+    Description & A developer wants to see a report on a project
+    \\ \hline
+    Actor & User (a developer)
+    \\ \hline \multicolumn{2}{|l|}{
+      Main scenario 
+    }
+    \\ \hline \multicolumn{2}{|l|}{ \parbox{\textwidth}{
+        \begin{enumerate}        
+        \item{At their weekly project-meetings, developers must be able to see how the projects are progressing}
+        \item{On each project it should be possible to see information about}
+          \begin{description}
+          \item[The total number of activities on the project] {}
+
+          \item[Progress on each activity?! Har vi ikke implementeret TODO] \hfill \\
+            {Should be calculated the following way...}
+
+          \item[How much of the budgeted time has been allocated to activities]\hfill \\
+            {Should be calculated the following way:
+              The sum of budgeted hours on all of the project's activities}
+
+          \item[How much work has been registered]\hfill \\
+            {Should be calculated the following way:
+              The sum of registered hours on all of the project's activities
+              Kommer assists med? TODO}
+
+          \item[An estimate on percentage completion]\hfill \\
+            {TODO Should be calculated the following way:}
+
+          \item[An estimate on overall remaining man-hours]\hfill \\
+            {Should be calculated the following way:}
+          \end{description}
+        \end{enumerate}
+      }}
+    \\ \hline \multicolumn{2}{|l|} {
+      Alternative scenarios }
+    \\ \hline \multicolumn{2}{|c|}{\parbox{\textwidth}{
+        \begin{enumerate}
+        \item{Budget is exceeded by sum of hours registered compared to project budget}
+          \begin{itemize}
+          \item {Mark in red color}
+          \end{itemize}
+        \item{Budget is exceeded by accumulated sum of bugdgetted hours of activites on project }
+          \begin{itemize}
+          \item{Mark in red color}
+          \end{itemize}
+        \end{enumerate}
+      }}
+    \\ \hline
+  \end{tabular}
+\end{table}
