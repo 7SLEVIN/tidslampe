@@ -10,7 +10,7 @@ public class TestTimeService {
 	
 	@Before
 	public void setUp() {
-		Dialog.setDebugMode(true);
+		Dialog.setDebugMode(true,0);
 	}
 	
 	@Test
