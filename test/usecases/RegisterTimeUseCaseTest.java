@@ -135,13 +135,45 @@ public class RegisterTimeUseCaseTest extends BaseViewControllerTest {
 		assertEquals(timeEntries.size(), 1);
 	}
 
+	@Test
+	public void testNoSelectedProject() {
+		CalendarViewController calendarController = this.getMockedCalendarController(null, this.activity, "10:00", "13:00", "20-04-2002");
+		
+		// User clicks register
+		calendarController.addRegisterTimeEntry();
+		
+		// Assert
+		verify(dialogMock).showMessage("You must select project and activity");
+		
+		List<TimeEntry> timeEntries = this.db.registerTime().readAll();
+		assertEquals(timeEntries.size(), 0);
+	}
+
+	@Test
+	public void testNoSelectedActivity() {
+		CalendarViewController calendarController = this.getMockedCalendarController(this.project, null, "10:00", "13:00", "20-04-2002");
+		
+		// User clicks register
+		calendarController.addRegisterTimeEntry();
+		
+		// Assert
+		verify(dialogMock).showMessage("You must select project and activity");
+		
+		List<TimeEntry> timeEntries = this.db.registerTime().readAll();
+		assertEquals(timeEntries.size(), 0);
+	}
+	
 	private CalendarViewController getMockedCalendarController(String startTime, String endTime, String date) {
+		return this.getMockedCalendarController(this.project, this.activity, startTime, endTime, date);
+	}
+
+	private CalendarViewController getMockedCalendarController(Project project, Activity activity, String startTime, String endTime, String date) {
 		CalendarViewState calView = mock(CalendarViewState.class);
 		when(calView.getStartTimeString())		.thenReturn(startTime);
 		when(calView.getEndTimeString())		.thenReturn(endTime);
 		when(calView.getDateString())			.thenReturn(date);
-		when(calView.getSelectedProject())		.thenReturn(this.project);
-		when(calView.getSelectedActivity())		.thenReturn(this.activity);
+		when(calView.getSelectedProject())		.thenReturn(project);
+		when(calView.getSelectedActivity())		.thenReturn(activity);
 		
 		// Swing component mock
 		when(calView.getFixedToggleButton())	.thenReturn(new JToggleButton());
