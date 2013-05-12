@@ -1,0 +1,46 @@
+\begin{table}[h]
+  \begin{tabular}{|l|l|}
+    \multicolumn{2}{l}{
+      \bf{Create a new activity}
+    }
+    \\ \hline
+    Description & A new activity needs to be added to a project
+    \\ \hline
+    Actor & User
+    \\ \hline \multicolumn{2}{|l|}{
+      Main scenario 
+    }
+    \\ \hline \multicolumn{2}{|l|}{ \parbox{\textwidth}{
+        \begin{enumerate}
+        \item{The user logs in (if not already logged in)}
+        \item{The user clicks ``Projects'' button in the top bar menu}
+        \item{The user selects the project to which the activity should be added}
+        \item{The user clicks the ``Maintain selected'' button}
+        \item{The user fills out ``Name'', ``Hour budget'' and ``Deadline'' fields}
+        \item{The user clicks the ``Add activity'' button}
+        \item{The new activity is displayed in the above list of all activities in the current project}
+        \end{enumerate}
+      }}
+    \\ \hline \multicolumn{2}{|l|} {
+      Alternative scenarios }
+    \\ \hline \multicolumn{2}{|c|}{\parbox{\textwidth}{
+        \begin{enumerate}
+        \item{The user inputs an invalid date}
+          \begin{itemize}
+          \item {The user is told to use a valid date, and no activity is created}
+          \end{itemize}
+
+        \item{The user inputs an invalid number in the ``Hour budget'' field}
+          \begin{itemize}
+          \item {The user is told to type in a valid number, and no activity is created}
+          \end{itemize}
+
+        \item{The user does not fill out all fields}
+          \begin{itemize}
+          \item {The user is told to fill out all fields, and no activity is created}
+          \end{itemize}
+        \end{enumerate}
+      }}
+    \\ \hline
+  \end{tabular}
+\end{table}

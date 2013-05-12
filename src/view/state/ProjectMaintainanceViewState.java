@@ -68,14 +68,12 @@ public class ProjectMaintainanceViewState extends AbstractViewState {
 		pnlList = new JPanel();
 		add(pnlList);
 
-		// TODO knapper: Assign manager, add developer to activity, split
-		// activity
 		this.table = new JTable();
 
 		JScrollPane scrollPane = new JScrollPane(this.table);
-		scrollPane.setMinimumSize(new Dimension(400, 300));
+		scrollPane.setMinimumSize(new Dimension(600, 300));
 		pnlList.add(scrollPane);
-		scrollPane.setPreferredSize(new Dimension(400, 300));
+		scrollPane.setPreferredSize(new Dimension(600, 300));
 
 		pnlControls = new JPanel();
 		add(pnlControls);

@@ -24,7 +24,7 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 	public void deleteRelationsByDevID(int id) throws DeleteNonExistingException{
 		List<ActivityDeveloperRelation> relations = this.getRelationsOfDeveloper(id);
 		for(ActivityDeveloperRelation relation : relations){
-			relation.delete();
+			this.delete(relation);
 		}
 	}
 	

@@ -26,6 +26,17 @@ public abstract class TimeRepository extends Repository<TimeEntry> {
 		return this.parse(this.database.getConnnection().execQuery(query));
 	}
 	
+	public List<TimeEntry> readByActivityId(int acitivtyId) {
+//		Query query = Query.selectAllFrom(this.table).whereIn("developer_activity_relation_id", 
+//				Query.select("id").from("activity_developer_relation").whereEquals("developer_id", developerId));
+//		return this.parse(this.database.getConnnection().execQuery(query));
+		
+		Query query = Query.selectAllFrom(this.table).whereIn("developer_activity_relation_id",
+				Query.select("id").from("activity_developer_relation").whereIn("activity_id",
+						Query.select("id").from("activity").whereEquals("id", acitivtyId)));
+		return this.parse(this.database.getConnnection().execQuery(query));
+	}
+	
 	@Override
 	protected List<TimeEntry> parse(ResultSet rs) {
 		List<TimeEntry> timeEntries = new ArrayList<TimeEntry>();

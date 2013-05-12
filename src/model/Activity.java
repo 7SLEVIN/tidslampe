@@ -64,6 +64,14 @@ public class Activity extends DatabaseObject {
 		return new String[]{this.type.name() , this.description , String.valueOf(this.expectedTime) , String.valueOf(this.startTime) , String.valueOf(this.endTime), String.valueOf(this.projectID)};
 	}
 
+	public int getHoursRegistered(){
+		int timeUsed = 0;
+		for (TimeEntry entry : this.database.registerTime().readByActivityId(this.getId())) {
+			timeUsed += entry.getDurationInMinutes();
+		}
+		timeUsed /= 60;
+		return timeUsed;
+	}
 	
 	@Override
 	protected void save() throws UpdateNonExistingException {
