@@ -8,9 +8,12 @@ public class Dialog {
 	private static DialogChoice defaultChoice;
 	public Dialog() {}
 	
-	
 	public static Dialog getInstance() {
 		return instance == null ? instance = new Dialog() : instance;
+	}
+	
+	public static void setInstance(Dialog instance) {
+		Dialog.instance = instance;
 	}
 	
 	public static void setDebugMode(boolean enabled, DialogChoice defaultChoice) {

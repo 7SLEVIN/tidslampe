@@ -45,8 +45,8 @@ public class BaseTestDatabase {
 		Activity activity2 = this.db.activity().createProjectActivity(1, "Test Activity B", 6, deadlineLate, deadlineLate);
 		Developer developer = this.db.developer().readByInitials("PM").get(0);
 
-		ActivityDeveloperRelation relation1 = this.db.activityDeveloperRelation().create(activity1, developer);
-		ActivityDeveloperRelation relation2 = this.db.activityDeveloperRelation().create(activity2, developer);
+		this.db.activityDeveloperRelation().create(activity1, developer);
+		this.db.activityDeveloperRelation().create(activity2, developer);
 	}
 	
 	protected void addDevelopers(){

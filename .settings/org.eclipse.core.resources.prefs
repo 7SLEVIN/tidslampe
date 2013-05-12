@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/model/TimeEntry.java=UTF-8
 encoding//src/persistency/ReserveTimeRepository.java=UTF-8
-encoding//src/view/state/ProjectRapportViewState.java=UTF-8
+encoding//src/view/state/ProjectReportViewState.java=UTF-8
 encoding//test/controller/TestLoginController.java=UTF-8

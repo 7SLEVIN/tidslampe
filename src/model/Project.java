@@ -89,11 +89,7 @@ public class Project extends DatabaseObject {
 		this.activities = this.database.activity().readAllWhereEquals("project_id", this.getId());
 		return this.activities;
 	}
-	
-	public String toString() {
-		return this.name;
-	}
-	
+
 	public int getHoursRegistered(){
 		int timeUsed = 0;
 		for (TimeEntry entry : this.database.registerTime().readByProjectId(this.getId())) {
@@ -132,4 +128,8 @@ public class Project extends DatabaseObject {
 		return serialNumber;
 	}
 
+	@Override
+	public String toString() {
+		return this.getName();
+	}
 }

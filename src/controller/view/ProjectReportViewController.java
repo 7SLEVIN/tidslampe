@@ -4,16 +4,16 @@ import model.Project;
 import persistency.Database;
 import view.ViewContainer;
 import view.state.AbstractViewState;
-import view.state.ProjectRapportViewState;
+import view.state.ProjectReportViewState;
 import controller.ControllerCollection;
 import controller.action.ChangeViewAction;
 
 
-public class ProjectRapportViewController extends AbstractViewController {
-	private ProjectRapportViewState viewState;
+public class ProjectReportViewController extends AbstractViewController {
+	private ProjectReportViewState viewState;
 	private Project project;
 
-	public ProjectRapportViewController(Database database,
+	public ProjectReportViewController(Database database,
 			ViewContainer viewContainer, 
 			ControllerCollection controllers,
 			int projectId) {
@@ -28,7 +28,7 @@ public class ProjectRapportViewController extends AbstractViewController {
 
 	@Override
 	public void initialize() {
-		this.viewState = new ProjectRapportViewState(this.project.getName(),this.project.getActivities().size());
+		this.viewState = new ProjectReportViewState(this.project.getName(),this.project.getActivities().size());
 		
 		this.viewState.getBackButton().addActionListener(new ChangeViewAction(this.viewContainer, ViewControllerFactory.CreateProjectMaintainanceViewController(this.project.getId())));
 

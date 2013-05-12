@@ -315,7 +315,7 @@ public class CalendarViewController extends AbstractViewController {
 					} catch (DeleteNonExistingException e1) {
 						e1.printStackTrace();
 					}
-					
+
 					updateStartDate();
 				}
 			});

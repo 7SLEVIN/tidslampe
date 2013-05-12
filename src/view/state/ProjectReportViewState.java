@@ -18,7 +18,7 @@ import utils.GuiUtils;
 import view.ViewContainer;
 
 @SuppressWarnings("serial")
-public class ProjectRapportViewState extends AbstractViewState {
+public class ProjectReportViewState extends AbstractViewState {
 	
 	private JButton backButton;
 	
@@ -29,7 +29,7 @@ public class ProjectRapportViewState extends AbstractViewState {
 	private JLabel estimatedTimeRemaining; 
 	private JLabel hoursUnassignedLabel;
 	
-	public ProjectRapportViewState(String projectName, int noOfActivities) {
+	public ProjectReportViewState(String projectName, int noOfActivities) {
 		this.backButton = new JButton("Back to project");
 		this.nameLabel = new JLabel(projectName);
 		this.nameLabel.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
