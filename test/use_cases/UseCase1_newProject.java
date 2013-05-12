@@ -65,7 +65,7 @@ public class UseCase1_newProject extends BaseTestDatabase {
 		assertEquals(null,project);
 		assertEquals(projectsCount , this.db.project().readAll().size()); //No new projects should be added
 		
-//User forgets name of project
+//User forgets to add a name to the project
 		hourBudgetInput = 1337;
 		nameInput = "";
 		
@@ -73,6 +73,27 @@ public class UseCase1_newProject extends BaseTestDatabase {
 		
 		assertEquals(null,project);
 		assertEquals(projectsCount , this.db.project().readAll().size()); //No new projects should be added
+		
+//User forgets to add a deadline to the project
+		nameInput = "derp";
+		deadlineInput = "";
+		
+		project = this.db.project().create(nameInput, hourBudgetInput, deadlineInput, developer);
+		
+		assertEquals(null,project);
+		assertEquals(projectsCount , this.db.project().readAll().size()); //No new projects should be added
+		
+//User accidentially clicks the "create new project"-button
+		hourBudgetInput = 0;
+		nameInput = "";
+		deadlineInput = "";
+		
+		project = this.db.project().create(nameInput, hourBudgetInput, deadlineInput, null);
+		
+		assertEquals(null,project);
+		assertEquals(projectsCount , this.db.project().readAll().size()); //No new projects should be added
+		
+		
 	}
 
 }

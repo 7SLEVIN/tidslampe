@@ -40,8 +40,6 @@ public class ProjectRepository extends Repository<Project> {
 	}
 
 	public Project create(String name, int hourBudget, long deadline, Developer manager) {
-		if(manager == null)
-			return this.create(name, hourBudget, deadline);
 		if (name.length() == 0 ||
 				hourBudget <= 0) {
 			Dialog.message("You must fill out all fields");
@@ -49,6 +47,9 @@ public class ProjectRepository extends Repository<Project> {
 		}else if(deadline < 0){
 			return null;
 		}
+		
+		if(manager == null)
+			return this.create(name, hourBudget, deadline);
 		
 		int id = this.create(new String[] { name, String.valueOf(hourBudget),
 				String.valueOf(deadline), String.valueOf(manager.getId()) });
