@@ -1,0 +1,82 @@
+\documentclass[danish]{article}
+
+\usepackage{fullpage} 
+\usepackage[latin1]{inputenc} 
+\usepackage[danish]{babel}
+\usepackage{listings} 
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{amssymb} 
+\usepackage{amsmath} 
+\usepackage{fancyhdr}
+\usepackage{lastpage} 
+\usepackage{hyperref}
+\usepackage{parskip} 
+\usepackage{graphicx} 
+\usepackage{pdfpages}
+\usepackage{abstract}
+\usepackage{url}
+\usepackage{float}
+
+
+% setup c sharp syntax highlight 
+\lstdefinestyle{sharpc}{ language=[Sharp]C,
+frame=lr, rulecolor=\color{black}, basicstyle=\footnotesize\ttfamily,
+keywordstyle=\bfseries\color{green!40!black},
+commentstyle=\itshape\color{purple!40!black}, identifierstyle=\color{blue},
+stringstyle=\color{orange}}
+
+\lstset{ style=sharpc, numbers=left, escapeinside={\<*}{*>},
+breakatwhitespace=true }
+
+% code formatting helper 
+\newcommand{\code}[1]{\texttt{#1}}
+
+% no paragraph indention 
+\setlength{\parindent}{0pt}
+
+% setup page style 
+\pagestyle{fancy} 
+\fancyhf{} 
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{25pt} 
+\lfoot{Side \thepage{} af \pageref{LastPage}}
+\rfoot{13/05-2013} \lhead{02161 Software Engineering 1} 
+\chead{Obligatorisk opgave} 
+\rhead{Gruppe 17}
+
+\author{
+  Patrick Gadd\\
+  \texttt{s113491}
+  \and
+  Markus Færevaag\\
+  \texttt{s1337}
+  \and
+  Simon Altschuler\\
+  \texttt{s123563}
+}
+\title{02161 Software Engineering\\
+  Obligatorisk opgave}
+\date{13/05-2013}
+
+\begin{document}
+\maketitle
+\bf{Gruppe 17}
+\clearpage
+
+\section{Indledning} 
+
+\section{Kravspecifikation}
+
+\section{Programdesign}
+
+\section{Test}
+
+\section{Konklusion}
+
+\section{Bilag}
+\subsection{Oprindeligt planlægningsdokument}a
+\includepdf{projekt_plan_gruppe_17.pdf}
+
+\end{document}

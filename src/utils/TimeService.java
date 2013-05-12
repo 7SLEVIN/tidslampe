@@ -92,7 +92,6 @@ public class TimeService {
 			Dialog.message("Date invalid.");
 			return false;
 		}
-			
 		
 		String date = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day)+"-"+String.valueOf(hour)+"-"+String.valueOf(minute);
 		String DATE_FORMAT = "yyyy-MM-dd-HH-mm";
