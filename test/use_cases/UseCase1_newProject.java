@@ -16,7 +16,7 @@ public class UseCase1_newProject extends BaseTestDatabase {
 	
 	private void init(){
 		this.addDevelopers();
-		Dialog.setDebugMode(true);
+		Dialog.setDebugMode(true,0);
 	}
 	
 	//Tests whether the correct input yields a new project
