@@ -1,13 +1,13 @@
 package use_cases;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import model.Developer;
 import model.Project;
 
 import org.junit.Test;
 
 import persistency.BaseTestDatabase;
+import utils.Dialog;
 import utils.TimeService;
 
 public class UseCase1_newProject extends BaseTestDatabase {
@@ -16,6 +16,7 @@ public class UseCase1_newProject extends BaseTestDatabase {
 	
 	private void init(){
 		this.addDevelopers();
+		Dialog.setDebugMode(true);
 	}
 	
 	//Tests whether the correct input yields a new project
@@ -47,8 +48,7 @@ public class UseCase1_newProject extends BaseTestDatabase {
 		assertEquals(sameProject.getManager().getId(),project.getManager().getId());
 	}
 	
-	//This is Alt. scenario #1
-	//It 
+	//This is Alternative scenario #1
 	@Test
 	public void testUserInputIncomplete(){
 		this.init();
@@ -92,8 +92,42 @@ public class UseCase1_newProject extends BaseTestDatabase {
 		
 		assertEquals(null,project);
 		assertEquals(projectsCount , this.db.project().readAll().size()); //No new projects should be added
+	}
+	
+	//This is Alternative scenario #2
+	@Test
+	public void testInvalidDeadline(){
+		this.init();
+	//User forgets hour-budget	
+		String nameInput = "Our newest project";
+		int hourBudgetInput = 0;
+		String deadlineInput = "30-02-2045";
+		Developer developer = this.db.developer().readByInitials("JL").get(0);
 		
+		int projectsCount = this.db.project().readAll().size();
+			
+		Project project = this.db.project().create(nameInput, hourBudgetInput, deadlineInput, developer);
 		
+		assertEquals(null,project);
+		assertEquals(projectsCount , this.db.project().readAll().size()); //No new projects should be added
+	}
+	
+	//This is Alternative scenario #3
+	@Test
+	public void testInvalidHourBudget(){
+		this.init();
+	//User inputs invalid hour-budget (budget <= 0)
+		String nameInput = "Our newest project";
+		int hourBudgetInput = -10;
+		String deadlineInput = "10-02-2045";
+		Developer developer = this.db.developer().readByInitials("JL").get(0);
+		
+		int projectsCount = this.db.project().readAll().size();
+			
+		Project project = this.db.project().create(nameInput, hourBudgetInput, deadlineInput, developer);
+		
+		assertEquals(null,project);
+		assertEquals(projectsCount , this.db.project().readAll().size()); //No new projects should be added
 	}
 
 }

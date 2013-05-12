@@ -65,9 +65,13 @@ public class ProjectsViewController extends AbstractViewController {
 		String deadlineInput = this.viewState.getDeadlineInput();
 		Developer managerInput = this.viewState.getManagerInput();
 		
+		System.out.println(this.database.project().readAll().size());
+		
 		if (this.database.project().create(nameInput, hourBudgetInput, deadlineInput, managerInput) == null) {
 			Dialog.message("Could not create project");
 		}
+		
+		
 		this.fillProjectList();
 	}
 	
