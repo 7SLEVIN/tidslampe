@@ -30,6 +30,10 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 	public AbstractViewState getViewState() {
 		return viewState;
 	}
+	
+	public void setViewState(ProjectMaintainanceViewState viewState){
+		this.viewState = viewState;
+	}
 
 	@Override
 	public void initialize() {
@@ -112,6 +116,11 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 		int hourBudget = Integer.valueOf(this.viewState.getHourBudgetInput());
 		String deadline = this.viewState.getDeadlineInput();
 		long milliDeadline = this.timeService.convertToMillis(deadline);
+
+		if (hourBudget < 0) {
+			Dialog.message("Hour budget cannot be negative!");
+			return;
+		}
 		
 		if(milliDeadline > 0){
 			this.addNewActivity(name, hourBudget, 0, milliDeadline);//TODO her i sequence diagram
@@ -122,4 +131,5 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 	public void addNewActivity(String description, int expectedTime, long startTime, long endTime){
 		this.database.activity().createProjectActivity(this.project.getId(), description, expectedTime, startTime, endTime);
 	}
+	
 }

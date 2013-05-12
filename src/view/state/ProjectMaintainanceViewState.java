@@ -25,6 +25,7 @@ import java.awt.FlowLayout;
 import javax.swing.JTextField;
 
 import utils.GuiUtils;
+import utils.TimeService;
 import view.ViewContainer;
 
 @SuppressWarnings("serial")
@@ -184,5 +185,4 @@ public class ProjectMaintainanceViewState extends AbstractViewState {
 	public String getDeadlineInput() {
 		return this.txtDeadline.getText();
 	}
-
 }

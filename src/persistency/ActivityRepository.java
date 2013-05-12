@@ -87,4 +87,8 @@ public class ActivityRepository extends Repository<Activity> {
 		ResultSet rs = this.database.getConnnection().execQuery(query);
 		return this.parse(rs);
 	}
+
+public List<Activity> readByProjectId(int projectId) {
+		return this.readAllWhereEquals(this.columns[5], projectId);
+	}
 }
