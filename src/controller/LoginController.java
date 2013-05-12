@@ -8,6 +8,7 @@ import model.Developer;
 import model.TimeEntry;
 
 import persistency.Database;
+import utils.Dialog;
 import utils.TimeService;
 
 public class LoginController {
@@ -48,7 +49,7 @@ public class LoginController {
 			int unregisteredTime = totalTimeOn - totalTimeRegisteredToday*60*1000;
 			unregisteredTime /= 60*1000; //converts to minutes
 //			return totalTimeOn > totalTimeRegisteredToday*60*1000 + 29*60*1000;
-			System.out.println("Log out failed, you have unregistered work! " + unregisteredTime + " minutes have not been registered.");
+			Dialog.message("Log out failed, you have unregistered work! " + unregisteredTime + " minutes have not been registered.");
 			return -1L;
 		}
 			

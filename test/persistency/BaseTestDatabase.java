@@ -2,6 +2,8 @@ package persistency;
 
 import org.junit.Before;
 
+import utils.Dialog;
+
 import app.ProjectPlanner;
 
 public class BaseTestDatabase {
@@ -10,6 +12,7 @@ public class BaseTestDatabase {
 	protected ProjectPlanner projectPlanner;
 	
 	public BaseTestDatabase() {
+		Dialog.setDebugMode(true);
 		this.db = new Database("test_db.db");
 		this.projectPlanner = new ProjectPlanner(this.db);
 	}

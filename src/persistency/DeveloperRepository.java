@@ -33,8 +33,6 @@ public class DeveloperRepository extends Repository<Developer> {
 		return this.parse(this.database.getConnnection().readWhereEquals(this.table, this.columns[0], initials));
 	}
 	
-	
-	
 	@Override
 	protected List<Developer> parse(ResultSet rs) {
 		List<Developer> developers = new ArrayList<Developer>();
