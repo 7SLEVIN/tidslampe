@@ -48,7 +48,7 @@ public class ProjectsViewState extends AbstractViewState {
 		GuiUtils.setSize(titlePanel, new Dimension(ViewContainer.WINDOW_WIDTH, 30));
 		
 		JScrollPane scrollPane = new JScrollPane(this.table);
-		scrollPane.setPreferredSize(new Dimension(400, 300));
+		scrollPane.setPreferredSize(new Dimension(600, 300));
 
 		JPanel maintainancePanel = new JPanel();
 		GuiUtils.setSize(maintainancePanel, new Dimension(ViewContainer.WINDOW_WIDTH, 30));
