@@ -127,13 +127,14 @@ public class DatabaseConnection {
 	
 	public boolean exists(String table, int id) {
 		ResultSet rs = this.execQuery(Query.exists(table, id));
+		boolean exists = false;
 		try {
 			while (rs.next()) {
-				return rs.getBoolean(1);
+				exists = rs.getBoolean(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return exists;
 	}
 }
