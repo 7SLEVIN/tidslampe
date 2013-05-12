@@ -1,10 +1,16 @@
 package utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
 public class TestStringUtils {
+	
+	@Test
+	public void testClass() {
+		assertNotNull(new StringUtils());
+	}
 
 	@Test
 	public void testTrailingZeros() {

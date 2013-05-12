@@ -1,6 +1,6 @@
 package utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -37,6 +37,18 @@ public class TestQueryBuilder {
 		
 		String q4 = Query.update("foo", new String[]{"name", "age"}, new String[]{"Karlsson", "37"}).end();
 		assertEquals("Update multiple fields", "UPDATE foo SET name='Karlsson',age='37'", q4);
+	}
+	
+	@Test
+	public void testUpdateSingleValue() {
+		String q1 = Query.update("foo", "name", "Karlsson").end();
+		assertEquals("Update single field", "UPDATE foo SET name='Karlsson'", q1);
+
+		String q2 = Query.update("foo", "name", "Karlsson").whereEquals("id", 1).end();
+		assertEquals("Update where", "UPDATE foo SET name='Karlsson' WHERE id = 1", q2);
+
+		String q3 = Query.update("foo", "name", "Karlsson").whereEquals("name", "foo").end();
+		assertEquals("Update where", "UPDATE foo SET name='Karlsson' WHERE name = 'foo'", q3);
 	}
 	
 	@Test
@@ -98,7 +110,6 @@ public class TestQueryBuilder {
 		String q3 = Query.selectAllFrom("foo").orderBy("name", SortDirection.Desc).end();
 		assertEquals("Order by desc", "SELECT * FROM foo ORDER BY name DESC", q3);
 	}
-
 	
 	@Test
 	public void testLimit() {
@@ -120,4 +131,5 @@ public class TestQueryBuilder {
 		String q1 = Query.count("foo").end();
 		assertEquals("Count", "SELECT COUNT(*) FROM foo", q1);
 	}
+	
 }

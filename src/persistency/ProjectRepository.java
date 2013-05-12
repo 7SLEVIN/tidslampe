@@ -7,7 +7,9 @@ import java.util.List;
 
 import exceptions.UpdateNonExistingException;
 
+import utils.Dialog;
 import utils.Query;
+import utils.TimeService;
 
 import model.Developer;
 import model.Project;
@@ -31,8 +33,21 @@ public class ProjectRepository extends Repository<Project> {
 		
 		return this.parse(rs);
 	}
+	
+	public Project create(String name, int hourBudget, String deadline, Developer manager){
+		long milliDeadline = (new TimeService()).convertToMillis(deadline);
+		return this.create(name, hourBudget, milliDeadline, manager);
+	}
 
 	public Project create(String name, int hourBudget, long deadline, Developer manager) {
+		if (name.length() == 0 ||
+				hourBudget <= 0) {
+			Dialog.message("You must fill out all fields");
+			return null;
+		}else if(deadline < 0){
+			return null;
+		}
+		
 		if(manager == null)
 			return this.create(name, hourBudget, deadline);
 		

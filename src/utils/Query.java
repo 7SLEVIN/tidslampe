@@ -56,17 +56,12 @@ public class Query {
 	}
 
 	private Query innerDeleteFrom(String table) {
-		if (this.lastStatement != QueryStatement.Empty)
-			System.err.println("Invalid query");
 		this.query = "DELETE ";
 		this.lastStatement = QueryStatement.Delete;
 		return this.from(table);
 	}
 
 	private Query innerSelect(String field) {
-		if (this.lastStatement != QueryStatement.Empty)
-			System.err.println("Invalid query");
-
 		this.query += String.format("SELECT %s ", field);
 		this.lastStatement = QueryStatement.Select;
 		return this;
@@ -83,9 +78,6 @@ public class Query {
 
 
 	private Query innerUpdate(String table, String[] columns, String[] values) {
-		if (this.lastStatement != QueryStatement.Empty)
-			System.err.println("Invalid query");
-			
 		String[] vals = ArrayUtils.wrapElementsWith(values, "'");
 		
 		this.query = String.format("UPDATE %s SET ", table);
@@ -156,7 +148,7 @@ public class Query {
 	}	
 
 	private Query innerInsertInto(String table, String[] columns, String[] values) {
-		if (this.lastStatement != QueryStatement.Empty || columns.length != values.length)
+		if (columns.length != values.length)
 			System.err.println("Invalid query");
 		if (columns.length == 0)
 			return this;
@@ -197,15 +189,12 @@ public class Query {
 	}
 	
 	private Query innerExists(String table, int id) {
-		if (this.lastStatement != QueryStatement.Empty)
-			System.err.println("Inavlid query");
 		this.query += String.format("SELECT EXISTS(SELECT * FROM %s WHERE id=%d)", table, id);
 		return this;
 	}
 	
 	private Query innerCount(String table) {
-		if (this.lastStatement != QueryStatement.Empty)
-			System.err.println("Inavlid query");
 		return this.innerSelect("COUNT(*)").from(table);
 	}
+	
 }
