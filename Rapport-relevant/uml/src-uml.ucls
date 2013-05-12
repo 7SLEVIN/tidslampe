@@ -426,7 +426,7 @@
   </class>  
   <class id="48" language="java" name="view.state.CalendarViewState" project="tidslampe" 
     file="/tidslampe/src/view/state/CalendarViewState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="940" y="2555"/>    
+    <position height="-1" width="-1" x="959" y="2513"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false"/>      
