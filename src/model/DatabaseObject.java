@@ -1,10 +1,9 @@
 package model;
 
-import exceptions.DeleteNonExistingException;
-import exceptions.UpdateNonExistingException;
-import persistency.ActivityDeveloperRelationRepository;
 import persistency.Database;
 import persistency.Repository;
+import exceptions.DeleteNonExistingException;
+import exceptions.UpdateNonExistingException;
 
 abstract public class DatabaseObject {
 
