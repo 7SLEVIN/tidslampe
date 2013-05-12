@@ -12,7 +12,7 @@ public class BaseTestDatabase {
 	protected ProjectPlanner projectPlanner;
 	
 	public BaseTestDatabase() {
-		Dialog.setDebugMode(true);
+		Dialog.setDebugMode(true,0);
 		this.db = new Database("test_db.db");
 		this.projectPlanner = new ProjectPlanner(this.db);
 	}
