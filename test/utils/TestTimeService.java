@@ -2,11 +2,17 @@ package utils;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestTimeService {
 	TimeService timeService = new TimeService();
-
+	
+	@Before
+	public void setUp() {
+		Dialog.setDebugMode(true);
+	}
+	
 	@Test
 	public void testSanityCheck(){
 //User has given chosen a time in the UI 		
