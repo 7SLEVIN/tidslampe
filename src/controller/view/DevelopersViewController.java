@@ -56,7 +56,7 @@ public class DevelopersViewController extends AbstractViewController {
 		this.fillDeveloperList();
 	}
 	
-	public void setViewState(DevelopersViewState viewState){
+	public void setViewState(DevelopersViewState viewState) {
 		this.viewState = viewState;
 	}
 	

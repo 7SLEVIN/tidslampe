@@ -10,7 +10,7 @@ public class TestTimeService {
 	
 	@Before
 	public void setUp() {
-		Dialog.setDebugMode(true,0);
+		Dialog.setDebugMode(true, DialogChoice.None);
 	}
 	
 	@Test
@@ -67,6 +67,4 @@ public class TestTimeService {
 		assertEquals(hour, values[3]);
 		assertEquals(minute, values[4]);
 	}
-	
-
 }

@@ -29,6 +29,7 @@ public class DeveloperRepository extends Repository<Developer> {
 		return dev;
 	}
 	
+	// TODO fix initials to single
 	public List<Developer> readByInitials(String initials) {
 		return this.parse(this.database.getConnnection().readWhereEquals(this.table, this.columns[0], initials));
 	}

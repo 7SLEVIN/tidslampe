@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import persistency.BaseTestDatabase;
 import utils.Dialog;
+import utils.DialogChoice;
 import utils.TimeService;
 import view.ViewContainer;
 import view.state.DevelopersViewState;
@@ -28,7 +29,7 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 	@Test
 	public void testMainScenario() {
 		this.init();
-		Dialog.setDebugMode(true,1);
+		Dialog.setDebugMode(true, DialogChoice.Yes);
 		TimeService timeService = new TimeService();
 		ControllerCollection controllerCollection = new ControllerCollection(this.db, timeService);
 		ViewContainer viewContainer = new ViewContainer();
@@ -39,6 +40,7 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 		controllerCollection.getLoginController().login("JL");
 		
 		Developer developer = this.db.developer().readByInitials("PM").get(0);
+
 		int totalDevelopers = this.db.developer().readAll().size();
 		
 		DevelopersViewState devsViewState = mock(DevelopersViewState.class);
@@ -81,7 +83,7 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 	@Test
 	public void testDeleteMyself() {
 		this.init();
-		Dialog.setDebugMode(true,1);
+		Dialog.setDebugMode(true, DialogChoice.Yes);
 		TimeService timeService = new TimeService();
 		ControllerCollection controllerCollection = new ControllerCollection(this.db, timeService);
 		ViewContainer viewContainer = new ViewContainer();
@@ -91,31 +93,31 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 		
 		controllerCollection.getLoginController().login("PM");
 		
-		Developer developer2 = this.db.developer().readByInitials("PM").get(0);
+		Developer developer = this.db.developer().readByInitials("PM").get(0);
 		int totalDevelopers = this.db.developer().readAll().size();
 		
 		DevelopersViewState devsViewState = mock(DevelopersViewState.class);
-		when(devsViewState.getSelectedDeveloper()).thenReturn(developer2);
+		when(devsViewState.getSelectedDeveloper()).thenReturn(developer);
 		devsViewController.setViewState(devsViewState);
 		
 		assertEquals(this.db.developer().readByInitials("PM").size(),1);
 		
 //Add developer as manager on a project		
-		int projectID = this.db.project().create("Test project", 42, "13-05-2014", developer2).getId();
-		assertEquals(this.db.project().read(projectID).getManager().getId(),developer2.getId());
+		int projectID = this.db.project().create("Test project", 42, "13-05-2014", developer).getId();
+		assertEquals(this.db.project().read(projectID).getManager().getId(),developer.getId());
 		
 		
 //Add developer to an activity on the project
 		Activity activity = this.db.activity().createProjectActivity(projectID, "An activity on the proejct", 2, 1337, 1337);
-		activity.addDeveloper(developer2);
-		assertEquals(activity.getDevelopers().get(0).getId(), developer2.getId());
+		activity.addDeveloper(developer);
+		assertEquals(activity.getDevelopers().get(0).getId(), developer.getId());
 		assertEquals(activity.getDevelopers().size(), 1);
 		
 		devsViewController.deleteSelectedDeveloper();
 		
 //Is the developer removed from developers, projects and activities?
 		assertEquals(this.db.developer().readByInitials("PM").size(),1);
-		assertEquals(developer2.getId(),this.db.project().read(projectID).getManager().getId());
+		assertEquals(developer.getId(),this.db.project().read(projectID).getManager().getId());
 		activity = this.db.activity().read(activity.getId());
 		assertEquals(activity.getDevelopers().size(), 1);
 		assertEquals(totalDevelopers, this.db.developer().readAll().size());
@@ -125,7 +127,7 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 	@Test
 	public void testNoToDeletion() {
 		this.init();
-		Dialog.setDebugMode(true,-1);
+		Dialog.setDebugMode(true, DialogChoice.No);
 		TimeService timeService = new TimeService();
 		ControllerCollection controllerCollection = new ControllerCollection(this.db, timeService);
 		ViewContainer viewContainer = new ViewContainer();
@@ -169,7 +171,7 @@ public class UseCase2_RemoveDeveloper extends BaseTestDatabase {
 	@Test
 	public void testNoDeveloperSelected() {
 		this.init();
-		Dialog.setDebugMode(true,1);
+		Dialog.setDebugMode(true, DialogChoice.No);
 		TimeService timeService = new TimeService();
 		ControllerCollection controllerCollection = new ControllerCollection(this.db, timeService);
 		ViewContainer viewContainer = new ViewContainer();

@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import persistency.BaseTestDatabase;
 import utils.Dialog;
+import utils.DialogChoice;
 import utils.TimeService;
 
 public class UseCase1_newProject extends BaseTestDatabase {
@@ -16,7 +17,7 @@ public class UseCase1_newProject extends BaseTestDatabase {
 	
 	private void init(){
 		this.addDevelopers();
-		Dialog.setDebugMode(true,0);
+		Dialog.setDebugMode(true, DialogChoice.None);
 	}
 	
 	//Tests whether the correct input yields a new project

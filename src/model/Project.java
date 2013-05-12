@@ -128,4 +128,8 @@ public class Project extends DatabaseObject {
 		return serialNumber;
 	}
 
+	@Override
+	public String toString() {
+		return this.getName();
+	}
 }

@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import persistency.BaseTestDatabase;
 import utils.Dialog;
+import utils.DialogChoice;
 
 public class UseCase3_GenerateReport extends BaseTestDatabase {
 
@@ -38,7 +39,7 @@ public class UseCase3_GenerateReport extends BaseTestDatabase {
 	@Test
 	public void testMainScenario() {
 		this.init();
-		Dialog.setDebugMode(true,0);
+		Dialog.setDebugMode(true, DialogChoice.None);
 		
 		
         
