@@ -114,7 +114,7 @@ public class ProjectMaintainanceViewController extends AbstractViewController {
 		long milliDeadline = this.timeService.convertToMillis(deadline);
 		
 		if(milliDeadline > 0){
-			this.addNewActivity(name, hourBudget, 0, milliDeadline);
+			this.addNewActivity(name, hourBudget, 0, milliDeadline);//TODO her i sequence diagram
 			this.fillActivityList();
 		}
 	}
