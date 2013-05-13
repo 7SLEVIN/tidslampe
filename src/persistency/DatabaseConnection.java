@@ -81,23 +81,23 @@ public class DatabaseConnection {
 		return this.execQuery(Query.selectAllFrom(table).whereEquals(key, value));
 	}
 
-	public ResultSet readByID(String table, int id)  {
-		return this.readWhereEquals(table, "id", id);
-	}
-
-	public ResultSet readAll(String table)  {
-		return this.execQuery(Query.selectAllFrom(table));
-	}
-
-	public ResultSet readAllWhere(String table, String key, String value) {
-		return this.execQuery(Query.selectAllFrom(table).whereEquals(key, value));
-	}
-	
-	public boolean update(String table, int id, String column, String value) {
-		if (!this.exists(table, id)) return false;
-		this.execUpdate(Query.update(table, column, value).whereEquals("id", id));
-		return true;
-	}
+//	public ResultSet readByID(String table, int id)  {
+//		return this.readWhereEquals(table, "id", id);
+//	}
+//
+//	public ResultSet readAll(String table)  {
+//		return this.execQuery(Query.selectAllFrom(table));
+//	}
+//
+//	public ResultSet readAllWhere(String table, String key, String value) {
+//		return this.execQuery(Query.selectAllFrom(table).whereEquals(key, value));
+//	}
+//	
+//	public boolean update(String table, int id, String column, String value) {
+//		if (!this.exists(table, id)) return false;
+//		this.execUpdate(Query.update(table, column, value).whereEquals("id", id));
+//		return true;
+//	}
 	
 	public boolean update(String table, int id, String[] columns, String[] values) 
 			throws UpdateNonExistingException {

@@ -28,16 +28,16 @@ public class ActivityDeveloperRelationRepository extends Repository<ActivityDeve
 		}
 	}
 	
-	public List<Developer> getDevelopersFromActivityID(int id){
-		List<ActivityDeveloperRelation> relations = this.database.activityDeveloperRelation().readAllWhereEquals("activity_id", id);
-		List<Developer> devs = new ArrayList<Developer>();
-		
-		for(ActivityDeveloperRelation relation : relations){
-			devs.add(relation.getDeveloper());
-		}
-		
-		return devs;
-	}
+//	public List<Developer> getDevelopersFromActivityID(int id){
+//		List<ActivityDeveloperRelation> relations = this.database.activityDeveloperRelation().readAllWhereEquals("activity_id", id);
+//		List<Developer> devs = new ArrayList<Developer>();
+//		
+//		for(ActivityDeveloperRelation relation : relations){
+//			devs.add(relation.getDeveloper());
+//		}
+//		
+//		return devs;
+//	}
 	
 	public ActivityDeveloperRelation create(Activity activity, Developer developer) {
 		int id = this.create(new String[]{String.valueOf(activity.getId()), 

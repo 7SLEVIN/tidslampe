@@ -21,11 +21,11 @@ public class ActivityRepository extends Repository<Activity> {
 		
 	}
 	
-	public List<Activity> readByDeveloperId(int developerId) {
-		Query query = Query.selectAllFrom(this.table).whereIn("id", 
-					Query.select("id").from("activity_developer_relation").whereEquals("developer_id", developerId)).orderBy("start_time");
-		return this.parse(this.database.getConnnection().execQuery(query));
-	}
+//	public List<Activity> readByDeveloperId(int developerId) {
+//		Query query = Query.selectAllFrom(this.table).whereIn("id", 
+//					Query.select("id").from("activity_developer_relation").whereEquals("developer_id", developerId)).orderBy("start_time");
+//		return this.parse(this.database.getConnnection().execQuery(query));
+//	}
 	
 	public Activity createProjectActivity(int projectID, String description, int expectedTime, long startTime, long endTime){
 		int id = this.create(new String[]{ActivityType.PROJECT.name(), description, 

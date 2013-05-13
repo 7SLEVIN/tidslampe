@@ -119,7 +119,12 @@ public class CalendarViewState extends AbstractViewState {
 	private JLabel lblFixed;
 	private JPanel panel_13;
 
+
 	public CalendarViewState() {
+		this.initComponents();
+	}
+	
+	public void initComponents() {
 		setMinimumSize(new Dimension(ViewContainer.WINDOW_WIDTH,
 				ViewContainer.WINDOW_HEIGHT));
 		setMaximumSize(new Dimension(ViewContainer.WINDOW_WIDTH,
@@ -380,55 +385,55 @@ public class CalendarViewState extends AbstractViewState {
 		panel_3.setPreferredSize(new Dimension(798, 250));
 		add(panel_3);
 		panel_3.setLayout(new GridLayout(5, 1, 0, 0));
-				
-				panel_13 = new JPanel();
-				panel_3.add(panel_13);
-						panel_13.setLayout(new GridLayout(0, 3, 0, 0));
-				
-						pnlInputActivity = new JPanel();
-						panel_13.add(pnlInputActivity);
-						pnlInputActivity.setPreferredSize(new Dimension(400, 40));
-						FlowLayout flowLayout = (FlowLayout) pnlInputActivity.getLayout();
-								
-										panel_10 = new JPanel();
-										panel_10.setBackground(Color.ORANGE);
-										pnlInputActivity.add(panel_10);
-										
-												lblLegendNormal = new JLabel("NORMAL");
-												panel_10.add(lblLegendNormal);
-												lblLegendNormal.setBackground(Color.ORANGE);
-												
-														panel_11 = new JPanel();
-														panel_11.setBackground(Color.CYAN);
-														pnlInputActivity.add(panel_11);
-														
-																lblAssist = new JLabel("ASSIST");
-																lblAssist.setBackground(Color.ORANGE);
-																panel_11.add(lblAssist);
-																
-																		panel_12 = new JPanel();
-																		panel_12.setBackground(Color.MAGENTA);
-																		pnlInputActivity.add(panel_12);
-																		
-																				lblFixed = new JLabel("RESERVED");
-																				lblFixed.setBackground(Color.ORANGE);
-																				panel_12.add(lblFixed);
-										
-												JPanel controls = new JPanel();
-												panel_13.add(controls);
-												FlowLayout flowLayout_1 = (FlowLayout) controls.getLayout();
-												flowLayout_1.setAlignment(FlowLayout.RIGHT);
-												
-														btnPrevious = new JButton("<");
-														controls.add(btnPrevious);
-														
-																lblChangeDay = new JLabel("Change day");
-																lblChangeDay.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
-																controls.add(lblChangeDay);
-																
-																		btnNext = new JButton(">");
-																		btnNext.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
-																		controls.add(btnNext);
+
+		panel_13 = new JPanel();
+		panel_3.add(panel_13);
+		panel_13.setLayout(new GridLayout(0, 3, 0, 0));
+
+		pnlInputActivity = new JPanel();
+		panel_13.add(pnlInputActivity);
+		pnlInputActivity.setPreferredSize(new Dimension(400, 40));
+		FlowLayout flowLayout = (FlowLayout) pnlInputActivity.getLayout();
+
+		panel_10 = new JPanel();
+		panel_10.setBackground(Color.ORANGE);
+		pnlInputActivity.add(panel_10);
+
+		lblLegendNormal = new JLabel("NORMAL");
+		panel_10.add(lblLegendNormal);
+		lblLegendNormal.setBackground(Color.ORANGE);
+
+		panel_11 = new JPanel();
+		panel_11.setBackground(Color.CYAN);
+		pnlInputActivity.add(panel_11);
+
+		lblAssist = new JLabel("ASSIST");
+		lblAssist.setBackground(Color.ORANGE);
+		panel_11.add(lblAssist);
+
+		panel_12 = new JPanel();
+		panel_12.setBackground(Color.MAGENTA);
+		pnlInputActivity.add(panel_12);
+
+		lblFixed = new JLabel("RESERVED");
+		lblFixed.setBackground(Color.ORANGE);
+		panel_12.add(lblFixed);
+
+		JPanel controls = new JPanel();
+		panel_13.add(controls);
+		FlowLayout flowLayout_1 = (FlowLayout) controls.getLayout();
+		flowLayout_1.setAlignment(FlowLayout.RIGHT);
+
+		btnPrevious = new JButton("<");
+		controls.add(btnPrevious);
+
+		lblChangeDay = new JLabel("Change day");
+		lblChangeDay.setFont(new Font("DejaVu Sans", Font.BOLD, 12));
+		controls.add(lblChangeDay);
+
+		btnNext = new JButton(">");
+		btnNext.setFont(new Font("DejaVu Sans", Font.PLAIN, 12));
+		controls.add(btnNext);
 
 		pnlDateInput = new JPanel();
 		panel_3.add(pnlDateInput);
