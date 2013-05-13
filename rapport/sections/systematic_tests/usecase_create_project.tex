@@ -1,0 +1,33 @@
+\subsection{Use case: Create a new project}
+
+Input partitions
+\begin{center}
+  \begin{tabular}{| l | l |}
+    \hline
+	Input data set & Input property \\ \hline
+     1  & Name, hour budget, deadline \\ \hline
+     2  & Name, no budget, deadline \\ \hline
+     3  & No name, budget hour, deadline \\ \hline
+     4  & Name, budget hour, no deadline \\ \hline
+     5  & No name, no budget hour, no deadline \\ \hline
+     6  & Name, hour budget, \emph{invalid} deadline \\ \hline
+     7  & Name, \emph{invalid} hour budget, deadline \\ \hline
+  \end{tabular}
+\end{center}
+
+Test values \& expected output
+
+Input partitions
+\begin{center}
+  \begin{tabular}{| l | l | l |}
+    \hline
+	Input data set & Contents & Expected output \\ \hline
+     1  & ``Projektet'', ``130'', ``13-02-2015'' & Project created  \\ \hline
+     2  & ``Projektet'', ``0'', ``13-02-2015'' & Project not created  \\ \hline
+     3  & ``'', ``130'', ``13-02-2015'' & Project not created  \\ \hline
+     4  & ``Projektet'', ``130'', ``'' & Project not created  \\ \hline
+     5  & ``'', ``'', ``'' & Project not created  \\ \hline
+     6  & ``Projektet'', ``130'', ``30-02-2015'' & Project not created  \\ \hline
+     7  & ``Projektet'', ``-10'', ``13-02-2015'' & Project not created  \\ \hline
+  \end{tabular}
+\end{center}

@@ -31,9 +31,9 @@ public class TestNewProjectUseCase extends BaseTestDatabase {
 	public void testMainScenario() {
 		//We don't test the GUI, so we expect that the ViewStates and ViewControllers work correctly.
 		
-		String nameInput = "Our newest project";
-		int hourBudgetInput = 1337;
-		String deadlineInput = "13-02-2045";
+		String nameInput = "Projektet";
+		int hourBudgetInput = 130;
+		String deadlineInput = "13-02-2015";
 		
 		Project project = this.db.project().create(nameInput, hourBudgetInput, deadlineInput, developer);
 		
@@ -58,9 +58,9 @@ public class TestNewProjectUseCase extends BaseTestDatabase {
 	@Test
 	public void testUserInputIncomplete(){
 		//User forgets hour-budget	
-		String nameInput = "Our newest project";
+		String nameInput = "Projektet";
 		int hourBudgetInput = 0;
-		String deadlineInput = "13-02-2045";
+		String deadlineInput = "13-02-2015";
 		Developer developer = this.db.developer().readByInitials("JL").get(0);
 		
 		int projectsCount = this.db.project().readAll().size();
@@ -71,7 +71,7 @@ public class TestNewProjectUseCase extends BaseTestDatabase {
 		assertEquals(projectsCount , this.db.project().readAll().size()); //No new projects should be added
 		
 		//User forgets to add a name to the project
-		hourBudgetInput = 1337;
+		hourBudgetInput = 130;
 		nameInput = "";
 		
 		project = this.db.project().create(nameInput, hourBudgetInput, deadlineInput, developer);
@@ -80,7 +80,7 @@ public class TestNewProjectUseCase extends BaseTestDatabase {
 		assertEquals(projectsCount , this.db.project().readAll().size()); //No new projects should be added
 		
 		//User forgets to add a deadline to the project
-		nameInput = "derp";
+		nameInput = "Projektet";
 		deadlineInput = "";
 		
 		project = this.db.project().create(nameInput, hourBudgetInput, deadlineInput, developer);
@@ -103,9 +103,9 @@ public class TestNewProjectUseCase extends BaseTestDatabase {
 	@Test
 	public void testInvalidDeadline(){
 		//User forgets hour-budget	
-		String nameInput = "Our newest project";
-		int hourBudgetInput = 0;
-		String deadlineInput = "30-02-2045";
+		String nameInput = "Projektet";
+		int hourBudgetInput = 130;
+		String deadlineInput = "30-02-2015";
 		Developer developer = this.db.developer().readByInitials("JL").get(0);
 		
 		int projectsCount = this.db.project().readAll().size();
@@ -124,7 +124,7 @@ public class TestNewProjectUseCase extends BaseTestDatabase {
 		
 		int projectsCount = this.db.project().readAll().size();
 			
-		Project project = this.db.project().create("Our newest project", -10, "10-02-2045", developer);
+		Project project = this.db.project().create("Projektet", -10, "13-02-2015", developer);
 		
 		assertEquals(null,project);
 		assertEquals(projectsCount , this.db.project().readAll().size()); //No new projects should be added
