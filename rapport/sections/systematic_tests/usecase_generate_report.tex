@@ -1,0 +1,31 @@
+\subsection{Use case: Generate Report}
+
+
+Input partitions
+\begin{center}
+  \begin{tabular}{| l | l |}
+    \hline
+	Input data set & Input property \\ \hline
+    1 & A project with no work done \\ \hline
+    2 & A project with activities and no work done \\ \hline
+    3 & A project, activities, developers and no work done \\ \hline
+	4 & A project, activities, developers and registered work \\ \hline
+	5 & A project, activities, developers, registered work and assists \\
+    \hline
+  \end{tabular}
+\end{center}
+
+
+Test values \& expected output
+\begin{center}
+  \begin{tabular}{| l | l | l |}
+    \hline
+	Input data set & Contents & Expected output \\ \hline
+    1 & \begin{tabular}[x]{@{}l@{}}Project-name: ``Test project'', \\hours budgeted: 200 and deadline: 13-05-2014\end{tabular} &\begin{tabular}[x]{@{}l@{}}The different report-values\\calculated correctly\end{tabular}\\ \hline
+	2 & \begin{tabular}[x]{@{}l@{}}Same as (1) with two activities \\each with 10 hours allocated\end{tabular} &\begin{tabular}[x]{@{}l@{}}The different report-values\\calculated correctly\end{tabular}\\ \hline
+    3 & \begin{tabular}[x]{@{}l@{}}Same as (2) with four developers (``JL'',``PM'', \\``GH'',``RS'') assigned to the first activity\end{tabular} &\begin{tabular}[x]{@{}l@{}}The different report-values\\calculated correctly\end{tabular} \\ \hline
+    4 & \begin{tabular}[x]{@{}l@{}}Same as (3) with work registered by ``JL'' \\\& ``PM'' on the first activity\end{tabular} &\begin{tabular}[x]{@{}l@{}}The different report-values\\calculated correctly\end{tabular} \\ \hline
+	5 & \begin{tabular}[x]{@{}l@{}}Same as (4) with assists registered by \\ ``GH'' \& ``RS''  on the second activity\end{tabular} &\begin{tabular}[x]{@{}l@{}}The different report-values\\calculated correctly\end{tabular} \\
+    \hline
+  \end{tabular}
+\end{center}
