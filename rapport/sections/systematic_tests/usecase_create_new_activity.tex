@@ -5,11 +5,13 @@ Input partitions
   \begin{tabular}{| l | l |}
     \hline
 	Input data set & Input property \\ \hline
-    1 & Initials and name \\ \hline
-    2 & Initials only \\ \hline
-    3 & Name only \\ \hline
-	4 & Name and too many initials \\
-    \hline
+    1 & Description, hour budget and deadline \\ \hline
+    2 & Hour budget and deadline only \\ \hline
+    3 & Description and deadline only \\ \hline
+    4 & Description and hour budget only \\ \hline
+    5 & Description, negative hour budget and deadline  \\ \hline
+    6 & Description, hour budget and deadline which has already passed \\ \hline
+    7 & Description, hour budget and malformed deadline dates \\ \hline
   \end{tabular}
 \end{center}
 
@@ -20,9 +22,12 @@ Input partitions
   \begin{tabular}{| l | l | l |}
     \hline
 	Input data set & Contents & Expected output \\ \hline
-    1 & 2 & 3 \\ \hline
-    4 & 5 & 6 \\ \hline
-    7 & 8 & 9 \\
-    \hline
+    1 & "Swim with Moby Dick", \\ & "123", "22-04-2666" & Activity created \\ \hline
+    2 & "\ ", "123", "22-04-2666" & "You must fill out all fields!" \\ \hline
+    3 & "Swim with Moby Dick", \\ & "\ ", "22-04-2666" & "You must fill out all fields!" \\ \hline
+    4 & "Swim with Moby Dick", \\ & "123", "\ " & "You must fill out all fields!" \\ \hline
+    5 & "Swim with Moby Dick", \\ & "-1", "22-04-2666" & "Hour budget cannot be negative!" \\ \hline
+    6 & "Swim with Moby Dick", \\ & "123", "01-01-1991" & "You can't make a deadline which \\ && is already passed" \\ \hline
+    7 & "Swim with Moby Dick", \\ & "123", "asdf" & "Invalid date format, you must \\ & & use dd-mm-yyyy" \\ \hline
   \end{tabular}
 \end{center}

@@ -43,7 +43,7 @@ public class MenuViewController extends AbstractViewController {
 		this.fillProjectList();
 	}
 	
-	private void fillProjectList() {
+	public void fillProjectList() {
 		int userId = this.controllers.getLoginController().getUser().getId();
 		List<Project> projects = new ArrayList<Project>();
 		for (Project project : this.database.project().readAll()) {
@@ -61,6 +61,10 @@ public class MenuViewController extends AbstractViewController {
 		}
 		this.viewContainer.setViewState(ViewControllerFactory.CreateProjectMaintainanceViewController(projectId));
 		
+	}
+
+	public void setViewState(MenuViewState viewState) {
+		this.viewState = viewState;
 	}
 
 }
