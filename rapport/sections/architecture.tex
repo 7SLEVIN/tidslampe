@@ -1,13 +1,13 @@
 We are using SQLite as our database. We use ``SQLite JDBC Driver''\footnote{\url{https://bitbucket.org/xerial/sqlite-jdbc}} as the driver, which allows us to execute arbitrary SQL commands very conveniently. On top of this driver lies our persistency module, which exposes an API to work with the different data models, by abstracting away actual SQL command calls.
 
-For each table in the database, there is a corresponding Java class, which maps each column to a property. These are all based on a very simple class, \code{DatabaseObject}, which has a single property, the \code{id}. This is used to identify the entity in the database, and is the only trusted identifier for an object. 
+For each table in the database, there is a corresponding Java class, which maps each column to a property. This is shown in figure \ref{fig:model_uml}. These are all based on a very simple class, \code{DatabaseObject}, which has a single property, the \code{id}. This is used to identify the entity in the database, and is the only trusted identifier for an object. 
 
 There is a repository for each model object, which exposes a \code{CRUD} interface for working with that model. Repositories have access to each other, so that they can fetch data about their own attributes easily. For instance, an \code{Activity} can fill out its \code{project} property, by asking the \code{ProjectRepository} for a \code{Project} model.
 
 We created a class, \code{Query}, that somewhat resembles \code{C\#}s \code{LINQ}\footnote{\url{http://msdn.microsoft.com/en-us/library/vstudio/bb397926.aspx}}. It allows us to completely abstract the string based SQL statements away by building \code{Query} objects and chain methods (by return its own instance). This greatly reduces the risk of simple typos and the like.
 
-The repositories are used by \code{ViewControllers}, which are (as the name implies), control the \code{View}s. They contain the business logic code, as they fetch data from the repositories, and send it to the \code{View}s, who then displays them accordingly. 
+The repositories are used by \code{ViewControllers}, which are (as the name implies), control the \code{View}s. They contain the business logic code, as they fetch data from the repositories, and send it to the \code{View}s, who then displays them accordingly. This is illustrated in figure \ref{fig:persistency_uml}.
 
-The \code{View}s are completely isolated objects, who know nothing of the other parts of the application, and other parts of the application know nothing of how they display the data. 
+The \code{View}s are completely isolated objects, who know nothing of the other parts of the application, and other parts of the application know nothing of how they display the data. This is reflected in figure \ref{fig:vc_uml}, where they are the last part of the dependency chain.
 
 This means that the actual GUI could easily be interchanged with a CLI\footnote{Command Line Interface}, or some other interface, except for the fact that there are some \code{Swing} components that the \code{ViewController}s make use of (for instance, adding a handler to a button). This could have been avoided by using Interfaces, but we felt that it was beyond the scope of this project.
