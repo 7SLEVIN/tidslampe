@@ -48,12 +48,4 @@ public class Dialog {
 			default: return DialogChoice.None;
 		}
 	}
-
-	public static DialogChoice getDefaultChoice() {
-		return defaultChoice;
-	}
-
-	public static void setDefaultChoice(DialogChoice defaultChoice) {
-		Dialog.defaultChoice = defaultChoice;
-	}
 }

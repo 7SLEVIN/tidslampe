@@ -2,6 +2,8 @@ package utils;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Calendar;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,5 +68,17 @@ public class TestTimeService {
 		assertEquals(day, values[2]);
 		assertEquals(hour, values[3]);
 		assertEquals(minute, values[4]);
+	}
+	
+	@Test
+	public void testConversion(){
+
+		int year = 2011, month = 11, day = 11, hour = 8, minute = 0;
+		Calendar cal1 = timeService.convertToCalendar(year, month, day, hour, minute);
+		long long1 = timeService.convertToMillis(year, month, day, hour, minute);
+		assertEquals(cal1.getTimeInMillis(), long1);
+
+		Calendar cal2 = timeService.convertToCalendar(long1);
+		assertEquals(cal1.getTimeInMillis(), cal2.getTimeInMillis());
 	}
 }
