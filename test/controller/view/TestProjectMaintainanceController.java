@@ -14,8 +14,7 @@ import app.ProjectPlanner;
 import persistency.BaseTestDatabase;
 import view.ViewContainer;
 
-public class TestProjectMaintainance extends BaseTestDatabase{
-//TODO fjern denne test, den er GUI-agtig
+public class TestProjectMaintainanceController extends BaseTestDatabase{
 	
 	private ControllerCollection controllers;
 	private ViewContainer viewContainer;
