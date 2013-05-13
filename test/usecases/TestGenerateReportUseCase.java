@@ -42,7 +42,8 @@ public class TestGenerateReportUseCase extends BaseTestDatabase {
 	@Test
 	public void testMainScenario() {
 		Project project = this.db.project().create("Test project", 200, "13-05-2014", null);
-		
+
+//Test #1		
 		assertEquals(project.getActivities().size(), 0);
 		assertEquals(project.getEstPercentageCompletion(), 0);
 		assertEquals(project.getEstHoursRemaining(), 200);
@@ -52,7 +53,8 @@ public class TestGenerateReportUseCase extends BaseTestDatabase {
 		
 		Activity activity1 = this.db.activity().createProjectActivity(project.getId(), "activity1", 10, this.stringDateTimeToLong("01-05-2013 01:00"), this.stringDateTimeToLong("01-05-2014 01:00"));
 		Activity activity2 = this.db.activity().createProjectActivity(project.getId(), "activity2", 10, this.stringDateTimeToLong("01-05-2013 01:00"), this.stringDateTimeToLong("01-05-2014 01:00"));
-		
+
+//Test #2		
 		assertEquals(project.getActivities().size(), 2);
 		assertEquals(project.getEstPercentageCompletion(), 0);
 		assertEquals(project.getEstHoursRemaining(), 200);
@@ -69,16 +71,18 @@ public class TestGenerateReportUseCase extends BaseTestDatabase {
 		activity1.addDeveloper(developer3);
 		activity1.addDeveloper(developer4);
 
+//Test #3
 		//Tests that the initials of all developers are stored correctly		
 		assertEquals(activity1.getAllDevsInitials(),"JL,PM,GH,RS");
 		assertEquals(activity1.getAllDevsInitials() == "The Beatles", false); //Please fail!
 		
 		this.db.registerTime().create(this.stringDateTimeToLong("11-05-2013 06:30"), this.stringDateTimeToLong("11-05-2013 09:30"), developer.getId(), activity1.getId(), false);
-		this.db.registerTime().create(this.stringDateTimeToLong("11-05-2013 06:30"), this.stringDateTimeToLong("11-05-2013 09:30"), developer2.getId(), activity1.getId(), true);
+		this.db.registerTime().create(this.stringDateTimeToLong("11-05-2013 06:30"), this.stringDateTimeToLong("11-05-2013 09:30"), developer2.getId(), activity1.getId(), false);
 		
 		//Showed in the project maintainance view, and is relevant to the report
 		assertEquals(activity1.getHoursRegistered(),6);
 		
+//Test #4
 		//Tests normal registration		
 		assertEquals(project.getEstPercentageCompletion(), 3);
 		assertEquals(project.getEstHoursRemaining(), 194);
@@ -86,8 +90,10 @@ public class TestGenerateReportUseCase extends BaseTestDatabase {
 		assertEquals(project.getHoursAllocatedToActivities(), 20);
 		assertEquals(project.getHoursRegistered(), 6);
 		
-		this.db.registerTime().create(this.stringDateTimeToLong("12-05-2013 06:30"), this.stringDateTimeToLong("12-05-2013 09:30"), developer.getId(), activity2.getId(), true);
-		this.db.registerTime().create(this.stringDateTimeToLong("12-05-2013 06:30"), this.stringDateTimeToLong("12-05-2013 09:30"), developer2.getId(), activity2.getId(), true);
+		this.db.registerTime().create(this.stringDateTimeToLong("12-05-2013 06:30"), this.stringDateTimeToLong("12-05-2013 09:30"), developer3.getId(), activity2.getId(), true);
+		this.db.registerTime().create(this.stringDateTimeToLong("12-05-2013 06:30"), this.stringDateTimeToLong("12-05-2013 09:30"), developer4.getId(), activity2.getId(), true);
+
+//Test #5
 		//Tests that assits also count		
 		assertEquals(project.getEstPercentageCompletion(), 6);
 		assertEquals(project.getEstHoursRemaining(), 188);
