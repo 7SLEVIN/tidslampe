@@ -80,7 +80,8 @@ public class DevelopersViewController extends AbstractViewController {
 			} catch (DeleteNonExistingException e) {
 				e.printStackTrace();
 			}
-			this.fillDeveloperList();
 		}
+		
+		this.fillDeveloperList();
 	}
 }
