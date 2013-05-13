@@ -41,7 +41,7 @@ public class TestActivityTableModel extends BaseTestDatabase {
 	public void testGetValueAt() {
 		for (int i = 0; i < this.activities.size(); i++) {
 			assertEquals(this.activities.get(i).getDescription(), this.model.getValueAt(i, 0));	
-			assertEquals(this.activities.get(i).getExpectedTime(), this.model.getValueAt(i, 1));	
+			assertEquals(this.activities.get(i).getHoursBudgeted(), this.model.getValueAt(i, 1));	
 			assertEquals(this.activities.get(i).getHoursRegistered(), this.model.getValueAt(i, 2));	
 			assertEquals(this.projectPlanner.getTimeService().convertCalendarToInputString(this.activities.get(i).getEndCalendar()), 
 					this.model.getValueAt(i, 3));	

@@ -110,7 +110,7 @@ public class Project extends DatabaseObject {
 	public int getHoursAllocatedToActivities(){
 		int time = 0;
 		for (Activity activity : this.getActivities()) {
-			time += activity.getExpectedTime();
+			time += activity.getHoursBudgeted();
 		}
 		return time;
 	}

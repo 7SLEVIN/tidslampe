@@ -14,7 +14,7 @@ public class Activity extends DatabaseObject {
 	
 	private ActivityType type;
 	private String description;
-	private int expectedTime;
+	private int hoursBudgeted;
 	private long startTime;
 	private long endTime;
 	private List<Developer> developers;
@@ -35,7 +35,7 @@ public class Activity extends DatabaseObject {
 		this.type = ActivityType.PROJECT;
 		this.description = description;
 		this.projectID = projectID;
-		this.expectedTime = expectedTime;
+		this.hoursBudgeted = expectedTime;
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
@@ -52,7 +52,7 @@ public class Activity extends DatabaseObject {
 		super(id,db,db.activity());
 		this.type = type;
 		this.description = description;
-		this.expectedTime = -1;
+		this.hoursBudgeted = -1;
 		this.projectID = -1;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -60,7 +60,7 @@ public class Activity extends DatabaseObject {
 
 	@Override
 	public String[] getValueArray() {
-		return new String[]{this.type.name() , this.description , String.valueOf(this.expectedTime) , String.valueOf(this.startTime) , String.valueOf(this.endTime), String.valueOf(this.projectID)};
+		return new String[]{this.type.name() , this.description , String.valueOf(this.hoursBudgeted) , String.valueOf(this.startTime) , String.valueOf(this.endTime), String.valueOf(this.projectID)};
 	}
 
 	public int getHoursRegistered(){
@@ -110,12 +110,12 @@ public class Activity extends DatabaseObject {
 		this.save();
 	}
 
-	public int getExpectedTime() {
-		return this.expectedTime;
+	public int getHoursBudgeted() {
+		return this.hoursBudgeted;
 	}
 	
-	public void setExpectedTime(int expTime) throws UpdateNonExistingException {
-		this.expectedTime = expTime;
+	public void setHoursBudgeted(int expTime) throws UpdateNonExistingException {
+		this.hoursBudgeted = expTime;
 		this.save();
 	}
 	

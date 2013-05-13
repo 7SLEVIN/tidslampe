@@ -74,7 +74,7 @@ public class TestCreateNewActivityUseCase extends BaseViewControllerTest {
 		assertEquals(1, found.size());
 		Activity actual = found.get(0);
 		assertEquals(description, actual.getDescription());
-		assertEquals(hourBudget, String.valueOf(actual.getExpectedTime()));
+		assertEquals(hourBudget, String.valueOf(actual.getHoursBudgeted()));
 		assertEquals(deadline, this.projectPlanner.getTimeService().convertLongToString(actual.getEndTime()));
 	}
 	

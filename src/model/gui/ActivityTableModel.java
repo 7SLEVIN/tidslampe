@@ -28,7 +28,7 @@ public class ActivityTableModel extends DefaultTableModel implements TableModel 
 		Activity activity = this.data.get(row);
 		switch (column) {
 			case 0: return activity.getDescription();
-			case 1: return activity.getExpectedTime();
+			case 1: return activity.getHoursBudgeted();
 			case 2: return activity.getHoursRegistered();
 			case 3: return this.timeService.convertCalendarToInputString(activity.getEndCalendar());
 			case 4: return activity.getAllDevsInitials();

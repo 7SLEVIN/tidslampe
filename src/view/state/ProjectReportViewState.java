@@ -86,6 +86,7 @@ public class ProjectReportViewState extends AbstractViewState {
 	}
 	
 	public void hoursUnassigned(int totalHourBudget, int hoursAssigned){
+		if (totalHourBudget < hoursAssigned) this.hoursUnassignedLabel.setForeground(Color.RED);
 		this.hoursUnassignedLabel.setText("Of the " + totalHourBudget + " total budgeted hours " + hoursAssigned + " have been assigned to activities");
 	}
 	

@@ -104,7 +104,7 @@ public class TestDatabase extends BaseTestDatabase {
 		
 		assertEquals("Activity description", "Catch Moby Dick", actual.getDescription());
 		assertEquals("Activity description", "Catch Moby Dick", activity.getDescription());
-		assertEquals("Activity expected time", 2, actual.getExpectedTime());
+		assertEquals("Activity expected time", 2, actual.getHoursBudgeted());
 		long actualStart = actual.getStartTime();
 		assertEquals("Activity start time", startTime, actualStart);
 		long actualEnd = actual.getEndTime();
@@ -193,19 +193,19 @@ public class TestDatabase extends BaseTestDatabase {
 		Activity activity = this.db.activity().createProjectActivity(1,"Catch Moby Dick", 2, date, date2);
 
 		activity.setDescription("Leave Moby Dick alone");
-		activity.setExpectedTime(666);
+		activity.setHoursBudgeted(666);
 		activity.setStartTime(newDate);
 		activity.setEndTime(newDate2);
 		
 		Activity actual = (Activity) this.db.activity().read(activity.getId());
 		
 		assertEquals("Activity existing description", "Loadfactor", existing.getDescription());
-		assertEquals("Activity existing expected time", 3, existing.getExpectedTime());
+		assertEquals("Activity existing expected time", 3, existing.getHoursBudgeted());
 		assertEquals("Activity existing start time", date, existing.getStartTime());
 		assertEquals("Activity existing end time", date2, existing.getEndTime());
 		
 		assertEquals("Activity description", "Leave Moby Dick alone", actual.getDescription());
-		assertEquals("Activity expected time", 666, actual.getExpectedTime());
+		assertEquals("Activity expected time", 666, actual.getHoursBudgeted());
 		assertEquals("Activity start time", newDate, actual.getStartTime());
 		assertEquals("Activity end time", newDate2, actual.getEndTime());
 	}
@@ -280,7 +280,7 @@ public class TestDatabase extends BaseTestDatabase {
 		Activity actual = this.db.activity().read(activity.getId());
 		
 		assertEquals("Activity description", "Catch Moby Dick", actual.getDescription());
-		assertEquals("Activity expected time", 1, actual.getExpectedTime());
+		assertEquals("Activity expected time", 1, actual.getHoursBudgeted());
 		assertEquals("Activity start time", date, actual.getStartTime());
 		assertEquals("Activity end time", date, actual.getEndTime());
 		
