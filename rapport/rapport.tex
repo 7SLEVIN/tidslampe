@@ -67,7 +67,8 @@ breakatwhitespace=true }
 \section{Introduction} 
 \input{sections/introduction.tex}
 
-\section{Requirements Specification}\label{requirements}
+\section{Requirements Specification}
+\label{requirements}
 \subsection{Important concepts}
 \input{sections/concepts.tex}
 
@@ -82,10 +83,33 @@ breakatwhitespace=true }
 \subsection{Limiting}
 \input{sections/limiting.tex}
 
-\section{Program Architecture}\label{architecture}
+\section{Program Architecture}
+\label{architecture}
 \subsection{Class Diagrams}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{uml/model-simple-uml.png}
+  \label{fig:model_uml}
+  \caption{The model architecture.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{uml/controller-simple-uml.png}
+  \label{fig:vc_uml}
+  \caption{The view-controller architecture.}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{uml/model-persistency-simple-uml.png}
+  \label{fig:persistency_uml}
+  \caption{The persistency architecture.}
+\end{figure}
 
 \subsection{Sequence Diagrams}
+Please see the attached file named \code{sequence.zip} for the three sequence diagrams. 
 
 \subsection{Architecture Design}
 \input{sections/architecture.tex}
