@@ -67,17 +67,17 @@ public class TestMenuViewController extends BaseViewControllerTest {
 
 //	@Test
 //	public void testGotoProject() {
-//		MenuViewController mockController = mock(MenuViewController.class);
-//		mockController = ViewControllerFactory.CreateMenuViewController();
-//		mockController.initialize();
+//		ViewContainer viewContainer = mock(ViewContainer.class);
+//		this.controller = ViewControllerFactory.CreateMenuViewController();
+//		this.controller.initialize();
 //		
 //		MenuViewState viewState = mock(MenuViewState.class);
 //		when(viewState.getSelectedProject()).thenReturn(-1);
-//		mockController.setViewState(viewState);
+//		this.controller.setViewState(viewState);
 //		
-//		mockController.gotoProject();
+//		this.controller.gotoProject();
 //		
-//		verify(mockController).setViewState((MenuViewState)any());
+//		verify(viewContainer).setViewState((MenuViewState)any());
 //	}
 
 }
