@@ -62,6 +62,8 @@ public class AddDeveloperUseCaseTest extends BaseTestDatabase {
 		assertEquals(initials, actual.getInitials());
 		assertEquals(name, actual.getName());
 	}
+	
+	// Alternative scenarios:
 
 	@Test
 	public void testEmptyInitials() {
