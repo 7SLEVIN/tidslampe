@@ -25,7 +25,7 @@ import controller.view.BaseViewControllerTest;
 import controller.view.ProjectMaintainanceViewController;
 import controller.view.ViewControllerFactory;
 
-public class CreateNewActivityUseCaseTest extends BaseViewControllerTest {
+public class TestCreateNewActivityUseCase extends BaseViewControllerTest {
 	
 	private Project project;
 	private ProjectMaintainanceViewController controller;

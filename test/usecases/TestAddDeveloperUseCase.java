@@ -22,7 +22,7 @@ import controller.view.BaseViewControllerTest;
 import controller.view.DevelopersViewController;
 import controller.view.ViewControllerFactory;
 
-public class AddDeveloperUseCaseTest extends BaseViewControllerTest {
+public class TestAddDeveloperUseCase extends BaseViewControllerTest {
 
 	private DevelopersViewController controller;
 	private DevelopersViewState viewState;

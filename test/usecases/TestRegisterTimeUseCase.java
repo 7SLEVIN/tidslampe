@@ -29,7 +29,7 @@ import controller.view.BaseViewControllerTest;
 import controller.view.CalendarViewController;
 import controller.view.ViewControllerFactory;
 
-public class RegisterTimeUseCaseTest extends BaseViewControllerTest {
+public class TestRegisterTimeUseCase extends BaseViewControllerTest {
 
 	private Dialog dialogMock;
 	private Developer developer;

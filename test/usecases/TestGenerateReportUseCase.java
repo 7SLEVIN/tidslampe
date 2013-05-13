@@ -18,7 +18,7 @@ import persistency.BaseTestDatabase;
 import utils.Dialog;
 import utils.DialogChoice;
 
-public class GenerateReportUseCaseTest extends BaseTestDatabase {
+public class TestGenerateReportUseCase extends BaseTestDatabase {
 
 	@Before
 	public void setUp() throws Exception {

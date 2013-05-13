@@ -20,7 +20,7 @@ import controller.view.BaseViewControllerTest;
 import controller.view.DevelopersViewController;
 import controller.view.ViewControllerFactory;
 
-public class RemoveDeveloperUseCaseTest extends BaseViewControllerTest {
+public class TestRemoveDeveloperUseCase extends BaseViewControllerTest {
 	private DevelopersViewController developerController;
 	private Developer developer;
 	private int totalDevelopers;

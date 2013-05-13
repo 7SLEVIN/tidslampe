@@ -12,7 +12,7 @@ import utils.Dialog;
 import utils.DialogChoice;
 import utils.TimeService;
 
-public class NewProjectUseCaseTest extends BaseTestDatabase {
+public class TestNewProjectUseCase extends BaseTestDatabase {
 
 	TimeService timeService = new TimeService();
 	private Developer developer;
