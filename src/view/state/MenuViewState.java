@@ -51,6 +51,10 @@ public class MenuViewState extends AbstractViewState {
 		this.projectsList.setModel(new ProjectListModel(projects));
 	}
 	
+	public List<Project> getProjects() {
+		return this.projects;
+	}
+	
 	public int getSelectedProject() {
 		if(this.projectsList.getSelectedIndex() == -1)
 			return -1;

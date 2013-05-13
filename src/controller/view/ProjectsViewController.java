@@ -65,8 +65,6 @@ public class ProjectsViewController extends AbstractViewController {
 		String deadlineInput = this.viewState.getDeadlineInput();
 		Developer managerInput = this.viewState.getManagerInput();
 		
-		System.out.println(this.database.project().readAll().size());
-		
 		if (this.database.project().create(nameInput, hourBudgetInput, deadlineInput, managerInput) == null) {
 			Dialog.message("Could not create project");
 		}
@@ -77,15 +75,19 @@ public class ProjectsViewController extends AbstractViewController {
 	
 	public void maintainSelectedProject() {
 		Project sel = this.viewState.getSelectedProject();
-		if (sel == null) 
+		if (sel == null) {
+			Dialog.message("No project selected");
 			return;
-		this.viewContainer.setViewState(ViewControllerFactory.CreateProjectMaintainanceViewController(sel.getId()));
+		}
+		this.getViewContainer().setViewState(ViewControllerFactory.CreateProjectMaintainanceViewController(sel.getId()));
 	}
 	
 	public void deleteSelectedProject() {
 		Project sel = this.viewState.getSelectedProject();
-		if (sel == null) 
+		if (sel == null) {
+			Dialog.message("No project selected");
 			return;
+		}
 		
 		DialogChoice confirm = Dialog.confirm(String.format("Really delete %s?", sel.getName()));
 		if (confirm == DialogChoice.Yes) {
@@ -96,6 +98,14 @@ public class ProjectsViewController extends AbstractViewController {
 			}
 			this.fillProjectList();
 		}
+	}
+
+	public void setViewState(ProjectsViewState viewState) {
+		this.viewState = viewState;
+	}
+	
+	public ViewContainer getViewContainer() {
+		return this.viewContainer;
 	}
 
 }
