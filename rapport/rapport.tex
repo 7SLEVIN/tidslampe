@@ -19,16 +19,6 @@
 \usepackage{url}
 \usepackage{float}
 
-% setup c sharp syntax highlight 
-\lstdefinestyle{sharpc}{ language=[Sharp]C,
-frame=lr, rulecolor=\color{black}, basicstyle=\footnotesize\ttfamily,
-keywordstyle=\bfseries\color{green!40!black},
-commentstyle=\itshape\color{purple!40!black}, identifierstyle=\color{blue},
-stringstyle=\color{orange}}
-
-\lstset{ style=sharpc, numbers=left, escapeinside={\<*}{*>},
-breakatwhitespace=true }
-
 % code formatting helper 
 \newcommand{\code}[1]{\texttt{#1}}
 
@@ -145,11 +135,14 @@ Please see the attached file named \code{sequence.zip} for the three sequence di
 
 
 \section{Conclusion}
-\texttt{By Markus Færevaag}\\
-\input{sections/conclusion.tex}
+\input{sections/conclusion.tex} \\
+\texttt{By Markus Færevaag}
 
 \section{Appendix}
 \subsection{Original schedule document}
 \includepdf{projekt_plan_gruppe_17.pdf}
+\subsection{Work division}
+\input{work.tex}
+
 
 \end{document}
