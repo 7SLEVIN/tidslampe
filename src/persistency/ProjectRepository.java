@@ -40,11 +40,11 @@ public class ProjectRepository extends Repository<Project> {
 	}
 
 	public Project create(String name, int hourBudget, long deadline, Developer manager) {
-		if (name.length() == 0 ||
-				hourBudget <= 0) {
+		if (name.length() == 0 || hourBudget <= 0) {
 			Dialog.message("You must fill out all fields");
 			return null;
-		}else if(deadline < 0){
+		} else if(deadline < 0) {
+			Dialog.message("Deadline is in the past");
 			return null;
 		}
 		

@@ -1,0 +1,32 @@
+Input partitions
+\begin{center}
+  \begin{tabular}{| l | l |}
+    \hline
+	Input data set & Input property \\ \hline
+     1 & Reserve,  start time, end time, date, project selected, activity selected \\ \hline
+     2 & Register, start time, end time, date, project selected, activity selected \\ \hline
+     3 & Register, start time, end time, invalid date, project selected, activity selected \\ \hline
+     4 & Register, invalid start time, end time, date, project selected, activity selected \\ \hline
+     5 & Register, start time, end time, date, project selected, activity selected, overlapping time exists \\ \hline
+     6 & Register, start time, end time, date, no project selected, activity selected \\ \hline
+     7 & Register, start time, end time, date, project selected, no activity selected \\ \hline
+  \end{tabular}
+\end{center}
+
+
+Test values \& expected output
+
+Input partitions
+\begin{center}
+  \begin{tabular}{| l | l | l |}
+    \hline
+	Input data set & Contents & Expected output \\ \hline
+    1 & reserve  ``10:00'', ``13:00'', ``20-04-2002'', valid project, valid activity & Time entry created  \\ \hline
+    2 & register ``10:00'', ``13:00'', ``20-04-2002'', valid project, valid activity & Time entry created  \\ \hline
+    3 & register ``10:00'', ``13:00'', ``20-99-2002'', valid project, valid activity & Time entry not created  \\ \hline
+    4 & register ``fake'',  ``13:00'', ``20-04-2002'', valid project, valid activity & Time entry not created  \\ \hline
+    5 & register ``10:00'', ``13:00'', ``20-04-2002'', valid project, valid activity & Time entry not created  \\ \hline
+    6 & register ``10:00'', ``13:00'', ``20-04-2002'', no project & Time entry not created  \\ \hline
+    7 & register ``10:00'', ``13:00'', ``20-04-2002'', no activity & Time entry not created  \\ \hline
+  \end{tabular}
+\end{center}
