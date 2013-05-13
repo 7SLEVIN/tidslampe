@@ -35,6 +35,7 @@ public class UseCase1_newProject extends BaseTestDatabase {
 		
 //Checks if the returned project has the input values		
 		assertEquals(nameInput,project.getName());
+		assertEquals(nameInput,project.toString());
 		assertEquals(hourBudgetInput,project.getHourBudget());
 		assertEquals(this.timeService.convertToMillis(deadlineInput),project.getDeadline());
 		assertEquals(developer,project.getManager());

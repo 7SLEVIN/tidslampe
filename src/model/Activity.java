@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import exceptions.UpdateNonExistingException;
@@ -124,9 +123,9 @@ public class Activity extends DatabaseObject {
 		return this.startTime;
 	}
 	
-	public Date getStartDate() {
-		return new Date(this.startTime);
-	}
+//	public Date getStartDate() {
+//		return new Date(this.startTime);
+//	}
 	
 	public void setStartTime(long newDate) throws UpdateNonExistingException {
 		this.startTime = newDate;

@@ -54,7 +54,7 @@ public class TimeEntry extends DatabaseObject{
 	
 	public Calendar getStartDate() {
 		Calendar cal = Calendar.getInstance();
-		cal.setTimeInMillis(this.startTime);
+		cal.setTimeInMillis(this.getStartTime());
 		return cal;
 	}
 

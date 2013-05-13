@@ -93,6 +93,7 @@ public class TestRegisterTime extends BaseTestDatabase {
 		TimeEntry secondEntry = this.db.registerTime().create(startTime, endTime, relation, false);
 
 		assertEquals(false, secondEntry == null);
+		assertEquals(false, secondEntry.getIsAssist());
 		
 //Register illegal entry
 		hour = 22;
@@ -105,5 +106,18 @@ public class TestRegisterTime extends BaseTestDatabase {
 
 		assertEquals(true, illegalEntry == null);
 		
+		
+//Register assist
+		hour = 1;
+		minute = 0;
+		startTime = this.timeService.convertToMillis(year, month, day, hour, minute);
+		hour = 2;
+		minute = 30;
+		endTime = this.timeService.convertToMillis(year, month, day, hour, minute);
+		
+		TimeEntry legalAssistEntry = this.db.registerTime().create(startTime, endTime, relation, true);
+
+		assertEquals(false, legalAssistEntry == null);
+		assertEquals(true, legalAssistEntry.getIsAssist());
 	}
 }
