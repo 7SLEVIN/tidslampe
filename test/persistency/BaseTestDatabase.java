@@ -1,14 +1,12 @@
 package persistency;
 
 import model.Activity;
-import model.ActivityDeveloperRelation;
 import model.Developer;
 
 import org.junit.Before;
 
 import utils.Dialog;
 import utils.DialogChoice;
-
 import app.ProjectPlanner;
 
 public class BaseTestDatabase {

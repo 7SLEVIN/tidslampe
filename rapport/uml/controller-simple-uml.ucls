@@ -3,282 +3,280 @@
   realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="controller.ControllerCollection" project="tidslampe" 
     file="/tidslampe/src/controller/ControllerCollection.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="550" y="1006"/>    
+    <position height="-1" width="-1" x="1088" y="113"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="2" language="java" name="controller.action.ChangeViewAction" project="tidslampe" 
     file="/tidslampe/src/controller/action/ChangeViewAction.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="941" y="267"/>    
+    <position height="-1" width="-1" x="497" y="145"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="3" language="java" name="controller.LoginController" project="tidslampe" 
     file="/tidslampe/src/controller/LoginController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="922" y="1038"/>    
+    <position height="-1" width="-1" x="1508" y="147"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="4" language="java" name="controller.view.ViewControllerFactory" project="tidslampe" 
     file="/tidslampe/src/controller/view/ViewControllerFactory.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="557" y="1351"/>    
+    <position height="-1" width="-1" x="1505" y="75"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="5" language="java" name="controller.view.ProjectsViewController" project="tidslampe" 
     file="/tidslampe/src/controller/view/ProjectsViewController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="224" width="408" x="348" y="493"/>    
+    <position height="52" width="180" x="1608" y="221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="6" language="java" name="controller.view.LoginViewController" project="tidslampe" 
     file="/tidslampe/src/controller/view/LoginViewController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="134" width="395" x="3392" y="493"/>    
+    <position height="52" width="164" x="670" y="221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="7" language="java" name="controller.view.CalendarViewController" project="tidslampe" 
     file="/tidslampe/src/controller/view/CalendarViewController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="332" width="431" x="2389" y="493"/>    
+    <position height="52" width="185" x="445" y="221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="8" language="java" name="controller.view.MenuViewController" project="tidslampe" 
     file="/tidslampe/src/controller/view/MenuViewController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="152" width="395" x="1263" y="493"/>    
+    <position height="52" width="162" x="243" y="221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="9" language="java" name="controller.view.AbstractViewController" project="tidslampe" 
     file="/tidslampe/src/controller/view/AbstractViewController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="152" width="408" x="1599" y="193"/>    
+    <position height="52" width="182" x="670" y="129"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="10" language="java" name="controller.view.DevelopersViewController" project="tidslampe" 
     file="/tidslampe/src/controller/view/DevelopersViewController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="170" width="427" x="796" y="493"/>    
+    <position height="52" width="201" x="1063" y="221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="11" language="java" name="controller.view.ProjectMaintainanceViewController" project="tidslampe" 
     file="/tidslampe/src/controller/view/ProjectMaintainanceViewController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="296" width="492" x="2860" y="493"/>    
+    <position height="52" width="264" x="1304" y="221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="12" language="java" name="view.state.LoginViewState" project="tidslampe" 
     file="/tidslampe/src/view/state/LoginViewState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="206" width="164" x="2899" y="865"/>    
+    <position height="52" width="131" x="774" y="313"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="13" language="java" name="view.state.AbstractViewState" project="tidslampe" 
     file="/tidslampe/src/view/state/AbstractViewState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="116" width="149" x="2200" y="493"/>    
+    <position height="52" width="149" x="874" y="221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="14" language="java" name="view.state.ProjectsViewState" project="tidslampe" 
     file="/tidslampe/src/view/state/ProjectsViewState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="440" width="246" x="1174" y="865"/>    
+    <position height="52" width="147" x="1424" y="313"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="15" language="java" name="view.state.CalendarViewState" project="tidslampe" 
     file="/tidslampe/src/view/state/CalendarViewState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2404" y="1239"/>    
+    <position height="52" width="152" x="582" y="313"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="false" package="false" protected="false" private="false"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="16" language="java" name="view.state.ProjectMaintainanceViewState" project="tidslampe" 
     file="/tidslampe/src/view/state/ProjectMaintainanceViewState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="674" width="252" x="2607" y="865"/>    
+    <position height="52" width="231" x="1153" y="313"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="17" language="java" name="view.state.DevelopersViewState" project="tidslampe" 
     file="/tidslampe/src/view/state/DevelopersViewState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="296" width="229" x="1460" y="865"/>    
+    <position height="52" width="168" x="945" y="313"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <class id="18" language="java" name="view.state.MenuViewState" project="tidslampe" 
     file="/tidslampe/src/view/state/MenuViewState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="206" width="194" x="1729" y="865"/>    
+    <position height="52" width="129" x="413" y="313"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
     </display>  
   </class>  
   <generalization id="19">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
-  <generalization id="20">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <generalization id="21">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <generalization id="22">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
-  <generalization id="23">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <association id="24">    
-    <bendpoint x="288" y="444"/>    
-    <bendpoint x="288" y="856"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="25" name="controllers"/>      
-      <multiplicity id="26" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="27">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="28" name="viewState"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="30">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="9"/>  
-  </generalization>  
-  <generalization id="31">    
     <end type="SOURCE" refId="17"/>    
     <end type="TARGET" refId="13"/>  
   </generalization>  
-  <generalization id="32">    
-    <end type="SOURCE" refId="15"/>    
+  <generalization id="20">    
+    <end type="SOURCE" refId="18"/>    
     <end type="TARGET" refId="13"/>  
   </generalization>  
-  <association id="33">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="34" name="viewController"/>      
-      <multiplicity id="35" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="36">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <association id="37">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="38" name="loginController"/>      
-      <multiplicity id="39" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="40">    
+  <generalization id="21">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="9"/>  
   </generalization>  
-  <association id="41">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="42" name="viewState"/>      
-      <multiplicity id="43" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="44">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="45" name="viewState"/>      
-      <multiplicity id="46" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="47">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="48" name="controllerCollection"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="50">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="9"/>  
+  <generalization id="22">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="13"/>  
   </generalization>  
-  <association id="51">    
+  <generalization id="23">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <association id="24">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="25" name="viewState"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="27">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="52" name="viewState"/>      
-      <multiplicity id="53" minimum="0" maximum="1"/>    
+      <attribute id="28" name="viewState"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="30">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="31" name="viewController"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <association id="35">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="36" name="controllers"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="39" name="controllerCollection"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <association id="42">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="43" name="viewState"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="46">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="47">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <association id="48">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="49" name="loginController"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="52" name="viewState"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="54">    
-    <end type="SOURCE" refId="6" navigable="false">      
+    <end type="SOURCE" refId="10" navigable="false">      
       <attribute id="55" name="viewState"/>      
       <multiplicity id="56" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="17" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="57">    
@@ -290,7 +288,7 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <generalization id="60">    
-    <end type="SOURCE" refId="6"/>    
+    <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="9"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
