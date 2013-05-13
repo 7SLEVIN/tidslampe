@@ -1,11 +1,16 @@
 package controller.view;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.any;
 import model.Developer;
 import model.Project;
 
 import org.junit.Before;
+import org.junit.Test;
 
 import utils.Dialog;
 import view.ViewContainer;
@@ -16,9 +21,7 @@ public class TestMenuViewController extends BaseViewControllerTest {
 	private Developer developer;
 	private Project project;
 	private Dialog dialog;
-	private ViewContainer viewContainer;
 	private MenuViewController controller;
-	private MenuViewState viewState;
 	
 	@Before
 	public void setUpTest() throws Exception {
@@ -44,17 +47,37 @@ public class TestMenuViewController extends BaseViewControllerTest {
 		this.controller.initialize();
 	}
 
-	private void mockViewState() {
-		this.viewState = mock(MenuViewState.class);
-		this.controller.setViewState(this.viewState);
+	@Test
+	public void testFillProjects() {
 		this.controller.fillProjectList();
+		
+		assertEquals(1, ((MenuViewState)this.controller.getViewState()).getProjects().size());
+	}
+
+	@Test
+	public void testGotoNullProject() {
+		MenuViewState viewState = mock(MenuViewState.class);
+		when(viewState.getSelectedProject()).thenReturn(-1);
+		this.controller.setViewState(viewState);
+		
+		this.controller.gotoProject();
+		
+		verify(this.dialog).showMessage("No project selected!");
 	}
 
 //	@Test
-//	public void testFillProjects() {
-//		this.mockViewState();
+//	public void testGotoProject() {
+//		MenuViewController mockController = mock(MenuViewController.class);
+//		mockController = ViewControllerFactory.CreateMenuViewController();
+//		mockController.initialize();
 //		
-//		assertEquals(1, this.viewState.getProjects().size());
+//		MenuViewState viewState = mock(MenuViewState.class);
+//		when(viewState.getSelectedProject()).thenReturn(-1);
+//		mockController.setViewState(viewState);
+//		
+//		mockController.gotoProject();
+//		
+//		verify(mockController).setViewState((MenuViewState)any());
 //	}
 
 }
