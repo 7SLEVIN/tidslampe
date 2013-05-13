@@ -1,0 +1,29 @@
+\subsection{Use case: Remove Developer}
+
+
+Input partitions
+\begin{center}
+  \begin{tabular}{| l | l |}
+    \hline
+	Input data set & Input property \\ \hline
+    1 & User logs in and answers ``yes'' to remove another developer \\ \hline
+    2 & User logs in and attempts to remove his/hers own account \\ \hline
+    3 & User logs in and answers ``no'' to remove another developer \\ \hline
+	4 & User logs in and clicks ``Delete selected'' while none is selected \\
+    \hline
+  \end{tabular}
+\end{center}
+
+
+Test values \& expected output
+\begin{center}
+  \begin{tabular}{| l | l | l |}
+    \hline
+	Input data set & Contents & Expected output \\ \hline
+    1 & \begin{tabular}[x]{@{}l@{}}``JL'' logs in, selects ``PM'' and \\ answers ``yes'' to remove him\end{tabular} & ``PM'' is removed, as well as all his relations \\ \hline
+	2 & \begin{tabular}[x]{@{}l@{}}``JL'' logs in, selects ``JL'' and \\ clicks ``Delete selected''\end{tabular} & Nothing is affected and the user is prompted \\ \hline
+    3 & \begin{tabular}[x]{@{}l@{}}``JL'' logs in, selects ``PM'' and \\ answers ``no'' to remove him\end{tabular} & Nothing is affected \\ \hline
+    4 & \begin{tabular}[x]{@{}l@{}}``JL'' logs in, selects none and \\ clicks ``Delete selected''\end{tabular} & Nothing is affected and the user is prompted \\
+    \hline
+  \end{tabular}
+\end{center}

@@ -55,6 +55,10 @@ public class TestAddDeveloperUseCase extends BaseViewControllerTest {
 		String initials = "MD";
 		String name = "Moby Dick";
 		
+		List<Developer> preFound = this.db.developer().readByInitials(initials);
+		assertEquals(0, preFound.size());
+		int developerCount = this.db.developer().readAll().size();
+		
 		// Mock view state
 		this.mockDeveloperView(initials, name);
 		
@@ -64,6 +68,7 @@ public class TestAddDeveloperUseCase extends BaseViewControllerTest {
 		Developer actual = found.get(0);
 		assertEquals(initials, actual.getInitials());
 		assertEquals(name, actual.getName());
+		assertEquals(developerCount+1, this.db.developer().readAll().size());
 	}
 	
 	// Alternative scenarios:
@@ -72,17 +77,21 @@ public class TestAddDeveloperUseCase extends BaseViewControllerTest {
 	public void testEmptyInitials() {
 		String initials = "";
 		
+		int developerCount = this.db.developer().readAll().size();
+		
 		// Mock view state
 		this.mockDeveloperView(initials, "Moby Dick");
 		
 		// Assert correct result
 		assertEquals(0, this.db.developer().readByInitials(initials).size());
 		verify(dialog).showMessage("You must fill out both initials and name");
+		assertEquals(developerCount, this.db.developer().readAll().size());
 	}
 
 	@Test
 	public void testEmptyName() {
 		String initials = "MD";
+		int developerCount = this.db.developer().readAll().size();
 		
 		// Mock view state
 		this.mockDeveloperView(initials, "");
@@ -90,5 +99,22 @@ public class TestAddDeveloperUseCase extends BaseViewControllerTest {
 		// Assert correct result
 		assertEquals(0, this.db.developer().readByInitials(initials).size());
 		verify(dialog).showMessage("You must fill out both initials and name");
+		assertEquals(developerCount, this.db.developer().readAll().size());
+	}
+	
+
+
+	@Test
+	public void testTooManyInitials() {
+		String initials = "12345";
+		int developerCount = this.db.developer().readAll().size();
+		
+		// Mock view state
+		this.mockDeveloperView(initials, "Moby Dick");
+		
+		// Assert correct result
+		assertEquals(0, this.db.developer().readByInitials(initials).size());
+		verify(dialog).showMessage("The length of initials can at most be 4.");
+		assertEquals(developerCount, this.db.developer().readAll().size());
 	}
 }
